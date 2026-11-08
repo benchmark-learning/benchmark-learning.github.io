@@ -947,12 +947,21 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
 .welcome .eyebrow{color:#FFD23F!important}
 .welcome h1{color:#fff!important}
 .welcome .lede{color:#D8D8DC!important}
-.lvl{background:linear-gradient(160deg,#34363B,#232428)!important;border:1px solid #17181B!important;border-top:6px solid #FFD23F!important;color:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.lvl.s3{border-top-color:#D6E6D1!important}
-.lvl-big{background:#FFD23F!important;color:#1a1a1a!important}
-.lvl.s3 .lvl-big{background:#D6E6D1!important}
+.lvl{background:linear-gradient(160deg,#34363B,#232428)!important;border:1px solid #17181B!important;border-top:6px solid #C9CED6!important;color:#fff!important;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lvl.s3{border-top-color:#FFD23F!important}
+.lvl-big{background:linear-gradient(150deg,#F4F6F8,#C3C8CF 55%,#9AA1AB)!important;color:#1a1a1a!important;box-shadow:inset 0 2px 4px rgba(255,255,255,.6),0 4px 12px rgba(0,0,0,.35)}
+.lvl.s3 .lvl-big{background:linear-gradient(150deg,#FFF0A8,#FFD23F 55%,#D9A514)!important}
+.lvl-subj{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9CED6;margin-top:6px}
+.lvl.s3 .lvl-subj{color:#FFD23F}
 .lvl-name{color:#fff!important}
-.lvl:focus-visible{outline:3px solid #FFD23F;outline-offset:3px}
+.lvl:focus-visible{outline:3px solid #fff!important;outline-offset:3px}
+
+/* the topic card on a topic page continues to the next step */
+.hubgo{cursor:pointer;position:relative}
+.hubgo::after{content:attr(data-go);position:absolute;right:16px;bottom:12px;font-size:13px;font-weight:700;color:#1a1a1a;background:#FFD23F;border-radius:999px;padding:4px 10px}
+.hubgo:hover,.hubgo:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (max-width:520px){.hubgo::after{position:static;display:inline-block;margin-top:10px}}
+.tq-resume{color:#2F6B45;font-weight:700;margin:0 0 6px}
 /* the pink dot on Progress link is enough: no status text in the top bar */
 .tb-status{display:none!important}
 /* mint cream close and back buttons */
@@ -1071,12 +1080,12 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
 <div class="wrap">
 
 <section class="welcome" id="welcome" hidden>
-  <p class="eyebrow">BenchMark · Design and Manufacture</p>
+  <p class="eyebrow">Design and Manufacture</p>
   <h1>Choose your level</h1>
   <p class="lede">Pick the course you’re studying. You can change it later.</p>
   <div class="levels">
-    <button type="button" class="lvl s1" data-level="N5"><span class="lvl-big">N5</span><span class="lvl-name">National 5</span></button>
-    <button type="button" class="lvl s3" data-level="H"><span class="lvl-big">H</span><span class="lvl-name">Higher</span></button>
+    <button type="button" class="lvl s1" data-level="N5"><span class="lvl-big">N5</span><span class="lvl-subj">Design and Manufacture</span><span class="lvl-name">National 5</span></button>
+    <button type="button" class="lvl s3" data-level="H"><span class="lvl-big">H</span><span class="lvl-subj">Design and Manufacture</span><span class="lvl-name">Higher</span></button>
   </div>
 </section>
 
@@ -2285,7 +2294,7 @@ function runFx(kind,amt){
 function encodeProgress(){
   const c={};CHECKS.forEach(ck=>{const r=S.checks[ck.id];if(!ck.q||!r||!Object.keys(r.m).length)return;
     c[ck.id]=[ck.q.map(q=>r.m[q.id]===undefined?'-':r.m[q.id]).join(''),r.date||'']});
-  const rs=CKL_N5.map(i=>S.rag[i.id]||'-').join('');const pr={};['tq','ex','exb','ppd','att','evd','d5','evMig','lr','tools','sr','srV2','streak','welcomed','level','weeks','per'].forEach(k=>{if(S[k]&&(typeof S[k]!=='object'||Object.keys(S[k]).length))pr[k]=S[k]});const j=JSON.stringify(Object.assign({v:2,c,n:S.nick||'',k:S.cls||''},/[rag]/.test(rs)?{r:rs}:{},Object.keys(pr).length?{p:pr}:{}));return btoa(unescape(encodeURIComponent(j))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const rs=CKL_N5.map(i=>S.rag[i.id]||'-').join('');const pr={};['tq','ex','exb','ppd','att','evd','d5','evMig','lr','tools','sr','srV2','streak','welcomed','level','weeks','per','tqp'].forEach(k=>{if(S[k]&&(typeof S[k]!=='object'||Object.keys(S[k]).length))pr[k]=S[k]});const j=JSON.stringify(Object.assign({v:2,c,n:S.nick||'',k:S.cls||''},/[rag]/.test(rs)?{r:rs}:{},Object.keys(pr).length?{p:pr}:{}));return btoa(unescape(encodeURIComponent(j))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 }
 function decodeProgress(code){
   try{const b=code.replace(/-/g,'+').replace(/_/g,'/');const o=JSON.parse(decodeURIComponent(escape(atob(b))));const out={};
@@ -3081,8 +3090,10 @@ function renderLearnList(lv){
   $('learnBody').innerHTML=(lv==='N5'&&!S.welcomed&&!VIEW?`<div class="welcome1" id="welcomeCard"><h3>New to BenchMark?</h3><ol><li>Pick a topic your teacher has covered and learn it.</li><li>Test yourself, then try the exam question.</li><li>Do the Daily 5 each day, and set a reminder there.</li></ol><p class="sub">Every topic starts grey and changes colour as you practise.</p><div class="row"><button type="button" class="btn" data-welcome="skip">Got it</button></div></div>`:'')+`<p class="sub">${esc(LEVELS[lv])} · ${list.length} topics from the course specification. Pick a topic to read, then test yourself.</p>`+(lv==='N5'?`<div class="wfgrid"><button type="button" class="wfeature wf-daily" data-lt="x-daily" data-lv="N5"><span class="wf-k">Every day</span><span class="wf-t">Daily 5</span><span class="wf-s">Five quick questions, picked from your weakest topics. Wrong answers come back tomorrow.</span>${(S.streak&&S.streak.n)?`<span class="wf-sticker" aria-label="${S.streak.n}-day streak"><span class="st-burst"><span class="st-f" aria-hidden="true">🔥</span><span class="st-n">${S.streak.n}</span><span class="st-l">day streak</span></span></span>`:''}</button><button type="button" class="wfeature wf-tools" data-lt="x-tools" data-lv="N5"><span class="wf-k">Workshop</span><span class="wf-t">Tools quick-fire</span><span class="wf-s">Name the tool from its picture. Marking out, woodwork, metalwork, drill bits.</span><span class="wf-cred">Photo: Shixart1985, CC BY 2.0</span></button></div>`:'')+
    LGROUPS.map(([a,n])=>`<h3 class="lgh ${AREAS[a].cls}">${esc(n)}</h3><div class="lgrid">${list.filter(t=>t.area===a).map(t=>topicCard(t,lv)).join('')}</div>`).join('');
 }
+$('tab-learn').addEventListener('keydown',e=>{const hn=e.target.closest&&e.target.closest('#learnBody [data-next]');if(hn&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openPanel(hn.dataset.next)}});
 $('tab-learn').addEventListener('click',e=>{
   const hp=e.target.closest('#learnBody [data-panel]');if(hp){openPanel(hp.dataset.panel);return}
+  const hn=e.target.closest('#learnBody [data-next]');if(hn){openPanel(hn.dataset.next);return}
   const c=e.target.closest('button[data-lt]');if(c){LVIEW=c.dataset.lv;renderLearnTopic(c.dataset.lt);return}
   const b=e.target.closest('button[data-lback]');if(b){LCUR=null;renderLearnList(LVIEW||S.level||'N5');$('tab-learn').scrollIntoView({block:'start'});return}
   const o=e.target.closest('.lopt');if(o){answerLearnMC(o);return}
@@ -3752,18 +3763,28 @@ function topicCards(t){
   cards.push({h:'Exam tip',b:[['p',t.tip]],tip:true});return cards;
 }
 function blockHTML(blocks){return blocks.map(([k,v,cap])=>k==='p'?`<p>${esc(v)}</p>`:k==='ul'?`<ul>${v.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:k==='ol'?`<ol>${v.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:k==='fig'?figHTML(v,cap):'').join('')}
+function nextPanel(id){
+  const t=LEARN.N5.find(x=>x.id===id),tq=S.tq&&S.tq[id],exb=(S.exb&&S.exb[id])||(S.ex&&S.ex[id]),tp_=S.tqp&&S.tqp[id];
+  if(!(S.lr&&S.lr[id]))return 'learn';
+  if(tp_&&t&&tp_.i<t.mcq.length&&(tp_.i>0||tp_.done===0))return 'test';
+  if(!tq||tq[0]/tq[1]<.7)return 'test';
+  if(!exb||exb[0]<exb[1])return 'exam';
+  if(tq[0]<tq[1])return 'test';
+  return 'exam';
+}
+const PNAME={learn:'Learn it',test:'Test yourself',exam:'Get exam ready'};
 function renderHub(id){
   HUB=id;LCUR=id;const t=curTopic(),A=AREAS[t.area];S.lr=S.lr||{};S.tq=S.tq||{};S.ex=S.ex||{};
   const nCards=topicCards(t).length,tq=S.tq[id],ex=S.ex[id],exb=(S.exb&&S.exb[id])||ex;
   $('learnBody').innerHTML=`<div class="row"><button type="button" class="btn ghost" data-lback="1">← All topics</button></div>
    <article class="hub ${A.cls}"><p class="eyebrow">National 5 · ${esc(A.name)}</p>
-   <h2 class="ltitle sr">${esc(t.name)}</h2>${topicCard(t,LVIEW||'N5',1)}${SHORTN[id]?`<p class="hfull">${esc(t.name)}</p>`:''}<p class="hsum">${esc(SUM[id]||'')}</p>
+   <h2 class="ltitle sr">${esc(t.name)}</h2>${(()=>{const np=nextPanel(id);return topicCard(t,LVIEW||'N5',1).replace('<div class="',`<div role="button" tabindex="0" data-next="${np}" data-go="Continue: ${PNAME[np]} →" aria-label="${esc(t.name)}: continue with ${PNAME[np]}" class="hubgo `)})()}${SHORTN[id]?`<p class="hfull">${esc(t.name)}</p>`:''}<p class="hsum">${esc(SUM[id]||'')}</p>
    <details class="hspec"><summary>What the course says</summary><p>${esc(t.spec)}</p></details>
    <div class="htiles">
     ${hubTile('learn','Learn it',S.lr[id]?1:null,S.lr[id]?'Read':'Not read yet',nCards+' short cards')}
-    ${hubTile('test','Test yourself',tq?tq[0]/tq[1]:null,tq?`Best ${tq[0]} / ${tq[1]}`:'Not tried yet',t.mcq.length+' quick questions',tq?`${tq[0]}/${tq[1]}`:'')}
+    ${(()=>{const pg=S.tqp&&S.tqp[id],n=t.mcq.length;if(pg&&pg.i<n){const dn=pg.done===pg.i?pg.i+1:pg.i;if(dn>0)return hubTile('test','Test yourself',dn/n,`${dn} of ${n} done · tap to carry on`,'',`${dn}/${n}`)}return hubTile('test','Test yourself',tq?tq[0]/tq[1]:null,tq?`Best ${tq[0]} / ${tq[1]}`:'Not tried yet',n+' quick questions',tq?`${tq[0]}/${tq[1]}`:'')})()}
     ${hubTile('exam','Get exam ready',exb?exb[0]/exb[1]:null,exb?`Best ${exb[0]} / ${exb[1]}`:'Not tried yet','Exam question, marked for you',exb?`${exb[0]}/${exb[1]}`:'')}
-   </div><div class="hnext"><span class="hnl">Next step</span>${esc(nextStep(topicStatus(id)))}</div><p class="hguide">Test yourself 7/10 → Charging · Full marks on Get exam ready → Charged · All Test yourself right + 2 past papers → Supercharged · 5 past papers → Flying high 🚀</p></article>`;
+   </div><div class="hnext"><span class="hnl">Next step</span>${esc((()=>{const np=nextPanel(id),pg=S.tqp&&S.tqp[id];if(np==='learn')return 'Start with Learn it: read the short cards, then Test yourself.';if(np==='test'&&pg&&(pg.i>0||pg.done===0)){const dn=pg.done===pg.i?pg.i+1:pg.i;return `Finish Test yourself: ${dn} of ${t.mcq.length} done.`}return nextStep(topicStatus(id))})())}</div><p class="hguide">Test yourself 7/10 → Charging · Full marks on Get exam ready → Charged · All Test yourself right + 2 past papers → Supercharged · 5 past papers → Flying high 🚀</p></article>`;
 }
 function hubTile(k,title,f,sub,todo,txt){
   const done=f!==null;let ic=`<span class="hti">${ICON[k]}</span>`;
@@ -3781,7 +3802,7 @@ let PK=null,CARD=0,TQ=null,tpLast=null;
 function openPanel(kind,fromSwitch){
   PK=kind;const t=curTopic();tp.querySelector('.tp-sheet').className='tp-sheet tp-'+kind;
   tp.querySelector('.tp-ic').innerHTML=ICON[kind];$('tpTitle').textContent=({learn:'Learn it',test:'Test yourself',exam:'Get exam ready'})[kind]+' · '+t.name;
-  if(kind==='learn'){CARD=0;paintCard()}else if(kind==='test'){TQ={i:0,right:0,order:t.mcq.map((_,i)=>i)};paintTQ()}else paintExam();
+  if(kind==='learn'){CARD=0;paintCard()}else if(kind==='test'){const sv=S.tqp&&S.tqp[HUB];if(sv&&sv.i<t.mcq.length&&sv.order&&sv.order.length===t.mcq.length){TQ={i:sv.i+(sv.done===sv.i?1:0),right:sv.right,order:sv.order,resumed:true}}else TQ={i:0,right:0,order:t.mcq.map((_,i)=>i)};paintTQ()}else paintExam();
   if(tp.hidden){tpLast=document.activeElement;tp.hidden=false;document.body.classList.add('gated');try{history.pushState({tp:1},'')}catch(e){}}
   tp.querySelector('.tp-body').scrollTop=0;tp.querySelector('.tp-x').focus({preventScroll:true});
 }
@@ -3797,11 +3818,14 @@ function paintCard(){
 }
 function paintTQ(){
   const t=curTopic(),n=t.mcq.length;
-  if(TQ.i>=n){const pv=S.tq[HUB],bf=topicStatus(HUB);if(!pv||TQ.right/n>=pv[0]/pv[1])S.tq[HUB]=[TQ.right,n];evStamp('tq:'+HUB);save();topicCelebrate(HUB,bf);
-    setBody(`<div class="ddone"><p class="dbig">${TQ.right} / ${n}</p><p>${TQ.right===n?'All correct. ':''}${TQ.right<n?'Questions you got wrong also come up in your Daily 5.':'Ready for an exam question?'}</p></div>`,
-     `<button type="button" class="btn ghost" data-tq="retry">Try again</button><button type="button" class="btn nx-exam" data-panel="exam">Get exam ready →</button>`);return}
+  if(TQ.i>=n){const pv=S.tq[HUB],bf=topicStatus(HUB);if(!pv||TQ.right/n>=pv[0]/pv[1])S.tq[HUB]=[TQ.right,n];if(S.tqp)delete S.tqp[HUB];evStamp('tq:'+HUB);save();topicCelebrate(HUB,bf);
+    const full=TQ.right===n;
+    setBody(`<div class="ddone"><p class="dbig">${TQ.right} / ${n}</p><p>${full?'All correct. Ready for an exam question?':'Questions you got wrong also come up in your Daily 5. Try again now, or come back later.'}</p></div>`,
+     full?`<button type="button" class="btn ghost" data-pclose="1">Done</button><button type="button" class="btn nx-exam" data-panel="exam">Get exam ready →</button>`
+         :`<button type="button" class="btn ghost" data-pclose="1">Done for now</button><button type="button" class="btn" data-tq="retry">Try again</button>`);return}
   const m=t.mcq[TQ.order[TQ.i]],order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
-  setBody(`<p class="eyebrow">Question ${TQ.i+1} of ${n}</p><div class="lmc q" data-tqi="${TQ.order[TQ.i]}"><p class="qtext">${esc(m.q)}</p><div class="opts">${order.map(i=>`<button type="button" class="opt tqo" data-oi="${i}">${esc(m.o[i])}</button>`).join('')}</div><div class="fbm"></div></div>`,
+  if(!VIEW){S.tqp=S.tqp||{};S.tqp[HUB]={i:TQ.i,right:TQ.right,order:TQ.order,done:-1};save()}
+  setBody(`${TQ.resumed&&TQ.i>0?`<p class="tq-resume">Picking up where you left off.</p>`:''}<p class="eyebrow">Question ${TQ.i+1} of ${n}</p><div class="lmc q" data-tqi="${TQ.order[TQ.i]}"><p class="qtext">${esc(m.q)}</p><div class="opts">${order.map(i=>`<button type="button" class="opt tqo" data-oi="${i}">${esc(m.o[i])}</button>`).join('')}</div><div class="fbm"></div></div>`,
    `<span class="cdots">${t.mcq.map((_,i)=>`<i class="${i===TQ.i?'on':i<TQ.i?'dn':''}"></i>`).join('')}</span>`);
 }
 function paintExam(){
@@ -3820,11 +3844,11 @@ tp.addEventListener('click',e=>{
   const sw=e.target.closest('[data-panel]');if(sw){openPanel(sw.dataset.panel);return}
   const cd=e.target.closest('[data-card]');if(cd){CARD=Math.max(0,CARD+ +cd.dataset.card);paintCard();tp.querySelector('.tp-body').scrollTop=0;return}
   const o=e.target.closest('.tqo');
-  if(o){const div=o.closest('[data-tqi]');if(div.dataset.done)return;div.dataset.done='1';const m=curTopic().mcq[+div.dataset.tqi],ok=+o.dataset.oi===0;if(ok)TQ.right++;if(!VIEW)srMark(curTopic().id+'.'+div.dataset.tqi,ok);
+  if(o){const div=o.closest('[data-tqi]');if(div.dataset.done)return;div.dataset.done='1';const m=curTopic().mcq[+div.dataset.tqi],ok=+o.dataset.oi===0;if(ok)TQ.right++;if(!VIEW){srMark(curTopic().id+'.'+div.dataset.tqi,ok);S.tqp=S.tqp||{};S.tqp[HUB]={i:TQ.i,right:TQ.right,order:TQ.order,done:TQ.i};save()}
     div.querySelectorAll('.tqo').forEach(b=>{b.disabled=true;if(+b.dataset.oi===0)b.classList.add('right');else if(b===o)b.classList.add('wrong')});
     const f=div.querySelector('.fbm');f.className='fbm fb '+(ok?'good':'bad');f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${esc(m.e)}`;
     tp.querySelector('.tp-foot').innerHTML=`<button type="button" class="btn" data-tq="next">${TQ.i>=curTopic().mcq.length-1?'See my score':'Next →'}</button>`;tp.querySelector('[data-tq]').focus();return}
-  const q=e.target.closest('[data-tq]');if(q){if(q.dataset.tq==='retry')TQ={i:0,right:0,order:curTopic().mcq.map((_,i)=>i).sort(()=>Math.random()-.5)};else TQ.i++;paintTQ();tp.querySelector('.tp-body').scrollTop=0;return}
+  const q=e.target.closest('[data-tq]');if(q){if(q.dataset.tq==='retry')TQ={i:0,right:0,order:curTopic().mcq.map((_,i)=>i).sort(()=>Math.random()-.5)};else{TQ.i++;TQ.resumed=false}paintTQ();tp.querySelector('.tp-body').scrollTop=0;return}
   if(e.target.closest('[data-mark]')){
     const txt=$('exAns').value.trim();S.exAns=S.exAns||{};S.exAns[HUB]=txt;
     {const st=MK[HUB]&&MK[HUB].type==='state',n=txt.split(/\s+/).filter(Boolean).length;if(n<(st?1:4)){$('exRes').innerHTML=`<p class="fb bad">${st?'Write your answer first.':'Write your full answer first, in sentences.'}</p>`;save();return}}
