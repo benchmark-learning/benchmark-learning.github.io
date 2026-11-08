@@ -4134,8 +4134,8 @@ booting=false;autoOpen();paintNick();
     if(VIEW||BM_HAD)return;let seen=false;try{seen=localStorage.getItem('bm-welcome2')==='1'}catch(e){}if(seen)return;
     try{localStorage.setItem('bm-welcome2','1')}catch(e){}
     BM_BLOCK=true;gate.hidden=true;document.body.classList.remove('gated');
-    box.innerHTML=`<div class="bmup-s"><div class="bmup-top"><img src="${icon}" alt=""><h2 id="bmupT">Welcome to the new BenchMark</h2></div>
-      <p class="bmup-lede">Used BenchMark before? Paste your progress link to bring everything across.</p>
+    box.innerHTML=`<div class="bmup-s"><div class="bmup-top"><img src="${icon}" alt=""><h2 id="bmupT">Welcome to BenchMark</h2></div>
+      <p class="bmup-lede">Used BenchMark or the old D+M app before? Paste your progress link to bring everything across.</p>
       <label for="bmupIn" class="bmup-lab">Your progress link</label><input id="bmupIn" type="text" placeholder="Paste your link here" autocomplete="off">
       <button type="button" class="bmup-btn gold" id="bmupGo">Bring my progress across</button><p class="bmup-ok" id="bmupMsg" aria-live="polite"></p>
       <button type="button" class="bmup-link" id="bmupNew">I’m new to BenchMark</button></div>`;
