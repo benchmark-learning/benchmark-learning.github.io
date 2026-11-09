@@ -1010,6 +1010,75 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
 .bmw .build .steps .on,.bmw .roll .steps .on{background:#FFD23F}
 .bmw .blvl .bbig svg{width:130px!important;height:130px!important}
 
+
+@keyframes dgflk{0%,100%{opacity:.22}20%{opacity:.34}35%{opacity:.16}55%{opacity:.3}70%{opacity:.2}85%{opacity:.36}}
+@keyframes dgflk2{0%,100%{opacity:1}20%{opacity:.82}35%{opacity:.96}50%{opacity:.7}65%{opacity:1}80%{opacity:.85}}
+@keyframes dgtw{0%,100%{opacity:.35}50%{opacity:.08}}
+@keyframes dgtw2{0%,100%{opacity:.55}45%{opacity:.12}60%{opacity:.7}}
+@keyframes dgtw3{0%,100%{opacity:1}40%{opacity:0}60%{opacity:.2}}
+@keyframes dgsnow{from{transform:translate(0,0)}50%{transform:translate(8px,120px)}to{transform:translate(0,240px)}}
+@keyframes dgdrift{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(110px,22px) rotate(140deg)}50%{transform:translate(220px,8px) rotate(270deg)}75%{transform:translate(330px,34px) rotate(400deg)}100%{transform:translate(440px,46px) rotate(540deg)}}
+@keyframes dgacfall{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:1}40%{transform:translate(18px,30px) rotate(160deg)}70%{transform:translate(34px,56px) rotate(300deg)}90%{opacity:1}100%{transform:translate(60px,86px) rotate(420deg);opacity:0}}
+.gsmod{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:120}
+.gsbox{background:#1E2833;border:2px solid #3FA34D;border-radius:20px;max-width:360px;width:100%;padding:24px 22px 20px;text-align:center;color:#fff;font-family:var(--body);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.gsbox .spb{width:40px;height:40px;margin:0 auto 8px;display:block;background:#7FD36B;border-radius:50%;padding:7px}
+.gsbox h4{font:600 24px var(--display);margin:0 0 8px}
+.gsbox p{margin:0 0 6px;font-size:16px;line-height:1.45;color:#E6E7EA}
+.gsbox p b{color:#9FE3B0}
+.gsbox .small{font-size:13px;color:#B9BDC4;margin-bottom:16px}
+.gsbox .row{display:flex;gap:10px;justify-content:center}
+.gsbox button{font:700 15px var(--body);padding:11px 18px;border-radius:12px;border:0;cursor:pointer}
+.gsbox .go{background:linear-gradient(175deg,#7FD36B,#3FA34D);color:#0F2A14;box-shadow:0 3px 0 #2A7A36}
+.gsbox .no{background:transparent;color:#F5FFFA;border:2px solid #4A4C52}
+.gpop{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:16px;z-index:130;transition:opacity .4s}
+.gpop.gone{opacity:0}
+.gpbox{width:min(720px,100%);border-radius:20px;overflow:hidden;background:#111214;box-shadow:0 20px 60px rgba(0,0,0,.6);border:2px solid #3FA34D}
+.gpscene{position:relative;aspect-ratio:16/9}
+.gpscene>div,.gpfg{position:absolute;inset:0;width:100%;height:100%}
+.gpscene svg{width:100%;height:100%;display:block}
+.gpb{opacity:0;transform-origin:90.5% 83.5%}
+.gptop{position:absolute;inset:0;pointer-events:none}
+.gptop>div{position:absolute;inset:0}
+.pt2{opacity:0}
+.gpmsg{display:flex;align-items:baseline;gap:12px;justify-content:center;padding:12px;font-family:var(--body);color:#fff;opacity:0;transform:translateY(6px);transition:all .5s}
+.gpmsg.on{opacity:1;transform:none}
+.gpmsg b{font:600 22px var(--display)}
+.gpeb{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:#7FD36B}
+.dgflk{animation:dgflk 1.7s infinite}.dgflk2{animation:dgflk2 1.3s infinite}.dgtw{animation:dgtw 2.4s ease-in-out infinite}.dgtw2{animation:dgtw2 1.9s ease-in-out infinite}
+.dgmv{animation-timing-function:linear;animation-iteration-count:infinite;transform-box:fill-box;transform-origin:center}.dgsnow{animation-name:dgsnow}.dgdrift{animation-name:dgdrift}.dgacfall{animation-name:dgacfall}
+@media (prefers-reduced-motion:reduce){.dgflk,.dgflk2,.dgtw,.dgtw2{animation:none}.dgmv{animation:none;display:none}}
+.dg-spq{z-index:110}
+/* Daily Growth tile */
+.dg-wrap{grid-column:1/-1}
+.dg-tile{position:relative;margin-top:12px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.dg-clip{position:relative;overflow:hidden;border-radius:20px;border:1px solid #17181B;background:#111214;aspect-ratio:16/7}
+.dg-scene{position:absolute;inset:0}.dg-scene svg{width:100%;height:100%;display:block}
+.dg-fade{position:absolute;inset:0;background:linear-gradient(90deg,#111214 22%,rgba(17,18,20,.8) 38%,rgba(17,18,20,0) 62%);pointer-events:none}
+.dg-hit{position:absolute;inset:0;background:none;border:0;cursor:pointer;border-radius:20px}
+.dg-hit:focus-visible{outline:3px solid #FFD23F;outline-offset:-3px}
+.dg-body{position:absolute;inset:0;padding:20px 20px 16px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:46%;pointer-events:none;color:#fff}
+.dg-body button,.dg-body a{pointer-events:auto}
+.dg-eb{font-size:14px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#FFD23F}
+.dg-h{font:600 24px/1.05 var(--display);color:#fff}
+.dg-bar{display:block;height:5px;width:100%;border-radius:99px;background:#2E2F34;overflow:hidden;max-width:200px;margin-top:4px}.dg-bar i{display:block;height:100%;background:#FFD23F;border-radius:99px}
+.dg-sub{margin:6px 0 0;font-size:14px;line-height:1.4;color:#E6E7EA}.dg-sub b{color:#9FE3B0}
+.dg-done{margin:6px 0 0;font-size:14px;color:#9FE3B0;font-weight:700}
+.dg-btns{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.dg-btn{font:700 15px var(--body);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;background:#FFD23F;color:#1a1a1a;white-space:nowrap}
+.dg-btn.dg-gs{display:inline-flex;align-items:center;background:linear-gradient(175deg,#7FD36B,#3FA34D);color:#0F2A14;box-shadow:0 3px 0 #2A7A36}
+.dg-gs .spb{width:22px;height:22px;margin-right:6px;flex:none}
+.dg-left{display:inline-flex;gap:3px;margin-left:10px;padding-left:10px;border-left:1.5px solid rgba(15,42,20,.3)}.dg-left svg{width:15px;height:15px}
+.dg-tmw{font-size:13px;color:#C9CCD1}
+.dg-pill{position:absolute;right:14px;top:-12px;z-index:2;background:#1E2833;color:#F46D2B;border:1.5px solid #F46D2B;font-size:13px;font-weight:700;border-radius:999px;padding:4px 11px;box-shadow:0 3px 8px rgba(0,0,0,.4);white-space:nowrap}
+.dg-pill.warn{color:#E2A03F;border-color:#E2A03F}.dg-pill.dead{background:#6B6F76;color:#fff;border-color:#6B6F76}
+.dg-luck{display:inline-flex;align-items:center;gap:6px;font:800 14px var(--body);color:#fff;background:#D6247A;padding:5px 14px 5px 12px;border-radius:999px;margin:4px 0 0;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.dg-clover{width:32px;height:32px;flex:none;margin:-10px -30px -10px 2px}
+.dg-note{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:#24301F;border:1.5px solid #7FD36B;color:#fff}.dg-note b{color:#9FE3B0}
+@media (max-width:600px){.dg-clip{aspect-ratio:16/10}.dg-fade{background:linear-gradient(90deg,#111214 30%,rgba(17,18,20,.85) 48%,rgba(17,18,20,0) 74%)}
+ .dg-body{padding:14px 10px 12px 14px;max-width:64%;gap:2px}.dg-eb{font-size:12px}.dg-h{font-size:19px}.dg-bar{max-width:130px}
+ .dg-sub,.dg-done{font-size:12.5px}.dg-btn{font-size:13px;padding:8px 11px;border-radius:10px}.dg-gs .spb{width:18px;height:18px;margin-right:4px}
+ .dg-pill{font-size:11.5px;padding:3px 9px;right:10px;top:-10px}.dg-luck{font-size:12px;padding:4px 12px 4px 10px}.dg-clover{width:26px;height:26px;margin-right:-26px}}
+
 </style>
 </head>
 <body class="bmw">
@@ -1218,6 +1287,604 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* Daily Growth garden scene (drawn in code) */
+(function(){
+
+function rng(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
+const LEAF='M0-6 L1.4-2.6 L4.6-3.8 L3.6-0.6 L6-0.2 L2.4 2 L3 4.6 L0 3.2 L-3 4.6 L-2.4 2 L-6-0.2 L-3.6-0.6 L-4.6-3.8 L-1.4-2.6Z M0 3.2 L0 6';
+const AUT=['#C8281C','#E2452A','#F46D2B','#F9A03F','#FBC756','#D7301F'];
+const BROWN=['#8A5A2B','#9C6B3A','#7A4A22','#A67C45'];
+function mix(a,b,t){const p=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));const A=p(a),B=p(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')}
+/* fixed canopy points for the full-grown tree, revealed as it grows */
+const R=rng(7),PTS=[];for(let i=0;i<70;i++){const a=R()*Math.PI*2,r=Math.sqrt(R());PTS.push([Math.cos(a)*r,Math.sin(a)*r*.78,R(),R()])}
+PTS.sort((p,q)=>(p[0]*p[0]+p[1]*p[1])-(q[0]*q[0]+q[1]*q[1]));
+function badge(day,h,id){
+ const g=Math.min(1,(day-1)/99),e=Math.pow(g,.5);const dead=h>=3;
+ const ring=dead?'#6B6F76':h===2?'#9C6B3A':h===1?'#E2A03F':day>=100?'#FFD23F':'#F46D2B';
+ let s=`<svg viewBox="0 0 120 120" class="${dead?'dead':h===2?'wilt2':h===1?'wilt1':''}" role="img" aria-label="Maple, ${day}-day streak${dead?', the tree has died':h?', missed '+h+' day'+(h>1?'s':''):''}">`;
+ s+=`<defs><clipPath id="c${id}"><circle cx="60" cy="60" r="49"/></clipPath><linearGradient id="sk${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${dead?'#2a2b30':'#2B3A4A'}"/><stop offset="1" stop-color="${dead?'#1d1e22':'#1E2833'}"/></linearGradient></defs>`;
+ if(day>=100&&!h)s+=`<circle cx="60" cy="60" r="58" fill="#FFD23F" style="animation:halo 2.4s ease-in-out infinite"/>`;
+ s+=`<circle cx="60" cy="60" r="56" fill="${ring}"/><g clip-path="url(#c${id})"><rect width="120" height="120" fill="url(#sk${id})"/>`;
+ s+=`<ellipse cx="60" cy="112" rx="70" ry="18" fill="${dead?'#3a3530':'#3F5A2E'}"/><ellipse cx="60" cy="99" rx="${15+e*9}" ry="5" fill="#2E5A24"/><ellipse cx="60" cy="99" rx="${12+e*8}" ry="3.8" fill="#1C1A19"/><ellipse cx="60" cy="98.6" rx="${8+e*6}" ry="2.3" fill="#272423"/>`;
+ // tree
+ const H=14+e*50,TW=1.4+e*5,top=98-H;const trunkC=dead?'#5A5A5E':'#6B4423';
+ let t=`<g class="tree">`;
+ if(day<4){ // seedling: two seed leaves
+  const sh=8+day*4;t+=`<path d="M60 98 V${98-sh}" stroke="#7BA34A" stroke-width="1.6" stroke-linecap="round"/>`;
+  const droop=dead?14:h*5;
+  t+=`<path d="M60 ${98-sh} q-9 ${-4+droop*.5} -15 ${1+droop}" stroke="${dead?'#6B6F76':h?mix('#8FC25A','#9C6B3A',h*.45):'#8FC25A'}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M60 ${98-sh} q9 ${-4+droop*.5} 15 ${1+droop}" stroke="${dead?'#6B6F76':h?mix('#8FC25A','#9C6B3A',h*.45):'#8FC25A'}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  if(day===3&&!dead)t+=`<path d="${LEAF}" transform="translate(60 ${96-sh}) scale(.8)" fill="#F46D2B" stroke="#8A2A12" stroke-width=".6"/>`;
+ }else{
+  t+=`<path d="M${60-TW/2} 98 Q${60-TW*.3} ${98-H*.5} ${60-TW*.15} ${top} L${60+TW*.15} ${top} Q${60+TW*.3} ${98-H*.5} ${60+TW/2} 98Z" fill="${trunkC}"/>`;
+  // branches
+  const nb=day<8?0:Math.min(7,Math.floor(1+e*7));const BR=rng(3);
+  for(let i=0;i<nb;i++){const by=98-H*(.45+.5*(i/Math.max(1,nb-1))),side=i%2?1:-1,len=(8+BR()*10)*(.4+e*.9);const sag=dead?6:h*3;
+   t+=`<path d="M60 ${by} q${side*len*.5} ${-len*.4} ${side*len} ${-len*.55+sag}" stroke="${trunkC}" stroke-width="${Math.max(.8,TW*.35)}" fill="none" stroke-linecap="round"/>`}
+  // canopy
+  if(!dead){const cw=9+e*29,ch=8+e*19,cy=top+ch*.45;
+   const n=Math.round(5+e*65);const keep=h===2?.45:1;const droop=h*2.5;
+   for(let i=0;i<n;i++){const p=PTS[i];if(p[2]>keep&&h===2)continue;
+    const x=60+p[0]*cw,y=cy+p[1]*ch+droop*p[3];let col=AUT[Math.floor(p[3]*AUT.length)];if(day<10)col=mix('#8FC25A',col,day/10);
+    if(h)col=mix(col,BROWN[i%4],h===1?.35:.7);const sc=(.8+e*.4)*(.8+p[2]*.4);
+    t+=`<path d="${LEAF}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(p[3]*90-45+h*25).toFixed(0)}) scale(${sc.toFixed(2)})" fill="${col}" stroke="${mix(col,'#3a1a0a',.45)}" stroke-width=".5"/>`}
+  }
+ }
+ t+='</g>';s+=t;
+ // fallen and falling leaves when wilting
+ if(h===2||(h===1&&day>=4)){const F=rng(11);const nf=h===2?6:2;
+  for(let i=0;i<nf;i++)s+=`<path d="${LEAF}" transform="translate(${30+F()*60} ${101+F()*6}) rotate(${F()*180}) scale(.55)" fill="${BROWN[i%4]}"/>`;
+  for(let i=0;i<(h===2?3:1);i++)s+=`<g transform="translate(${46+i*12} ${40+i*6})"><path d="${LEAF}" transform="scale(.55)" fill="${BROWN[i%4]}" style="--dx:${(i%2?1:-1)*8}px;--dy:56px;animation:fall ${3.6+i}s linear ${i*1.2}s infinite"/></g>`}
+ if(dead)s+=`<path d="M52 ${103} l3-3 m2 3 l3-3" stroke="#6B6F76" stroke-width="1"/>`;
+ s+='</g></svg>';return s}
+
+
+const SPROUTB='<svg class="spb" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 19V9" stroke="#0F2A14" stroke-width="2.4" stroke-linecap="round"/><path d="M10 11C5.5 11 3 8 3 4.5c4.5 0 7 2.5 7 6.5zM10 9c0-4.5 3-7 7-7 0 4.5-2.5 7-7 7z" fill="#0F2A14"/></svg>';
+const SPROUT='<svg class="sp" viewBox="0 0 20 20"><path d="M10 18V9" stroke="#7FD36B" stroke-width="2" stroke-linecap="round"/><path d="M10 11C6 11 4 8 4 5c4 0 6 2 6 6zM10 9c0-4 3-6 6-6 0 4-2 6-6 6z" fill="#7FD36B"/></svg>';
+/* the maple: bonsai style, seasons change every 3 days */
+const SEASONS=['Spring','Summer','Autumn','Winter'];
+let THEME='',WINTERY=false,XL=''; /* in the real app these come from the device's date */
+const EVENTS={halloween:{name:'Halloween week',when:'24–31 October',eve:1,day:71},bonfire:{name:'Bonfire Night week',when:'1–7 November',eve:1,fw:1,day:72},
+ xmas:{name:'Christmas',when:'All of December',eve:1,dark:1,wint:1,day:72},hogmanay:{name:'Hogmanay',when:'31 December – 1 January',eve:1,fw:2,wint:1,day:73},
+ prelims:{name:'Prelims',when:'All of January',lant:1,wint:1,luck:'Good Luck In Your Prelims!',day:74},burns:{name:'Burns Night',when:'25 January',wint:1,day:80},
+  easter:{name:'Easter',when:'Easter weekend (date moves each year)',day:75},exams:{name:'Exam season',when:'Late April – early June',lant:1,luck:'Good Luck In Your Final Exams!',day:77}};
+const EV=()=>EVENTS[THEME]||{};
+const CYCLE=[0,0,1,1,2,2,3,3],CYCLE_W=[0,1,2,2,3,3,3,3]; /* 0 spring 1 summer 2 autumn 3 winter */
+function seasonOf(d){return d>=100?0:(WINTERY?CYCLE_W:CYCLE)[(d+5)%8]} /* day 1-2 winter (seed planted), day 3 spring ... day 100 spring */
+const PAL=[['#B9DE7A','#A3D166','#C9E58F','#8FC25A','#D9786A','#B2D86E'],
+ ['#9BD32C','#86C11F','#B5E03C','#6FAE1A','#C7EA4F','#7DBA22'],
+ ['#C8281C','#E2452A','#F46D2B','#F9A03F','#FBC756','#D7301F']];
+const ss=(a,b,x)=>{x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
+/* branches are added over time: [height up trunk, side (-1 left / 1 right), day it appears, full length, rise] */
+const BRANCHES=[[.36,1,9,36,.16],[.48,-1,16,40,.16],[.60,1,25,36,.22],[.71,-1,34,30,.24],[.81,1,47,26,.28],[.88,-1,58,20,.32],[.94,1,70,14,.36],[.97,-1,82,11,.40]];
+/* ---------- Scots pine, modelled on the reference photo (mirrored, so it leans towards the pond) ----------
+   Day 100 is the reference tree. Every branch and pad has a day it appears, then grows into place;
+   the trunk starts nearly straight and its lean and S-bend develop over time. Two early branches die off later. */
+const PK=.142,PB=[240,985];                       /* reference pixels -> scene units, reference base point */
+const PT=[[240,985],[300,905],[370,840],[440,790],[495,720],[525,640],[525,560],[495,475],[445,405],[415,335],[405,265],[418,195],[430,140]];
+const PW=[112,96,86,76,64,56,48,41,34,28,22,16,8];
+/* branches: [u along trunk, day it appears, day it dies (0 = never), width, branch points, pads [dx,dy,rx,ry]] (reference px, relative to where it joins) */
+const PBR=[
+ [.27,7,0,32,[[0,0],[140,-14],[320,-26],[500,-14]],[[220,-62,105,50],[420,-40,96,46],[95,-40,66,34]],{droop:95,post:340}],
+ [.2,22,0,18,[[0,0],[40,40],[0,72],[-90,88],[-170,84]],[[-60,52,82,38],[-170,60,70,34]],{front:1}],
+ [.21,12,0,26,[[0,0],[-100,-28],[-250,-48]],[[-215,-82,98,44],[-60,-62,90,40]]],
+ [.46,28,0,22,[[0,0],[-120,-18],[-290,-38],[-360,-52]],[[-285,-78,95,42],[-135,-62,92,40]]],
+ [.42,38,0,10,[[0,0],[60,-14],[100,-24]],[[85,-36,62,28]]],
+ [.57,46,0,14,[[0,0],[60,-40],[130,-68]],[[95,-82,92,40],[-30,-60,62,30]]],
+ [.72,58,0,12,[[0,0],[-80,-38],[-175,-66]],[[-135,-94,82,38]]],
+ [.75,66,0,10,[[0,0],[80,-48],[150,-78]],[[95,-102,88,38]]],
+ [.35,18,60,10,[[0,0],[-90,-18],[-165,-24]],[[-125,-44,62,28]]],   /* young branches that later die off */
+ [.62,34,76,8,[[0,0],[70,-18],[125,-28]],[[92,-44,56,26]]]];
+const PAPEX=[[0,22,145,52],[-85,52,72,34],[60,40,60,28]];
+const NEED_B=['#1F4029','#244A30','#2B5536'],NEED_F=['#3F6E4A','#4D7F57','#5E8F66','#6F9A7A','#7FA585'];
+function shoot(x,y,L,ang,col,R){ /* a shoot: stem with pairs of fine needles along it and a tuft at the tip */
+ const ex=x+Math.cos(ang)*L*.8,ey=y+Math.sin(ang)*L*.8;let d=`M${x.toFixed(1)} ${y.toFixed(1)}L${ex.toFixed(1)} ${ey.toFixed(1)}`;
+ for(let i=1;i<=4;i++){const f=i/4,px=x+(ex-x)*f,py=y+(ey-y)*f,l=L*(.8+.3*f)*(.85+R()*.3);
+  for(const sd of [-1,1]){const a=ang+sd*(.8-.3*f)+(R()-.5)*.2;d+=`M${px.toFixed(1)} ${py.toFixed(1)}q${(Math.cos(a)*l*.5+Math.cos(ang)*.5).toFixed(1)} ${(Math.sin(a)*l*.5+Math.sin(ang)*.5).toFixed(1)} ${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}`}}
+ for(let i=-1;i<=1;i++){const a=ang+i*.2,l=L*.9;d+=`M${ex.toFixed(1)} ${ey.toFixed(1)}l${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}`}
+ return `<path d="${d}" stroke="${col}" stroke-width=".5" stroke-linecap="round" fill="none"/>`}
+function smoothPath(P){let d=`M${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;for(let i=1;i<P.length-1;i++){const mx=(P[i][0]+P[i+1][0])/2,my=(P[i][1]+P[i+1][1])/2;d+=`Q${P[i][0].toFixed(1)} ${P[i][1].toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)}`}const l=P[P.length-1];return d+`L${l[0].toFixed(1)} ${l[1].toFixed(1)}`}
+
+/* Japanese-style T-shaped wooden support post */
+function tpost(x,yt,yg){const w=2.4;return `<ellipse cx="${x}" cy="${yg+.6}" rx="3" ry=".9" fill="#00000030"/><path d="M${x} ${yg}L${x} ${yt+1.6}" stroke="#7A5A3A" stroke-width="${w}" stroke-linecap="square"/><path d="M${x-.5} ${yg}L${x-.5} ${yt+2}" stroke="#9A7650" stroke-width=".7"/>
+ <path d="M${x-5} ${yt+.8}h10" stroke="#6A4C30" stroke-width="2" stroke-linecap="round"/><path d="M${x-5} ${yt+.2}h10" stroke="#9A7650" stroke-width=".5" stroke-linecap="round"/>
+ <path d="M${x-1.6} ${yt+2.6}l3.2 1.2M${x-1.6} ${yt+3.8}l3.2 1.2" stroke="#E2D3A8" stroke-width=".7"/>`}
+function bigPine(day,h,bx,by,se,id){
+ const g=Math.min(1,(day-1)/99),dead=h>=3,woody=ss(2,18,day);
+ const sz=.06+.94*Math.pow(g,.72),bend=ss(.04,.85,g),thick=.1+.9*Math.pow(g,.9);
+ const bark=dead?'#6B6560':mix('#6E9A43','#62564E',woody),limb=dead?'#76706A':mix('#6E9A43','#6E625A',woody),limbL=dead?'#8A847E':'#A4988C';
+ /* trunk control points: blend from a nearly straight young stem to the reference shape */
+ const n=PT.length-1,ctrl=PT.map((p,i)=>{const t=i/n,fx=-(p[0]-PB[0])*PK,fy=(p[1]-PB[1])*PK,yx=-4*Math.sin(t*Math.PI)*(1-bend),yy=-845*PK*t;
+  return [bx+sz*(yx+(fx-yx)*bend),by+sz*(yy+(fy-yy)*bend)]});
+ /* resample smoothly (Catmull-Rom) */
+ const N=60,C=[],Wd=[];for(let k=0;k<=N;k++){const f=k/N*n,i=Math.min(n-1,Math.floor(f)),t=f-i;const p0=ctrl[Math.max(0,i-1)],p1=ctrl[i],p2=ctrl[i+1],p3=ctrl[Math.min(n,i+2)];
+  const cr=(a,b,c,d)=>.5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);C.push([cr(p0[0],p1[0],p2[0],p3[0]),cr(p0[1],p1[1],p2[1],p3[1])]);const uu=k/N;Wd.push((PW[i]+(PW[i+1]-PW[i])*t)*PK*thick/2*(1+1.15*ss(.35,1,g)*Math.exp(-uu*9)))}
+ const at=u=>C[Math.round(Math.max(0,Math.min(1,u))*N)];
+ const BUMP=k=>1+ss(.15,.7,g)*(1+2.2*ss(.35,1,g)*Math.exp(-k/N*7))*(.07*Math.sin(k*.8)+.05*Math.sin(k*1.4+2)+.06*Math.sin(k*.33+.5));
+ let t=`<defs><linearGradient id="pb${id}" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5E534B"/><stop offset=".55" stop-color="#6E5E52"/><stop offset=".8" stop-color="#94603E"/><stop offset="1" stop-color="#B06A3E"/></linearGradient></defs>`;
+ const TF=dead||woody<.6?bark:`url(#pb${id})`;
+ const sag=dead?7:h*3,brs=[],pads=[];
+ const toS=(ax,ay,dx,dy,sc)=>[ax-dx*PK*sc,ay+dy*PK*sc+(sag*Math.abs(dx)/400)];
+ const frontBrs=[],posts=[];
+ PBR.forEach(([u,born,die,w,pts,pp,o={}],bi)=>{if(day<born)return;const a=at(u);
+  if(die&&day>=die){if(day<die+16)brs.push(`<path d="M${a[0].toFixed(1)} ${a[1].toFixed(1)}l${(-Math.sign(pts[pts.length-1][0])*3).toFixed(1)} -1" stroke="#857A72" stroke-width="${Math.max(.8,w*PK*.3*thick).toFixed(1)}" stroke-linecap="round"/>`);return}
+  const gr=ss(born,born<30?Math.max(born+45,96):born+45,day),sc=gr*(.4+.6*sz);const maxX=Math.max(...pts.map(p=>Math.abs(p[0])))||1,dr=(dx)=>o.droop?o.droop*Math.pow(Math.abs(dx)/maxX,1.6)*ss(40,100,day):0;
+  const P=pts.map(([dx,dy],k)=>toS(a[0],a[1],dx,dy+dr(dx)+(k&&k<pts.length-1?(k%2?14:-12):0),sc));
+  const ww=Math.max(.8,w*PK*thick*(.5+.5*gr));
+  (o.front?frontBrs:brs).push(`<path d="${smoothPath(P)}" stroke="${limb}" stroke-width="${ww.toFixed(1)}" fill="none" stroke-linecap="round"/><path d="${smoothPath(P)}" stroke="${limbL}" stroke-width="${(ww*.25).toFixed(2)}" fill="none" stroke-linecap="round" opacity=".45" transform="translate(0 -${(ww*.25).toFixed(1)})"/>`);
+  const fill=.55+.45*ss(born+15,100,day);
+  if(o.post&&day>=50){const[px,py]=toS(a[0],a[1],o.post,-24+dr(o.post),sc);posts.push([px,py+ww*.5,by+5])}
+  pp.forEach(([dx,dy,rx,ry],pi)=>{const[x,y]=toS(a[0],a[1],dx,dy+dr(dx),sc);pads.push([x,y,rx*PK*sc*fill,ry*PK*sc*fill,bi*10+pi])})});
+ const top=C[N],asz=.5+.5*sz;PAPEX.forEach(([dx,dy,rx,ry],i)=>{const k=i===0?1:ss(30+i*15,70+i*15,day);if(k<=0)return;pads.push([top[0]-dx*PK*asz,top[1]+dy*PK*asz,Math.max(2.2,rx*PK*asz*k*(i?1:.4+.6*g)),Math.max(1.4,ry*PK*asz*k*(i?1:.4+.6*g)),900+i])});
+ t+=brs.join('');
+ /* roots spreading out from the base as it ages */
+ const rt=ss(.3,1,g);if(rt>0&&!dead){const RR=rng(71);
+  [[-1,22,9],[-1,14,8],[-1,7,7],[1,6,7],[1,13,8],[1,19,6.5]].forEach(([sd,len,w])=>{const l=len*rt,ww=w*(.35+.65*rt),x0=bx+sd*Wd[0]*.2,y0=by-4,ex=bx+sd*(Wd[0]*.55+l),ey=by+4.5+RR()*1.5;
+   const c1=[x0+sd*l*.4,y0-1.5],c2=[ex-sd*l*.3,ey-2.5],P=[],K=10;for(let i=0;i<=K;i++){const f=i/K,q=1-f;P.push([q*q*q*x0+3*q*q*f*c1[0]+3*q*f*f*c2[0]+f*f*f*ex,q*q*q*y0+3*q*q*f*c1[1]+3*q*f*f*c2[1]+f*f*f*ey])}
+   const top=[],bot=[];P.forEach((p,i)=>{const f=i/K,w2=ww*(1-.82*f*f)/2;top.push([p[0],p[1]-w2]);bot.push([p[0],p[1]+w2])});
+   t+=`<path d="${top.concat(bot.reverse()).map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('')}Z" fill="${bark}"/>`;
+   t+=`<path d="${top.slice(1,K-1).map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+(p[1]+.5).toFixed(1)).join('')}" stroke="#8A7C70" stroke-width="${(ww*.18).toFixed(2)}" fill="none" opacity=".55" stroke-linecap="round"/>`})}
+ /* trunk with bumpy edges */
+ const L=[],Rr=[];for(let i=0;i<=N;i++){const pp=C[i],q=C[Math.min(N,i+1)],o=C[Math.max(0,i-1)];const dx=q[0]-o[0],dy=q[1]-o[1],m=Math.hypot(dx,dy)||1,w=Wd[i],wl=w*BUMP(i),wr=w*BUMP(i+23);
+  if(i<2){L.push([pp[0]+wl,pp[1]]);Rr.push([pp[0]-wr,pp[1]])}else{L.push([pp[0]-dy/m*wl,pp[1]+dx/m*wl]);Rr.push([pp[0]+dy/m*wr,pp[1]-dx/m*wr])}}
+ t+=`<path d="${L.concat(Rr.reverse()).map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join('')}Z" fill="${TF}"/>`;
+ if(thick>.3&&!dead){const RB=rng(55);
+  t+=`<path d="${C.slice(1,N-2).map((q,i)=>(i?'L':'M')+(q[0]+Wd[i+1]*.5).toFixed(1)+' '+q[1].toFixed(1)).join('')}" stroke="#000" stroke-width="${(Wd[0]*.5).toFixed(1)}" fill="none" opacity=".15" stroke-linecap="round"/>`;
+  for(let i=1;i<N*.62;i++){const q=C[i],w=Wd[i];const k=2+Math.floor(RB()*2);for(let j=0;j<k;j++){const off=(RB()*1.6-.8)*w,l=1.4+RB()*2.6;
+   t+=`<path d="M${(q[0]+off).toFixed(1)} ${q[1].toFixed(1)}q${(RB()*1.6-.8).toFixed(1)} ${(-l*.5).toFixed(1)} ${(RB()-.5).toFixed(1)} ${(-l).toFixed(1)}" stroke="#2A221D" stroke-width="${(.4+RB()*.35).toFixed(2)}" fill="none" opacity="${(.7-i/N*.8).toFixed(2)}"/>`;
+   if(RB()<.18)t+=`<path d="M${(q[0]+off).toFixed(1)} ${(q[1]-1).toFixed(1)}h${(1+RB()).toFixed(1)}" stroke="#A89A8E" stroke-width=".5" opacity=".6"/>`}}
+  for(let i=Math.round(N*.6);i<N-3;i++){if(RB()<.45)continue;const q=C[i],w=Wd[i];t+=`<path d="M${(q[0]-w*.6).toFixed(1)} ${q[1].toFixed(1)}q${(w*.5).toFixed(1)} ${(RB()-.5).toFixed(1)} ${(w*(.6+RB()*.5)).toFixed(1)} 0" stroke="${RB()>.5?'#E0A070':'#7E4A2E'}" stroke-width=".45" fill="none" opacity=".6"/>`}}
+ if(!dead&&g>.45){const kb=ss(.45,1,g);[[.06,-.55,1],[.12,.5,.8],[.2,-.4,.7]].forEach(([u,o,s0])=>{const q=at(u),w=Wd[Math.round(u*N)],r=w*.28*s0*kb;t+=`<ellipse cx="${(q[0]+o*w).toFixed(1)}" cy="${q[1].toFixed(1)}" rx="${r.toFixed(1)}" ry="${(r*.8).toFixed(1)}" fill="#5A4E46"/><path d="M${(q[0]+o*w-r*.6).toFixed(1)} ${(q[1]-r*.2).toFixed(1)}q${(r*.6).toFixed(1)} ${(-r*.7).toFixed(1)} ${(r*1.2).toFixed(1)} 0" stroke="#8A7C70" stroke-width=".5" fill="none" opacity=".7"/><path d="M${(q[0]+o*w-r*.5).toFixed(1)} ${(q[1]+r*.3).toFixed(1)}q${(r*.5).toFixed(1)} ${(r*.4).toFixed(1)} ${r.toFixed(1)} 0" stroke="#2A221D" stroke-width=".5" fill="none" opacity=".7"/>`})}
+ if(day>=20)t+=`<path d="M${bx-48} ${by+4}Q${bx-12} ${by+10} ${bx+24} ${by+4}Q${bx-12} ${by+6} ${bx-48} ${by+4}Z" fill="#1E1B19"/>`;
+ t+=frontBrs.join('');
+ posts.forEach(([x,yt,yg])=>t+=tpost(x,yt,yg));
+ /* a bamboo stake guiding the young tree upright, removed after about a month */
+ const gs=ss(2,5,day)*(1-ss(28,33,day));if(gs>0&&!dead){const H=by-C[N][1],sh=Math.min(H*.85,34),sx=bx+Wd[0]+2.2;t+=`<g opacity="${gs.toFixed(2)}"><path d="M${sx} ${by+1}L${sx-.4} ${by-sh}" stroke="#C9B27A" stroke-width="1.3" stroke-linecap="round"/>${[.3,.65].map(f=>`<path d="M${(sx-.3).toFixed(1)} ${(by-sh*f).toFixed(1)}L${(at(sh*f/H)[0]).toFixed(1)} ${(by-sh*f).toFixed(1)}" stroke="#E8DDB8" stroke-width=".8"/>`).join('')}<path d="M${sx-.5} ${by-sh*.3-1}h1M${sx-.5} ${by-sh*.65-1}h1" stroke="#8A7A50" stroke-width=".5"/></g>`}
+ /* needle pads: no blobs, just shoots; a darker back layer gives depth, lighter shoots on top give definition */
+ if(!dead)pads.forEach(([x0,y0,rx,ry,seed])=>{const R=rng(300+seed);const n=Math.max(3,Math.round(rx*ry*.6));
+  if(rx>4){for(let j=0;j<Math.round(rx/3);j++){const a=-Math.PI*(.1+.8*R()),l=rx*(.5+R()*.45);t+=`<path d="M${x0.toFixed(1)} ${(y0+ry*.6).toFixed(1)}q${(Math.cos(a)*l*.4).toFixed(1)} ${(-ry*.2).toFixed(1)} ${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*ry*.7).toFixed(1)}" stroke="${limb}" stroke-width=".6" fill="none" stroke-linecap="round"/>`}}
+  for(const layer of [0,1]){const m=layer?n:Math.round(n*.6);for(let i=0;i<m;i++){const a=R()*Math.PI*2,rr=Math.sqrt(R()),pick=R(),c1=R(),c2=R();if(h===2&&pick>.5)continue;
+    const x=x0+Math.cos(a)*rr*rx,y=y0+Math.sin(a)*rr*ry*(Math.sin(a)>0?.5:1)+(layer?0:.8);
+    let col=layer?NEED_F[Math.floor(c1*NEED_F.length)]:NEED_B[Math.floor(c1*NEED_B.length)];
+    if(se===2&&layer&&c2<.1)col='#C9A445';if(se===3)col=mix(col,'#1E3A2A',.25);if(h)col=mix(col,h===1?'#A8924A':'#8A6A3A',h===1?.35:.65);
+    const ang=-Math.PI/2+Math.cos(a)*1.1+(R()-.5)*.6;t+=shoot(x,y,2.2+R()*1.4,ang,col,R)}}
+  if(se===0&&!h&&day>=6){const k=Math.max(1,Math.round(rx/3));for(let j=0;j<k;j++){const x=x0+(R()-.5)*rx*1.6,y=y0-ry*(.5+R()*.4),l=1.8+R()*2.2;t+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}v${(-l).toFixed(1)}" stroke="#E6E0AA" stroke-width="1.1" stroke-linecap="round"/>`}}
+  if(se===3&&rx>3)t+=`<path d="M${(x0-rx*.75).toFixed(1)} ${(y0-ry*.55).toFixed(1)}Q${x0.toFixed(1)} ${(y0-ry*1.5).toFixed(1)} ${(x0+rx*.75).toFixed(1)} ${(y0-ry*.55).toFixed(1)}" stroke="#F4F6F4" stroke-width="${(.9+rx*.06).toFixed(1)}" fill="none" stroke-linecap="round" opacity=".75"/>`;
+  if(day>=45&&rx>8&&!h&&R()>.45){const x=x0+(R()-.5)*rx,y=y0+ry*.6;t+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="1.1" ry="1.7" fill="#7A5A3A"/>`}});
+ if(THEME==='xmas'&&!dead)XL=xmasSpiral(pads,C,N,by);
+ if(!dead&&day>=20&&(se===2||se===3||h)){const F=rng(13),k=se===2||h?14:5;for(let i=0;i<k;i++){const x=bx-45+F()*70,y=by+1+F()*8,aa=F()*3;t+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}l${(Math.cos(aa)*3).toFixed(1)} ${(Math.sin(aa)*1.2).toFixed(1)}" stroke="#A07A4A" stroke-width=".7"/>`}
+  if(day>=45)t+=`<ellipse cx="${bx-26}" cy="${by+5}" rx="2" ry="1.3" fill="#7A5A3A"/><ellipse cx="${bx+12}" cy="${by+7}" rx="2" ry="1.3" fill="#7A5A3A"/>`}
+ return t}
+
+/* ---------- acer: behind the right end of the bridge. Never grows, only changes colour ----------
+   Shape after the reference: a short trunk that forks low into two stems, then spreads into a wide, airy dome. */
+const ACER=[['#D2543F','#E8805A','#C13E35','#B8D86A','#E39A6A','#A8CC5A'],['#5E8F3A','#7AA84A','#6A9A40','#4F7F33','#86B455','#7A2E2E'],['#E8173A','#D4102F','#F2405A','#B80F2A','#FF5A5F','#C9142C'],null];
+function acer(se,dead){const X=206,Y=151,R=rng(4242),bark='#3E302C';let br='',tips=[];
+ const grow=(x,y,ang,len,w,d)=>{const ex=x+Math.cos(ang)*len,ey=y+Math.sin(ang)*len,cx=x+Math.cos(ang+.25*(R()-.5))*len*.55,cy=y+Math.sin(ang)*len*.55-1;
+  br+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}" stroke="${bark}" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round"/>`;
+  if(d>=3){/* outer tips arch over and droop a little */const dr=Math.abs(Math.cos(ang))>.45?3:0;tips.push([ex,ey+dr*.4,d]);if(dr)br+=`<path d="M${ex.toFixed(1)} ${ey.toFixed(1)}q${(Math.sign(Math.cos(ang))*3).toFixed(1)} -.5 ${(Math.sign(Math.cos(ang))*5).toFixed(1)} 3" stroke="${bark}" stroke-width=".5" fill="none"/>`;return}
+  const sp=.38+R()*.22;[ang-sp,ang+sp*(.8+R()*.4)].forEach(a=>{const aa=Math.max(-Math.PI+.15,Math.min(-.15,a));grow(ex,ey,aa,len*(.68+R()*.12),w*.62,d+1)})};
+ br+=`<path d="M${X-2.4} ${Y}Q${X-1} ${Y-5} ${X} ${Y-8}L${X+1.6} ${Y-8}Q${X+1.5} ${Y-4} ${X+2.6} ${Y}Z" fill="${bark}"/>`;
+ grow(X,Y-7,-Math.PI/2-.5,13,2.3,0);grow(X+.5,Y-7,-Math.PI/2+.42,12,2.1,0);
+ let t=`<ellipse cx="${X}" cy="${Y+1}" rx="20" ry="2.8" fill="#5E7A44" opacity=".6"/>`;
+ /* autumn carpet of red leaves, brown in winter */
+ if(se>=2&&!dead){const F=rng(9);for(let i=0;i<(se===2?30:18);i++)t+=`<path d="${LEAF}" transform="translate(${(X-26+F()*52).toFixed(1)} ${(Y-1+F()*5).toFixed(1)}) rotate(${(F()*180).toFixed(0)}) scale(.42)" fill="${se===2?ACER[2][i%6]:BROWN[i%4]}" opacity=".95"/>`}
+ if(se===3||dead)return t+br;
+ const pal=ACER[se];
+ /* soft shade behind the canopy, then branches, then leaf clusters at each tip */
+ t+=br;
+ tips.forEach(([x,y],k)=>{const LR=rng(600+k*11);const n=44;for(let i=0;i<n;i++){const a=LR()*Math.PI*2,r=Math.sqrt(LR())*7.5;const lx=x+Math.cos(a)*r,ly=y+Math.sin(a)*r*.6+1.5;
+   t+=`<path d="${LEAF}" transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)}) rotate(${(LR()*90-45).toFixed(0)}) scale(${(.38+LR()*.18).toFixed(2)})" fill="${pal[Math.floor(LR()*pal.length)]}" opacity=".95"/>`}});
+ return t}
+/* ---------- cherry tree options ---------- */
+const CB={pink:['#F7C6D0','#F4A7B9','#FBDDE4','#EE8FA8','#FFF1F4','#F2B5C4'],
+ sum:['#4F8A3A','#65A04A','#3E7530','#5C9440','#73A853'],
+ aut:['#C8562A','#E08A3A','#B23A2A','#D9A441','#A84A2A'],bark:'#4A3530',barkL:'#6A5048'};
+function blob(cx,cy,rx,ry,n,se,seed,dot){if(se===3)return '';const R=rng(seed);let t='';const pal=se===0?CB.pink:se===1?CB.sum:CB.aut;
+ const k=se===2?Math.round(n*.6):n;
+ if(se!==2){t+=`<ellipse cx="${cx}" cy="${cy+ry*.15}" rx="${rx*.85}" ry="${ry*.75}" fill="${se===0?'#E99AAF':'#3A6A2C'}" opacity=".45"/>`}
+ for(let i=0;i<k;i++){const a=R()*Math.PI*2,r=Math.sqrt(R());const x=cx+Math.cos(a)*r*rx,y=cy+Math.sin(a)*r*ry;
+  t+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${((dot||1.9)*(.7+R()*.6)).toFixed(2)}" fill="${pal[Math.floor(R()*pal.length)]}"/>`}
+ return t}
+function limb(x1,y1,cx,cy,x2,y2,w){return `<path d="M${x1} ${y1}Q${cx} ${cy} ${x2} ${y2}" stroke="${CB.bark}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`}
+function buds(pts){return pts.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.1" fill="#7A3A3A"/>`).join('')}
+function trunkPoly(pts,w0,w1){ /* tapered trunk along points */
+ const N=pts.length-1,L=[],R=[];pts.forEach((p,i)=>{const q=pts[Math.min(N,i+1)],o=pts[Math.max(0,i-1)];const dx=q[0]-o[0],dy=q[1]-o[1],m=Math.hypot(dx,dy)||1;const w=(w0+(w1-w0)*i/N)/2;L.push([p[0]-dy/m*w,p[1]+dx/m*w]);R.push([p[0]+dy/m*w,p[1]-dx/m*w])});
+ return `<path d="${L.concat(R.reverse()).map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('')}Z" fill="${CB.bark}"/>`}
+function curve(x0,y0,pts){return [[x0,y0],...pts]}
+const CX=100,CY=177; /* base of the cherry: left of the pond, a little in front */
+function cub(p0,p1,p2,p3,t){const u=1-t;return [0,1].map(k=>u*u*u*p0[k]+3*u*u*t*p1[k]+3*u*t*t*p2[k]+t*t*t*p3[k])}
+const WEEP={
+ W5:{name:'Leaning over the pond, gnarled trunk',desc:'',trunk:[[0,0],[5,-7],[1,-15],[6,-24],[12,-31],[16,-38]],w:[12,3.4],limbs:null,reach:.95,top:[16,-50,28,8],gnarled:true},
+ W1:{name:'Fountain',desc:'Upright trunk, limbs arching out evenly all round, curtain almost to the ground',
+  trunk:[[0,0],[-2,-14],[2,-30],[0,-46]],w:[7,2.6],
+  limbs:[[[0,-46],[-8,-60],[-24,-58],[-32,-40],1.8],[[0,-46],[8,-60],[24,-58],[32,-40],1.8],[[0,-44],[-6,-54],[-16,-56],[-22,-46],1.3],[[0,-44],[6,-54],[16,-56],[22,-46],1.3],[[0,-46],[-2,-58],[-8,-62],[-12,-56],1],[[0,-46],[2,-58],[8,-62],[12,-56],1],[[1,-30],[-10,-40],[-24,-42],[-28,-30],1.2],[[1,-30],[10,-40],[24,-42],[28,-30],1.2]],
+  reach:.92,top:[0,-56,26,9]},
+ W2:{name:'Leaning over the pond',desc:'Trunk leans towards the water, longer limbs reach over the pond, strands trail to the surface',
+  trunk:[[0,0],[3,-14],[10,-26],[16,-38]],w:[7.5,2.6],
+  limbs:[[[16,-38],[24,-54],[44,-54],[54,-30],1.9],[[16,-38],[22,-50],[36,-52],[42,-36],1.4],[[16,-38],[8,-54],[-8,-54],[-14,-38],1.5],[[12,-30],[0,-40],[-14,-40],[-20,-28],1.2],[[16,-38],[16,-52],[24,-58],[30,-50],1],[[16,-38],[12,-50],[4,-56],[0,-50],1]],
+  reach:.95,top:[16,-50,28,8]},
+ W3:{name:'Two tiers',desc:'A wide lower tier and a smaller upper tier, giving a layered curtain',
+  trunk:[[0,0],[-2,-18],[2,-36],[0,-58]],w:[7,2.2],
+  limbs:[[[0,-30],[-10,-40],[-30,-40],[-36,-24],1.8],[[0,-30],[10,-40],[30,-40],[36,-24],1.8],[[0,-32],[-4,-40],[-16,-42],[-20,-32],1.1],[[0,-32],[4,-40],[16,-42],[20,-32],1.1],[[0,-56],[-6,-66],[-16,-66],[-20,-54],1.2],[[0,-56],[6,-66],[16,-66],[20,-54],1.2],[[0,-58],[0,-66],[-4,-70],[-6,-64],.8],[[0,-58],[0,-66],[4,-70],[6,-64],.8]],
+  reach:.55,top:[0,-62,18,6],top2:[0,-36,30,7]},
+ W4:{name:'Old and gnarled',desc:'A short, thick, twisted trunk that splits in two, with uneven limbs and strands of different lengths',
+  trunk:[[0,0],[5,-10],[-3,-20],[2,-30]],w:[10,4.5],
+  limbs:[[[2,-30],[-6,-44],[-24,-48],[-34,-34],2],[[2,-30],[10,-46],[26,-50],[34,-38],2.1],[[-1,-24],[-12,-30],[-22,-30],[-26,-22],1.3],[[2,-30],[0,-46],[-8,-54],[-14,-48],1.3],[[2,-30],[8,-44],[16,-54],[22,-50],1.2],[[4,-28],[16,-34],[22,-32],[24,-26],1]],
+  reach:.8,top:[0,-46,30,8],irregular:true}};
+function weep(k,se,dead){const W=WEEP[k];if(W&&!W.limbs)W.limbs=WEEP.W2.limbs;if(!W)return '';const P=([x,y])=>[CX+x,CY+y];let t=W&&W.gnarled?`<ellipse cx="${CX+2}" cy="${CY+2}" rx="32" ry="6.5" fill="${se===3?'#8C9A82':'#5E7A44'}"/><ellipse cx="${CX+1}" cy="${CY+1.5}" rx="25" ry="4.8" fill="#1E1B19"/>`:`<ellipse cx="${CX}" cy="${CY+2}" rx="20" ry="4" fill="#00000022"/>`;
+ const pal=se===0?CB.pink:se===1?CB.sum:CB.aut;const R=rng(k.charCodeAt(1)*31);
+ /* a soft canopy behind, so it reads as a full tree */
+ const dome=(d)=>{if(!d||se===3)return '';const[x,y,rx,ry]=d;return `<ellipse cx="${CX+x}" cy="${CY+y}" rx="${rx}" ry="${ry}" fill="${se===0?'#EBA5B8':se===1?'#3F7231':'#B5602E'}" opacity="${se===2?.3:.45}"/>`};
+ t+=dome(W.top)+dome(W.top2);
+ /* trunk */
+ if(W.gnarled){
+  /* roots: flare out from the base and dive into the earth */
+  const roots=[[-15,2.5,3.2],[-9,3.2,2.6],[10,3,2.8],[16,2.2,2.2]];
+  roots.forEach(([dx,dy,w])=>{const sx=CX+Math.sign(dx)*3;t+=`<path d="M${sx} ${CY-4}C${sx+dx*.3} ${CY-3.5} ${CX+dx*.7} ${CY-1.5} ${CX+dx} ${CY+dy}" stroke="${CB.bark}" stroke-width="${w}" fill="none" stroke-linecap="round"/><path d="M${sx} ${CY-4}C${sx+dx*.3} ${CY-3.5} ${CX+dx*.7} ${CY-1.5} ${CX+dx} ${CY+dy}" stroke="${CB.barkL}" stroke-width=".6" fill="none" opacity=".5" transform="translate(0 -${(w*.3).toFixed(1)})"/>`});
+  t+=`<path d="M${CX-16} ${CY+3}C${CX-10} ${CY-.5} ${CX-6} ${CY-3.5} ${CX-4} ${CY-7}L${CX+5} ${CY-7}C${CX+8} ${CY-3} ${CX+12} ${CY-.5} ${CX+17} ${CY+2.6}Q${CX} ${CY+5} ${CX-16} ${CY+3}Z" fill="${CB.bark}"/>`;
+  { /* trunk with a smooth flare where it meets the ground */
+   const pts=[];const T=W.trunk.map(P);for(let i=0;i<T.length-1;i++)for(let k=0;k<6;k++){const f=k/6;pts.push([T[i][0]+(T[i+1][0]-T[i][0])*f,T[i][1]+(T[i+1][1]-T[i][1])*f])}pts.push(T[T.length-1]);
+   const N=pts.length-1,L=[],R=[];pts.forEach((p,i)=>{const u=i/N,q=pts[Math.min(N,i+1)],o=pts[Math.max(0,i-1)];let dx=q[0]-o[0],dy=q[1]-o[1];const m=Math.hypot(dx,dy)||1;
+    const w=(3.4+7*(1-u)*(1-u)+9*Math.exp(-u*14))/2;if(i<2){L.push([p[0]-w,p[1]+1]);R.push([p[0]+w,p[1]+1])}else{L.push([p[0]-dy/m*w,p[1]+dx/m*w]);R.push([p[0]+dy/m*w,p[1]-dx/m*w])}});
+   t+=`<path d="${L.concat(R.reverse()).map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('')}Z" fill="${CB.bark}"/>`}
+  /* twisting grain and a knot */
+  t+=`<path d="M${CX-3} ${CY-2}C${CX+3} ${CY-8} ${CX-2} ${CY-14} ${CX+3} ${CY-20}S${CX+9} ${CY-28} ${CX+14} ${CY-34}" stroke="${CB.barkL}" stroke-width="1.1" fill="none" opacity=".75"/>`;
+  t+=`<path d="M${CX+3} ${CY-3}C${CX+7} ${CY-9} ${CX+3} ${CY-14} ${CX+8} ${CY-21}" stroke="#3A2722" stroke-width=".9" fill="none" opacity=".8"/>`;
+  t+=`<ellipse cx="${CX+4}" cy="${CY-17}" rx="1.6" ry="2.2" fill="#3A2722" transform="rotate(25 ${CX+4} ${CY-17})"/><ellipse cx="${CX+4}" cy="${CY-17}" rx=".7" ry="1.1" fill="${CB.barkL}" transform="rotate(25 ${CX+4} ${CY-17})"/>`;
+  /* earth lip in front of the roots, so they sink in */
+  t+=`<path d="M${CX-24} ${CY+2.4}Q${CX+1} ${CY+7.5} ${CX+26} ${CY+2.4}Q${CX+1} ${CY+4.4} ${CX-24} ${CY+2.4}Z" fill="#1E1B19"/>`;
+ } else t+=trunkPoly(W.trunk.map(P),W.w[0],W.w[1]);
+ if(k==='W4')t+=`<path d="M${CX-3} ${CY-6}q4 -6 1 -12M${CX+4} ${CY-4}q-2 -8 2 -14" stroke="${CB.barkL}" stroke-width="1" fill="none" opacity=".7"/>`;
+ /* limbs, each with strands hanging from its outer part */
+ const strands=[];
+ W.limbs.forEach((L,li)=>{const [a,b,c,d,w]=L,A=P(a),B=P(b),C=P(c),D=P(d);
+  t+=`<path d="M${A[0]} ${A[1]}C${B[0]} ${B[1]} ${C[0]} ${C[1]} ${D[0]} ${D[1]}" stroke="${CB.bark}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`;
+  const n=Math.round(4+w*3);for(let i=0;i<n;i++){const tt=.35+.65*i/(n-1)+(R()-.5)*.04;const [x,y]=cub(A,B,C,D,Math.min(1,tt));
+   const room=CY-2-y;let len=room*W.reach*(.45+.55*tt);if(W.irregular)len*=.55+R()*.6;len=Math.min(room-2,Math.max(6,len));
+   strands.push([x,y,len,(R()-.5)*3]);}
+  /* small twigs above the limb */
+  if(w>1.2){const [x,y]=cub(A,B,C,D,.55);t+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}q${(D[0]-A[0])*.08} -5 ${(D[0]-A[0])*.18} -4" stroke="${CB.bark}" stroke-width=".8" fill="none" stroke-linecap="round"/>`}});
+ strands.forEach(([x,y,len,sw],i)=>{
+  t+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}q${sw.toFixed(1)} ${(len*.5).toFixed(1)} ${(sw*.6+1.5).toFixed(1)} ${len.toFixed(1)}" stroke="${se===3||dead?CB.barkL:'#6A4A40'}" stroke-width=".55" fill="none" opacity="${se===3?.9:.6}"/>`;
+  if(se===3||dead){if(!dead)for(let j=6;j<len;j+=7)t+=`<circle cx="${(x+sw*j/len*.8).toFixed(1)}" cy="${(y+j).toFixed(1)}" r=".7" fill="#7A3A3A"/>`;return}
+  const step=se===1?2.1:se===2?3.4:2.4;for(let j=0;j<len;j+=step){if(se===2&&R()>.55)continue;
+   const f=j/len,xx=x+sw*f*(2-f)*.9+f*1.2,r=(se===0?1.5:se===1?1.3:1.2)*(1-f*.35);
+   t+=`<circle cx="${xx.toFixed(1)}" cy="${(y+j).toFixed(1)}" r="${r.toFixed(2)}" fill="${pal[(i*3+(j|0))%pal.length]}"/>`}});
+ /* blossom or leaves on top of the arches */
+ if(se!==3&&!dead)W.limbs.forEach(([a,b,c,d],li)=>{const A=P(a),B=P(b),C=P(c),D=P(d);for(let i=0;i<9;i++){if(se===2&&R()>.6)continue;const [x,y]=cub(A,B,C,D,.15+.8*R());t+=`<circle cx="${(x+(R()-.5)*4).toFixed(1)}" cy="${(y-1-R()*3).toFixed(1)}" r="${(1.3+R()*.8).toFixed(2)}" fill="${pal[(li+i)%pal.length]}"/>`}});
+ /* fallen petals or leaves */
+ if(se===2||se===0){const pal2=se===0?CB.pink:CB.aut;for(let i=0;i<18;i++)t+=`<ellipse cx="${(CX-30+R()*60).toFixed(1)}" cy="${(CY+R()*7).toFixed(1)}" rx="1.6" ry="1" fill="${pal2[i%pal2.length]}"/>`}
+ return t}
+
+/* ---------- blossom cherry (cartoon, after the reference): twisted trunk, wide spreading crown of blossom clouds ---------- */
+function flower(x,y,r,col,mid){let d='';for(let i=0;i<5;i++){const a=-Math.PI/2+i*Math.PI*2/5,cx=x+Math.cos(a)*r*.62,cy=y+Math.sin(a)*r*.62,pr=r*.5;d+=`M${(cx+pr).toFixed(2)} ${cy.toFixed(2)}a${pr.toFixed(2)} ${pr.toFixed(2)} 0 1 0 ${(-2*pr).toFixed(2)} 0a${pr.toFixed(2)} ${pr.toFixed(2)} 0 1 0 ${(2*pr).toFixed(2)} 0`}
+ return `<path d="${d}" fill="${col}"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r*.22).toFixed(2)}" fill="${mid}"/>`}
+const SAK={pink:['#F8C9D4','#F4B6C6','#FBDDE4','#EFA3B8','#F9D3DD'],sum:['#5E8F3A','#4F7F33','#6E9F45','#7AAE50','#456F2E'],aut:['#D9572A','#E8803A','#C23A2A','#E8A23F','#B8452A']};
+function sakura(se,dead){const X=CX,Y=CY,bark='#4A3530',barkD='#33241F',barkL='#7A5A4E',R=rng(777);
+ let t=`<ellipse cx="${X+2}" cy="${Y+2}" rx="32" ry="6.5" fill="${se===3?'#8C9A82':'#5E7A44'}"/><ellipse cx="${X+1}" cy="${Y+1.5}" rx="25" ry="4.8" fill="#1E1B19"/>`;
+ /* roots and a twisting trunk */
+ [[-16,2.6,3.4],[-9,3.2,2.8],[10,3,3],[17,2.2,2.4]].forEach(([dx,dy,w])=>{const sx=X+Math.sign(dx)*3;t+=`<path d="M${sx} ${Y-4}C${sx+dx*.3} ${Y-3.5} ${X+dx*.7} ${Y-1.5} ${X+dx} ${Y+dy}" stroke="${bark}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`});
+ t+=`<path d="M${X-17} ${Y+3}C${X-10} ${Y-.5} ${X-7} ${Y-3.5} ${X-5} ${Y-7}L${X+6} ${Y-7}C${X+9} ${Y-3} ${X+13} ${Y-.5} ${X+18} ${Y+2.6}Q${X} ${Y+5} ${X-17} ${Y+3}Z" fill="${bark}"/>`;
+ const T=[[X,Y],[X-5,Y-9],[X-7,Y-18],[X-1,Y-26],[X+6,Y-33],[X+4,Y-41],[X-2,Y-47]];
+ t+=trunkPoly(T,13,4.2);
+ /* twisting grain */
+ t+=`<path d="M${X-3} ${Y-2}C${X-9} ${Y-10} ${X-8} ${Y-18} ${X-2} ${Y-24}S${X+6} ${Y-34} ${X+2} ${Y-44}" stroke="${barkL}" stroke-width="1.1" fill="none" opacity=".7"/><path d="M${X+3} ${Y-3}C${X-3} ${Y-10} ${X-3} ${Y-17} ${X+2} ${Y-23}" stroke="${barkD}" stroke-width="1" fill="none" opacity=".8"/>`;
+ t+=`<ellipse cx="${X-5}" cy="${Y-15}" rx="1.5" ry="2.1" fill="${barkD}"/>`;
+ /* limbs spreading into a wide crown */
+ let br='',tips=[];
+ const grow=(x,y,ang,len,w,d)=>{const ex=x+Math.cos(ang)*len,ey=y+Math.sin(ang)*len,cx=x+Math.cos(ang-.3*Math.sign(Math.cos(ang)))*len*.55,cy=y+Math.sin(ang-.3)*len*.55;
+  br+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}" stroke="${bark}" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round"/>`;
+  if(d>=2){tips.push([ex,ey]);return}
+  const sp=.35+R()*.2;[ang-sp,ang+sp].forEach(a=>{grow(ex,ey,Math.max(-Math.PI+.1,Math.min(-.08,a)),len*(.62+R()*.15),w*.6,d+1)});
+  if(d===0)tips.push([x+(ex-x)*.6,y+(ey-y)*.6-3])};
+ /* long limb reaching right towards the pond, sagging under its weight */
+ br+=`<path d="M${X+5} ${Y-33}C${X+18} ${Y-40} ${X+30} ${Y-33} ${X+42} ${Y-19}" stroke="${bark}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+ grow(X+42,Y-19,-.25,9,1.6,1);grow(X+33,Y-30,-1.1,9,1.6,1);grow(X+22,Y-36,-1.5,7,1.4,1);tips.push([X+44,Y-17]);
+ /* Japanese-style wooden support post with a forked top and a rope binding */
+ const post=tpost(X+38,Y-21.5,Y+1.5);
+ grow(X-6,Y-20,-Math.PI+.35,18,2.6,0); /* lower limb to the left */
+ grow(X-2,Y-47,-Math.PI/2-.55,15,2.6,0);
+ grow(X-2,Y-47,-Math.PI/2+.45,14,2.4,0);
+ if(dead)return t+br+post;
+ if(se===3){t+=br+post;tips.forEach(([x,y])=>{for(let j=0;j<3;j++){const a=-Math.PI*(.25+j*.25),l=4+R()*3;t+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}l${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}" stroke="${bark}" stroke-width=".6"/><circle cx="${(x+Math.cos(a)*l).toFixed(1)}" cy="${(y+Math.sin(a)*l).toFixed(1)}" r=".9" fill="#9A3A4A"/>`}});return t}
+ const pal=se===0?SAK.pink:se===1?SAK.sum:SAK.aut;
+ /* soft clouds of blossom (or leaves) behind, branches through them, flowers on top */
+ let back='',front='';
+ tips.forEach(([x,y],k)=>{const LR=rng(50+k*19);const n=0;for(let i=0;i<n;i++){const a=LR()*Math.PI*2,r=LR()*6;back+=`<circle cx="${(x+Math.cos(a)*r).toFixed(1)}" cy="${(y+Math.sin(a)*r*.6-1).toFixed(1)}" r="${(4+LR()*3.5).toFixed(1)}" fill="${pal[Math.floor(LR()*pal.length)]}" opacity="${se===0?.9:.85}"/>`}
+  const m=se===0?30:se===1?30:18;for(let i=0;i<m;i++){const a=LR()*Math.PI*2,r=Math.sqrt(LR())*9.5;const fx=x+Math.cos(a)*r,fy=y+Math.sin(a)*r*.6-1.5;
+   if(se===0){const c=LR();front+=flower(fx,fy,1.6+LR()*1.1,c>.66?'#FFE9EE':c>.33?'#F7BFCD':'#F2A5BA','#C2456A')}
+   else front+=`<path d="${LEAF}" transform="translate(${fx.toFixed(1)} ${fy.toFixed(1)}) rotate(${(LR()*90-45).toFixed(0)}) scale(.38)" fill="${mix(pal[Math.floor(LR()*pal.length)],'#000000',.12)}"/>`}});
+ t+=back+br+post+front;
+ if(se===2){const F=rng(31);for(let i=0;i<16;i++)t+=`<path d="${LEAF}" transform="translate(${(X-28+F()*56).toFixed(1)} ${(Y+F()*6).toFixed(1)}) rotate(${(F()*180).toFixed(0)}) scale(.4)" fill="${SAK.aut[i%5]}"/>`}
+ if(se===0){const F=rng(32);for(let i=0;i<18;i++)t+=`<ellipse cx="${(X-28+F()*56).toFixed(1)}" cy="${(Y+F()*6).toFixed(1)}" rx="1.6" ry="1" fill="${SAK.pink[i%5]}"/>`}
+ return t}
+function cherry(opt,se,dead){return opt?weep(opt,se,dead):''}
+/* blossom petals drifting across the whole garden in spring (still, no movement) */
+function petals(opt,se,dead){if(!opt||se!==0||dead)return '';const R=rng(77);let t='';
+ for(let i=0;i<34;i++){const u=R();const x=CX+10+u*280+R()*20,y=CY-60+u*-10+R()*95;
+  t+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(1.4+R()*.8).toFixed(1)}" ry="${(.8+R()*.4).toFixed(1)}" fill="${CB.pink[i%4]}" opacity="${(.75+R()*.25).toFixed(2)}" transform="rotate(${(R()*90-45).toFixed(0)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`}
+ /* a few floating on the pond */
+ for(let i=0;i<8;i++){const x=135+R()*110,y=163+R()*9;t+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="1.6" ry=".8" fill="${CB.pink[i%3]}"/>`}
+ return t}
+
+
+/* ---------- raked gravel (karesansui): fine grain, raked lines, rings around the trees and a rock ---------- */
+
+/* a tall, twisted, spiky rock (like a scholar's stone) with moss on its ledges */
+function rock(x,y,se){ /* a plain, rounded boulder */
+ return `<ellipse cx="${x}" cy="${y+.6}" rx="11" ry="2.2" fill="#00000026"/>
+ <path d="M${x-10} ${y}C${x-11} ${y-6} ${x-7} ${y-13} ${x-1} ${y-14}C${x+5} ${y-14.5} ${x+10} ${y-9} ${x+10} ${y-3}C${x+10} ${y-1} ${x+9} ${y} ${x+8} ${y}Z" fill="#8A8378"/>
+ <path d="M${x+2} ${y-14.2}C${x+7} ${y-12} ${x+10} ${y-8} ${x+10} ${y-3}C${x+10} ${y-1} ${x+9} ${y} ${x+8} ${y}L${x+3} ${y}C${x+6} ${y-4} ${x+6} ${y-10} ${x+2} ${y-14.2}Z" fill="#6A645B"/>
+ <path d="M${x-7} ${y-8}C${x-6} ${y-11} ${x-3} ${y-13} ${x} ${y-13.3}" stroke="#B2AA9E" stroke-width="1.2" fill="none" stroke-linecap="round"/>`}
+function gravel(id,bx,by,se){const base=se===3?'#DEDAD2':'#DCD4C4',groove='#BFB5A2',hi='#EEE8DC';
+ let t=`<defs><pattern id="gv${id}" width="6" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".35" fill="#B8AE9C"/><circle cx="4" cy="2.6" r=".3" fill="#F2EDE2"/><circle cx="2.6" cy="3.4" r=".28" fill="#C9BFAE"/><circle cx="5.2" cy=".6" r=".25" fill="#A99F8E"/></pattern></defs>`;
+ t+=`<rect y="152" width="400" height="73" fill="${base}"/>`;
+ const groovePath=(d,w)=>`<path d="${d}" stroke="${groove}" stroke-width="${w}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${hi}" stroke-width="${(w*.55).toFixed(2)}" fill="none" stroke-linecap="round" transform="translate(0 ${(w*.6).toFixed(2)})"/>`;
+ /* straight raked lines, further apart towards the front */
+ for(let i=0;i<14;i++){const y=154+i*2.2+i*i*.22;if(y>224)break;const w=.5+i*.06;t+=groovePath(`M0 ${y.toFixed(1)}Q200 ${(y-1.5).toFixed(1)} 400 ${y.toFixed(1)}`,w.toFixed(2))}
+ /* ring sets: clear the lines, then rake rings */
+ const rings=(cx,cy,r0,k,step,ratio)=>{let o='';const R=r0+k*step+2;o+=`<ellipse cx="${cx}" cy="${cy}" rx="${R}" ry="${(R*ratio).toFixed(1)}" fill="${base}"/>`;
+  for(let j=1;j<=k;j++){const r=r0+j*step;o+=groovePath(`M${cx-r} ${cy}a${r} ${(r*ratio).toFixed(1)} 0 1 0 ${2*r} 0a${r} ${(r*ratio).toFixed(1)} 0 1 0 ${-2*r} 0`,(.6+j*.05).toFixed(2))}return o};
+ t+=rings(bx-13,by+3.5,48,3,7,.17);       /* around the pine */
+ t+=rings(190,168,70,3,5,.165);         /* around the pond */
+ t+=rings(CX+1,CY+2,26,3,6,.2);         /* around the cherry */
+ t+=rings(214,213,11,3,5,.3)+rock(214,213,se);/* a feature rock */
+ return t}
+
+/* ---------- events through the year ---------- */
+function eveningSky(id,dk){return `<defs><linearGradient id="ev${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E2447"/><stop offset=".55" stop-color="#5A4A6A"/><stop offset="1" stop-color="#C9866A"/></linearGradient></defs><rect width="400" height="225" fill="url(#ev${id})" opacity="${dk?.92:.78}"/>`}
+function fireworks(k){const B=k===2?[[100,46,24,['#FFD23F','#FFF3B0']],[175,28,28,['#F2F2F2','#FFFFFF']],[250,44,22,['#FFC04D','#FFF0C8']],[320,30,20,['#E8E8E8','#FFFFFF']],[140,84,14,['#FFD23F','#FFF3B0']],[290,80,16,['#FF6B8A','#FFD0DA']]]:[[110,50,22,['#FFD23F','#FFF3B0']],[205,34,26,['#FF6B8A','#FFD0DA']],[300,62,18,['#7CE0FF','#E0F8FF']],[160,78,14,['#B98CFF','#EAD9FF']]];let t='';
+ B.forEach(([x,y,r,[c,c2]],k)=>{const R=rng(500+k);t+=`<circle cx="${x}" cy="${y}" r="${r*1.1}" fill="${c}" opacity=".12"/>`;
+  for(let i=0;i<18;i++){const a=i/18*Math.PI*2+R()*.1,l=r*(.75+R()*.3),x2=x+Math.cos(a)*l,y2=y+Math.sin(a)*l+l*.08;
+   t+=`<path d="M${(x+Math.cos(a)*r*.25).toFixed(1)} ${(y+Math.sin(a)*r*.25).toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="${c}" stroke-width=".8" stroke-linecap="round" opacity=".9"/><circle cx="${x2.toFixed(1)}" cy="${(y2+1).toFixed(1)}" r=".9" fill="${c2}"/>`}
+  t+=`<path d="M${x-6+k*3} 150Q${x-3} ${(y+110)/2} ${x} ${y+r*.3}" stroke="${c2}" stroke-width=".5" fill="none" opacity=".35" stroke-dasharray="1.5 2"/>`});return t}
+function pumpkin(x,y,s){const dl=((x*7+y*3)%17)/10;return `<ellipse class="dgflk" style="animation-delay:-${dl}s" cx="${x}" cy="${y-3*s}" rx="${9*s}" ry="${6*s}" fill="#FFB347" opacity=".22"/><ellipse cx="${x}" cy="${y+.5}" rx="${5*s}" ry="${1.2*s}" fill="#00000035"/>
+ <ellipse cx="${x-2.4*s}" cy="${y-3*s}" rx="${2.8*s}" ry="${3.2*s}" fill="#D9631E"/><ellipse cx="${x+2.4*s}" cy="${y-3*s}" rx="${2.8*s}" ry="${3.2*s}" fill="#D9631E"/><ellipse cx="${x}" cy="${y-3.1*s}" rx="${2.9*s}" ry="${3.4*s}" fill="#EE7A26"/>
+ <path d="M${x} ${y-6.2*s}q${.4*s} ${-1.6*s} ${1.6*s} ${-2*s}" stroke="#4E6A2A" stroke-width="${1.1*s}" fill="none" stroke-linecap="round"/>
+ <path d="M${x-2.3*s} ${y-4*s}l${1*s} ${-1.2*s}l${1*s} ${1.2*s}zM${x+.3*s} ${y-4*s}l${1*s} ${-1.2*s}l${1*s} ${1.2*s}zM${x-2.2*s} ${y-2.3*s}q${2.2*s} ${1.8*s} ${4.4*s} 0l${-.7*s} ${.3*s}l${-.6*s} ${-.4*s}l${-.8*s} ${.5*s}l${-.8*s} ${-.5*s}l${-.7*s} ${.4*s}z" fill="#FFE27A" class="dgflk2" style="animation-delay:-${dl}s"/>`}
+function xmasLights(pads,top){if(!pads.length)return '';const COL=['#FF4D4D','#FFD23F','#4DD6FF','#7CFF6B','#FF8AE2'];let t='',k=0;
+ pads.flatMap(([x0,y0,rx,ry])=>rx>7?[[x0,y0,rx,ry],[x0,y0-ry*.9,rx*.7,ry*.6]]:[[x0,y0,rx,ry]]).forEach(([x0,y0,rx,ry])=>{if(rx<3)return;const xa=x0-rx*.95,xb=x0+rx*.95,ya=y0-ry*.2,sag=ry*.9;const n=Math.max(3,Math.round(rx/1.5));
+  t+=`<path d="M${xa.toFixed(1)} ${ya.toFixed(1)}Q${x0.toFixed(1)} ${(ya+sag*2).toFixed(1)} ${xb.toFixed(1)} ${ya.toFixed(1)}" stroke="#2A3A2A" stroke-width=".35" fill="none"/>`;
+  for(let i=0;i<=n;i++){const f=i/n,q=1-f,x=q*q*xa+2*q*f*x0+f*f*xb,y=q*q*ya+2*q*f*(ya+sag*2)+f*f*ya,c=COL[k++%COL.length];
+   t+=`<circle class="dgtw" style="animation-delay:-${(k*.37%2.4).toFixed(2)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.4" fill="${c}" opacity=".35"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".85" fill="${c}"/><circle cx="${(x-.25).toFixed(1)}" cy="${(y-.25).toFixed(1)}" r=".3" fill="#fff" opacity=".8"/>`}});
+ return t}
+
+/* exam good-luck lanterns: paper chochin on a cord over the bridge, and a few floating on the pond */
+function chochin(x,y,s,c){return `<circle cx="${x}" cy="${y}" r="${7*s}" fill="#FFC768" opacity=".22"/><path d="M${x} ${y-6*s}V${y-4.4*s}" stroke="#2A2A2A" stroke-width=".4"/>
+ <rect x="${x-2*s}" y="${y-4.6*s}" width="${4*s}" height="${1*s}" rx=".3" fill="#2A2420"/><ellipse cx="${x}" cy="${y}" rx="${2.9*s}" ry="${3.8*s}" fill="${c}"/>
+ ${[-2,-1,0,1,2].map(i=>`<path d="M${x-2.8*s*Math.sqrt(1-(i/2.6)**2)} ${y+i*1.4*s}h${5.6*s*Math.sqrt(1-(i/2.6)**2)}" stroke="#00000030" stroke-width=".3"/>`).join('')}
+ <ellipse cx="${x-.8*s}" cy="${y-.6*s}" rx="${.9*s}" ry="${2.2*s}" fill="#FFF6D8" opacity=".45"/><rect x="${x-2*s}" y="${y+3.6*s}" width="${4*s}" height="${1*s}" rx=".3" fill="#2A2420"/><path d="M${x} ${y+4.6*s}v${1.6*s}" stroke="#C0392B" stroke-width=".5"/>`}
+function lanternString(){let t=`<path d="M104 169V112M276 169V112" stroke="#8A6A45" stroke-width="1.4"/><path d="M104 120H276" stroke="#3A3A3A" stroke-width=".5"/>`;
+ [118,140,162,184,206,228,250,268].forEach((x,i)=>{t+=`<path d="M${x} 120v3" stroke="#3A3A3A" stroke-width=".4"/>`+chochin(x,127,1,i%2?'#F4EAD2':'#D9473A')});return t}
+function examLanterns(){return lanternString()}
+/* Burns Night: a wild haggis running across the gravel */
+function haggis(x,y){const legs=[[-4.5,-1.4],[-2,1.4],[2.4,-1.4],[4.8,1.4]];
+ return `<ellipse cx="${x}" cy="${y+6}" rx="8" ry="1.3" fill="#00000028"/>
+ ${legs.map(([dx,k])=>`<path d="M${x+dx} ${y+3}l${k} 2.8" stroke="#3A2A1E" stroke-width="1.1" stroke-linecap="round"/><path d="M${x+dx+k} ${y+5.8}h1.3" stroke="#3A2A1E" stroke-width="1" stroke-linecap="round"/>`).join('')}
+ <ellipse cx="${x}" cy="${y}" rx="7.5" ry="4.8" fill="#7A5434"/>${Array.from({length:14},(_,i)=>{const a=-Math.PI+i/13*Math.PI;return `<path d="M${(x+Math.cos(a)*7).toFixed(1)} ${(y+Math.sin(a)*4.5).toFixed(1)}l${(Math.cos(a)*1.6-.6).toFixed(1)} ${(Math.sin(a)*1.6).toFixed(1)}" stroke="#5A3C22" stroke-width=".7" stroke-linecap="round"/>`}).join('')}
+ <circle cx="${x+4.4}" cy="${y-1}" r="1.5" fill="#fff"/><circle cx="${x+4.8}" cy="${y-.9}" r=".7" fill="#1a1a1a"/><circle cx="${x+1.8}" cy="${y-1.4}" r="1.3" fill="#fff"/><circle cx="${x+2.2}" cy="${y-1.3}" r=".6" fill="#1a1a1a"/>
+ <defs><clipPath id="tam${x}"><ellipse cx="${x+.6}" cy="${y-5.6}" rx="5.2" ry="2.2"/></clipPath></defs>
+ <ellipse cx="${x+.6}" cy="${y-5.6}" rx="5.2" ry="2.2" fill="#B8302A"/>
+ <g clip-path="url(#tam${x})" stroke-width=".7"><path d="M${x-4} ${y-8}v5M${x-1} ${y-8}v5M${x+2} ${y-8}v5M${x+5} ${y-8}v5" stroke="#1F4A2E"/><path d="M${x-5} ${y-6.4}h12M${x-5} ${y-4.6}h12" stroke="#1F4A2E"/><path d="M${x-2.5} ${y-8}v5M${x+3.5} ${y-8}v5M${x-5} ${y-5.5}h12" stroke="#F2C94C" stroke-width=".3"/></g>
+ <path d="M${x-3.6} ${y-4.2}q4.2 1.4 8.4 0" stroke="#1F4A2E" stroke-width="1" fill="none"/><circle cx="${x+.8}" cy="${y-8.2}" r="1.3" fill="#C0392B"/><circle cx="${x+.4}" cy="${y-8.6}" r=".45" fill="#E86A5A"/>
+ <path d="M${x-10} ${y-1}h-6M${x-10} ${y+1.6}h-8M${x-9.5} ${y+4}h-5" stroke="#A89A86" stroke-width=".6" stroke-linecap="round"/>
+ ${[[-12,5,1.6],[-15.5,4,1.2],[-18,5.4,.9]].map(([dx,dy,r])=>`<circle cx="${x+dx}" cy="${y+dy}" r="${r}" fill="#E6DED0" opacity=".8"/>`).join('')}`}
+/* Easter: rabbits and painted eggs */
+function bunny(x,y,s,hop){const lift=hop?5*s:0,yy=y-lift;return `<ellipse cx="${x}" cy="${y+.5}" rx="${5*s}" ry="${1.1*s}" fill="#00000028"/>
+ <g transform="rotate(${hop?-12:0} ${x} ${yy})"><ellipse cx="${x}" cy="${yy-3.2*s}" rx="${4.6*s}" ry="${3.4*s}" fill="#6E5848"/><circle cx="${x-4.4*s}" cy="${yy-3.6*s}" r="${1.4*s}" fill="#FFFFFF"/>
+ <ellipse cx="${x+3.2*s}" cy="${yy-6.4*s}" rx="${2.4*s}" ry="${2.1*s}" fill="#6E5848"/><ellipse cx="${x+2.4*s}" cy="${yy-10.2*s}" rx="${.8*s}" ry="${2.8*s}" fill="#6E5848" transform="rotate(-12 ${x+2.4*s} ${yy-10.2*s})"/><ellipse cx="${x+3.9*s}" cy="${yy-10.4*s}" rx="${.8*s}" ry="${2.8*s}" fill="#5E4A3C" transform="rotate(10 ${x+3.9*s} ${yy-10.4*s})"/>
+ <ellipse cx="${x+2.4*s}" cy="${yy-10*s}" rx="${.35*s}" ry="${1.8*s}" fill="#E9B8B8" transform="rotate(-12 ${x+2.4*s} ${yy-10*s})"/><circle cx="${x+4*s}" cy="${yy-6.8*s}" r="${.45*s}" fill="#1a1a1a"/><circle cx="${x+5.5*s}" cy="${yy-6*s}" r="${.4*s}" fill="#D98A8A"/>
+ <ellipse cx="${x+1.6*s}" cy="${yy-.4*s}" rx="${1.8*s}" ry="${.7*s}" fill="#5E4A3C"/></g>${hop?`<path d="M${x-14*s} ${y}q${5*s} ${-10*s} ${10*s} ${-5*s}" stroke="#A89A86" stroke-width=".5" fill="none" stroke-dasharray="1.2 1.6"/>`:''}`}
+function egg(x,y,c,c2){return `<ellipse cx="${x}" cy="${y+.6}" rx="2.6" ry=".7" fill="#00000028"/><ellipse cx="${x}" cy="${y-2.4}" rx="2.2" ry="3" fill="${c}"/><path d="M${x-2.1} ${y-2.6}l1 -.8l1 .8l1 -.8l1 .8l.3 -.2" stroke="${c2}" stroke-width=".6" fill="none"/><circle cx="${x-.7}" cy="${y-4}" r=".35" fill="${c2}"/><circle cx="${x+.8}" cy="${y-1}" r=".35" fill="${c2}"/>`}
+/* the events gallery */
+function evGrid(){const el=document.getElementById('evg');if(!el)return;const keep=[THEME,WINTERY];
+ el.innerHTML=Object.entries(EVENTS).map(([k,e])=>{THEME=k;WINTERY=!!e.wint;const svg=garden('ev'+k,e.day,0);return `<figure><div class="evs">${svg}${e.luck?`<div class="luck">${e.luck}<svg class="clover" viewBox="-13 -13 26 26" aria-hidden="true"><path d="M0 1Q-2 7-8 9.5Q-10.2 10.3-10.8 9.2" stroke="#5DB84A" stroke-width="1.6" fill="none" stroke-linecap="round"/><g transform="rotate(-8)"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g><g transform="rotate(82)"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g><g transform="rotate(172)"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g><g transform="rotate(262)"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g></svg></div>`:''}</div><figcaption><b>${e.name}</b> · ${e.when}</figcaption></figure>`}).join('');
+ [THEME,WINTERY]=keep}
+
+function deckY(x){const t=(x-98)/184;return 169-118*t*(1-t)}
+function bigEgg(x,y,rot,s){return `<ellipse cx="${x}" cy="${y+.8*s}" rx="${5.4*s}" ry="${1.2*s}" fill="#00000030"/><g transform="rotate(${rot} ${x} ${y-2.6*s})">
+ <defs><clipPath id="eg${x|0}"><ellipse cx="${x}" cy="${y-2.6*s}" rx="${2.9*s}" ry="${3.9*s}"/></clipPath></defs>
+ <ellipse cx="${x}" cy="${y-2.6*s}" rx="${2.9*s}" ry="${3.9*s}" fill="#9ED6F0"/>
+ <g clip-path="url(#eg${x|0})"><rect x="${x-4*s}" y="${y-4.2*s}" width="${8*s}" height="${1.6*s}" fill="#F2B5C4"/><rect x="${x-4*s}" y="${y-1.4*s}" width="${8*s}" height="${1.2*s}" fill="#FFE27A"/>
+ <path d="M${x-4*s} ${y-5.4*s}${Array.from({length:8},(_,i)=>`l${s} ${i%2?-.8*s:.8*s}`).join('')}" stroke="#7CC07A" stroke-width="${.5*s}" fill="none"/>
+ ${[[-1.4,-.3],[0,.2],[1.4,-.3]].map(([dx,dy])=>`<circle cx="${x+dx*s}" cy="${y+dy*s}" r="${.35*s}" fill="#FFF"/>`).join('')}</g>
+ <ellipse cx="${x-1*s}" cy="${y-4*s}" rx="${.7*s}" ry="${1.4*s}" fill="#fff" opacity=".45"/></g>`}
+function easter(bx,by,se){let t='';
+ t+=bigEgg(bx-36,by+9,-62,1.9)+bunny(bx-56,by+13,1.7,0);                        /* a big painted egg on its side under the pine, with a rabbit beside it */
+ t+=bigEgg(223,212,14,1.25)+rock(214,213,se);                                     /* an egg peeking out from behind the boulder */
+ return t}
+
+/* Christmas: tiny white fairy lights dotted over the acer */
+function fairy(){const R=rng(2024);let t='';for(let i=0;i<34;i++){const a=Math.PI*(1+R()),r=Math.sqrt(R());const x=206+Math.cos(a)*r*31,y=124+Math.sin(a)*r*18*.9+R()*10,dl=(R()*2).toFixed(2),big=i%3===0;
+ t+=`<circle class="dgtw2" style="animation-delay:-${dl}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.9" fill="#FFB830" opacity=".45"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".65" fill="#FFC94A"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".3" fill="#FFF6D0"/>`}
+ return t}
+
+/* Christmas: a single string of coloured bulbs spiralling up around the pine, from low on the trunk to the top */
+function xmasSpiral(pads,C,N,by){const COL=['#FF4D4D','#FFD23F','#4DD6FF','#7CFF6B','#FF8AE2'];
+ const y0=C[Math.round(N*.1)][1],y1=C[N][1]-2,Ht=y0-y1;if(Ht<6)return '';
+ const cx=y=>{let best=C[0],d=1e9;for(const p of C){const dd=Math.abs(p[1]-y);if(dd<d){d=dd;best=p}}return best[0]};
+ const half=y=>{let w=2.5;const x0=cx(y);pads.forEach(([px,py,rx,ry])=>{if(Math.abs(py-y)<ry+5){w=Math.max(w,Math.abs(px-x0)+rx*.6)}});return Math.min(w,48)};
+ const turns=Math.max(2,Ht/24),n=Math.round(Ht*1.5);let t='',path='';const P=[];
+ for(let i=0;i<=n;i++){const f=i/n,y=y0-Ht*f,ph=f*turns*Math.PI*2,w=half(y)*.85,x=cx(y)+w*Math.sin(ph),front=Math.cos(ph)>0;P.push([x,y+Math.cos(ph)*1.2,front])}
+ /* back half first, dimmer, then the front half */
+ for(const pass of [false,true]){P.forEach(([x,y,fr],i)=>{if(fr!==pass)return;const c=COL[i%COL.length];
+  if(i&&P[i-1][2]===pass)t+=`<path d="M${P[i-1][0].toFixed(1)} ${P[i-1][1].toFixed(1)}L${x.toFixed(1)} ${y.toFixed(1)}" stroke="#1E2A20" stroke-width=".35" opacity="${pass?1:.5}"/>`;
+  if(i%2)return;
+  t+=pass?`<circle class="dgtw" style="animation-delay:-${(i*.37%2.4).toFixed(2)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.3" fill="${c}" opacity=".35"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".85" fill="${c}"/><circle cx="${(x-.25).toFixed(1)}" cy="${(y-.25).toFixed(1)}" r=".3" fill="#fff" opacity=".8"/>`
+         :`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.4" fill="${c}" opacity=".18"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".6" fill="${c}" opacity=".55"/>`})}
+ return t}
+
+/* lettering standing on the gravel, bottom right, casting a shadow behind it */
+function gravelWords(msg){return `<text x="219" y="209.5" font-family="'Public Sans', Arial, sans-serif" font-weight="800" font-size="10" fill="#B8432F">${msg}</text>`}
+
+/* the hanging lanterns mirrored low in the pond: squashed, softened, slightly broken by ripples */
+function lanternReflect(){return [118,140,162,184,206,228,250,268].map((x,i)=>{const c=i%2?'#F4EAD2':'#D9473A';const y=175;
+ return `<ellipse cx="${x}" cy="${y}" rx="4.5" ry="2" fill="#FFC768" opacity=".25"/><ellipse cx="${x}" cy="${y}" rx="2.7" ry="1.6" fill="${c}" opacity=".55"/><path d="M${x-2.4} ${y-1.8}h4.8M${x-2.4} ${y+1.8}h4.8" stroke="#2A2420" stroke-width=".5" opacity=".35"/><path d="M${x-3} ${y+.3}h6" stroke="#E8F0EC" stroke-width=".35" opacity=".5"/>`}).join('')}
+
+/* ---------- seasonal motion: snow, drifting blossom, falling leaves (gentle CSS loops) ---------- */
+function groundSnow(){const R=rng(808);let t=`<rect y="153" width="400" height="72" fill="#FBFCFD" opacity=".72"/>`;
+ for(let i=0;i<14;i++){const x=R()*400,y=158+R()*62,w=14+R()*30;t+=`<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${w.toFixed(0)}" ry="${(w*.12).toFixed(1)}" fill="#FFFFFF" opacity=".8"/>`}return t}
+function groundLeaves(){const R=rng(909),C=['#E8173A','#D4102F','#F2405A','#E2452A','#F46D2B','#C8281C'];let t='';
+ for(let i=0;i<38;i++){const x=R()*400,y=156+R()*66;t+=`<path d="${LEAF}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(R()*180).toFixed(0)}) scale(${(.35+R()*.25).toFixed(2)})" fill="${C[i%6]}" opacity=".9"/>`}return t}
+function motion(se){const R=rng(31+se);let t='';
+ if(se===3){for(let i=0;i<46;i++){const x=R()*420-10,r=.6+R()*1.1,d=6+R()*6;t+=`<g class="dgmv dgsnow" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><circle cx="${x.toFixed(0)}" cy="-6" r="${r.toFixed(1)}" fill="#FFFFFF" opacity="${(.7+R()*.3).toFixed(2)}"/></g>`}}
+ if(se===0){const C=['#FFFFFF','#FBDDE4','#F8C9D4','#FFE9EE'];for(let i=0;i<26;i++){const y=30+R()*150,d=9+R()*7;t+=`<g class="dgmv dgdrift" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><ellipse cx="-12" cy="${y.toFixed(0)}" rx="${(1.3+R()*.8).toFixed(1)}" ry="${(.8+R()*.4).toFixed(1)}" fill="${C[i%4]}"/></g>`}}
+ if(se===2){const C=['#E8173A','#D4102F','#F2405A','#F46D2B','#F9A03F'];
+  for(let i=0;i<18;i++){const y=40+R()*140,d=8+R()*6;t+=`<g class="dgmv dgdrift" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><path d="${LEAF}" transform="translate(-12 ${y.toFixed(0)}) scale(${(.45+R()*.2).toFixed(2)})" fill="${C[i%5]}"/></g>`}
+  for(let i=0;i<9;i++){const x=184+R()*44,y=112+R()*24,d=4.5+R()*3;t+=`<g class="dgmv dgacfall" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><path d="${LEAF}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(.42)" fill="${C[i%3]}"/></g>`}}
+ return t}
+function garden(id,day,h){
+ const dead=h>=3,bx=362,by=186,se=seasonOf(day);const SKY=[['#F2DFC2','#F6EAD6'],['#F6D29A','#F8E4C2'],['#F3D7B0','#F6E6CF'],['#DCE0E0','#EAECEA']][se];const MOSS=['#6E8C4E','#5E7A3A','#6A7A48','#8C9A82'][se];
+ return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A Japanese garden with a Scots pine, ${day} days of growth">
+ <defs><linearGradient id="sky${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${dead?'#C9C3BA':SKY[0]}"/><stop offset=".7" stop-color="${dead?'#D8D3CB':SKY[1]}"/><stop offset="1" stop-color="#E9DFCF"/></linearGradient>
+ <radialGradient id="sun${id}" cx=".72" cy=".22" r=".35"><stop offset="0" stop-color="#FFF6DD" stop-opacity="${dead?.3:.95}"/><stop offset="1" stop-color="#FFF6DD" stop-opacity="0"/></radialGradient>
+ <linearGradient id="pond${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CB8B0"/><stop offset="1" stop-color="#6F918A"/></linearGradient></defs>
+ <rect width="400" height="225" fill="url(#sky${id})"/><rect width="400" height="225" fill="url(#sun${id})"/>${EV().eve&&!dead?eveningSky(id,EV().dark):""}${EV().fw&&!dead?fireworks(EV().fw):""}
+ <circle cx="290" cy="52" r="16" fill="#FBEBD0" opacity="${dead?.3:.9}"/>
+ <path d="M0 132 Q60 96 120 118 T240 104 T400 112 V160 H0Z" fill="#CBB9A6" opacity=".55"/>
+ <path d="M0 146 Q80 118 170 136 T320 126 T400 134 V170 H0Z" fill="#A9B39A" opacity=".55"/>
+ ${[[60,142,16],[96,138,12],[150,146,18],[372,140,14]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r*1.4}" ry="${r*.8}" fill="#6F8A5A" opacity=".55"/><ellipse cx="${x+r*.6}" cy="${y-r*.7}" rx="${r}" ry="${r*.55}" fill="#7E9966" opacity=".55"/>`).join('')}
+ ${gravel(id,bx,by,se)}${se===3&&!dead?groundSnow():""}${se===2&&!dead?groundLeaves():""}
+ ${(()=>{const AC=acer(se,dead),BR=`<path d="M98 169 Q190 110 282 169" stroke="#B8432F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 169 Q190 118 282 169" stroke="#B8432F" stroke-width="2" fill="none"/>
+ ${[130,160,190,220,250].map(x=>{const t=(x-98)/184,y=169-118*t*(1-t);return `<path d="M${x} ${y.toFixed(1)} V${x<122||x>258?169:168}" stroke="#9A3424" stroke-width="1.6"/>`}).join('')}
+`,LN=`<g transform="translate(232 150)"><rect x="-3" y="10" width="6" height="16" fill="#8E8A82"/><path d="M-12 10h24l-4-6h-16z" fill="#7C786F"/><rect x="-7" y="-2" width="14" height="7" fill="#A6A196"/><rect x="-3" y="-1" width="6" height="5" fill="#FFE7A8" opacity=".85" class="dgflk2"/><path d="M-13 -2h26l-13-9z" fill="#7C786F"/></g>`,CH=sakura(se,dead);
+ const glow=dead?.25:se===3?.95:.75;
+ return `${AC}
+ <defs><clipPath id="pc${id}"><ellipse cx="190" cy="168" rx="70" ry="11"/></clipPath>
+ <radialGradient id="lg${id}"><stop offset="0" stop-color="#FFD98A" stop-opacity="${glow}"/><stop offset=".45" stop-color="#FFC768" stop-opacity="${glow*.35}"/><stop offset="1" stop-color="#FFC768" stop-opacity="0"/></radialGradient></defs>
+ <ellipse cx="190" cy="168" rx="70" ry="11" fill="url(#pond${id})"/>
+ <g clip-path="url(#pc${id})">
+  <g opacity=".3"><g transform="translate(0 157) scale(1 -.55) translate(0 -157)">${AC}</g><g transform="translate(0 166) scale(1 -.6) translate(0 -166)">${BR}</g></g>
+  ${EV().lant&&!dead?lanternReflect():""}
+  <rect x="120" y="155" width="140" height="26" fill="#6F918A" opacity=".35"/>
+  <ellipse cx="231" cy="171" rx="16" ry="4.5" fill="url(#lg${id})"/><path d="M226 168h9M224 171.5h13M227 175h7" stroke="#FFE2A0" stroke-width=".7" opacity="${glow*.8}" stroke-linecap="round"/>
+  ${[[150,163,22],[196,171,30],[170,175,18],[222,166,16]].map(([x,y,w])=>`<path d="M${x} ${y}h${w}" stroke="#E8F0EC" stroke-width=".5" opacity=".5" stroke-linecap="round"/>`).join('')}
+ </g>
+ <path d="M120 168a70 11 0 0 1 140 0" fill="none" stroke="#4E5A52" stroke-width="1.6" opacity=".75" stroke-linecap="round"/><path d="M121 166.5a69 9.6 0 0 1 138 0" fill="none" stroke="#2E3A34" stroke-width="1.4" opacity=".35"/>
+ ${BR}
+ <circle class="dgflk" cx="232" cy="151.5" r="20" fill="url(#lg${id})"/>
+ ${LN}
+ <rect x="228.5" y="171.5" width="7" height="5" fill="#7FA09A" opacity=".75"/><ellipse cx="232" cy="171.6" rx="5.5" ry="1.3" fill="none" stroke="#E8F0EC" stroke-width=".7" opacity=".85"/><path d="M225 173.6h4M235 173.6h4" stroke="#E8F0EC" stroke-width=".5" opacity=".6" stroke-linecap="round"/>
+ ${CH}`})()}
+
+ ${[[110,192,9,4],[132,200,8,3.5],[156,206,9,4]].map(([x,y,a,b])=>`<ellipse cx="${x}" cy="${y}" rx="${a}" ry="${b}" fill="#B9B2A3"/>`).join('')}
+ <ellipse cx="${bx-13}" cy="${by+3.5}" rx="44" ry="7.5" fill="#1E1B19"/>
+ ${bigPine(day,h,bx,by+2,se,id)}
+ ${petals('W5',se,dead)}
+ ${dead?'':motion(se)}
+ ${THEME==='halloween'&&!dead?pumpkin(bx-62,by+10,2)+pumpkin(bx-45,by+14,1.5)+pumpkin(234,216,1.65)+pumpkin(124,189,1.5)+pumpkin(258,180,1.3):''}
+ ${EV().eve&&!dead?`<rect width="400" height="225" fill="#1E2447" opacity="${EV().dark?.32:.12}"/>`:''}
+ ${THEME==='xmas'&&!dead?XL+fairy():''}
+ ${EV().lant&&!dead?examLanterns():''}
+ ${THEME==='burns'&&!dead?`<g transform="translate(262 206) scale(1.7) translate(-262 -206)">${haggis(262,206)}</g>`:''}
+ ${THEME==='easter'&&!dead?easter(bx,by,se):''}
+ </svg>`}
+
+/* ---------- after a Growth Spurt: the gardener waters the pine and it grows a stage ---------- */
+function gardener(tool){return `<g id="gdn"><g id="gbob">
+ <path id="gl1" d="M-2 -9L-3 0" stroke="#2A3340" stroke-width="2.6" stroke-linecap="round"/><path id="gl2" d="M2 -9L3 0" stroke="#2A3340" stroke-width="2.6" stroke-linecap="round"/>
+ <path d="M-5.5 -20.5L5.5 -20.5L6.5 -8.5L-6.5 -8.5Z" fill="#2F4A6B"/><path d="M-6 -12.5h12" stroke="#C9B27A" stroke-width="1.6"/><path d="M0 -20.5L-2.5 -13" stroke="#24395A" stroke-width=".8"/>
+ <circle cx="0" cy="-23" r="3.2" fill="#E3BC94"/>
+ <path d="M-10.5 -23.3L0 -31L10.5 -23.3Q0 -21.2 -10.5 -23.3Z" fill="#D9B86A"/><path d="M-6 -26.6Q0 -25.3 6 -26.6" stroke="#B8954E" stroke-width=".6" fill="none"/><path d="M0 -31v-.8" stroke="#8A6A3A" stroke-width="1"/>
+ <path d="M2 -18L7 -14.5" stroke="#2F4A6B" stroke-width="2.4" stroke-linecap="round"/><circle cx="7.4" cy="-14.2" r="1.1" fill="#E3BC94"/>
+ ${tool==="syr"?`<g id="gsyr"><rect x="6" y="-16.4" width="11" height="4.2" rx="1" fill="#EAF2F4" stroke="#7A8A90" stroke-width=".5"/><rect id="gliq" x="9" y="-15.6" width="7.6" height="2.6" fill="#7CFF6B"/><path d="M17 -14.3h6.5" stroke="#9AA6AA" stroke-width=".7"/><rect id="gplg" x="4" y="-15.7" width="2.6" height="2.8" fill="#C0392B"/><path id="gplr" d="M4 -14.3h-3" stroke="#7A8A90" stroke-width="1"/><path d="M1 -16.4v4.2" stroke="#7A8A90" stroke-width="1.2"/></g>`:""}<g id="gcan" ${tool==="syr"?'style="display:none"':""}><rect x="6.5" y="-16.5" width="8" height="6" rx="1.2" fill="#8FA3AD"/><path d="M6.8 -16.6q3.7 -4 7.4 0" stroke="#6E8590" stroke-width="1" fill="none"/><path d="M14.3 -14.5L20 -18.5" stroke="#8FA3AD" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="20.3" cy="-18.7" rx="1.3" ry=".8" fill="#6E8590" transform="rotate(-35 20.3 -18.7)"/></g>
+ </g></g>`}
+function growAnim(from,to,cb){reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const pine=(d,id)=>`<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">${bigPine(d,0,362,188,seasonOf(d),id)}</svg>`;
+ const o=document.createElement('div');o.className='gpop';
+ o.innerHTML=`<div class="gpbox"><div class="gpscene"><div class="gpa">${garden('ga',from,0)}</div><div class="gpb">${garden('gb',to,0)}</div>
+  <svg class="gpfg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">${gardener()}<g id="gdrops"></g><g id="gspark" opacity="0"></g></svg>
+  <div class="gptop"><div class="pt1">${pine(from,'pt1')}</div><div class="pt2">${pine(to,'pt2')}</div></div></div>
+  <div class="gpmsg"><span class="gpeb">Daily Growth</span><b>Stage ${to} of 100</b></div></div>`;
+ document.body.appendChild(o);
+ const q=x=>o.querySelector(x),G=q('#gdn'),B=q('#gbob'),L1=q('#gl1'),L2=q('#gl2'),CAN=q('#gcan'),DR=q('#gdrops'),SP=q('#gspark'),NB=q('.gpb'),TOP=q('.gptop'),PT2=q('.pt2'),MSG=q('.gpmsg');
+ const S=1.35,tx=360,ty=190,stand=[334,209];
+ SP.innerHTML=Array.from({length:9},(_,i)=>{const a=i/9*Math.PI*2,r=28+(i%3)*8;return `<path d="M${tx+Math.cos(a)*r} ${ty-40+Math.sin(a)*r*.8}m-2.5 0h5m-2.5 -2.5v5" stroke="#FFF3B0" stroke-width="1" stroke-linecap="round"/>`}).join('');
+ const T={behind:2200,round:1100,tilt:450,water:1800,grow:1300,hold:1000,out:1700};const t0=performance.now();
+ const end=()=>{o.classList.add('gone');setTimeout(()=>{o.remove();cb&&cb()},400)};
+ const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,lin=(a,b,f)=>a+(b-a)*f;
+ const place=(x,y,face,walk,tilt,now)=>{const depth=Math.max(0,Math.min(1,(y-184)/25)),sc=S*(.8+.2*depth),ph=walk?Math.sin(now/110):0;
+  G.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(face*sc).toFixed(3)} ${sc.toFixed(3)})`);B.setAttribute('transform',`translate(0 ${(-Math.abs(ph)).toFixed(2)})`);
+  L1.setAttribute('d',`M-2 -9L${(-2-ph*3).toFixed(2)} 0`);L2.setAttribute('d',`M2 -9L${(2+ph*3).toFixed(2)} 0`);CAN.setAttribute('transform',`rotate(${tilt.toFixed(1)} 10.5 -13.5)`)};
+ if(reduce){NB.style.opacity=1;PT2.style.opacity=1;TOP.style.display='none';MSG.classList.add('on');place(stand[0],stand[1],1,false,0,0);setTimeout(end,1800);return}
+ function frame(now){let t=now-t0;
+  if(t<T.behind){const f=ease(t/T.behind);place(lin(440,312,f),184,-1,true,0,now)}                       /* behind the tree, walking left */
+  else if((t-=T.behind)<T.round){const f=ease(t/T.round);const x=312+(stand[0]-312)*f-10*Math.sin(f*Math.PI),y=184+(stand[1]-184)*f;   /* curving round to the front */
+   TOP.style.display=y>196?'none':'';place(x,y,f<.35?-1:1,true,0,now)}
+  else if((t-=T.round)<T.tilt){TOP.style.display='none';place(stand[0],stand[1],1,false,40*ease(t/T.tilt),now)}        /* tip the can down */
+  else if((t-=T.tilt)<T.water){place(stand[0],stand[1],1,false,40,now);const sx=stand[0]+26,sy=stand[1]-17;
+   const k=Math.min(1,t/600),pu=.5+.5*Math.sin(t/180);   /* no stream: a pool of water spreads and pulses at the foot of the tree */
+   DR.innerHTML=`<ellipse cx="${tx}" cy="${ty+3}" rx="${(4+12*k+2*pu*k).toFixed(1)}" ry="${(1.2+3*k+.5*pu*k).toFixed(1)}" fill="#6FB8E0" opacity="${(.35+.2*pu).toFixed(2)}"/><ellipse cx="${tx}" cy="${ty+3}" rx="${(2+8*k).toFixed(1)}" ry="${(.8+2*k).toFixed(1)}" fill="#9FD3F0" opacity=".6"/><ellipse cx="${tx}" cy="${ty+3}" rx="${(6+16*((t/900)%1)).toFixed(1)}" ry="${(1.6+4*((t/900)%1)).toFixed(1)}" fill="none" stroke="#BFE4F7" stroke-width=".6" opacity="${(1-(t/900)%1).toFixed(2)}"/>`}
+  else if((t-=T.water)<T.grow){DR.style.opacity=Math.max(0,1-t/T.grow).toFixed(2);const f=t/T.grow;place(stand[0],stand[1],1,false,40*Math.max(0,1-t/400),now);NB.style.opacity=ease(f);SP.setAttribute('opacity',Math.sin(f*Math.PI).toFixed(2));if(f>.5)MSG.classList.add('on')}
+  else if((t-=T.grow)<T.hold){place(stand[0],stand[1],1,false,0,now);NB.style.opacity=1;SP.setAttribute('opacity',0)}
+  else if((t-=T.hold)<T.out){const f=t/T.out;place(lin(stand[0],440,ease(f)),stand[1],1,true,0,now);if(f>.6&&!o.dataset.e){o.dataset.e=1;end()}}   /* off to the right, in front */
+  else return;
+  PT2.style.opacity=NB.style.opacity||0;requestAnimationFrame(frame)}
+ requestAnimationFrame(frame)}
+
+/* ---------- Growth Spurt: the gardener races over the bridge on a motorbike and gives the pine a boost ---------- */
+function rider(){return `<g id="rbk">
+ <g id="rbody"><circle cx="-7" cy="-3.3" r="3.3" fill="#262626"/><circle cx="-7" cy="-3.3" r="1.2" fill="#9AA0A6"/><circle cx="7" cy="-3.3" r="3.3" fill="#262626"/><circle cx="7" cy="-3.3" r="1.2" fill="#9AA0A6"/>
+ <path d="M-7 -3.3L-2 -7.2H4.4L7 -3.3" stroke="#B8432F" stroke-width="1.6" fill="none" stroke-linejoin="round"/><ellipse cx="1.4" cy="-8.4" rx="4" ry="1.9" fill="#D9473A"/><rect x="-5.4" y="-9.6" width="4.6" height="1.6" rx=".6" fill="#2A2A2A"/>
+ <path d="M-6 -5.6h-3.4" stroke="#8A9096" stroke-width="1.2" stroke-linecap="round"/><path d="M5.4 -7.4L6.6 -11.4L8.6 -11.8" stroke="#2A2A2A" stroke-width=".9" fill="none" stroke-linecap="round"/><circle cx="8" cy="-9.4" r=".8" fill="#FFE27A"/>
+ <g id="rman"><path d="M-2.4 -9.4L1.6 -6L2.2 -2.2" stroke="#2A3340" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M-4.6 -9.6L-1.2 -18.6L3.4 -17.6L1.2 -9.2Z" fill="#2F4A6B"/><path d="M1.2 -16.4L6.8 -11.8" stroke="#2F4A6B" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="1.4" cy="-21.2" r="3" fill="#E3BC94"/><path d="M-8.4 -21.6L2 -28.4L11.6 -20.6Q1.6 -19.4 -8.4 -21.6Z" fill="#D9B86A"/><path d="M2 -28.4v-.8" stroke="#8A6A3A" stroke-width="1"/></g></g>
+ <g id="rlines" opacity="0" stroke="#FFFFFF" stroke-width=".7" stroke-linecap="round"><path d="M-12 -14h-7M-13 -9h-9M-12 -4h-6"/></g></g>`}
+function spurtAnim(from,to,cb){reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const pine=(d,id)=>`<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">${bigPine(d,0,362,188,seasonOf(d),id)}</svg>`;
+ const o=document.createElement('div');o.className='gpop';
+ o.innerHTML=`<div class="gpbox"><div class="gpscene"><div class="gpa">${garden('sa',from,0)}</div><div class="gpb">${garden('sb',to,0)}</div>
+  <svg class="gpfg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><g id="sdust"></g>${rider()}${gardener('syr')}<g id="sglow"></g><g id="gspark" opacity="0"></g></svg></div>
+  <div class="gpmsg"><span class="gpeb">Growth Spurt!</span><b>Stage ${to} of 100</b></div></div>`;
+ document.body.appendChild(o);
+ const q=x=>o.querySelector(x),BK=q('#rbk'),BODY=q('#rbody'),MAN=q('#rman'),LN=q('#rlines'),G=q('#gdn'),Bb=q('#gbob'),L1=q('#gl1'),L2=q('#gl2'),LIQ=q('#gliq'),PLG=q('#gplg'),DU=q('#sdust'),GL=q('#sglow'),SP=q('#gspark'),NB=q('.gpb'),MSG=q('.gpmsg');
+ const tx=361,ty=183,park=[314,207],stand=[336,209],S=1.35;G.style.display='none';
+ SP.innerHTML=Array.from({length:12},(_,i)=>{const a=i/12*Math.PI*2,r=26+(i%3)*10;return `<path d="M${tx+Math.cos(a)*r} ${ty-40+Math.sin(a)*r*.8}m-3 0h6m-3 -3v6" stroke="#FFF3B0" stroke-width="1.1" stroke-linecap="round"/>`}).join('');
+ const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,lin=(a,b,f)=>a+(b-a)*f,sc=y=>S*(.72+.28*Math.max(0,Math.min(1,(y-168)/40)));
+ const deck=x=>{const t=(x-98)/184;return 169-118*t*(1-t)};
+ const end=()=>{o.classList.add('gone');setTimeout(()=>{o.remove();cb&&cb()},400)};
+ if(reduce){NB.style.opacity=1;MSG.classList.add('on');BK.setAttribute('transform',`translate(${park[0]} ${park[1]}) scale(${S})`);setTimeout(end,1800);return}
+ let puffs=[];const puff=(x,y,n)=>{for(let i=0;i<n;i++)puffs.push({x:x-Math.random()*6,y:y-Math.random()*2,r:1.5+Math.random()*2,b:performance.now()})};
+ const drawPuffs=now=>{puffs=puffs.filter(p=>now-p.b<700);DU.innerHTML=puffs.map(p=>{const k=(now-p.b)/700;return `<circle cx="${(p.x-k*6).toFixed(1)}" cy="${(p.y-k*4).toFixed(1)}" r="${(p.r*(1+k*1.5)).toFixed(1)}" fill="#E6DED0" opacity="${(.8*(1-k)).toFixed(2)}"/>`}).join('')};
+ const bike=(x,y,rot,fast,man=true)=>{BK.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)}) scale(${sc(y).toFixed(3)})`);LN.setAttribute('opacity',fast?.8:0);MAN.style.display=man?'':'none'};
+ const T={ride:3000,skid:500,hop:500,syr:1700,grow:1400,hold:500,off:400,zoom:1300};const t0=performance.now();let last=0;
+ function frame(now){let t=now-t0;drawPuffs(now);
+  if(t<T.ride){const f=t/T.ride,x=lin(-30,park[0]-20,f);let y,rot=0;
+   if(x<98){y=170}else if(x<282){y=deck(x);const t2=(x-98)/184;rot=-Math.atan(118*(1-2*t2)/184)*57.3;if(x>168&&x<232){const j=(x-168)/64;y-=16*Math.sin(j*Math.PI);rot=lin(-12,10,j)}}else{y=lin(169,park[1],Math.min(1,(x-282)/(park[0]-20-282)))}
+   bike(x,y,rot,true);if(now-last>60&&(x<168||x>232)){puff(x-8*sc(y),y,1);last=now}}
+  else if((t-=T.ride)<T.skid){const f=t/T.skid,x=lin(park[0]-20,park[0],1-Math.pow(1-f,3));bike(x,park[1],-6*Math.sin(f*Math.PI),false);if(now-last>40){puff(x+2,park[1],2);last=now}}
+  else if((t-=T.skid)<T.hop){const f=t/T.hop;bike(park[0],park[1],0,false,false);G.style.display='';
+   const x=lin(park[0],stand[0],f),y=lin(park[1]-4,stand[1],f)-10*Math.sin(f*Math.PI);G.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${S})`)}
+  else if((t-=T.hop)<T.syr){const f=t/T.syr,lunge=Math.sin(Math.min(1,f*2.2)*Math.PI/2)*3*(f<.85?1:(1-f)/.15);
+   G.setAttribute('transform',`translate(${(stand[0]+lunge).toFixed(1)} ${stand[1]}) scale(${S})`);
+   const push=Math.max(0,Math.min(1,(f-.3)/.5));LIQ.setAttribute('width',(7.6*(1-push)).toFixed(2));LIQ.setAttribute('x',(9+7.6*push).toFixed(2));PLG.setAttribute('x',(4+7.6*push).toFixed(2));
+   GL.innerHTML=push>0?`<circle cx="${tx}" cy="${ty}" r="${(3+9*push).toFixed(1)}" fill="#7CFF6B" opacity="${(.45*push).toFixed(2)}"/><path d="M${tx} ${ty}V${(ty-60*push).toFixed(1)}" stroke="#7CFF6B" stroke-width="2" opacity="${(.5*push).toFixed(2)}" stroke-linecap="round"/>`:''}
+  else if((t-=T.syr)<T.grow){const f=t/T.grow;GL.style.opacity=(1-f).toFixed(2);NB.style.opacity=Math.min(1,f*1.6).toFixed(2);
+   const bo=1+.08*Math.sin(f*Math.PI*3)*(1-f);NB.style.transform=`scale(${bo.toFixed(3)})`;SP.setAttribute('opacity',Math.sin(f*Math.PI).toFixed(2));if(f>.35)MSG.classList.add('on');
+   G.setAttribute('transform',`translate(${stand[0]} ${(stand[1]-(f<.3?8*Math.sin(f/.3*Math.PI):0)).toFixed(1)}) scale(${S})`)}  /* a little jump for joy */
+  else if((t-=T.grow)<T.hold){NB.style.transform='';NB.style.opacity=1;SP.setAttribute('opacity',0)}
+  else if((t-=T.hold)<T.off){const f=t/T.off,x=lin(stand[0],park[0],f),y=lin(stand[1],park[1]-4,f)-8*Math.sin(f*Math.PI);G.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${S})`)}
+  else if((t-=T.off)<T.zoom){G.style.display='none';const f=t/T.zoom,x=lin(park[0],470,f*f);bike(x,park[1],f<.2?-14*Math.sin(f/.2*Math.PI):0,true);if(now-last>40){puff(x-8*S,park[1],2);last=now}if(f>.5&&!o.dataset.e){o.dataset.e=1;end()}}
+  else return;
+  requestAnimationFrame(frame)}
+ requestAnimationFrame(frame)}
+
+/* ---------- date-aware theme (events and longer winters in Dec/Jan) ---------- */
+function easterSun(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da)}
+function eventFor(d){const m=d.getMonth()+1,dd=d.getDate(),es=easterSun(d.getFullYear()),diff=Math.round((new Date(d.getFullYear(),m-1,dd)-es)/864e5);
+ if(diff>=-2&&diff<=1)return 'easter';
+ if(m===10&&dd>=24)return 'halloween';if(m===11&&dd<=7)return 'bonfire';
+ if((m===12&&dd===31)||(m===1&&dd===1))return 'hogmanay';if(m===12)return 'xmas';
+ if(m===1&&dd===25)return 'burns';if(m===1)return 'prelims';
+ if((m===4&&dd>=22)||m===5||(m===6&&dd<=7))return 'exams';return ''}
+function today(){const q=new URLSearchParams(location.search).get('dgdate');if(q){const x=new Date(q+'T12:00:00');if(!isNaN(x))return x}return new Date()}
+function setDate(){const d=today(),m=d.getMonth()+1;THEME=eventFor(d);WINTERY=!!(EV().wint)||m===12||m===1}
+setDate();
+window.DG={garden,growAnim,spurtAnim,setDate,EV:()=>EV(),SPROUTB,seasonOf:d=>seasonOf(d)};
+})();
+</script>
 <script>
 (function(){
 const $=id=>document.getElementById(id);
@@ -2313,7 +2980,7 @@ function runFx(kind,amt){
 function encodeProgress(){
   const c={};CHECKS.forEach(ck=>{const r=S.checks[ck.id];if(!ck.q||!r||!Object.keys(r.m).length)return;
     c[ck.id]=[ck.q.map(q=>r.m[q.id]===undefined?'-':r.m[q.id]).join(''),r.date||'']});
-  const rs=CKL_N5.map(i=>S.rag[i.id]||'-').join('');const pr={};['tq','ex','exb','ppd','att','evd','d5','evMig','lr','tools','sr','srV2','streak','welcomed','level','weeks','per','tqp'].forEach(k=>{if(S[k]&&(typeof S[k]!=='object'||Object.keys(S[k]).length))pr[k]=S[k]});const j=JSON.stringify(Object.assign({v:2,c,n:S.nick||'',k:S.cls||''},/[rag]/.test(rs)?{r:rs}:{},Object.keys(pr).length?{p:pr}:{}));return btoa(unescape(encodeURIComponent(j))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  const rs=CKL_N5.map(i=>S.rag[i.id]||'-').join('');const pr={};['tq','ex','exb','ppd','att','evd','d5','evMig','lr','tools','sr','srV2','streak','welcomed','level','weeks','per','tqp','grow'].forEach(k=>{if(S[k]&&(typeof S[k]!=='object'||Object.keys(S[k]).length))pr[k]=S[k]});const j=JSON.stringify(Object.assign({v:2,c,n:S.nick||'',k:S.cls||''},/[rag]/.test(rs)?{r:rs}:{},Object.keys(pr).length?{p:pr}:{}));return btoa(unescape(encodeURIComponent(j))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 }
 function decodeProgress(code){
   try{const b=code.replace(/-/g,'+').replace(/_/g,'/');const o=JSON.parse(decodeURIComponent(escape(atob(b))));const out={};
@@ -3416,7 +4083,7 @@ let LVIEW=null;
 /* topic cards are built by topicCard() in the battery ladder section */
 function renderLearnList(lv){
   const list=LEARN[lv];LCUR=null;
-  $('learnBody').innerHTML=(lv==='N5'&&!S.welcomed&&!VIEW?`<div class="welcome1" id="welcomeCard"><h3>New to BenchMark?</h3><ol><li>Pick a topic your teacher has covered and learn it.</li><li>Test yourself, then try the exam question.</li><li>Do the Daily 5 each day, and set a reminder there.</li></ol><p class="sub">Every topic starts grey and changes colour as you practise.</p><div class="row"><button type="button" class="btn" data-welcome="skip">Got it</button></div></div>`:'')+`<p class="sub">${esc(LEVELS[lv])} · ${list.length} topics from the course specification. Pick a topic to read, then test yourself.</p>`+(lv==='N5'?`<div class="wfgrid"><button type="button" class="wfeature wf-daily" data-lt="x-daily" data-lv="N5"><span class="wf-k">Every day</span><span class="wf-t">Daily 5</span><span class="wf-s">Five quick questions, picked from your weakest topics. Wrong answers come back tomorrow.</span>${(S.streak&&S.streak.n)?`<span class="wf-sticker" aria-label="${S.streak.n}-day streak"><span class="st-burst"><span class="st-f" aria-hidden="true">🔥</span><span class="st-n">${S.streak.n}</span><span class="st-l">day streak</span></span></span>`:''}</button><button type="button" class="wfeature wf-tools" data-lt="x-tools" data-lv="N5"><span class="wf-k">Workshop</span><span class="wf-t">Tools quick-fire</span><span class="wf-s">Name the tool from its picture. Marking out, woodwork, metalwork, drill bits.</span><span class="wf-cred">Photo: Shixart1985, CC BY 2.0</span></button></div>`:'')+
+  $('learnBody').innerHTML=(lv==='N5'&&!S.welcomed&&!VIEW?`<div class="welcome1" id="welcomeCard"><h3>New to BenchMark?</h3><ol><li>Pick a topic your teacher has covered and learn it.</li><li>Test yourself, then try the exam question.</li><li>Do the Daily 5 each day, and set a reminder there.</li></ol><p class="sub">Every topic starts grey and changes colour as you practise.</p><div class="row"><button type="button" class="btn" data-welcome="skip">Got it</button></div></div>`:'')+`<p class="sub">${esc(LEVELS[lv])} · ${list.length} topics from the course specification. Pick a topic to read, then test yourself.</p>`+(lv==='N5'?`<div class="wfgrid"><div id="dgTile" class="dg-wrap">${dgTileHTML()}</div><button type="button" class="wfeature wf-tools" data-lt="x-tools" data-lv="N5"><span class="wf-k">Workshop</span><span class="wf-t">Tools quick-fire</span><span class="wf-s">Name the tool from its picture. Marking out, woodwork, metalwork, drill bits.</span><span class="wf-cred">Photo: Shixart1985, CC BY 2.0</span></button></div>`:'')+
    LGROUPS.map(([a,n])=>`<h3 class="lgh ${AREAS[a].cls}">${esc(n)}</h3><div class="lgrid">${list.filter(t=>t.area===a).map(t=>topicCard(t,lv)).join('')}</div>`).join('');
 }
 $('tab-learn').addEventListener('keydown',e=>{const hn=e.target.closest&&e.target.closest('#learnBody [data-next]');if(hn&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openPanel(hn.dataset.next)}});
@@ -3622,7 +4289,7 @@ function renderDaily(){
   $('learnBody').innerHTML=h;
   const dq=document.querySelector('#learnBody .dq');if(dq)paintDaily(dq);
 }
-function dailyDone(){const n=DAILY.qs.length;return `<div class="ddone"><p class="dbig">${DAILY.right} / ${n}</p><p>${DAILY.right===n?'Perfect. ':''}That’s today’s Daily 5 done. Come back tomorrow to keep your streak going.</p>
+function dailyDone(){const n=DAILY.qs.length;return `<div class="ddone"><p class="dbig">${DAILY.right} / ${n}</p><p>${DAILY.right===n?'Perfect. ':''}That’s today’s Daily 5 done. Come back tomorrow to keep your streak going.</p>${dgNote()}
   <div class="row"><button type="button" class="btn" data-dmore="1">5 more questions</button><button type="button" class="btn ghost" data-lback="1">Back to topics</button></div></div>`}
 function dailyQ(id){return srPool().find(q=>q.id===id)}
 function paintDaily(div){const q=dailyQ(div.dataset.did),m=q.m,order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
@@ -3636,9 +4303,9 @@ $('tab-learn').addEventListener('click',e=>{
     const last=DAILY.i>=DAILY.qs.length-1;
     const f=div.querySelector('.fbm');f.className='fbm fb '+(ok?'good':'bad');
     f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${esc(q.m.e)} ${ok?'':'<br><small>This one will come back tomorrow.</small>'}<div class="row"><button type="button" class="btn" data-dnext="1">${last?'See how I did':'Next question →'}</button>${q.l!=='x-words'?`<button type="button" class="btn ghost sm" data-lt="${q.l}" data-lv="N5">Read this topic</button>`:''}</div>`;
-    if(last&&!VIEW){const st=S.streak||{n:0,d:''},td=sday();if(st.d!==td){S.streak={n:st.d===addDays(td,-1)?st.n+1:1,d:td}}}
+    if(last&&!VIEW){const st=S.streak||{n:0,d:''},td=sday();if(st.d!==td){S.streak={n:st.d===addDays(td,-1)?st.n+1:1,d:td}}dgDaily(DAILY.right,DAILY.qs.length)}
     save();return}
-  if(e.target.closest('button[data-dnext]')){if(DAILY.i>=DAILY.qs.length-1)DAILY.done=true;else DAILY.i++;renderDaily();$('tab-learn').scrollIntoView({block:'start'});return}
+  if(e.target.closest('button[data-dnext]')){if(DAILY.i>=DAILY.qs.length-1)DAILY.done=true;else DAILY.i++;renderDaily();if(DAILY.done)dgPlay();$('tab-learn').scrollIntoView({block:'start'});return}
   if(e.target.closest('button[data-dmore]')){DAILY={day:sday(),qs:pickDaily(),i:0,right:0,done:false};renderDaily();return}
 });
 
@@ -3677,7 +4344,7 @@ function paintGate(){
   const st=S.streak||{n:0,d:''};
   let h=`<div class="gcard"><p class="eyebrow">Daily 5 · ${new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})}</p><h2 id="gateTitle">Do your Daily 5 to open the site</h2>`;
   if(DAILY.done){
-    h+=`<div class="ddone"><p class="dbig">${DAILY.right} / ${DAILY.qs.length}</p><p>${DAILY.right===DAILY.qs.length?'Perfect. ':''}Daily 5 done${st.n>1?`: that’s a ${st.n}-day streak`:''}. Anything you got wrong comes back tomorrow.</p><div class="row"><button class="btn" type="button" data-gopen="1">Open the site</button></div></div>`;
+    h+=`<div class="ddone"><p class="dbig">${DAILY.right} / ${DAILY.qs.length}</p><p>${DAILY.right===DAILY.qs.length?'Perfect. ':''}Daily 5 done${st.n>1?`: that’s a ${st.n}-day streak`:''}. Anything you got wrong comes back tomorrow.</p>${dgNote()}<div class="row"><button class="btn" type="button" data-gopen="1">Open the site</button></div></div>`;
   }else{
     const q=DAILY.qs[DAILY.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),m=q.m,order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
     h+=`<p class="sub">Answer all five to get in. Wrong answers still count: you’ll see why, and they come back tomorrow.</p>
@@ -3694,14 +4361,74 @@ gate.addEventListener('click',e=>{
     div.querySelectorAll('.gopt').forEach(b=>{b.disabled=true;if(+b.dataset.oi===0)b.classList.add('right');else if(b===o)b.classList.add('wrong')});
     DAILY.ans=DAILY.ans||{};const first=!DAILY.ans[DAILY.i];DAILY.ans[DAILY.i]=1;
     if(first){d5Log(q,ok);srMark(q.id,ok);if(ok)DAILY.right++}DAILY.right=Math.min(DAILY.right,DAILY.qs.length);const last=DAILY.i>=DAILY.qs.length-1;
-    if(last){const st=S.streak||{n:0,d:''},td=sday();if(st.d!==td)S.streak={n:st.d===addDays(td,-1)?st.n+1:1,d:td}}
+    if(last){const st=S.streak||{n:0,d:''},td=sday();if(st.d!==td)S.streak={n:st.d===addDays(td,-1)?st.n+1:1,d:td};dgDaily(DAILY.right,DAILY.qs.length)}
     save();const f=div.querySelector('.fbm');f.className='fbm fb '+(ok?'good':'bad');
     f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${esc(q.m.e)}<div class="row"><button type="button" class="btn" data-gnext="1">${last?'See how I did':'Next question →'}</button></div>`;
     f.querySelector('[data-gnext]').focus();return}
-  if(e.target.closest('[data-gnext]')){if(DAILY.i>=DAILY.qs.length-1)DAILY.done=true;else DAILY.i++;paintGate();return}
+  if(e.target.closest('[data-gnext]')){if(DAILY.i>=DAILY.qs.length-1)DAILY.done=true;else DAILY.i++;paintGate();if(DAILY.done)dgPlay();return}
   if(e.target.closest('[data-gopen]')){gate.hidden=true;document.body.classList.remove('gated');if(LCUR==='x-daily')renderDaily();return}
 });
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)maybeGate()});
+
+/* ---------- Daily Growth: a Scots pine that grows one stage for each day's Daily 5 ---------- */
+const G0=()=>{S.grow=S.grow||{st:0,days:0,last:'',sp:{}};return S.grow};
+const dgGap=(a,b)=>Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5);
+function dgHealth(){const g=G0();if(!g.last)return 0;const miss=dgGap(g.last,sday())-1;return Math.max(0,Math.min(3,miss))}
+function dgSp(){const g=G0();if(!g.sp||g.sp.d!==sday())g.sp={d:sday(),won:0,fail:0};return g.sp}
+const dgSpurtOK=()=>{const g=G0(),sp=dgSp();return g.last===sday()&&g.st<100&&sp.won<2&&sp.fail<2};
+let DG_PENDING=null,DG_RETRY=false;
+function dgDaily(right,n){if(VIEW||!window.DG)return;const g=G0(),td=sday();if(g.last===td){DG_RETRY=false;return}
+  const h=dgHealth();if(h>=3&&g.st>0&&right<n){DG_RETRY=true;return}
+  DG_RETRY=false;const from=Math.max(1,g.st),to=Math.min(100,g.st+1);g.st=to;g.days=(g.days||0)+1;g.last=td;save();
+  DG_PENDING={kind:h>=3?'revive':'daily',from,to}}
+function dgPlay(){if(!DG_PENDING||!window.DG)return;const p=DG_PENDING;DG_PENDING=null;window.DG.setDate();window.DG.growAnim(p.from,p.to,()=>renderDGTile())}
+function dgNote(){if(DG_RETRY)return `<div class="dg-note"><b>Your pine needs reviving.</b> Get <b>5 out of 5</b> on these questions to bring it back. Your stage is safe.<div class="row"><button type="button" class="btn" data-dgretry="1">Try again</button></div></div>`;return ''}
+function dgRetry(){DAILY={day:sday(),qs:DAILY.qs,i:0,right:0,done:false,ans:{}};DG_RETRY=false}
+const SPROUTS=n=>Array.from({length:n},()=>'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18V9" stroke="#0F2A14" stroke-width="2.2" stroke-linecap="round"/><path d="M10 11C6 11 4 8 4 5c4 0 6 2 6 6zM10 9c0-4 3-6 6-6 0 4-2 6-6 6z" fill="#0F2A14"/></svg>').join('');
+const CLOVER='<svg class="dg-clover" viewBox="-13 -13 26 26" aria-hidden="true"><path d="M0 1Q-2 7-8 9.5Q-10.2 10.3-10.8 9.2" stroke="#5DB84A" stroke-width="1.6" fill="none" stroke-linecap="round"/>'+[-8,82,172,262].map(r=>`<g transform="rotate(${r})"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g>`).join('')+'</svg>';
+function dgTileHTML(){if(!window.DG)return '';window.DG.setDate();
+  const g=G0(),h=dgHealth(),st=g.st,td=sday(),done=g.last===td,sp=dgSp(),ev=window.DG.EV();
+  const shown=st||1,hs=st?Math.min(h,3):0;
+  const pill=!st?'Plant your seed':h>=3?'Needs reviving':h?`${g.days} days of growth · thirsty`:`${g.days} day${g.days===1?'':'s'} of growth`;
+  let body;
+  if(!st)body=`<p class="dg-sub">Do today’s Daily 5 to plant your pine. Each day you do it, it grows a stage.</p><div class="dg-btns"><button type="button" class="dg-btn" data-lt="x-daily" data-lv="N5">Start Daily 5</button></div>`;
+  else if(h>=3)body=`<p class="dg-sub">Your pine is resting. Get <b>5 out of 5</b> in a Daily 5 to bring it back. Your stage is safe.</p><div class="dg-btns"><button type="button" class="dg-btn" data-lt="x-daily" data-lv="N5">Revive your pine</button></div>`;
+  else if(!done)body=`<p class="dg-sub">${h?'Your pine is thirsty. ':''}Do today’s Daily 5 to grow to Stage ${Math.min(100,st+1)}.</p><div class="dg-btns"><button type="button" class="dg-btn" data-lt="x-daily" data-lv="N5">${h?'Water your pine':'Start Daily 5'}</button></div>`;
+  else if(st>=100)body=`<p class="dg-done">✓ Fully grown. Keep doing your Daily 5 to look after it.</p>`;
+  else body=`<p class="dg-done">✓ Today’s growth done</p><div class="dg-btns">${dgSpurtOK()?`<button type="button" class="dg-btn dg-gs" data-dgspurt="1">${window.DG.SPROUTB}Growth Spurt<span class="dg-left" aria-label="${2-sp.won} left today">${SPROUTS(2-sp.won)}</span></button>`:`<span class="dg-tmw">Come back tomorrow for more growth.</span>`}</div>`;
+  return `<div class="dg-tile${hs>=3?' dead':''}"><div class="dg-pill${hs>=3?' dead':hs?' warn':''}">${pill}</div><div class="dg-clip">
+   <div class="dg-scene">${window.DG.garden('dgt'+Date.now(),shown,hs)}</div><div class="dg-fade"></div>
+   <button type="button" class="dg-hit" data-lt="x-daily" data-lv="N5" aria-label="Open the Daily 5"></button>
+   <div class="dg-body"><span class="dg-eb">Daily Growth</span><span class="dg-h">${st?`Stage ${st} of 100`:'Stage 1 of 100'}</span>${ev.luck?`<span class="dg-luck">${ev.luck}${CLOVER}</span>`:''}<span class="dg-bar" aria-hidden="true"><i style="width:${Math.max(1,st)}%"></i></span>${body}</div></div></div>`}
+function renderDGTile(){const el=document.getElementById('dgTile');if(el)el.innerHTML=dgTileHTML()}
+/* Growth Spurt: 5 fresh questions, full marks grows a stage; up to 2 a day, one last chance after a miss */
+let SPQ=null;const spo=document.createElement('div');spo.className='d5gate dg-spq';spo.hidden=true;spo.setAttribute('role','dialog');spo.setAttribute('aria-modal','true');document.body.appendChild(spo);
+function dgSpurtAsk(){const g=G0(),sp=dgSp(),m=document.createElement('div');m.className='gsmod';
+  m.innerHTML=`<div class="gsbox" role="dialog" aria-modal="true" aria-labelledby="gst">${window.DG.SPROUTB}<h4 id="gst">Growth Spurt</h4><p>Get <b>full marks</b> on the next 5 questions to grow to <b>Stage ${g.st+1}</b>.</p><p class="small">${2-sp.won} Growth Spurt${2-sp.won===1?'':'s'} left today${sp.fail?' · this is your last chance today':''}</p><div class="row"><button class="no" data-x>Not now</button><button class="go" data-start>Start</button></div></div>`;
+  document.body.appendChild(m);m.querySelector('.go').focus();
+  m.onclick=ev=>{if(ev.target.closest('[data-start]')){m.remove();SPQ={qs:pickDaily(),i:0,right:0,done:false,ans:{}};spo.hidden=false;paintSPQ();return}if(ev.target===m||ev.target.closest('[data-x]'))m.remove()}}
+function paintSPQ(){const sp=dgSp();let h=`<div class="gcard"><p class="eyebrow">Growth Spurt</p><h2 id="spqTitle">Full marks to grow</h2>`;
+  if(SPQ.done){const win=SPQ.right===SPQ.qs.length;
+    h+=`<div class="ddone"><p class="dbig">${SPQ.right} / ${SPQ.qs.length}</p><p>${win?'Full marks! Watch your pine grow.':sp.fail<2?'Not this time. You have one last chance today with new questions.':'Not this time. Try another Growth Spurt tomorrow.'}</p><div class="row">${win?`<button class="btn" type="button" data-spgo="1">Grow my pine</button>`:sp.fail<2?`<button class="btn" type="button" data-spagain="1">Last chance</button><button class="btn ghost" type="button" data-spx="1">Not now</button>`:`<button class="btn" type="button" data-spx="1">Close</button>`}</div></div>`}
+  else{const q=SPQ.qs[SPQ.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),mm=q.m,order=mm.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+    h+=`<p class="sub">All five need to be right for your pine to grow.</p><div class="dprog">${SPQ.qs.map((_,j)=>`<i class="${j<SPQ.i?'dn':j===SPQ.i?'cur':''}"></i>`).join('')}</div>
+     <p class="eyebrow">Question ${SPQ.i+1} of ${SPQ.qs.length} · ${esc(t.name)}</p>${dtag(q)}
+     <div class="lmc q" data-sid="${q.id}"><p class="qtext">${esc(mm.q)}</p><div class="opts">${order.map(i=>`<button type="button" class="opt sopt" data-oi="${i}">${esc(mm.o[i])}</button>`).join('')}</div><div class="fbm"></div></div>`}
+  spo.innerHTML=h+'</div>';spo.scrollTop=0}
+spo.addEventListener('click',e=>{const o=e.target.closest('.sopt');
+  if(o){const div=o.closest('[data-sid]');if(div.dataset.done)return;div.dataset.done='1';const q=dailyQ(div.dataset.sid),ok=+o.dataset.oi===0;
+    div.querySelectorAll('.sopt').forEach(b=>{b.disabled=true;if(+b.dataset.oi===0)b.classList.add('right');else if(b===o)b.classList.add('wrong')});
+    if(!SPQ.ans[SPQ.i]){SPQ.ans[SPQ.i]=1;d5Log(q,ok);srMark(q.id,ok);if(ok)SPQ.right++}const last=SPQ.i>=SPQ.qs.length-1;
+    if(last){const sp=dgSp();if(SPQ.right===SPQ.qs.length)sp.won++;else sp.fail++}save();
+    const f=div.querySelector('.fbm');f.className='fbm fb '+(ok?'good':'bad');f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${esc(q.m.e)}<div class="row"><button type="button" class="btn" data-snext="1">${last?'See how I did':'Next question →'}</button></div>`;f.querySelector('[data-snext]').focus();return}
+  if(e.target.closest('[data-snext]')){if(SPQ.i>=SPQ.qs.length-1)SPQ.done=true;else SPQ.i++;paintSPQ();return}
+  if(e.target.closest('[data-spagain]')){SPQ={qs:pickDaily(),i:0,right:0,done:false,ans:{}};paintSPQ();return}
+  if(e.target.closest('[data-spx]')){spo.hidden=true;renderDGTile();return}
+  if(e.target.closest('[data-spgo]')){spo.hidden=true;const g=G0(),from=g.st,to=Math.min(100,g.st+1);g.st=to;save();window.DG.setDate();window.DG.spurtAnim(from,to,()=>renderDGTile());return}
+});
+document.addEventListener('click',e=>{if(e.target.closest('[data-dgspurt]')){e.preventDefault();e.stopPropagation();if(dgSpurtOK())dgSpurtAsk();return}
+  if(e.target.closest('[data-dgretry]')){dgRetry();if(!gate.hidden)paintGate();else renderDaily();return}},true);
+
 
 /* Estimated marking for the Learn exam questions.
    Each point: t = what the mark is for, a = list of alternative requirement sets (every pattern in one set must
