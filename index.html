@@ -1049,7 +1049,55 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
 @media (prefers-reduced-motion:reduce){.dgflk,.dgflk2,.dgtw,.dgtw2{animation:none}.dgmv{animation:none;display:none}}
 .dg-spq{z-index:110}
 /* Daily Growth tile */
-.dg-wrap{grid-column:1/-1}.dg-view{position:fixed;inset:0;z-index:125;background:rgba(5,6,8,.86);display:flex;align-items:center;justify-content:center;padding:12px}.dg-vbox{position:relative;width:min(100%,calc(88vh*16/9),1100px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}.dg-vbox svg{width:100%;height:100%;display:block}.dg-vx{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;border:0;background:#F5FFFA;color:#1a1a1a;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+/* ---------- Daily Zen ---------- */
+.dg-clip{aspect-ratio:16/10}
+.dg-fade{background:linear-gradient(90deg,rgba(17,18,20,.55) 0%,rgba(17,18,20,.25) 38%,rgba(17,18,20,0) 64%)!important}
+.dg-tile .dg-pill{right:92px}
+.dz-pin{position:absolute;right:-14px;top:-20px;z-index:3;width:58px;height:58px;background:none;border:0;cursor:pointer;padding:0;filter:drop-shadow(0 3px 5px rgba(0,0,0,.55))}
+.dz-pin svg{width:58px;height:58px;overflow:visible}
+@keyframes dzpintap{0%,55%,100%{transform:translate(0,0) rotate(-28deg)}66%{transform:translate(-2px,3px) rotate(-28deg) scale(.94)}74%{transform:translate(0,0) rotate(-28deg)}}
+.dz-pin .fing{animation:dzpintap 2.4s ease-in-out infinite;transform-box:view-box;transform-origin:12px 12px}
+@keyframes dzpinring{0%,62%{r:0;opacity:0}68%{r:1.5;opacity:.95}100%{r:7;opacity:0}}
+.dz-pin .ring{animation:dzpinring 2.4s ease-out infinite}
+.dg-vhint{position:absolute;left:0;right:0;bottom:-30px;text-align:center;font-size:13px;color:#C9CCD3}
+.dg-vsnd{position:absolute;left:8px;top:8px;height:34px;border-radius:999px;border:0;background:rgba(20,22,26,.6);color:#fff;font:700 13px var(--body);padding:0 12px;cursor:pointer}
+.dz-fv{position:fixed;inset:0;z-index:150;background:rgba(5,6,8,.82);display:flex;align-items:center;justify-content:center;padding:16px}
+.dz-fvbox{width:min(100%,420px);background:#1F2024;border:1px solid #3A3C42;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);color:#fff}
+.dz-fvbox .pic{aspect-ratio:16/9}.dz-fvbox .pic svg{display:block;width:100%;height:100%}
+.dz-fvbox .in{padding:14px 18px 18px}.dz-fvbox .eb{font-size:13px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#FFD23F}
+.dz-fvbox h3{font:600 24px/1.15 var(--display);margin:4px 0 2px;color:#fff}.dz-fvbox .tag{color:#9FE3B8;font-weight:700;margin:0 0 8px;font-size:15px}.dz-fvbox p{margin:0 0 12px;color:#E6E7EA;font-size:14px;line-height:1.5}
+.dz-fvbox button{font:700 15px var(--body);border:0;border-radius:12px;padding:11px 18px;background:#FFD23F;color:#1a1a1a;cursor:pointer}
+.rv{position:fixed;inset:0;z-index:160;background:#0B0C0E;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:12px;opacity:0;transition:opacity .5s;color:#fff;font-family:var(--body)}
+.rv.on{opacity:1}
+.rvbox{position:relative;width:min(100%,calc(62vh*16/9),1100px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);flex:none}
+.rvbox>div,.rvbox>svg{position:absolute;inset:0}.rvbox svg{width:100%;height:100%;display:block}
+.rvb{opacity:0}
+.rvmsg{width:min(100%,560px);text-align:center;min-height:190px}
+.rvmsg .m1{opacity:0;transform:translateY(8px);transition:all .7s}.rvmsg .m1.on{opacity:1;transform:none}
+.rvmsg .eb{font-size:13px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#FFD23F}
+.rvmsg h3{font:600 26px/1.15 var(--display);margin:4px 0 2px;color:#fff}.rvmsg .tag{color:#9FE3B8;font-weight:700;margin:0 0 6px}
+.rvmsg .newi{display:inline-block;background:#2A2C31;border:1px solid #4A4D54;border-radius:999px;padding:5px 14px;font-size:14px;margin-top:4px}
+.dzgift{background:linear-gradient(160deg,#5A1D2C,#3A1420);border:1.5px solid #E9A21A;border-radius:14px;padding:10px 14px;margin:8px auto 0;max-width:420px;font-size:15px;line-height:1.45}.dzgift b{color:#FFD23F}
+.rv .tz{display:flex;align-items:center;gap:12px;background:#1F2024;border:1px solid #3A3C42;border-radius:14px;padding:10px 12px;margin:10px auto 0;max-width:420px;text-align:left}
+.rv .tz .sil{width:84px;height:52px;flex:none;border-radius:10px;background:#2A2C31;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rv .tz .sil svg{width:76px;height:46px;filter:blur(2.6px);opacity:.75}.rv .tz p{margin:0;font-size:14px;line-height:1.4;color:#E6E7EA}.rv .tz small{display:block;color:#9FA3AB;font-size:12px;margin-top:2px}
+.rvgo{margin-top:12px;font:700 16px var(--body);border:0;border-radius:12px;padding:11px 22px;background:#FFD23F;color:#1a1a1a;cursor:pointer}
+@keyframes dzrustle{0%{transform:rotate(0)}22%{transform:rotate(-.9deg)}48%{transform:rotate(.7deg)}72%{transform:rotate(-.35deg)}100%{transform:rotate(0)}}
+.dzrustle{animation:dzrustle 2.2s ease-in-out}
+@keyframes twk{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}
+.tw{transform-box:fill-box;transform-origin:center;animation:twk 1.6s ease-in-out infinite}
+@keyframes giftbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-.8px)}}
+.giftb{animation:giftbob 2.6s ease-in-out infinite}
+@keyframes crbob{0%,100%{transform:rotate(0)}50%{transform:rotate(-2.5deg)}}
+.cr .neckhead{transform-origin:80px 104px;animation:crbob 5s ease-in-out infinite}
+@keyframes flapw{0%,100%{transform:scaleY(1)}50%{transform:scaleY(-.75)}}
+.fl .fwing{transform-origin:108px 117px;animation:flapw .7s ease-in-out infinite}
+.fl .fwing2{transform-origin:112px 117px;animation:flapw .7s ease-in-out infinite;animation-delay:-.08s}
+@keyframes ktail{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}@keyframes krear{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes kpecT{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(14deg)}}@keyframes kpecB{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}}
+.k .rear{transform-origin:118px 40px;animation:krear 1.6s ease-in-out infinite}.k .tail{transform-origin:66px 40px;animation:ktail 1.6s ease-in-out infinite;animation-delay:-.2s}
+.k .pecT{transform-origin:156px 26px;animation:kpecT 2.2s ease-in-out infinite}.k .pecB{transform-origin:156px 54px;animation:kpecB 2.2s ease-in-out infinite}
+.dg-wrap{grid-column:1/-1}.dg-view{position:fixed;inset:0;z-index:125;background:rgba(5,6,8,.86);display:flex;align-items:center;justify-content:center;padding:12px}.dg-vbox{position:relative;width:min(100%,calc(80vh*16/9),1100px);aspect-ratio:16/9;border-radius:16px;overflow:visible;touch-action:manipulation;box-shadow:0 20px 60px rgba(0,0,0,.6)}.dg-vbox svg{width:100%;height:100%;display:block;border-radius:16px}.dg-vx{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;border:0;background:#F5FFFA;color:#1a1a1a;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4)}
 .dg-tile{position:relative;margin-top:12px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .dg-clip{position:relative;overflow:hidden;border-radius:20px;border:1px solid #17181B;background:#111214;aspect-ratio:16/7}
 .dg-scene{position:absolute;inset:0}.dg-scene svg{width:100%;height:100%;display:block}
@@ -1460,6 +1508,8 @@ var done=function(){if(s.parentNode)s.remove()};s.addEventListener('animationend
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+window.ZG={pine:1,pond:1,bridge:1,lantern:1,rock:1,rock2:1,acer:1,cherry:1,acerX:252};
+
 /* Daily Growth garden scene (drawn in code) */
 (function(){
 
@@ -1631,7 +1681,7 @@ function bigPine(day,h,bx,by,se,id){
 /* ---------- acer: behind the right end of the bridge. Never grows, only changes colour ----------
    Shape after the reference: a short trunk that forks low into two stems, then spreads into a wide, airy dome. */
 const ACER=[['#D2543F','#E8805A','#C13E35','#B8D86A','#E39A6A','#A8CC5A'],['#5E8F3A','#7AA84A','#6A9A40','#4F7F33','#86B455','#7A2E2E'],['#E8173A','#D4102F','#F2405A','#B80F2A','#FF5A5F','#C9142C'],null];
-function acer(se,dead){const X=206,Y=151,R=rng(4242),bark='#3E302C';let br='',tips=[];
+function acer(se,dead){const X=(window.ZG.acerX||206),Y=151,R=rng(4242),bark='#3E302C';let br='',tips=[];
  const grow=(x,y,ang,len,w,d)=>{const ex=x+Math.cos(ang)*len,ey=y+Math.sin(ang)*len,cx=x+Math.cos(ang+.25*(R()-.5))*len*.55,cy=y+Math.sin(ang)*len*.55-1;
   br+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}Q${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}" stroke="${bark}" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round"/>`;
   if(d>=3){/* outer tips arch over and droop a little */const dr=Math.abs(Math.cos(ang))>.45?3:0;tips.push([ex,ey+dr*.4,d]);if(dr)br+=`<path d="M${ex.toFixed(1)} ${ey.toFixed(1)}q${(Math.sign(Math.cos(ang))*3).toFixed(1)} -.5 ${(Math.sign(Math.cos(ang))*5).toFixed(1)} 3" stroke="${bark}" stroke-width=".5" fill="none"/>`;return}
@@ -1801,7 +1851,10 @@ function gravel(id,bx,by,se){const base=se===3?'#DEDAD2':'#DCD4C4',groove='#BFB5
  t+=rings(bx-13,by+3.5,48,3,7,.17);       /* around the pine */
  t+=rings(190,168,70,3,5,.165);         /* around the pond */
  t+=rings(CX+1,CY+2,26,3,6,.2);         /* around the cherry */
- t+=rings(214,213,11,3,5,.3)+rock(214,213,se);/* a feature rock */
+ t+=window.ZG.rock?rings(214,213,11,3,5,.3)+rock(214,213,se):'';/* a feature rock */
+ t+=window.ZG.rock2?rings(58,199,17,3,6,.3)+`<g transform="translate(58 199) scale(1.6) translate(-58 -199)">${rock(58,199,se)}</g>`:'';/* the larger boulder by the cherry */
+ t+=`<ellipse cx="${CX}" cy="${CY+1}" rx="13" ry="3.2" fill="#5A4636"/><ellipse cx="${CX}" cy="${CY+.4}" rx="10" ry="2.2" fill="#6E5643"/>`;
+ {const ax=window.ZG.acerX||206;t+=`<ellipse cx="${ax}" cy="152" rx="10" ry="2.4" fill="#5A4636"/><ellipse cx="${ax}" cy="151.6" rx="7.5" ry="1.6" fill="#6E5643"/>`}
  return t}
 
 /* ---------- events through the year ---------- */
@@ -1901,12 +1954,12 @@ function groundLeaves(){const R=rng(909),C=['#E8173A','#D4102F','#F2405A','#E245
  for(let i=0;i<38;i++){const x=R()*400,y=156+R()*66;t+=`<path d="${LEAF}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(R()*180).toFixed(0)}) scale(${(.35+R()*.25).toFixed(2)})" fill="${C[i%6]}" opacity=".9"/>`}return t}
 function motion(se){const R=rng(31+se);let t='';
  if(se===3){for(let i=0;i<46;i++){const x=R()*420-10,r=.6+R()*1.1,d=6+R()*6;t+=`<g class="dgmv dgsnow" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><circle cx="${x.toFixed(0)}" cy="-6" r="${r.toFixed(1)}" fill="#FFFFFF" opacity="${(.7+R()*.3).toFixed(2)}"/></g>`}}
- if(se===0){const C=['#FFFFFF','#FBDDE4','#F8C9D4','#FFE9EE'];for(let i=0;i<26;i++){const y=30+R()*150,d=9+R()*7;t+=`<g class="dgmv dgdrift" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><ellipse cx="-12" cy="${y.toFixed(0)}" rx="${(1.3+R()*.8).toFixed(1)}" ry="${(.8+R()*.4).toFixed(1)}" fill="${C[i%4]}"/></g>`}}
- if(se===2){const C=['#E8173A','#D4102F','#F2405A','#F46D2B','#F9A03F'];
+ if(se===0&&window.ZG.cherry>0){const C=['#FFFFFF','#FBDDE4','#F8C9D4','#FFE9EE'];for(let i=0;i<26;i++){const y=30+R()*150,d=9+R()*7;t+=`<g class="dgmv dgdrift" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><ellipse cx="-12" cy="${y.toFixed(0)}" rx="${(1.3+R()*.8).toFixed(1)}" ry="${(.8+R()*.4).toFixed(1)}" fill="${C[i%4]}"/></g>`}}
+ if(se===2&&(window.ZG.acer>0||window.ZG.cherry>0)){const C=['#E8173A','#D4102F','#F2405A','#F46D2B','#F9A03F'];
   for(let i=0;i<18;i++){const y=40+R()*140,d=8+R()*6;t+=`<g class="dgmv dgdrift" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><path d="${LEAF}" transform="translate(-12 ${y.toFixed(0)}) scale(${(.45+R()*.2).toFixed(2)})" fill="${C[i%5]}"/></g>`}
-  for(let i=0;i<9;i++){const x=184+R()*44,y=112+R()*24,d=4.5+R()*3;t+=`<g class="dgmv dgacfall" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><path d="${LEAF}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(.42)" fill="${C[i%3]}"/></g>`}}
+  if(window.ZG.acer>0)for(let i=0;i<9;i++){const x=184+((window.ZG.acerX||206)-206)+R()*44,y=112+R()*24,d=4.5+R()*3;t+=`<g class="dgmv dgacfall" style="animation-duration:${d.toFixed(1)}s;animation-delay:-${(R()*d).toFixed(1)}s"><path d="${LEAF}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(.42)" fill="${C[i%3]}"/></g>`}}
  return t}
-function garden(id,day,h){
+function garden0(id,day,h){
  const dead=h>=3,bx=362,by=186,se=seasonOf(day);const SKY=[['#F2DFC2','#F6EAD6'],['#F6D29A','#F8E4C2'],['#F3D7B0','#F6E6CF'],['#DCE0E0','#EAECEA']][se];const MOSS=['#6E8C4E','#5E7A3A','#6A7A48','#8C9A82'][se];
  return `<svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" role="img" aria-label="A Japanese garden with a Scots pine, ${day} days of growth">
  <defs><linearGradient id="sky${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${dead?'#C9C3BA':SKY[0]}"/><stop offset=".7" stop-color="${dead?'#D8D3CB':SKY[1]}"/><stop offset="1" stop-color="#E9DFCF"/></linearGradient>
@@ -1917,33 +1970,34 @@ function garden(id,day,h){
  <path d="M0 132 Q60 96 120 118 T240 104 T400 112 V160 H0Z" fill="#CBB9A6" opacity=".55"/>
  <path d="M0 146 Q80 118 170 136 T320 126 T400 134 V170 H0Z" fill="#A9B39A" opacity=".55"/>
  ${[[60,142,16],[96,138,12],[150,146,18],[372,140,14]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r*1.4}" ry="${r*.8}" fill="#6F8A5A" opacity=".55"/><ellipse cx="${x+r*.6}" cy="${y-r*.7}" rx="${r}" ry="${r*.55}" fill="#7E9966" opacity=".55"/>`).join('')}
- ${gravel(id,bx,by,se)}${se===3&&!dead?groundSnow():""}${se===2&&!dead?groundLeaves():""}
- ${(()=>{const AC=acer(se,dead),BR=`<path d="M98 169 Q190 110 282 169" stroke="#B8432F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 169 Q190 118 282 169" stroke="#B8432F" stroke-width="2" fill="none"/>
+ ${gravel(id,bx,by,se)}${se===3&&!dead?groundSnow():""}${se===2&&!dead&&(window.ZG.acer>0||window.ZG.cherry>0)?groundLeaves():""}
+ ${(()=>{const ZGs=window.ZG,ACs=ZGs.acer,AC=ACs>0?`<g class="zt-acer"><g transform="translate(${ZGs.acerX||206} 151) scale(${ACs}) translate(${-(ZGs.acerX||206)} -151)">${acer(se,dead)}</g></g>`:'',BR=`<path d="M98 169 Q190 110 282 169" stroke="#B8432F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 169 Q190 118 282 169" stroke="#B8432F" stroke-width="2" fill="none"/>
  ${[130,160,190,220,250].map(x=>{const t=(x-98)/184,y=169-118*t*(1-t);return `<path d="M${x} ${y.toFixed(1)} V${x<122||x>258?169:168}" stroke="#9A3424" stroke-width="1.6"/>`}).join('')}
-`,LN=`<g transform="translate(232 150)"><rect x="-3" y="10" width="6" height="16" fill="#8E8A82"/><path d="M-12 10h24l-4-6h-16z" fill="#7C786F"/><rect x="-7" y="-2" width="14" height="7" fill="#A6A196"/><rect x="-3" y="-1" width="6" height="5" fill="#FFE7A8" opacity=".85" class="dgflk2"/><path d="M-13 -2h26l-13-9z" fill="#7C786F"/></g>`,CH=sakura(se,dead);
+`,LN=`<g transform="translate(232 150)"><rect x="-3" y="10" width="6" height="16" fill="#8E8A82"/><path d="M-12 10h24l-4-6h-16z" fill="#7C786F"/><rect x="-7" y="-2" width="14" height="7" fill="#A6A196"/><rect x="-3" y="-1" width="6" height="5" fill="#FFE7A8" opacity=".85" class="dgflk2"/><path d="M-13 -2h26l-13-9z" fill="#7C786F"/></g>`,CH=ZGs.cherry>0?`<g class="zt-cher"><g transform="translate(100 177) scale(${ZGs.cherry}) translate(-100 -177)">${sakura(se,dead)}</g></g>`:'';const FT=[[96,169],[284,169]].map(([x,y])=>`<rect x="${x-4}" y="${y-2.5}" width="8" height="5" rx=".8" fill="#7A5A3A"/><rect x="${x-4}" y="${y-2.5}" width="8" height="1.4" fill="#9A7650"/>`).join(''),BRX=ZGs.bridge?BR:'',LNX='';
  const glow=dead?.25:se===3?.95:.75;
  return `${AC}
  <defs><clipPath id="pc${id}"><ellipse cx="190" cy="168" rx="70" ry="11"/></clipPath>
  <radialGradient id="lg${id}"><stop offset="0" stop-color="#FFD98A" stop-opacity="${glow}"/><stop offset=".45" stop-color="#FFC768" stop-opacity="${glow*.35}"/><stop offset="1" stop-color="#FFC768" stop-opacity="0"/></radialGradient></defs>
- <ellipse cx="190" cy="168" rx="70" ry="11" fill="url(#pond${id})"/>
+${ZGs.pond?` <ellipse cx="190" cy="168" rx="70" ry="11" fill="url(#pond${id})"/>
  <g clip-path="url(#pc${id})">
-  <g opacity=".3"><g transform="translate(0 157) scale(1 -.55) translate(0 -157)">${AC}</g><g transform="translate(0 166) scale(1 -.6) translate(0 -166)">${BR}</g></g>
+  <g opacity=".3"><g transform="translate(0 157) scale(1 -.55) translate(0 -157)">${AC}</g><g transform="translate(0 166) scale(1 -.6) translate(0 -166)">${BRX}</g></g>
   ${EV().lant&&!dead?lanternReflect():""}
   <rect x="120" y="155" width="140" height="26" fill="#6F918A" opacity=".35"/>
-  <ellipse cx="231" cy="171" rx="16" ry="4.5" fill="url(#lg${id})"/><path d="M226 168h9M224 171.5h13M227 175h7" stroke="#FFE2A0" stroke-width=".7" opacity="${glow*.8}" stroke-linecap="round"/>
+ 
   ${[[150,163,22],[196,171,30],[170,175,18],[222,166,16]].map(([x,y,w])=>`<path d="M${x} ${y}h${w}" stroke="#E8F0EC" stroke-width=".5" opacity=".5" stroke-linecap="round"/>`).join('')}
  </g>
  <path d="M120 168a70 11 0 0 1 140 0" fill="none" stroke="#4E5A52" stroke-width="1.6" opacity=".75" stroke-linecap="round"/><path d="M121 166.5a69 9.6 0 0 1 138 0" fill="none" stroke="#2E3A34" stroke-width="1.4" opacity=".35"/>
- ${BR}
- <circle class="dgflk" cx="232" cy="151.5" r="20" fill="url(#lg${id})"/>
- ${LN}
- <rect x="228.5" y="171.5" width="7" height="5" fill="#7FA09A" opacity=".75"/><ellipse cx="232" cy="171.6" rx="5.5" ry="1.3" fill="none" stroke="#E8F0EC" stroke-width=".7" opacity=".85"/><path d="M225 173.6h4M235 173.6h4" stroke="#E8F0EC" stroke-width=".5" opacity=".6" stroke-linecap="round"/>
+`:'<ellipse cx="190" cy="168" rx="70" ry="11" fill="#CFC6B4" opacity=".55"/><path d="M120 168a70 11 0 0 1 140 0" fill="none" stroke="#A89F8E" stroke-width="1.2" opacity=".7"/>'}
+ ${FT}${BRX}
+ ${LNX}
+
  ${CH}`})()}
 
  ${[[110,192,9,4],[132,200,8,3.5],[156,206,9,4]].map(([x,y,a,b])=>`<ellipse cx="${x}" cy="${y}" rx="${a}" ry="${b}" fill="#B9B2A3"/>`).join('')}
  <ellipse cx="${bx-13}" cy="${by+3.5}" rx="44" ry="7.5" fill="#1E1B19"/>
- ${bigPine(day,h,bx,by+2,se,id)}
- ${petals('W5',se,dead)}
+ ${window.ZG.lantern?`<circle class="dgflk" cx="${bx-40}" cy="${by-6}" r="18" fill="url(#lg${id})"/><g transform="translate(${bx-40} ${by+1})"><ellipse cx="0" cy=".6" rx="10" ry="1.9" fill="#00000033"/><rect x="-8" y="-3.2" width="16" height="3.4" rx=".6" fill="#7C786F"/><rect x="-6" y="-10.4" width="12" height="7.4" fill="#A6A196"/><rect x="-3" y="-9.4" width="6" height="5.2" fill="#FFE7A8" opacity=".85" class="dgflk2"/><path d="M-12 -10.4h24l-12-8z" fill="#7C786F"/><path d="M-12 -10.4h24" stroke="#5E5A52" stroke-width="1"/><circle cx="0" cy="-19.4" r="1.5" fill="#7C786F"/></g>`:''}
+ ${window.ZG.pine===0?'':`<g class="zt-pine">${bigPine(day,h,bx,by+2,se,id)}</g>`}
+ ${window.ZG.cherry>0?petals('W5',se,dead):''}
  ${dead?'':motion(se)}
  ${THEME==='halloween'&&!dead?pumpkin(bx-62,by+10,2)+pumpkin(bx-45,by+14,1.5)+pumpkin(234,216,1.65)+pumpkin(124,189,1.5)+pumpkin(258,180,1.3):''}
  ${EV().eve&&!dead?`<rect width="400" height="225" fill="#1E2447" opacity="${EV().dark?.32:.12}"/>`:''}
@@ -1968,7 +2022,7 @@ function growAnim(from,to,cb){const reduce=false; /* reward animations always pl
  o.innerHTML=`<div class="gpbox"><div class="gpscene"><div class="gpa">${garden('ga',from,0)}</div><div class="gpb">${garden('gb',to,0)}</div>
   <svg class="gpfg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">${gardener()}<g id="gdrops"></g><g id="gspark" opacity="0"></g></svg>
   <div class="gptop"><div class="pt1">${pine(from,'pt1')}</div><div class="pt2">${pine(to,'pt2')}</div></div></div>
-  <div class="gpmsg"><span class="gpeb">Daily Growth</span><b>Stage ${to} of 100</b></div></div>`;
+  <div class="gpmsg"><span class="gpeb">Daily Zen</span><b>Stage ${to} of 100</b></div></div>`;
  document.body.appendChild(o);
  const q=x=>o.querySelector(x),G=q('#gdn'),B=q('#gbob'),L1=q('#gl1'),L2=q('#gl2'),CAN=q('#gcan'),DR=q('#gdrops'),SP=q('#gspark'),NB=q('.gpb'),TOP=q('.gptop'),PT2=q('.pt2'),MSG=q('.gpmsg');
  const S=1.35,tx=360,ty=190,stand=[334,209];
@@ -2101,7 +2155,282 @@ function eventFor(d){const m=d.getMonth()+1,dd=d.getDate(),es=easterSun(d.getFul
 function today(){const q=new URLSearchParams(location.search).get('dgdate');if(q){const x=new Date(q+'T12:00:00');if(!isNaN(x))return x}return new Date()}
 function setDate(){const d=today(),m=d.getMonth()+1;THEME=eventFor(d);WINTERY=!!(EV().wint)||m===12||m===1}
 setDate();
-window.DG={garden,growAnim,spurtAnim,heliAnim,setDate,EV:()=>EV(),SPROUTB,seasonOf:d=>seasonOf(d)};
+/* ---------- Daily Zen: what each stage has unlocked, living things, touch, jingle, reveals ---------- */
+const ZEN=(function(){
+const NS='http://www.w3.org/2000/svg';
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+function zgFor(st){return {pine:st>=1?1:0,pond:st>=2,bridge:st>=3,acer:st>=4?Math.min(1,.32+.68*(st-4)/26):0,lantern:st>=5,rock:st>=6,rock2:st>=7,cherry:st>=8?Math.min(1,.3+.7*(st-8)/32):0,acerX:252}}
+const railY=x=>{const t=(x-98)/184;return 169-118*t*(1-t)};
+const cherryTop=st=>{const s=zgFor(st).cherry||.3;return {x:100+(92-100)*s,y:177+(110-177)*s}};
+const ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,lin=(a,b,f)=>a+(b-a)*f;
+const arc=(a,b,k,h)=>({x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k-h*Math.sin(Math.PI*k)});
+
+/* ---- the gifts (stage 8 by the cherry; stage 100 by the pine) ---- */
+const GIFTS={g8:{x:126,y:188,st:8},g100:{x:318,y:208,st:100}};
+const giftGone=k=>store.get('dz-'+k)==='1';
+function giftSVG(x,y){const st=(cx,cy,r,d)=>`<path class="tw" style="animation-delay:${d}s" d="M${cx} ${cy-r}L${cx+r*.28} ${cy-r*.28}L${cx+r} ${cy}L${cx+r*.28} ${cy+r*.28}L${cx} ${cy+r}L${cx-r*.28} ${cy+r*.28}L${cx-r} ${cy}L${cx-r*.28} ${cy-r*.28}Z" fill="#FFF6C8"/>`;
+ return `<ellipse cx="${x}" cy="${y+.8}" rx="11" ry="2.2" fill="#00000030"/><g class="giftb">
+ <rect x="${x-9}" y="${y-13}" width="18" height="13" rx="1" fill="#D3263A"/><rect x="${x-9}" y="${y-13}" width="18" height="13" rx="1" fill="url(#dzgsh)"/>
+ <rect x="${x-10.2}" y="${y-16.5}" width="20.4" height="4.4" rx="1" fill="#E43A4C"/><rect x="${x-1.6}" y="${y-16.5}" width="3.2" height="16.5" fill="#FFCC2E"/>
+ <path d="M${x} ${y-16.5}C${x-3} ${y-22} ${x-9} ${y-21} ${x-7} ${y-17.4}C${x-5.6} ${y-16} ${x-2.4} ${y-16.2} ${x} ${y-16.5}Z" fill="#FFCC2E"/>
+ <path d="M${x} ${y-16.5}C${x+3} ${y-22} ${x+9} ${y-21} ${x+7} ${y-17.4}C${x+5.6} ${y-16} ${x+2.4} ${y-16.2} ${x} ${y-16.5}Z" fill="#F2B81E"/><circle cx="${x}" cy="${y-16.6}" r="1.6" fill="#E9A21A"/></g>
+ ${st(x-13,y-18,3.2,0)}${st(x+13,y-14,2.6,.5)}${st(x+3,y-27,2.4,.9)}${st(x-8,y-4,2,1.2)}${st(x+12,y-2,2.2,.3)}`}
+
+/* ---- koi (approved design), shared by every garden on screen ---- */
+function koi(id,v){
+ const C={
+  ogon:{base:['#FFB347','#F3861F','#C4570F'],fin:'#FFB866',fins:'#F5913A',spots:'',name:'Orange (Yamabuki/Ogon)',note:'All-over metallic orange. Simple and reads clearly at small sizes.'},
+  kohaku:{base:['#FFFFFF','#F4F1EC','#DCD6CC'],fin:'#FFFFFF',fins:'#EDE8E0',spots:'kohaku',name:'Orange and white (Kohaku style)',note:'White body with bright orange patches: the classic koi.'},
+  plat:{base:['#FFFFFF','#F2F1EE','#CFCBC4'],fin:'#FFFFFF',fins:'#E4E1DB',spots:'',name:'White (Platinum)',note:''},
+  sanke:{base:['#FFFFFF','#F4F1EC','#DCD6CC'],fin:'#FFFFFF',fins:'#EDE8E0',spots:'sanke',name:'Orange, white and black (Sanke style)',note:'Orange patches with small black spots. Busiest of the three.'}
+ }[v];
+ const scale=`<pattern id="sc${id}" width="4.4" height="3.6" patternUnits="userSpaceOnUse"><path d="M0 3.6a2.2 2.2 0 0 1 4.4 0" fill="none" stroke="rgba(110,50,10,.16)" stroke-width=".45"/><path d="M-2.2 1.8a2.2 2.2 0 0 1 4.4 0M2.2 1.8a2.2 2.2 0 0 1 4.4 0" fill="none" stroke="rgba(110,50,10,.12)" stroke-width=".45"/></pattern>`;
+ const body="M187 40C187 30.5 181 23.6 168 22.2C150 20.6 128 24 108 28.8C90 33 76 36 66 37.2C62 37.7 62 42.3 66 42.8C76 44 90 47 108 51.2C128 56 150 59.4 168 57.8C181 56.4 187 49.5 187 40Z";
+ const rearBody="M120 25.6C110 27.6 100 29.6 92 31.5C80 34.5 69 37 60 40C69 43 80 45.5 92 48.5C100 50.4 110 52.4 120 54.4Z";
+ const tail="M67 40C60 34 50 25 34 18C26 15 18 15 14 17C21 24 27 32 30 37.6C31 39.2 31 40.8 30 42.4C27 48 21 56 14 63C18 65 26 65 34 62C50 55 60 46 67 40Z";
+ const rays=[-30,-21,-12,-4,4,12,21,30].map(a=>{const r=a*Math.PI/180;return `<path d="M66 40Q${(48-6*Math.cos(r)).toFixed(1)} ${(40+20*Math.sin(r)).toFixed(1)} ${(66-50*Math.cos(r)).toFixed(1)} ${(40+46*Math.sin(r)).toFixed(1)}" stroke="rgba(150,80,30,.28)" stroke-width=".45" fill="none"/>`}).join('');
+ const spotsK=`<path d="M181 36C179 32 173 31 169.5 33.5C167 36 167 43 170 45.5C173.5 48 179 46.5 181 43.5C182 41 182 38 181 36Z" fill="#E9541C"/><path d="M160 30.5C152 27.5 141 28.5 133 32.5C128 35.5 127.5 44 132.5 47.5C139 51.5 150 52 157.5 49C163 46.5 164.5 34 160 30.5Z" fill="#E9541C"/><path d="M122 32.5C114 30.5 105 33.5 100.5 36.5C98 39.5 99.5 44 104 46C111.5 48.5 120 46.5 123.5 43.5C126 40.5 125.5 35 122 32.5Z" fill="#E9541C"/><path d="M91 37.6C87.5 37 82.5 38 80.5 40C82.5 42 87.5 43 91 42.4C92.5 41 92.5 39 91 37.6Z" fill="#E9541C"/>`;
+ const spotsS=spotsK+`<ellipse cx="138" cy="44.5" rx="3" ry="2.1" fill="#1C1A1A"/><ellipse cx="126" cy="51" rx="2.2" ry="1.5" fill="#1C1A1A"/><ellipse cx="108" cy="38" rx="2.4" ry="1.7" fill="#1C1A1A"/><ellipse cx="96" cy="46" rx="1.7" ry="1.2" fill="#1C1A1A"/><ellipse cx="146" cy="31.5" rx="2" ry="1.4" fill="#1C1A1A"/>`;
+ const spots=C.spots==='kohaku'?spotsK:C.spots==='sanke'?spotsS:'';
+ const pec=(top)=>`<path d="${top?'M158 25C154 15 146 8 136 7C129 7 127 11 131 15C137 21 145 25 152 27Z':'M158 55C154 65 146 72 136 73C129 73 127 69 131 65C137 59 145 55 152 53Z'}" fill="${C.fin}" opacity=".62" stroke="${C.fins}" stroke-width=".6"/>${[0,1,2,3,4].map(i=>`<path d="M155 ${top?26:54}L${131+i*3.6} ${top?9+i*2.4:71-i*2.4}" stroke="${C.fins}" stroke-width=".35" opacity=".75"/>`).join('')}`;
+ const pel=(top)=>`<path d="${top?'M112 29C108 23 102 20 95 20C98 24 102 28 106 30.5Z':'M112 51C108 57 102 60 95 60C98 56 102 52 106 49.5Z'}" fill="${C.fin}" opacity=".55" stroke="${C.fins}" stroke-width=".5"/>`;
+ return `<svg class="k" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+ <defs>${scale}<linearGradient id="bd${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.base[2]}"/><stop offset=".22" stop-color="${C.base[1]}"/><stop offset=".5" stop-color="${C.base[0]}"/><stop offset=".78" stop-color="${C.base[1]}"/><stop offset="1" stop-color="${C.base[2]}"/></linearGradient>
+ <linearGradient id="sh${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".12"/><stop offset=".6" stop-color="#000" stop-opacity="0"/></linearGradient>
+ <clipPath id="cl${id}"><path d="${body}"/></clipPath></defs>
+ <ellipse cx="118" cy="44" rx="66" ry="12" fill="rgba(60,40,20,.10)"/>
+ <g class="pecT">${pec(true)}</g><g class="pecB">${pec(false)}</g>
+ <g class="rear"><g class="tail"><path d="${tail}" fill="${C.fin}" opacity=".7" stroke="${C.fins}" stroke-width=".6"/>${rays}<path d="M62 40C50 36 40 30 28 24" stroke="${C.fins}" stroke-width=".5" opacity=".7" fill="none"/></g>
+  ${pel(true)}${pel(false)}</g>
+ <path d="${body}" fill="url(#bd${id})"/>
+ <g clip-path="url(#cl${id})">${spots}<rect x="56" y="20" width="132" height="40" fill="url(#sc${id})"/><rect x="56" y="20" width="132" height="40" fill="url(#sh${id})"/>
+  <ellipse cx="148" cy="38" rx="36" ry="4.5" fill="rgba(255,255,255,.22)"/>
+  <path d="M170 23.5C173 31 173 49 170 56.5" stroke="rgba(110,50,10,.22)" stroke-width=".9" fill="none"/></g>
+ <path d="M138 40C122 40 104 40 88 40" stroke="rgba(110,50,10,.16)" stroke-width="1.2" stroke-linecap="round"/>
+ <ellipse cx="177" cy="27.6" rx="2.4" ry="1.7" fill="#2A1E16"/><ellipse cx="177" cy="52.4" rx="2.4" ry="1.7" fill="#2A1E16"/><circle cx="177.7" cy="27.2" r=".55" fill="#fff"/><circle cx="177.7" cy="52" r=".55" fill="#fff"/>
+ <path d="M185.5 35.5C188 34 189.5 33.6 191 34.2M185.5 44.5C188 46 189.5 46.4 191 45.8" stroke="${C.fins}" stroke-width=".7" fill="none" stroke-linecap="round"/>
+ </svg>`}
+const PC={x:190,y:168};const FISH=[{c:'ogon',rx:56,ry:6.2,dir:1,spd:.00016,t:0},{c:'plat',rx:44,ry:4.6,dir:-1,spd:.00013,t:.5}];
+FISH.forEach(f=>{f.x=PC.x+f.rx*Math.cos(f.t*Math.PI*2);f.y=PC.y+f.ry*Math.sin(f.t*Math.PI*2);f.ang=f.dir*Math.PI/2+f.t*Math.PI*2;f.nextJump=performance.now()+(f.c==='ogon'?9000:17000)});
+function koiLayer(id){return `<defs><clipPath id="pw${id}"><ellipse cx="190" cy="168" rx="69" ry="10.4"/></clipPath></defs><g id="rip${id}" data-koi="${id}" clip-path="url(#pw${id})"></g>
+ <g clip-path="url(#pw${id})">${FISH.map((f,n)=>`<g id="kw${id}${n}" opacity=".9"><g id="kf${id}${n}">${koi('p'+id+n,f.c).replace('<svg class="k"','<svg class="k" x="-100" y="-40" width="200" height="80" overflow="visible"')}</g></g>`).join('')}</g>`}
+const koiIds=()=>[...document.querySelectorAll('[data-koi]')].map(e=>e.dataset.koi);
+function ripple(x,y,big){koiIds().forEach(id=>{const g=document.getElementById('rip'+id);if(!g)return;for(let i=0;i<(big?3:2);i++){const e=document.createElementNS(NS,'ellipse');e.setAttribute('cx',x);e.setAttribute('cy',y);e.setAttribute('fill','none');e.setAttribute('stroke','#EAF4F0');e.setAttribute('stroke-width','.6');g.appendChild(e);
+ const R=(big?16:12)+i*4,t0=performance.now(),D=1400+i*350,dl=i*220;(function st(n){const k=(n-t0-dl)/D;if(k<0){requestAnimationFrame(st);return}if(k>=1){e.remove();return}e.setAttribute('rx',(R*k).toFixed(2));e.setAttribute('ry',(R*.17*k).toFixed(2));e.setAttribute('opacity',(.9*(1-k)).toFixed(2));requestAnimationFrame(st)})(t0)}})}
+const KSC=.085;let last=0;
+function drawK(ids,f,n,lift,sc){const deg=f.ang*180/Math.PI;ids.forEach(id=>{const k=document.getElementById('kf'+id+n),w=document.getElementById('kw'+id+n),j=document.getElementById('kj'+id);if(!k)return;
+ k.setAttribute('transform',`translate(${f.dx??f.x} ${f.dy??f.y}) scale(1 .62) rotate(${deg.toFixed(1)}) scale(${sc||KSC})`);
+ if(lift&&j&&k.parentNode!==j)j.appendChild(k);if(!lift&&w&&k.parentNode!==w)w.appendChild(k)})}
+function koiFrame(now){const dt=Math.min(50,now-(last||now));last=now;const ids=koiIds();
+ if(ids.length)FISH.forEach((f,n)=>{
+  if(f.jump){const J=f.jump,k=(now-J.t0)/1700;if(k>=1){f.jump=null;f.dx=f.dy=undefined;ripple(J.x2,J.y2,true)}else{f.dx=(J.x1+(J.x2-J.x1)*k).toFixed(2);f.dy=(J.y1-15*Math.sin(Math.PI*k)).toFixed(2);const a0=f.ang;f.ang=J.a+Math.PI*2*k*J.s;drawK(ids,f,n,true,KSC*(1+.25*Math.sin(Math.PI*k)));f.ang=a0;return}}
+  let tx,ty;if(f.target&&now<f.target.until){tx=f.target.x;ty=f.target.y}else{f.target=null;f.t+=f.dir*dt*f.spd;tx=PC.x+f.rx*Math.cos(f.t*Math.PI*2);ty=PC.y+f.ry*Math.sin(f.t*Math.PI*2)}
+  const dx=tx-f.x,dy=(ty-f.y)/.16,want=Math.atan2(dy,dx);let da=want-f.ang;while(da>Math.PI)da-=2*Math.PI;while(da<-Math.PI)da+=2*Math.PI;f.ang+=da*Math.min(1,dt*.0035);
+  const sp=(f.target?.028:.02)*dt;if(Math.hypot(dx,dy*.16)>1.2){f.x+=Math.cos(f.ang)*sp;f.y+=Math.sin(f.ang)*sp*.16}
+  if(now>f.nextJump&&!f.target&&f.y>PC.y+1&&f.x>150&&f.x<232){const s=Math.cos(f.ang)>=0?1:-1;const x2=Math.max(PC.x-50,Math.min(PC.x+50,f.x+s*22));f.jump={t0:now,x1:f.x,y1:f.y,x2,y2:f.y,a:f.ang,s};ripple(f.x,f.y,true);f.x=x2;f.nextJump=now+18000+Math.random()*9000}
+  drawK(ids,f,n,false)});
+ requestAnimationFrame(koiFrame)}
+requestAnimationFrame(koiFrame);
+
+/* ---- red-crowned crane: perched in the middle of the bridge ---- */
+const DEF=id=>`<defs><linearGradient id="bw${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F3F1EC"/><stop offset="1" stop-color="#CBC6BC"/></linearGradient>
+ <linearGradient id="bl${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9DA08A"/><stop offset="1" stop-color="#C9C7AE"/></linearGradient></defs>`;
+/* base drawing faces left; it is mirrored to face right */
+const head=id=>`<g><path d="M68 26C62 23 55.5 24 52.5 27.6C50.6 30.6 51.6 34.6 55.4 36.4C60 38.4 66.4 37.4 69.4 33.8C71.4 31 71 28 68 26Z" fill="#141416"/>
+ <path d="M54.4 24.6C57.4 21.6 63 21 67 23.2C69 24.3 70 25.7 69.6 26.8C65 25.7 59.4 25.5 54.4 26.6Z" fill="#D4232B"/>
+ <path d="M66 29.4C69 30.8 71 33 71.6 36C69.6 35.4 67.4 34 66 32.2Z" fill="#FFFFFF"/>
+ <path d="M53.4 29.6L21 35L53.8 33.6Z" fill="url(#bl${id})"/><circle cx="59" cy="28.6" r="1.2" fill="#2A1A10"/><circle cx="59.4" cy="28.2" r=".38" fill="#fff"/></g>`;
+const NECK='M84 106C77 96 71.5 86 69.6 74C68 62 71 53 71 45C71 39 69 34.6 66.4 32.4',NECKW='M87 105C80 95 75 85.5 73.2 74C71.6 62.6 74.6 53.4 74.6 45.4C74.6 39.4 72.6 35 70 32.8';
+const neck=()=>`<path d="${NECK}" stroke="#141416" stroke-width="7" fill="none" stroke-linecap="round"/><path d="${NECKW}" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+/* slim, streamlined body */
+const body=id=>`<path d="M72 112C75 101 92 95 114 95C137 95 156 103 165 114C169 121 165 130 154 134C138 139 114 141 96 137C81 134 71 124 72 112Z" fill="url(#bw${id})"/>
+ <path d="M98 104C116 102 136 104 152 110M94 115C114 114 138 116 158 121M100 125C118 126 136 126 150 127" stroke="#DAD6CD" stroke-width=".8" fill="none"/>`;
+const plume=(x,y,a,l,w,c)=>`<path transform="translate(${x} ${y}) rotate(${a})" d="M0 0C${w} ${l*.3} ${w*.8} ${l*.8} 0 ${l}C${-w*.8} ${l*.8} ${-w} ${l*.3} 0 0Z" fill="${c}"/>`;
+const plumes=()=>[[142,106,-66,34,8,'#1E1E20'],[146,108,-58,40,8.5,'#18181A'],[150,110,-50,44,9,'#141416'],[153,113,-42,44,9,'#1A1A1C'],[155,116,-34,40,8.5,'#111113'],[155,120,-26,34,8,'#1C1C1E'],[152,124,-18,26,7,'#18181A']].map(a=>plume(...a)).join('')+'<path d="M150 112C166 122 176 130 184 138M152 118C164 128 172 136 178 146" stroke="#3A3A3E" stroke-width=".6" fill="none"/>';
+const legs=()=>`<g stroke-linecap="round" fill="none"><path d="M118 132L120 182L116 226" stroke="#3B3D3E" stroke-width="2.1"/><path d="M106 132L104 182L101 226" stroke="#2C2E2F" stroke-width="2.1"/>
+ <path d="M120 182l-1.3-.5M104 182l1.3-.5" stroke="#3B3D3E" stroke-width="3.2"/><path d="M116 226l-10 1.4M116 226l4 2M101 226l-10 1.4M101 226l4 2" stroke="#2C2E2F" stroke-width="1.3"/>
+ <path d="M115 130C116 138 118 142 120 146M107 130C106 138 105 142 104 146" stroke="#ECE9E2" stroke-width="6"/></g>`;
+function perch(id){return `${DEF(id)}${legs()}${body(id)}${plumes()}<g class="neckhead">${neck()}${head(id)}</g>`}
+/* flying: neck stretched forward, legs trailing, broad wings flapping */
+function flying(id){
+ const wing=(cls,fill,shade)=>`<g class="${cls}"><path d="M98 116C96 100 92 84 88 70C84 58 78 46 70 36C82 38 96 46 106 56C114 66 120 80 122 94C123 102 122 110 120 118Z" fill="${fill}" stroke="${shade}" stroke-width=".4"/>
+  ${[0,1,2,3,4].map(k=>`<path transform="translate(${70+k*4.6} ${36+k*3.4}) rotate(${-52+k*9})" d="M0 0C2.2 -4.6 1.8 -10 0 -13.6C-1.8 -10 -2.2 -4.6 0 0Z" fill="${fill}" stroke="${shade}" stroke-width=".35"/>`).join('')}
+  <path d="M106 56C114 66 120 80 122 94C123 102 122 110 120 118L113 117C115 108 115 99 113 91C111 80 106 68 100 60Z" fill="#161618"/>
+  <path d="M84 64c6 6 12 14 16 24M78 54c6 6 12 14 16 22" stroke="${shade}" stroke-width=".5" fill="none"/></g>`;
+ return `${DEF(id)}<g class="fl">${wing('fwing2','#E7E5DE','#CFCBC2')}
+  <path d="M150 122L198 126M148 124L198 130" stroke="#2C2E2F" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M74 118C80 110 96 106 116 106C136 106 152 112 160 120C156 128 140 132 118 132C98 132 82 128 74 118Z" fill="url(#bw${id})"/>
+  ${plume(150,114,-80,26,6,'#18181A')}${plume(152,118,-88,30,6,'#141416')}
+  <path d="M76 116C64 114 50 113 36 112" stroke="#141416" stroke-width="6.4" stroke-linecap="round"/><path d="M76 113C64 111 50 110.2 37 109.6" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+  <g transform="translate(-30 82)">${head(id)}</g>${wing('fwing','#FFFFFF','#D6D2C9')}</g>`}
+
+const CSC=.18,HOME={x:190,y:railY(190)-2.4};const CRANES={};
+function craneLayer(id,st){return `<g id="cr${id}" class="cr" data-crane="${id}" data-st="${st}"><g id="crp${id}">${perch('p'+id)}</g><g id="crf${id}" style="display:none">${flying('f'+id)}</g></g>`}
+function cplace(id,x,y,face,fly){const C=document.getElementById('cr'+id);if(!C)return;const ox=fly?110:108,oy=fly?120:227;
+ C.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(face*CSC).toFixed(3)} ${CSC}) translate(${-ox} ${-oy})`);
+ document.getElementById('crp'+id).style.display=fly?'none':'';document.getElementById('crf'+id).style.display=fly?'':'none'}
+function spook(id){const c=CRANES[id];if(!c||c.mode!=='perch')return false;c.mode='spook';c.t0=performance.now();return true}
+function craneFrame(now){document.querySelectorAll('[data-crane]').forEach(e=>{const id=e.dataset.crane;if(!CRANES[id]){CRANES[id]={mode:'perch',st:+e.dataset.st,nextFlap:now+5000+Math.random()*6000};cplace(id,HOME.x,HOME.y,-1,false)}});
+ for(const id in CRANES){const c=CRANES[id];if(!document.getElementById('cr'+id)){delete CRANES[id];continue}const TR=cherryTop(c.st),t=now-c.t0;
+  if(c.mode==='perch'){if(now>c.nextFlap){const k=(now-c.nextFlap)/1500;if(k<1)cplace(id,HOME.x,HOME.y-3*Math.sin(Math.PI*k),-1,true);else{c.nextFlap=now+9000+Math.random()*7000;cplace(id,HOME.x,HOME.y,-1,false)}}}
+  else{const T=[350,2200,3200,2400];
+   if(t<T[0])cplace(id,HOME.x,HOME.y,-1,false);
+   else if(t<T[0]+T[1]){const p=arc({x:HOME.x,y:HOME.y-4},TR,ease((t-T[0])/T[1]),26);cplace(id,p.x,p.y,1,true)}
+   else if(t<T[0]+T[1]+T[2])cplace(id,TR.x,TR.y+4,-1,false);
+   else if(t<T[0]+T[1]+T[2]+T[3]){const p=arc(TR,{x:HOME.x,y:HOME.y-4},ease((t-T[0]-T[1]-T[2])/T[3]),20);cplace(id,p.x,p.y,-1,true)}
+   else{c.mode='perch';c.nextFlap=now+8000;cplace(id,HOME.x,HOME.y,-1,false)}}}
+ requestAnimationFrame(craneFrame)}
+requestAnimationFrame(craneFrame);
+/* the motorbike frightens every crane on screen */
+function spookAll(){for(const id in CRANES)spook(id)}
+
+/* ---- layers laid over a garden picture for its stage ---- */
+function layers(s,id,st){
+ if(st>=10)s=s.replace('<path d="M120 168a70 11 0 0 1 140 0"',koiLayer(id)+'<path d="M120 168a70 11 0 0 1 140 0"');
+ let x=`<defs><linearGradient id="dzgsh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient></defs><g id="fx${id}"></g>`;
+ for(const k in GIFTS){const G=GIFTS[k];if(st>=G.st&&!giftGone(k))x+=`<g id="${k}${id}" data-gift="${k}">${giftSVG(G.x,G.y)}</g>`}
+ if(st>=20)x+=craneLayer(id,st);
+ if(st>=10)x+=`<g id="kj${id}"></g>`;
+ return s.replace(/<\/svg>\s*$/,x+'</svg>')}
+
+/* ---- touch (full-screen view): gentle rustle, falling needles/leaves, ripples, crane, gift ---- */
+function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+function inBox(el,p,pad){if(!el)return false;const b=el.getBBox();return p.x>b.x-pad&&p.x<b.x+b.width+pad&&p.y>b.y-pad&&p.y<b.y+b.height+pad}
+function rustle(svg,cls,ox,oy){svg.querySelectorAll('.'+cls).forEach(g=>{g.style.transformBox='view-box';g.style.transformOrigin=`${ox}px ${oy}px`;g.classList.remove('dzrustle');void g.getBBox();g.classList.add('dzrustle')})}
+function drop(id,st,kind,box,n){const fx=document.getElementById('fx'+id);if(!fx)return;const se=seasonOf(Math.max(1,st));
+ const cols=kind==='pine'?['#5C7A3A','#6E8C4E','#8A6A3A']:se===0?['#FFFFFF','#FBDDE4','#F8C9D4']:se===2?['#E8173A','#F46D2B','#F9A03F']:se===3?['#FFFFFF']:['#6E9A44','#5E8A38'];
+ for(let i=0;i<n;i++){const e=document.createElementNS(NS,kind==='pine'?'path':'ellipse');const x0=box.x+box.width*(.2+.6*Math.random()),y0=box.y+box.height*(.25+.5*Math.random());
+  if(kind==='pine'){e.setAttribute('d','M0 0l2.2 .8');e.setAttribute('stroke',cols[i%3]);e.setAttribute('stroke-width','.6');e.setAttribute('stroke-linecap','round')}
+  else{e.setAttribute('rx',se===3?.9:1.4);e.setAttribute('ry',.8);e.setAttribute('fill',cols[i%cols.length])}
+  fx.appendChild(e);const t0=performance.now()+i*120,D=2600+Math.random()*1400,fall=18+Math.random()*16,sw=4+Math.random()*5,dr=6+Math.random()*8;
+  (function stp(nw){const k=(nw-t0)/D;if(k<0){requestAnimationFrame(stp);return}if(k>=1){e.remove();return}
+   e.setAttribute('transform',`translate(${(x0+dr*k+Math.sin(k*7)*sw*.3).toFixed(2)} ${(y0+fall*k).toFixed(2)}) rotate(${(k*260).toFixed(0)})`);e.setAttribute('opacity',(k<.1?k*10:k>.75?(1-k)*4:1).toFixed(2));requestAnimationFrame(stp)})(performance.now())}}
+function sparkle(id,x,y,n,col){const fx=document.getElementById('fx'+id);if(!fx)return;for(let i=0;i<n;i++){const e=document.createElementNS(NS,'path');const a=i/n*Math.PI*2,r0=4,r1=14+Math.random()*8;
+  e.setAttribute('d','M0 -2.6L.7 -.7L2.6 0L.7 .7L0 2.6L-.7 .7L-2.6 0L-.7 -.7Z');e.setAttribute('fill',col||'#FFF3B0');fx.appendChild(e);const t0=performance.now()+i*30;
+  (function stp(nw){const k=(nw-t0)/1200;if(k<0){requestAnimationFrame(stp);return}if(k>=1){e.remove();return}const r=r0+(r1-r0)*ease(k);
+   e.setAttribute('transform',`translate(${(x+Math.cos(a)*r).toFixed(1)} ${(y+Math.sin(a)*r*.7).toFixed(1)}) scale(${(1.2*(1-k)+.3).toFixed(2)})`);e.setAttribute('opacity',(1-k).toFixed(2));requestAnimationFrame(stp)})(performance.now())}}
+function pondRipple(id,x,y){const fx=document.getElementById('fx'+id);if(!fx)return;for(let i=0;i<2;i++){const e=document.createElementNS(NS,'ellipse');e.setAttribute('cx',x);e.setAttribute('cy',y);e.setAttribute('fill','none');e.setAttribute('stroke','#EAF4F0');e.setAttribute('stroke-width','.6');e.setAttribute('clip-path',`url(#pc${id})`);fx.appendChild(e);
+ const R=12+i*4,t0=performance.now()+i*220,D=1400+i*350;(function stp(n){const k=(n-t0)/D;if(k<0){requestAnimationFrame(stp);return}if(k>=1){e.remove();return}e.setAttribute('rx',(R*k).toFixed(2));e.setAttribute('ry',(R*.17*k).toFixed(2));e.setAttribute('opacity',(.9*(1-k)).toFixed(2));requestAnimationFrame(stp)})(performance.now())}}
+function touch(host,id,st){const svg=host.querySelector('svg');if(!svg)return;let hold=null;
+ svg.addEventListener('pointerdown',e=>{const p=svgPt(svg,e);
+  const cr=document.getElementById('cr'+id);if(st>=20&&CRANES[id]&&CRANES[id].mode==='perch'&&inBox(cr,p,6)){spook(id);return}
+  for(const k in GIFTS){const gf=document.getElementById(k+id),G=GIFTS[k];if(gf&&gf.firstChild&&inBox(gf,p,5)){sparkle(id,G.x,G.y-9,10);const t0=performance.now();   /* a pupil's tap sparkles; the teacher holds for 5 seconds */
+   clearInterval(hold);hold=setInterval(()=>{if(performance.now()-t0>=5000){clearInterval(hold);hold=null;store.set('dz-'+k,'1');sparkle(id,G.x,G.y-9,18,'#FFD23F');gf.style.transition='opacity .8s';gf.style.opacity=0;setTimeout(()=>gf.innerHTML='',900)}},100);return}}
+  const pine=svg.querySelector('.zt-pine'),cher=svg.querySelector('.zt-cher'),acr=svg.querySelector('.zt-acer'),se=seasonOf(Math.max(1,st));
+  if(pine&&inBox(pine,p,6)){rustle(svg,'zt-pine',362,188);drop(id,st,'pine',pine.getBBox(),7);return}
+  if(cher&&inBox(cher,p,4)){rustle(svg,'zt-cher',100,177);drop(id,st,'leaf',cher.getBBox(),se===1?3:7);return}
+  if(acr&&p.y<160&&inBox(acr,p,4)){rustle(svg,'zt-acer',252,151);drop(id,st,'leaf',acr.getBBox(),se===1?3:6);return}
+  if(st>=2&&((p.x-PC.x)/70)**2+((p.y-PC.y)/11)**2<=1.15){
+   if(st>=10){ripple(p.x,p.y);let best=0,bd=1e9;FISH.forEach((f,n)=>{const d=Math.hypot(f.x-p.x,(f.y-p.y)/.16);if(d<bd){bd=d;best=n}});FISH[best].target={x:p.x,y:p.y,until:performance.now()+3500}}
+   else pondRipple(id,p.x,p.y)}});
+ const stop=()=>{if(hold){clearInterval(hold);hold=null}};svg.addEventListener('pointerup',stop);svg.addEventListener('pointerleave',stop);svg.addEventListener('pointercancel',stop)}
+
+/* ---- the jingle: a plucked, shamisen-like phrase made in code (warm, with reverb) ---- */
+let SOUND=store.get('dz-snd')!=='0',AC=null,BUS=null;
+function pluckBuf(freq,dur){const sr=AC.sampleRate,N=Math.round(sr/freq),len=Math.floor(sr*dur),b=AC.createBuffer(1,len,sr),d=b.getChannelData(0);
+ const ring=new Float32Array(N);let l0=0;for(let i=0;i<N;i++){l0=.55*l0+.45*(Math.random()*2-1);ring[i]=l0*1.6}
+ let p=0;for(let i=0;i<len;i++){const a=ring[p],nx=ring[(p+1)%N];ring[p]=.4992*(a+nx);d[i]=Math.tanh(a*1.8)*.9;p=(p+1)%N}return b}
+function bus(){if(BUS)return BUS;const sr=AC.sampleRate,len=Math.floor(sr*2.8),ir=AC.createBuffer(2,len,sr);
+ for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<len;i++){const k=i/len;d[i]=(Math.random()*2-1)*Math.pow(1-k,3.2)*(i<sr*.012?i/(sr*.012):1)}}
+ const f=(type,fr,q,gn)=>{const x=AC.createBiquadFilter();x.type=type;x.frequency.value=fr;if(q)x.Q.value=q;if(gn!=null)x.gain.value=gn;return x};
+ const hp=f('highpass',150),mid=f('peaking',650,.8,4),shelf=f('highshelf',2500,0,-8),lp=f('lowpass',2000,.5);
+ const dry=AC.createGain();dry.gain.value=.8;const rv=AC.createConvolver();rv.buffer=ir;const wet=AC.createGain();wet.gain.value=.55;
+ hp.connect(mid);mid.connect(shelf);shelf.connect(lp);lp.connect(dry);dry.connect(AC.destination);lp.connect(rv);rv.connect(wet);wet.connect(AC.destination);BUS=hp;return BUS}
+function note(freq,t,vol,dur){const src=AC.createBufferSource();src.buffer=pluckBuf(freq,dur);const g=AC.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.006);g.gain.exponentialRampToValueAtTime(.001,t+dur);
+ src.connect(g);g.connect(bus());src.playbackRate.setValueAtTime(1.012,t);src.playbackRate.linearRampToValueAtTime(1,t+.06);src.start(t)}
+function jingle(){if(!SOUND)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume();
+ const f={D4:293.7,Eb4:311.1,G4:392,A4:440,Bb4:466.2,D5:587.3,G3:196};
+ const seq=[['A4',0,.32,1.4],['Bb4',.2,.3,1.4],['D5',.4,.36,1.4],['A4',.78,.3,1.4],['G4',1.0,.3,1.4],['Eb4',1.32,.3,1.4],['D4',1.62,.34,2.2],['G3',1.62,.16,2.2]];
+ const t0=AC.currentTime+.05;seq.forEach(([n,t,v,d])=>note(f[n],t0+t,v,d))}catch(e){}}
+function setSound(on){SOUND=on;store.set('dz-snd',on?'1':'0')}
+
+/* ---- what each stage brings, and the hint for next time ---- */
+const SIL={pond:'<svg viewBox="0 0 80 48"><ellipse cx="40" cy="30" rx="34" ry="9" fill="#9FB8C8"/></svg>',
+ bridge:'<svg viewBox="0 0 80 48"><path d="M6 38Q40 4 74 38" stroke="#D86A50" stroke-width="5" fill="none"/></svg>',
+ tree:'<svg viewBox="0 0 80 48"><rect x="37" y="26" width="5" height="18" fill="#9A7A60"/><ellipse cx="40" cy="20" rx="20" ry="13" fill="#D5603A"/></svg>',
+ lantern:'<svg viewBox="0 0 80 48"><path d="M24 20h32L40 8z" fill="#C9C3B6"/><rect x="31" y="20" width="18" height="12" fill="#F2DFA0"/><rect x="27" y="32" width="26" height="6" fill="#C9C3B6"/></svg>',
+ rock:'<svg viewBox="0 0 80 48"><path d="M18 42C14 28 26 12 42 12C56 12 66 26 62 42Z" fill="#A8A196"/></svg>',
+ gift:'<svg viewBox="0 0 80 48"><rect x="24" y="18" width="32" height="24" fill="#E0465A"/><rect x="37" y="12" width="6" height="30" fill="#FFD23F"/><path d="M40 14C34 4 24 8 30 14ZM40 14C46 4 56 8 50 14Z" fill="#FFD23F"/></svg>',
+ koi:'<svg viewBox="0 0 80 48"><path d="M14 24C24 14 46 14 58 22L70 14L68 24L70 34L58 26C46 34 24 34 14 24Z" fill="#F28C3A"/></svg>',
+ crane:'<svg viewBox="0 0 80 48"><path d="M30 40L32 30M40 40L38 30" stroke="#ddd" stroke-width="2"/><ellipse cx="38" cy="26" rx="14" ry="7" fill="#EEE"/><path d="M28 24C24 16 24 10 22 6" stroke="#EEE" stroke-width="3" fill="none"/></svg>',
+ painter:'<svg viewBox="0 0 80 48"><path d="M26 18h28L40 8z" fill="#D9B86A"/><rect x="33" y="18" width="14" height="20" fill="#6A7FA0"/></svg>'};
+const STAGE={1:{what:'Your pine is planted',sp:[356,182],hint:['pond','Your pond is waiting for something…','Do a Growth Spurt to find out, or come back tomorrow.']},
+ 2:{what:'Your pond fills with water',sp:[190,166],hint:['bridge','Something is being built for your garden…','Do another Growth Spurt, or come back tomorrow.']},
+ 3:{what:'A bridge across your pond',sp:[190,140],hint:['tree','A new tree is on its way…','Come back tomorrow for your Daily 5.']},
+ 4:{what:'A baby acer',sp:[252,142],hint:['lantern','Something to light up your evenings is coming…','Do a Growth Spurt to find out.']},
+ 5:{what:'A stone lantern',sp:[322,176],hint:['rock','Something solid is coming to your garden…','Do another Growth Spurt to find out.']},
+ 6:{what:'A boulder',sp:[214,204],hint:['rock','Something bigger is on its way…','Come back tomorrow for your Daily 5.']},
+ 7:{what:'A great big boulder',sp:[58,186],hint:['gift','One more stage to unlock your first tasty reward…','Do a Growth Spurt to find out.']},
+ 8:{what:'A cherry sapling… and a surprise!',sp:[100,166],gift:1,hint:['koi','Only 2 more stages until something arrives in your pond…','Keep going!']},
+ 9:{what:'Your trees are growing',sp:[252,140],hint:['koi','Something is stirring in your pond…','Come back tomorrow to find out what it is.']},
+ 10:{what:'Two koi carp',sp:[190,168],hint:['crane','A visitor is coming to your bridge…','Arrives at Stage 20.']},
+ 20:{what:'A red-crowned crane',sp:[190,128],hint:['painter','Someone new is coming to your garden…','Keep growing!']}};
+const info=n=>STAGE[n]||{what:'Your garden is growing',sp:[356,170],hint:n<20?['crane','A visitor is coming to your bridge…',`Only ${20-n} more stage${20-n===1?'':'s'} to go.`]:['painter','Something new is coming to your garden…','Keep growing!']};
+/* a Daily 5 at a reward stage could fall on a day with no Growth Spurts left, so keep the hint wording general where needed */
+
+/* ---- people for the special entrances ---- */
+let pk=0;
+function person(extra){const k='zp'+(++pk);let m=gardener().replace(/id="g(\w+)"/g,'data-p="$1"');if(extra)m=m.replace('<g data-p="can"',extra+'<g data-p="can"');return {k,m:`<g id="${k}">${m}</g>`}}
+function bindP(P,root){const q=x=>root.querySelector(`#${P.k} [data-p="${x}"]`);Object.assign(P,{G:q('dn'),B:q('bob'),L1:q('l1'),L2:q('l2'),CAN:q('can'),SAP:root.querySelector(`#${P.k} .sap`)});return P}
+function place(P,x,y,face,walk,tilt,now,dip){const depth=Math.max(0,Math.min(1,(y-184)/25)),sc=1.35*(.8+.2*depth),ph=walk?Math.sin(now/110):0;
+ P.G.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(face*sc).toFixed(3)} ${sc.toFixed(3)})`);P.B.setAttribute('transform',`translate(0 ${(-Math.abs(ph)+(dip||0)).toFixed(2)})`);
+ P.L1.setAttribute('d',`M-2 -9L${(-2-ph*3).toFixed(2)} 0`);P.L2.setAttribute('d',`M2 -9L${(2+ph*3).toFixed(2)} 0`);if(P.CAN)P.CAN.setAttribute('transform',`rotate(${(tilt||0).toFixed(1)} 10.5 -13.5)`)}
+const SAPLING='<g class="sap"><path d="M9 -13v-5" stroke="#6A4A30" stroke-width="1"/><path d="M9 -24l-3.2 5h6.4z M9 -21.5l-4 5h8z" fill="#3E6A34"/><ellipse cx="9" cy="-13" rx="2.6" ry="1.4" fill="#5A4636"/></g>';
+const BRIDGE=()=>`<path d="M98 169 Q190 110 282 169" stroke="#B8432F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 169 Q190 118 282 169" stroke="#B8432F" stroke-width="2" fill="none"/>`+[130,160,190,220,250].map(x=>{const t=(x-98)/184,y=169-118*t*(1-t);return `<path d="M${x} ${y.toFixed(1)} V${x<122||x>258?169:168}" stroke="#9A3424" stroke-width="1.6"/>`}).join('');
+function timeline(steps,done){let i=0,t0=performance.now();(function f(now){while(i<steps.length&&now-t0>=steps[i][0]){steps[i][1](1,now);t0+=steps[i][0];i++}if(i>=steps.length){done&&done();return}steps[i][1]((now-t0)/steps[i][0],now);requestAnimationFrame(f)})(t0)}
+
+/* ---- the message panel: well done, what's new, the hint, then the button (no skipping) ---- */
+function msgHTML(n){const I=info(n);return `<div class="rvmsg"><div class="m1" data-m="1"><span class="eb">Daily Zen · Stage ${n} of 100</span><h3>Well done!</h3><p class="tag">Grow your knowledge, grow your garden</p><span class="newi">New: ${I.what}</span>
+ ${I.gift?`<div class="dzgift">🎁 <b>You’ve unlocked your first tasty reward!</b><br>Go and see your teacher to claim your prize.</div>`:''}${n===100?`<div class="dzgift">🎁 <b>You’ve unlocked another tasty reward!</b><br>Go and see your teacher to claim your prize.</div>`:''}</div>
+ ${n<100?`<div class="m1" data-m="2"><div class="tz"><div class="sil">${SIL[I.hint[0]]}</div><div><p>${I.hint[1]}</p><small>${I.hint[2]}</small></div></div></div>`:''}
+ <div class="m1" data-m="3"><button type="button" class="rvgo">Back to my garden</button></div></div>`}
+function runMsgs(o,cb){const q=k=>o.querySelector(`[data-m="${k}"]`);q(1).classList.add('on');setTimeout(()=>{const m=q(2);m&&m.classList.add('on')},1600);
+ setTimeout(()=>{q(3).classList.add('on');const b=o.querySelector('.rvgo');b.focus();b.onclick=()=>{o.classList.remove('on');setTimeout(()=>{o.remove();cb&&cb()},450)}},3200)}
+/* after the usual gardener / motorbike / helicopter animation: the garden as it is now, with the messages */
+function card(n,cb){const o=document.createElement('div');o.className='rv';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label','Your garden has grown');
+ o.innerHTML=`<div class="rvbox"><div>${garden('rvc'+Date.now(),n,0)}</div></div>${msgHTML(n)}`;document.body.appendChild(o);requestAnimationFrame(()=>o.classList.add('on'));runMsgs(o,cb)}
+
+/* ---- the special entrances: planting the pine (stage 1), carrying in the bridge (stage 3) ---- */
+function special(n,cb){const t=Date.now(),A=garden('rva'+t,n-1,0),B=garden('rvb'+t,n,0),I=info(n);
+ const o=document.createElement('div');o.className='rv';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label','Your garden is growing');
+ const g1=person(n===1?SAPLING:''),c1=person(),c2=person();
+ o.innerHTML=`<div class="rvbox"><div>${A}</div><div class="rvb">${B}</div><svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice"><g id="rvbr" style="display:none">${BRIDGE()}</g>${n===3?c2.m+c1.m:g1.m}<g id="rvdr"></g><g id="rvsp"></g></svg></div>${msgHTML(n)}`;
+ document.body.appendChild(o);requestAnimationFrame(()=>o.classList.add('on'));
+ const NB=o.querySelector('.rvb'),SV=o.querySelector('.rvbox>svg'),DR=o.querySelector('#rvdr'),SPG=o.querySelector('#rvsp');
+ const showNew=k=>{NB.style.opacity=ease(Math.min(1,k)).toFixed(3)};
+ const burst=()=>{const [x,y]=I.sp;SPG.innerHTML=Array.from({length:10},(_,i)=>{const a=i/10*Math.PI*2,r=16+(i%3)*6;return `<path class="tw" style="animation-delay:${(i%4)*.2}s" d="M${(x+Math.cos(a)*r).toFixed(1)} ${(y+Math.sin(a)*r*.7).toFixed(1)}m-2.6 0h5.2m-2.6 -2.6v5.2" stroke="#FFF3B0" stroke-width="1.1" stroke-linecap="round"/>`}).join('');setTimeout(()=>SPG.innerHTML='',2600)};
+ let shown=false;const msgs=()=>{if(shown)return;shown=true;runMsgs(o,cb)};
+ if(n===3){const P1=bindP(c1,SV),P2=bindP(c2,SV);P1.CAN.style.display='none';P2.CAN.style.display='none';const BRG=SV.querySelector('#rvbr');BRG.style.display='';
+  const hand=y=>y-14.2*1.35*(.8+.2*Math.max(0,Math.min(1,(y-184)/25)));const setB=(lead,y,dy)=>BRG.setAttribute('transform',`translate(${(lead-4-282).toFixed(1)} ${(dy!=null?dy:hand(y)-169).toFixed(1)})`);
+  timeline([[5200,(k,now)=>{const L=lin(-20,288,ease(k));place(P1,L,195,1,true,0,now);place(P2,L-196,195,1,true,0,now);setB(L,195)}],
+   [1300,(k,now)=>{const y=lin(195,174,ease(k));place(P1,288,y,1,true,0,now);place(P2,92,y,1,true,0,now);setB(288,y)}],
+   [1100,(k,now)=>{const d0=hand(174)-169,dp=1.6*Math.sin(Math.PI*k);place(P1,288,174,1,false,0,now,dp);place(P2,92,174,1,false,0,now,dp);setB(288,174,lin(d0,0,ease(k)))}],
+   [900,(k,now)=>{showNew(k);place(P1,288,174,1,false,0,now);place(P2,92,174,1,false,0,now);if(k>=1){BRG.style.display='none';burst()}}],
+   [500,()=>{}],
+   [2600,(k,now)=>{msgs();const f=ease(k);place(P1,lin(288,440,f),lin(174,192,f),1,true,0,now);place(P2,lin(92,440,f),lin(174,200,Math.min(1,f*3)),1,true,0,now)}]]);return}
+ const P=bindP(g1,SV),tx=360,ty=190,stand=[334,209];if(P.SAP)P.CAN.style.display='none';
+ const water=(k,now)=>{const kk=Math.min(1,k*3),pu=.5+.5*Math.sin(now/180),t=k*1800;DR.innerHTML=`<ellipse cx="${tx}" cy="${ty+3}" rx="${(4+12*kk+2*pu*kk).toFixed(1)}" ry="${(1.2+3*kk+.5*pu*kk).toFixed(1)}" fill="#6FB8E0" opacity="${(.35+.2*pu).toFixed(2)}"/><ellipse cx="${tx}" cy="${ty+3}" rx="${(6+16*((t/900)%1)).toFixed(1)}" ry="${(1.6+4*((t/900)%1)).toFixed(1)}" fill="none" stroke="#BFE4F7" stroke-width=".6" opacity="${(1-(t/900)%1).toFixed(2)}"/>`};
+ timeline([[2000,(k,now)=>place(P,lin(440,stand[0],ease(k)),stand[1],-1,true,0,now)],[350,(k,now)=>place(P,stand[0],stand[1],1,false,0,now)],
+  [1500,(k,now)=>place(P,stand[0],stand[1],1,false,0,now,2.2*Math.abs(Math.sin(k*Math.PI*3)))],
+  [1100,(k,now)=>{place(P,stand[0],stand[1],1,false,0,now,2*Math.sin(Math.PI*Math.min(1,k*1.4)));if(k>.4){if(P.SAP)P.SAP.style.display='none';showNew((k-.4)/.6)}}],
+  [300,()=>{P.CAN.style.display='';burst()}],
+  [450,(k,now)=>place(P,stand[0],stand[1],1,false,40*ease(k),now)],
+  [1800,(k,now)=>{place(P,stand[0],stand[1],1,false,40,now);water(k,now)}],
+  [600,(k,now)=>{place(P,stand[0],stand[1],1,false,40*Math.max(0,1-k*2),now);DR.style.opacity=(1-k).toFixed(2)}],
+  [500,(k,now)=>{place(P,stand[0],stand[1],1,false,0,now);if(k>=1)msgs()}],
+  [1800,(k,now)=>place(P,lin(stand[0],440,ease(k)),stand[1],1,true,0,now)]])}
+
+/* ---- one entry point for every new stage ---- */
+function play(from,to,kind,cb){jingle();const done=()=>card(to,cb);
+ if(to===1||to===3)return special(to,cb);
+ if(kind==='bike'&&to>3){setTimeout(spookAll,1200);return spurtAnim(from,to,done)}
+ if(kind==='heli')return heliAnim(from,to,done);
+ return growAnim(from,to,done)}
+return {zgFor,layers,touch,play,jingle,setSound,sound:()=>SOUND,spookAll};
+})();
+
+function garden(id,day,h){window.ZG=ZEN.zgFor(day);return ZEN.layers(garden0(id,day,h),id,day)}
+window.DG={zen:ZEN,gardener,rock,garden,growAnim,spurtAnim,heliAnim,setDate,EV:()=>EV(),SPROUTB,seasonOf:d=>seasonOf(d)};
 })();
 </script>
 <script>
@@ -4569,14 +4898,14 @@ function dgDaily(right,n){if(VIEW||!window.DG)return;const g=G0(),td=sday();if(g
   const h=dgHealth();if(h>=3&&g.st>0&&right<n){DG_RETRY=true;return}
   DG_RETRY=false;const from=Math.max(1,g.st),to=Math.min(100,g.st+1);g.st=to;g.days=(g.days||0)+1;g.last=td;save();
   DG_PENDING={kind:h>=3?'revive':'daily',from,to}}
-function dgPlay(){if(!DG_PENDING||!window.DG)return;const p=DG_PENDING;DG_PENDING=null;window.DG.setDate();window.DG.growAnim(p.from,p.to,()=>renderDGTile())}
+function dgPlay(){if(!DG_PENDING||!window.DG)return;const p=DG_PENDING;DG_PENDING=null;window.DG.setDate();window.DG.zen.play(p.to===1?0:p.from,p.to,'daily',()=>renderDGTile())}
 function dgNote(){if(DG_RETRY)return `<div class="dg-note"><b>Your pine needs reviving.</b> Get <b>5 out of 5</b> on these questions to bring it back. Your stage is safe.<div class="row"><button type="button" class="btn" data-dgretry="1">Try again</button></div></div>`;return ''}
 function dgRetry(){DAILY={day:sday(),qs:DAILY.qs,i:0,right:0,done:false,ans:{}};DG_RETRY=false}
 const SPROUTS=n=>Array.from({length:n},()=>'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18V9" stroke="#0F2A14" stroke-width="2.2" stroke-linecap="round"/><path d="M10 11C6 11 4 8 4 5c4 0 6 2 6 6zM10 9c0-4 3-6 6-6 0 4-2 6-6 6z" fill="#0F2A14"/></svg>').join('');
 const CLOVER='<svg class="dg-clover" viewBox="-13 -13 26 26" aria-hidden="true"><path d="M0 1Q-2 7-8 9.5Q-10.2 10.3-10.8 9.2" stroke="#5DB84A" stroke-width="1.6" fill="none" stroke-linecap="round"/>'+[-8,82,172,262].map(r=>`<g transform="rotate(${r})"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g>`).join('')+'</svg>';
 function dgTileHTML(){if(!window.DG)return '';window.DG.setDate();
   const g=G0(),h=dgHealth(),st=g.st,td=sday(),done=g.last===td,sp=dgSp(),ev=window.DG.EV();
-  const shown=st||1,hs=st?Math.min(h,3):0;
+  const shown=st,hs=st?Math.min(h,3):0;
   const pill=!st?'Plant your seed':h>=3?'Needs reviving':h?`${g.days} days of growth · thirsty`:`${g.days} day${g.days===1?'':'s'} of growth`;
   let body;
   if(!st)body=`<p class="dg-sub">Do today’s Daily 5 to plant your pine. Each day you do it, it grows a stage.</p><div class="dg-btns"><button type="button" class="dg-btn" data-dgdaily="1">Start Daily 5</button></div>`;
@@ -4584,11 +4913,17 @@ function dgTileHTML(){if(!window.DG)return '';window.DG.setDate();
   else if(!done)body=`<p class="dg-sub">${h?'Your pine is thirsty. ':''}Do today’s Daily 5 to grow to Stage ${Math.min(100,st+1)}.</p><div class="dg-btns"><button type="button" class="dg-btn" data-dgdaily="1">${h?'Water your pine':'Start Daily 5'}</button></div>`;
   else if(st>=100)body=`<p class="dg-done">✓ Fully grown. Keep doing your Daily 5 to look after it.</p>`;
   else body=`<p class="dg-done">✓ Today’s growth done</p><div class="dg-btns">${dgSpurtOK()?`<button type="button" class="dg-btn dg-gs" data-dgspurt="1">${window.DG.SPROUTB}Growth Spurt<span class="dg-left" aria-label="${2-sp.won} left today">${SPROUTS(2-sp.won)}</span></button>`:`<span class="dg-tmw">Come back tomorrow for more growth.</span>`}</div>`;
-  return `<div class="dg-tile${hs>=3?' dead':''}"><div class="dg-clip">
+  return `<div class="dg-tile${hs>=3?' dead':''}"><button type="button" class="dz-pin" data-dgview="1" aria-label="Open your garden full screen and touch it">${DZFINGER}</button><div class="dg-clip">
    <div class="dg-scene">${window.DG.garden('dgt'+Date.now(),shown,hs)}</div><div class="dg-fade"></div>
    <button type="button" class="dg-hit" data-dgview="1" aria-label="See your garden"></button>
-   <div class="dg-body"><span class="dg-eb">Daily Growth</span><span class="dg-h">${st?`Stage ${st} of 100`:'Stage 1 of 100'}</span>${ev.luck?`<span class="dg-luck">${ev.luck}${CLOVER}</span>`:''}<span class="dg-bar" aria-hidden="true"><i style="width:${Math.max(1,st)}%"></i></span>${body}</div></div></div>`}
-function renderDGTile(){const el=document.getElementById('dgTile');if(el)el.innerHTML=dgTileHTML()}
+   <div class="dg-body"><span class="dg-eb">Daily Zen</span><span class="dg-h">${st?`Stage ${st} of 100`:'Stage 1 of 100'}</span>${ev.luck?`<span class="dg-luck">${ev.luck}${CLOVER}</span>`:''}<span class="dg-bar" aria-hidden="true"><i style="width:${Math.max(1,st)}%"></i></span>${body}</div></div></div>`}
+const DZFINGER='<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ring" cx="7.6" cy="5.2" r="0" fill="none" stroke="#FFD23F" stroke-width="1.1"/><g class="fing"><path d="M9 4.5c0-1 .7-1.7 1.6-1.7s1.6.7 1.6 1.7v6.2l.6-.1c.3-1 1.2-1.4 2-1.1.6.2 1 .7 1.1 1.3l.6-.1c.4-.7 1.2-1 2-.7.7.3 1.1 1 1.1 1.7v4.6c0 3.6-2.6 6.2-6.2 6.2h-1.4c-2 0-3.4-.8-4.6-2.4L3.2 15c-.6-.8-.4-1.9.4-2.4.7-.5 1.7-.3 2.3.3L9 15.4z" fill="#FFD23F" stroke="#1a1a1a" stroke-width="1.2" stroke-linejoin="round"/></g></svg>';
+function dzIntro(){let seen=false;try{seen=localStorage.getItem('dz-intro')==='1'}catch(e){}if(seen||VIEW||!window.DG)return;if(document.querySelector('.rv,.gpop,.dz-fv'))return;if(typeof gate!=='undefined'&&!gate.hidden)return;
+  try{localStorage.setItem('dz-intro','1')}catch(e){}const st=G0().st,f=document.createElement('div');f.className='dz-fv';f.setAttribute('role','dialog');f.setAttribute('aria-modal','true');f.setAttribute('aria-labelledby','dzfvh');
+  f.innerHTML=`<div class="dz-fvbox"><div class="pic">${window.DG.garden('dzfv'+Date.now(),st,0)}</div><div class="in"><span class="eb">Take a breath…</span><h3 id="dzfvh">You’ve unlocked your Daily Zen</h3><p class="tag">Grow your knowledge, grow your garden</p>
+  <p>Come back every day. Each Daily 5 builds your garden, and new stages bring new trees, a pond, animals and more.</p><button type="button">See my garden</button></div></div>`;
+  document.body.appendChild(f);const b=f.querySelector('button');b.focus();b.onclick=()=>f.remove()}
+function renderDGTile(){const el=document.getElementById('dgTile');if(el){el.innerHTML=dgTileHTML();setTimeout(dzIntro,600)}}
 /* Growth Spurt: 5 fresh questions, full marks grows a stage; up to 2 a day, one last chance after a miss */
 let SPQ=null;const spo=document.createElement('div');spo.className='d5gate dg-spq';spo.hidden=true;spo.setAttribute('role','dialog');spo.setAttribute('aria-modal','true');document.body.appendChild(spo);
 function dgSpurtAsk(){const g=G0(),sp=dgSp(),m=document.createElement('div');m.className='gsmod';
@@ -4597,7 +4932,7 @@ function dgSpurtAsk(){const g=G0(),sp=dgSp(),m=document.createElement('div');m.c
   m.onclick=ev=>{if(ev.target.closest('[data-start]')){m.remove();SPQ={qs:pickDaily(),i:0,right:0,done:false,ans:{}};spo.hidden=false;paintSPQ();return}if(ev.target===m||ev.target.closest('[data-x]'))m.remove()}}
 function paintSPQ(){const sp=dgSp();let h=`<div class="gcard">${gateBg()}<p class="eyebrow">Growth Spurt</p><h2 id="spqTitle">Full marks to grow</h2>`;
   if(SPQ.done){const win=SPQ.right===SPQ.qs.length;
-    h+=`<div class="ddone"><p class="dbig"><span class="five">${SPQ.right} / ${SPQ.qs.length}</span></p><p>${win?'Full marks! Watch your pine grow.':sp.fail<2?'Not this time. You have one last chance today with new questions.':'Not this time. Try another Growth Spurt tomorrow.'}</p><div class="row">${win?`<button class="btn" type="button" data-spgo="1">Grow my pine</button>`:sp.fail<2?`<button class="btn" type="button" data-spagain="1">Last chance</button><button class="btn ghost" type="button" data-spx="1">Not now</button>`:`<button class="btn" type="button" data-spx="1">Close</button>`}</div></div>`}
+    h+=`<div class="ddone"><p class="dbig"><span class="five">${SPQ.right} / ${SPQ.qs.length}</span></p><p>${win?'Full marks! Watch your garden grow.':sp.fail<2?'Not this time. You have one last chance today with new questions.':'Not this time. Try another Growth Spurt tomorrow.'}</p><div class="row">${win?`<button class="btn" type="button" data-spgo="1">Build my garden</button>`:sp.fail<2?`<button class="btn" type="button" data-spagain="1">Last chance</button><button class="btn ghost" type="button" data-spx="1">Not now</button>`:`<button class="btn" type="button" data-spx="1">Close</button>`}</div></div>`}
   else{const q=SPQ.qs[SPQ.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),mm=q.m,order=mm.o.map((_,i)=>i).sort(()=>Math.random()-.5);
     h+=`<p class="sub">Get <span class="five">5 out of 5</span> for your pine to grow.</p><div class="dprog">${SPQ.qs.map((_,j)=>`<i class="${j<SPQ.i?'dn':j===SPQ.i?'cur':''}"></i>`).join('')}</div>
      <p class="eyebrow">Question ${SPQ.i+1} of ${SPQ.qs.length} · ${esc(t.name)}</p>${dtag(q)}
@@ -4614,10 +4949,12 @@ spo.addEventListener('click',e=>{const o=e.target.closest('.sopt');
   if(e.target.closest('[data-snext]')){if(SPQ.i>=SPQ.qs.length-1)SPQ.done=true;else SPQ.i++;paintSPQ();return}
   if(e.target.closest('[data-spagain]')){SPQ={qs:pickDaily(),i:0,right:0,done:false,ans:{}};paintSPQ();return}
   if(e.target.closest('[data-spx]')){spo.hidden=true;renderDGTile();return}
-  if(e.target.closest('[data-spgo]')){spo.hidden=true;const g=G0(),from=g.st,to=Math.min(100,g.st+1);g.st=to;save();window.DG.setDate();(dgSp().won>=2?window.DG.heliAnim:window.DG.spurtAnim)(from,to,()=>renderDGTile());return}
+  if(e.target.closest('[data-spgo]')){spo.hidden=true;const g=G0(),from=g.st,to=Math.min(100,g.st+1);g.st=to;save();window.DG.setDate();window.DG.zen.play(from,to,dgSp().won>=2?'heli':'bike',()=>renderDGTile());return}
 });
 function dgView(){const g=G0(),h=g.st?dgHealth():0;window.DG.setDate();const v=document.createElement('div');v.className='dg-view';v.setAttribute('role','dialog');v.setAttribute('aria-modal','true');v.setAttribute('aria-label','Your garden');
-  v.innerHTML=`<div class="dg-vbox">${window.DG.garden('dgv'+Date.now(),Math.max(1,g.st),h)}<button type="button" class="dg-vx" aria-label="Close">✕</button></div>`;document.body.appendChild(v);v.querySelector('.dg-vx').focus();
+  const vid='dgv'+Date.now(),Z=window.DG.zen;
+  v.innerHTML=`<div class="dg-vbox">${window.DG.garden(vid,g.st,h)}<button type="button" class="dg-vx" aria-label="Close">✕</button><button type="button" class="dg-vsnd">${Z.sound()?'🔊 Sound on':'🔇 Sound off'}</button><div class="dg-vhint">Touch your garden. Turn your phone sideways for the big view.</div></div>`;document.body.appendChild(v);v.querySelector('.dg-vx').focus();
+  Z.touch(v.querySelector('.dg-vbox'),vid,g.st);v.querySelector('.dg-vsnd').onclick=ev=>{ev.stopPropagation();Z.setSound(!Z.sound());ev.currentTarget.textContent=Z.sound()?'🔊 Sound on':'🔇 Sound off';if(Z.sound())Z.jingle()};
   const close=()=>v.remove();v.addEventListener('click',ev=>{if(ev.target===v||ev.target.closest('.dg-vx'))close()});v.addEventListener('keydown',ev=>{if(ev.key==='Escape')close()})}
 function dgOpenDaily(){if(!DAILY||DAILY.day!==sday()||DAILY.done)DAILY={day:sday(),qs:pickDaily(),i:0,right:0,done:false,ans:{}};gate.hidden=false;document.body.classList.add('gated');paintGate()}
 document.addEventListener('click',e=>{if(e.target.closest('[data-dgview]')){e.preventDefault();e.stopPropagation();dgView();return}
