@@ -1049,6 +1049,7 @@ li:not(.bmup-locked) .bmup-lockmsg{display:none}
 @media (prefers-reduced-motion:reduce){.dgflk,.dgflk2,.dgtw,.dgtw2{animation:none}.dgmv{animation:none;display:none}}
 .dg-spq{z-index:110}
 /* Daily Growth tile */
+body:has(.dg-view) #dgTile *{animation-play-state:paused!important}
 .dzsh *{fill:#2B2119!important;stroke:#2B2119!important;fill-opacity:1!important;stroke-opacity:1!important}
 @keyframes dzcand{0%{opacity:.92}7%{opacity:.74}13%{opacity:1}21%{opacity:.84}30%{opacity:.97}38%{opacity:.78}47%{opacity:1}55%{opacity:.86}63%{opacity:.95}72%{opacity:.72}81%{opacity:1}90%{opacity:.85}100%{opacity:.92}}
 .dzcand{animation:dzcand 2s linear infinite}
@@ -1116,7 +1117,7 @@ body.bmw nav.tabs button[data-tab="cad"][aria-selected="true"]{background:#DCC8F
 .dzcue .pill svg{position:static!important;width:12px!important;height:12px!important;flex:none}
 .dg-tile .dg-btn.dg-gs{background:linear-gradient(175deg,rgba(127,211,107,.8),rgba(63,163,77,.8))!important;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 @media (prefers-reduced-motion:reduce){.dzcue circle{animation:none;opacity:0}}
-.dzsnowcv{position:fixed;inset:0;width:100%;height:100%;z-index:20;pointer-events:none}
+.dzsnowcv{position:absolute;left:0;top:0;width:100%;z-index:20;pointer-events:none}
 body.dzsnowing #dgTile .dgsnow{display:none}
 /* ---------- Daily Zen ---------- */
 .dg-clip{aspect-ratio:16/10}
@@ -1592,7 +1593,7 @@ window.ZG={pine:1,pond:1,bridge:1,lantern:1,rock:1,rock2:1,acer:1,cherry:1,acerX
 (function(){
 
 function rng(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
-const LEAF='M-0.6 2.5L-1.1 2.9L-1.4 2.8L-1.8 2.8L-2.3 2.6L-2.2 2.1L-1.9 1.8L-1.8 1.5L-1.2 1.3L-0.9 1.5L-1.7 2.1L-2.9 2.0L-3.3 1.5L-3.9 1.2L-4.4 0.5L-3.6 0.0L-3.0 -0.1L-2.4 -0.3L-1.3 0.1L-0.8 0.9L-2.1 0.7L-3.2 -0.2L-3.3 -1.0L-3.5 -1.7L-3.5 -2.8L-2.5 -2.6L-1.8 -2.2L-1.1 -2.0L-0.3 -0.8L-0.3 0.5L-1.2 -0.6L-1.4 -2.2L-1.0 -2.9L-0.7 -3.7L0.0 -4.6L0.7 -3.7L1.0 -2.9L1.5 -2.2L1.2 -0.6L0.3 0.5L0.3 -0.8L1.1 -2.0L1.8 -2.2L2.5 -2.6L3.5 -2.8L3.5 -1.7L3.3 -1.0L3.2 -0.2L2.1 0.7L0.8 0.9L1.3 0.1L2.4 -0.3L3.0 -0.1L3.6 0.0L4.4 0.5L3.9 1.2L3.3 1.5L2.9 2.0L1.7 2.1L0.9 1.5L1.2 1.3L1.8 1.5L1.9 1.8L2.2 2.1L2.3 2.6L1.8 2.8L1.4 2.8L1.1 2.9L0.6 2.5L0.0 2.9ZM0 3.2L0 5.6';
+const LEAF='M0-6 L1.4-2.6 L4.6-3.8 L3.6-0.6 L6-0.2 L2.4 2 L3 4.6 L0 3.2 L-3 4.6 L-2.4 2 L-6-0.2 L-3.6-0.6 L-4.6-3.8 L-1.4-2.6Z M0 3.2 L0 6';
 const AUT=['#C8281C','#E2452A','#F46D2B','#F9A03F','#FBC756','#D7301F'];
 const BROWN=['#8A5A2B','#9C6B3A','#7A4A22','#A67C45'];
 function mix(a,b,t){const p=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));const A=p(a),B=p(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')}
@@ -1683,11 +1684,9 @@ function shoot(x,y,L,ang,col,R){ /* a shoot: stem with pairs of fine needles alo
  for(let i=1;i<=4;i++){const f=i/4,px=x+(ex-x)*f,py=y+(ey-y)*f,l=L*(.8+.3*f)*(.85+R()*.3);
   for(const sd of [-1,1]){const a=ang+sd*(.8-.3*f)+(R()-.5)*.2;d+=`M${px.toFixed(1)} ${py.toFixed(1)}q${(Math.cos(a)*l*.5+Math.cos(ang)*.5).toFixed(1)} ${(Math.sin(a)*l*.5+Math.sin(ang)*.5).toFixed(1)} ${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}`}}
  for(let i=-1;i<=1;i++){const a=ang+i*.2,l=L*.9;d+=`M${ex.toFixed(1)} ${ey.toFixed(1)}l${(Math.cos(a)*l).toFixed(1)} ${(Math.sin(a)*l).toFixed(1)}`}
- let tip='';for(let i=-1;i<=1;i++){const a=ang+i*.2,l=L*.9;tip+=`M${(ex+Math.cos(a)*l*.45).toFixed(1)} ${(ey+Math.sin(a)*l*.45).toFixed(1)}l${(Math.cos(a)*l*.55).toFixed(1)} ${(Math.sin(a)*l*.55).toFixed(1)}`}
- if(SHB){SHB[col]=(SHB[col]||'')+d;SHB['~'+col]=(SHB['~'+col]||'')+tip;return ''}
- return `<path d="${d}" stroke="${col}" stroke-width=".4" stroke-linecap="round" fill="none"/><path d="${tip}" stroke="${mix(col,'#D8E8C0',.38)}" stroke-width=".34" stroke-linecap="round" fill="none"/>`}
-let SHB=null;function SHFLUSH(){let o='';for(const k in SHB){if(k[0]==='~')continue;o+=`<path d="${SHB[k]}" stroke="${k}" stroke-width=".4" stroke-linecap="round" fill="none"/>`}
- for(const k in SHB){if(k[0]!=='~')continue;const c=k.slice(1);o+=`<path d="${SHB[k]}" stroke="${mix(c,'#D8E8C0',.38)}" stroke-width=".34" stroke-linecap="round" fill="none"/>`}SHB={};return o}
+ if(SHB){SHB[col]=(SHB[col]||'')+d;return ''}
+ return `<path d="${d}" stroke="${col}" stroke-width=".5" stroke-linecap="round" fill="none"/>`}
+let SHB=null;function SHFLUSH(){let o='';for(const k in SHB)o+=`<path d="${SHB[k]}" stroke="${k}" stroke-width=".5" stroke-linecap="round" fill="none"/>`;SHB={};return o}
 function smoothPath(P){let d=`M${P[0][0].toFixed(1)} ${P[0][1].toFixed(1)}`;for(let i=1;i<P.length-1;i++){const mx=(P[i][0]+P[i+1][0])/2,my=(P[i][1]+P[i+1][1])/2;d+=`Q${P[i][0].toFixed(1)} ${P[i][1].toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)}`}const l=P[P.length-1];return d+`L${l[0].toFixed(1)} ${l[1].toFixed(1)}`}
 
 /* Japanese-style T-shaped wooden support post */
@@ -1881,11 +1880,8 @@ function weep(k,se,dead){const W=WEEP[k];if(W&&!W.limbs)W.limbs=WEEP.W2.limbs;if
  return t}
 
 /* ---------- blossom cherry (cartoon, after the reference): twisted trunk, wide spreading crown of blossom clouds ---------- */
-function flower(x,y,r,col,mid){let d='';const rot=((x*7.3+y*3.1)%72);
- for(let i=0;i<5;i++){const a=(-90+rot+i*72)*Math.PI/180,c=Math.cos(a),sn=Math.sin(a),P=(u,v)=>`${(x+c*u*r-sn*v*r).toFixed(2)} ${(y+sn*u*r+c*v*r).toFixed(2)}`;
-  d+=`M${P(.08,0)}C${P(.3,-.42)} ${P(.86,-.5)} ${P(1,-.18)}L${P(.86,0)}L${P(1,.18)}C${P(.86,.5)} ${P(.3,.42)} ${P(.08,0)}Z`}
- let st='';for(let i=0;i<5;i++){const a=(-54+rot+i*72)*Math.PI/180;st+=`M${(x+Math.cos(a)*r*.16).toFixed(2)} ${(y+Math.sin(a)*r*.16).toFixed(2)}L${(x+Math.cos(a)*r*.38).toFixed(2)} ${(y+Math.sin(a)*r*.38).toFixed(2)}`}
- return `<path d="${d}" fill="${col}"/><path d="${st}M${(x-r*.1).toFixed(2)} ${y.toFixed(2)}h${(r*.2).toFixed(2)}" stroke="${mid}" stroke-width="${(r*.09).toFixed(2)}" stroke-linecap="round"/>`}
+function flower(x,y,r,col,mid){let d='';for(let i=0;i<5;i++){const a=-Math.PI/2+i*Math.PI*2/5,cx=x+Math.cos(a)*r*.62,cy=y+Math.sin(a)*r*.62,pr=r*.5;d+=`M${(cx+pr).toFixed(2)} ${cy.toFixed(2)}a${pr.toFixed(2)} ${pr.toFixed(2)} 0 1 0 ${(-2*pr).toFixed(2)} 0a${pr.toFixed(2)} ${pr.toFixed(2)} 0 1 0 ${(2*pr).toFixed(2)} 0`}
+ return `<path d="${d}" fill="${col}"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r*.22).toFixed(2)}" fill="${mid}"/>`}
 const SAK={pink:['#F8C9D4','#F4B6C6','#FBDDE4','#EFA3B8','#F9D3DD'],sum:['#5E8F3A','#4F7F33','#6E9F45','#7AAE50','#456F2E'],aut:['#D9572A','#E8803A','#C23A2A','#E8A23F','#B8452A']};
 function sakura(se,dead){const X=CX,Y=CY,bark='#4A3530',barkD='#33241F',barkL='#7A5A4E',R=rng(777);
  let t=`<ellipse cx="${X+2}" cy="${Y+2}" rx="32" ry="6.5" fill="${se===3?'#8C9A82':'#5E7A44'}"/><ellipse cx="${X+1}" cy="${Y+1.5}" rx="25" ry="4.8" fill="#1E1B19"/>`;
@@ -1947,7 +1943,7 @@ function rock(x,y,se){ /* a plain, rounded boulder */
 function EARTH(x,y,rx,ry,se){const moss=se===3?'#8C9A82':'#5E7A44',mossD=se===3?'#7A8872':'#4E6A38';
  return `<ellipse cx="${x.toFixed(1)}" cy="${(y+.4).toFixed(1)}" rx="${(rx*1.3).toFixed(1)}" ry="${(ry*1.35).toFixed(1)}" fill="${moss}"/><ellipse cx="${(x-rx*.25).toFixed(1)}" cy="${(y+ry*.55).toFixed(1)}" rx="${(rx*.7).toFixed(1)}" ry="${(ry*.5).toFixed(1)}" fill="${mossD}" opacity=".55"/><ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="#1E1B19"/>`}
 /* a shadow made from the object's own outline: flattened onto the ground and leaning left (the sun is up to the right) */
-function SH(markup,bx,by,id,op){const c=.42,d=-.2;const m=String(markup).replace(/\sclass="[^"]*"/g,'').replace(/\sid="[^"]*"/g,'');
+function SH(markup,bx,by,id,op){const c=.42,d=-.2;let m=String(markup).replace(/\sclass="[^"]*"/g,'').replace(/\sid="[^"]*"/g,'');if(m.length>15000){let k=0;m=m.replace(/<(path|circle|ellipse|use|rect)\b[^>]*\/>/g,x=>(++k<=40||k%3===0)?x:'')}
  return `<g class="dzsh" opacity="${op||.42}" transform="matrix(1 0 ${c} ${d} ${(-c*by).toFixed(2)} ${(by*(1-d)).toFixed(2)})" pointer-events="none">${m}</g>`}
 function SHDEFS(id){return `<defs><filter id="shf${id}" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 .17  0 0 0 0 .13  0 0 0 0 .1  0 0 0 1 0"/><feGaussianBlur stdDeviation=".7"/></filter></defs>`}
 function LANTERN(x,y,id){return `<g transform="translate(${x} ${y})"><ellipse cx="0" cy=".5" rx="5.5" ry="1.3" fill="#00000040"/><rect x="-1.7" y="-6.2" width="3.4" height="6.6" fill="#8A867D"/><rect x="-1.7" y="-6.2" width="1.1" height="6.6" fill="#9B978E"/><g transform="translate(0 -6)"><rect x="-7.5" y="-3" width="15" height="3.2" rx=".6" fill="#7C786F"/><rect x="-5.6" y="-10" width="11.2" height="7.2" fill="#A6A196"/><rect x="-5.6" y="-10" width="2.2" height="7.2" fill="#B5B0A5"/><rect class="dzcand" x="-2.8" y="-9" width="5.6" height="5" fill="#FFE2A0" opacity=".9" style="animation-duration:2.3s"/><rect x="-.75" y="-5.4" width="1.5" height="1.4" fill="#F4E8D0"/><g class="dzflame" style="animation-duration:1.3s"><path d="M0 -5.5C-.5 -6.1 -.4 -7 0 -8C.4 -7 .5 -6.1 0 -5.5Z" fill="#FFA531"/><path d="M0 -5.6C-.25 -6 -.22 -6.5 0 -7C.22 -6.5 .25 -6 0 -5.6Z" fill="#FFF7D6"/></g><path d="M-11.5 -10h23l-11.5-7.6z" fill="#7C786F"/><path d="M-11.5 -10h23" stroke="#5E5A52" stroke-width="1"/><circle cx="0" cy="-18.8" r="1.4" fill="#7C786F"/></g></g>`}
@@ -2547,7 +2543,8 @@ function drawK(ids,f,n,lift,sc){const S=kspine(f),N=KN;
  const sh=body.replace(/(-?\d+\.\d+) (-?\d+\.\d+)/g,(m,x,y)=>`${(+x+.6).toFixed(2)} ${(+y+1.3).toFixed(2)}`);
  const D=[sh,tail,fin(1)+fin(-1),body,body,back,eyes];
  ids.forEach(id=>{const k=document.getElementById('kf'+id+n);if(!k)return;k.removeAttribute('transform');const c=k.children;for(let i=0;i<c.length&&i<D.length;i++)c[i].setAttribute('d',D[i])})}
-function koiFrame(now){const dt=Math.min(50,now-(last||now));last=now;const ids=koiIds();
+let kLast=0;const dzVisible=id=>{const v=document.querySelector('.dg-view');const e=document.getElementById('rip'+id);if(!e)return false;if(v)return v.contains(e);const r=e.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight};
+function koiFrame(now){if(now-kLast<31){requestAnimationFrame(koiFrame);return}kLast=now;const dt=Math.min(60,now-(last||now));last=now;const ids=koiIds().filter(dzVisible);
  if(ids.length)FISH.forEach((f,n)=>{
   if(f.jump){const J=f.jump,k=(now-J.t0)/1700;if(k>=1){f.jump=null;f.dx=f.dy=undefined;ripple(J.x2,J.y2,true)}else{f.dx=(J.x1+(J.x2-J.x1)*k).toFixed(2);f.dy=(J.y1-15*Math.sin(Math.PI*k)).toFixed(2);const a0=f.ang;f.ang=J.a+Math.PI*2*k*J.s;drawK(ids,f,n,true,KSC*(1+.25*Math.sin(Math.PI*k)));f.ang=a0;return}}
   let tx,ty;if(f.target&&now<f.target.until){tx=f.target.x;ty=f.target.y}else{f.target=null;f.t+=f.dir*dt*f.spd;tx=PC.x+f.rx*Math.cos(f.t*Math.PI*2);ty=PC.y+f.ry*Math.sin(f.t*Math.PI*2)}
@@ -2621,7 +2618,7 @@ function spook(id,why){const c=CRANES[id];if(!c)return false;const now=performan
  if(c.mode==='onSmall'){c.mode='back';c.t0=now;c.from=SMALL;c.sc=OS2;return true}
  return false}
 function craneFrame(now){document.querySelectorAll('[data-crane]').forEach(e=>{const id=e.dataset.crane;if(!CRANES[id])CRANES[id]={id,mode:'perch',st:+e.dataset.st,t0:now,tm:{}}});
- for(const id in CRANES){const c=CRANES[id];if(!document.getElementById('cr'+id)){delete CRANES[id];continue}const t=now-c.t0,TR=cherryTop(c.st),TRp={x:TR.x,y:TR.y+2};
+ const VV=document.querySelector('.dg-view');for(const id in CRANES){const c=CRANES[id];const ce=document.getElementById('cr'+id);if(!ce){delete CRANES[id];continue}if(VV&&!VV.contains(ce))continue;const t=now-c.t0,TR=cherryTop(c.st),TRp={x:TR.x,y:TR.y+2};
   const fl=(p,face,sc,k)=>odraw(id,p.x,p.y+Math.sin(now/90)*.6,face,sc,k>.9?lin(Math.sin(now/95),.62,(k-.9)/.1):Math.sin(now/95),0,0,groundAt(p.x));
   const hop=(k,s0)=>odraw(id,HOME.x,HOME.y-2.5*Math.sin(Math.PI*k),Math.cos(Math.PI*k)<0?-1:1,s0,.62+.38*Math.sin(k*Math.PI*2),0,0,HOME.y);
   if(c.mode==='perch')idle(now,c,HOME,1,OS0);
@@ -5394,31 +5391,43 @@ function dzIntro(){let seen=false;try{seen=localStorage.getItem('dz-intro')==='1
   document.body.appendChild(f);const b=f.querySelector('button');b.focus();b.onclick=()=>f.remove()}
 function renderDGTile(){const el=document.getElementById('dgTile');if(el){el.innerHTML=dgTileHTML();setTimeout(dzIntro,600)}DZSNOW.check()}
 /* winter: tiny flakes fall from the top of the garden tile, over it, and on down the whole page */
-const DZSNOW=(function(){let cv=null,g=null,fl=[],run=false,last=0,box=null,docH=0,acc=0,dpr=1,tk=0;
+const DZSNOW=(function(){let cv=null,g=null,fl=[],run=false,last=0,box=null,acc=0,dpr=1,tk=0,kind=-1,vis=true,io=null,LP=null;
  const RM=matchMedia('(prefers-reduced-motion: reduce)');
- const want=()=>{if(RM.matches||VIEW||!window.DG||document.hidden)return false;const c=document.querySelector('#dgTile .dg-clip');if(!c||!c.offsetParent)return false;
-  const st=G0().st;if(!st)return false;const h=dgHealth();return h<3&&window.DG.seasonOf(st)===3};
- const measure=()=>{const c=document.querySelector('#dgTile .dg-clip');if(!c)return false;const r=c.getBoundingClientRect();box={l:r.left+scrollX,r:r.right+scrollX,t:r.top+scrollY,w:r.width};docH=Math.max(document.documentElement.scrollHeight,innerHeight);return true};
- const DENS=()=>.00085*(box.w/360);   /* flakes per px across the tile, per px of fall */
- const mk=y=>({x:box.l-8+Math.random()*(box.w+16),y,r:.55+Math.random()*1.05,vy:(18+Math.random()*16)*(box.w/400),ph:Math.random()*6.28,sw:2+Math.random()*4,f:.6+Math.random()*.9,a:.65+Math.random()*.35});
- function size(){dpr=Math.min(2,devicePixelRatio||1);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr}
- function start(){if(run)return;if(!measure())return;run=true;document.body.classList.add('dzsnowing');
-  if(!cv){cv=document.createElement('canvas');cv.className='dzsnowcv';cv.setAttribute('aria-hidden','true');g=cv.getContext('2d');addEventListener('resize',()=>{if(cv){size();measure()}})}
-  document.body.appendChild(cv);size();
-  /* already snowing when the page opens: fill from the tile down to the bottom of the page */
-  fl=[];const n=Math.round(DENS()*box.w*(docH-box.t));for(let i=0;i<n;i++)fl.push(mk(box.t+Math.random()*(docH-box.t)));
+ /* 3 snow, 0 blossom (once the cherry is planted), 2 leaves (once there is an acer or cherry); nothing in summer */
+ const what=()=>{if(RM.matches||VIEW||!window.DG||document.hidden)return -1;const c=document.querySelector('#dgTile .dg-clip');if(!c||!c.offsetParent)return -1;
+  const st=G0().st;if(!st||dgHealth()>=3)return -1;const se=window.DG.seasonOf(st);if(se===3)return 3;if(se===0&&st>=8)return 0;if(se===2&&st>=4)return 2;return -1};
+ const measure=()=>{const c=document.querySelector('#dgTile .dg-clip');if(!c)return false;const r=c.getBoundingClientRect(),t=document.querySelector('#dgTile ~ .wf-tools')||document.querySelector('.wf-tools');
+  const top=r.top+scrollY;let fs,end;if(t&&t.offsetParent){const q=t.getBoundingClientRect();fs=q.top+scrollY;end=q.bottom+scrollY}else{fs=r.bottom+scrollY+30;end=fs+160}
+  box={l:r.left+scrollX,w:r.width,top,th:r.height,fs:fs-top,end:Math.max(fs-top+40,end-top)};
+  if(cv){cv.style.top=top+'px';cv.style.height=box.end+'px';const W=document.documentElement.clientWidth;if(cv._w!==W||cv._h!==box.end){cv._w=W;cv._h=box.end;cv.style.width=W+'px';cv.width=W*dpr;cv.height=box.end*dpr}}return true};
+ const PET=['#FFFFFF','#FBDDE4','#F8C9D4','#F4B6C6'],LEAFC=['#E8173A','#D4102F','#F2405A','#F46D2B','#F9A03F','#C8281C'];
+ const mk=(y,k)=>{const s=box.w/400;const p={x:box.l-8+Math.random()*(box.w+16),y,ph:Math.random()*6.28,f:.6+Math.random()*.9,a:.65+Math.random()*.35,rot:Math.random()*6.28,vr:(Math.random()-.5)*2.4};
+  if(k===3){p.r=.55+Math.random()*1.05;p.vy=(18+Math.random()*16)*s;p.sw=2+Math.random()*4}
+  else if(k===0){p.r=(1.5+Math.random()*1.3)*s*1.6;p.vy=(14+Math.random()*12)*s;p.sw=(10+Math.random()*14)*s;p.c=PET[Math.floor(Math.random()*4)]}
+  else{p.r=(2.2+Math.random()*1.4)*s*1.4;p.vy=(20+Math.random()*14)*s;p.sw=(12+Math.random()*16)*s;p.c=LEAFC[Math.floor(Math.random()*6)];p.vr*=1.6}
+  return p};
+ const rate=()=>kind===3?.00085*(box.w/360)*box.w*28*(box.w/400):kind===0?2.4*(box.w/400):1.5*(box.w/400);
+ function start(k){if(run&&k===kind)return;stop();kind=k;if(!measure())return;run=true;if(k===3)document.body.classList.add('dzsnowing');
+  if(!cv){cv=document.createElement('canvas');cv.className='dzsnowcv';cv.setAttribute('aria-hidden','true');g=cv.getContext('2d');addEventListener('resize',()=>{if(cv)measure()});
+   if('IntersectionObserver' in window){io=new IntersectionObserver(e=>{vis=e[0].isIntersecting});io.observe(cv)}
+   try{LP=new Path2D('M0-6 L1.4-2.6 L4.6-3.8 L3.6-0.6 L6-0.2 L2.4 2 L3 4.6 L0 3.2 L-3 4.6 L-2.4 2 L-6-0.2 L-3.6-0.6 L-4.6-3.8 L-1.4-2.6Z')}catch(e){}}
+  dpr=Math.min(2,devicePixelRatio||1);cv._w=0;document.body.appendChild(cv);measure();
+  /* already falling when the page opens */
+  fl=[];const span=box.end/(kind===3?1:1.4),n=Math.round(rate()*span/((kind===3?26:18)*(box.w/400)));for(let i=0;i<n;i++)fl.push(mk((kind===3?0:box.th*.5)+Math.random()*(box.end-(kind===3?0:box.th*.5)),kind));
   last=performance.now();requestAnimationFrame(frame)}
- function stop(){if(!run)return;run=false;document.body.classList.remove('dzsnowing');if(cv&&cv.parentNode)cv.remove();fl=[]}
+ function stop(){if(!run)return;run=false;document.body.classList.remove('dzsnowing');if(cv&&cv.parentNode)cv.remove();fl=[];kind=-1}
  function frame(now){if(!run)return;const dt=Math.min(.05,(now-last)/1000);last=now;
-  if(++tk%30===0)measure();
-  acc+=DENS()*box.w*28*(box.w/400)*dt;while(acc>=1){acc-=1;fl.push(mk(box.t-2))}
-  g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,innerWidth,innerHeight);g.fillStyle='#fff';g.shadowColor='rgba(60,62,72,.45)';g.shadowBlur=1.4*dpr;
-  const sy=scrollY,sx=scrollX,t=now/1000;let j=0;
-  for(let i=0;i<fl.length;i++){const p=fl[i];p.y+=p.vy*dt;p.x+=Math.cos(t*p.f+p.ph)*p.sw*dt;
-   if(p.y>docH)continue;fl[j++]=p;const vy=p.y-sy;if(vy<-4||vy>innerHeight+4)continue;
-   const fade=Math.min(1,(docH-p.y)/80);g.globalAlpha=p.a*fade;g.beginPath();g.arc(p.x-sx,vy,p.r,0,6.283);g.fill()}
-  fl.length=j;g.globalAlpha=1;requestAnimationFrame(frame)}
- function check(){want()?start():stop()}
+  if(++tk%45===0)measure();
+  acc+=rate()*dt;while(acc>=1){acc-=1;fl.push(mk(kind===3?-2:box.th*(.45+Math.random()*.45),kind))}
+  let j=0;const t=now/1000;for(let i=0;i<fl.length;i++){const p=fl[i];p.y+=p.vy*dt;p.x+=Math.cos(t*p.f+p.ph)*p.sw*dt;p.rot+=p.vr*dt;if(p.y>box.end)continue;fl[j++]=p}fl.length=j;
+  if(vis){g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,cv.width/dpr,cv.height/dpr);
+   const F=y=>y<box.fs?1:Math.max(0,1-(y-box.fs)/(box.end-box.fs));
+   if(kind===3){g.fillStyle='#fff';for(const p of fl){const a=p.a*F(p.y);if(a<=0)continue;g.globalAlpha=a;g.beginPath();g.arc(p.x,p.y,p.r,0,6.283);g.fill()}}
+   else if(kind===0){for(const p of fl){const a=p.a*F(p.y);if(a<=0)continue;g.globalAlpha=a;g.fillStyle=p.c;g.beginPath();g.ellipse(p.x,p.y,p.r,p.r*(.45+.25*Math.abs(Math.sin(p.rot*1.3))),p.rot,0,6.283);g.fill()}}
+   else{for(const p of fl){const a=p.a*F(p.y);if(a<=0)continue;g.globalAlpha=a;g.fillStyle=p.c;g.setTransform(dpr*p.r/6*Math.cos(p.rot),dpr*p.r/6*Math.sin(p.rot)*.8,-dpr*p.r/6*Math.sin(p.rot),dpr*p.r/6*Math.cos(p.rot)*.8+dpr*p.r/6*.2*Math.sin(p.rot*2),dpr*p.x,dpr*p.y);if(LP)g.fill(LP);else{g.beginPath();g.arc(0,0,5,0,6.283);g.fill()}}}
+   g.globalAlpha=1}
+  requestAnimationFrame(frame)}
+ function check(){const k=what();k<0?stop():start(k)}
  setInterval(check,1200);document.addEventListener('visibilitychange',check);
  return {check}})();
 /* Growth Spurt: 5 fresh questions, full marks grows a stage; up to 2 a day, one last chance after a miss */
