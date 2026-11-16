@@ -4177,13 +4177,13 @@ function showTab(t){
 }
 /* ---------- CAD tutorials: Mr P DTE's SketchUp videos. Add each video's ID (the part after watch?v= in its link). ---------- */
 const CAD_LIST='PLp6p320ESAGHRmRAagcbNb78Z8mTIb9Z6';
-const CAD_VIDEOS=[{t:'Setting up a new SketchUp file',id:'y6CovKTRUbY'}];
+const CAD_VIDEOS=[{"t": "Setting up a new SketchUp file", "id": "y6CovKTRUbY"}, {"t": "Drawing basic 2D shapes", "id": "vrskBE8xSjQ"}, {"t": "Drawing 2D shapes with dimensions", "id": "4E5_wdxFRp8"}, {"t": "Turning 2D shapes into 3D forms", "id": "Ddca8nXu4Bw"}, {"t": "Complex 2D shapes (wood component)", "id": "3AbvdTbumUw"}, {"t": "Complex 3D forms (wood component)", "id": "dCQO4VXbUls"}, {"t": "Making and editing components", "id": "2InC2RKc4po"}, {"t": "Complex 3D acrylic models", "id": "jUvOw4eu1CQ"}, {"t": "Complex 3D metal models", "id": "wtF6cO3ym_g"}, {"t": "Complex 3D woodturning models (Revolve / Follow Me)", "id": "m0gtm6_qX_0"}, {"t": "How to assemble components (Rotate, Move, Align)", "id": "G2phfq1fz8c"}, {"t": "Adding materials and textures (including custom)", "id": "o0sLBQLl-lk"}, {"t": "Generating rendered pictorials in perspective", "id": "6aELWgl_-tc"}, {"t": "Generating exploded isometric graphics", "id": "jz2LdBT_w3E"}, {"t": "Generating orthographic drawings (including dimensions)", "id": "zhdrCgFTyzk"}, {"t": "Creating a page of drawings", "id": "Vy3jkd3G7Fc"}];
 function renderCad(){const el=$('cadBody');if(!el||el.dataset.done)return;el.dataset.done=1;
   const card=(n,t,id,list)=>`<div class="cadv"><div class="cadh"><span class="cadn">${n}</span><b>${esc(t)}</b></div><button type="button" class="cadplay" data-yt="${esc(id||'')}" data-list="${list?1:''}" aria-label="Play ${esc(t)}" style="background-image:url(https://i.ytimg.com/vi/${esc(id||CAD_VIDEOS[0].id)}/hqdefault.jpg)"><span>▶</span></button></div>`;
-  el.innerHTML='<div class="cadlist">'+CAD_VIDEOS.map((v,i)=>card(i+1,v.t,v.id,false)).join('')+card('▤','The whole course: every tutorial in order','',true)+'</div>';
-  el.addEventListener('click',e=>{const b=e.target.closest('.cadplay');if(!b)return;const f=document.createElement('iframe');
+  el.innerHTML='<div class="cadlist">'+CAD_VIDEOS.map((v,i)=>card(i+1,v.t,v.id,false)).join('')+'</div>';
+  if(!el.dataset.ls){el.dataset.ls=1;el.addEventListener('click',e=>{const b=e.target.closest('.cadplay');if(!b)return;const f=document.createElement('iframe');
     f.src=b.dataset.list?'https://www.youtube-nocookie.com/embed/videoseries?list='+CAD_LIST+'&autoplay=1&rel=0':'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(b.dataset.yt)+'?list='+CAD_LIST+'&autoplay=1&rel=0';
-    f.title='SketchUp tutorial';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.className='cadframe';b.replaceWith(f)})}
+    f.title='SketchUp tutorial';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.className='cadframe';b.replaceWith(f)})}}
 /* ---------- tool library: a tile at the top of Workshop; 3D models load only when opened ---------- */
 let TLLOAD=null;
 let TLQ=[],TLOK=false,TLMOUNT=false;
@@ -4204,7 +4204,10 @@ function loadWorkshop(){if(WSLOAD)return;WSLOAD=1;const el=document.createElemen
   el.onload=()=>{try{WS.mount($('wsBody'))}catch(e){$('wsBody').innerHTML='<p class="row">Sorry, the 3D workshop could not start on this device.</p>'}};
   el.onerror=()=>{WSLOAD=null;$('wsBody').innerHTML='<p class="row">The 3D workshop needs an internet connection the first time it opens.</p>'};
   document.body.appendChild(el)}
-document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;if(b.dataset.tab==='learn'){if(typeof tp!=='undefined'&&!tp.hidden)closePanel();LCUR=null;HUB=null}showTab(b.dataset.tab)});
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;if(b.dataset.tab==='learn'){if(typeof tp!=='undefined'&&!tp.hidden)closePanel();LCUR=null;HUB=null}
+  const t=b.dataset.tab;if(t==='ws'&&typeof wsView==='function'&&$('wsHome')&&$('wsHome').hidden)wsView('home');
+  {const c=$('cadBody');if(c&&c.querySelector('.cadframe')){c.dataset.done='';c.innerHTML=''}}// stop any CAD video when leaving
+  showTab(t);scrollTo(0,0)});
 document.querySelector('.tabs').addEventListener('keydown',e=>{const bs=[...document.querySelectorAll('.tabs button')];const i=bs.indexOf(document.activeElement);if(i<0)return;
   if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length];n.focus();showTab(n.dataset.tab)}});
 
