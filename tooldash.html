@@ -216,6 +216,10 @@ html,body{margin:0;background:#EFE8E1;font-family:'Segoe UI',system-ui,-apple-sy
 .sndb{position:fixed;left:14px;top:max(14px,env(safe-area-inset-top));z-index:40;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .sndb svg{width:22px;height:22px}.sndb[aria-pressed="false"]{color:#9a96a6}
 #play .hud{padding-left:52px}
+.lvsub{font-size:14px;color:#cfc8d8;text-align:center;max-width:320px;margin:4px auto 8px;line-height:1.4}
+.lifeup{animation:lifeup .7s cubic-bezier(.2,1.6,.4,1) .2s both}.lifeup .hrt{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(244,179,194,.18);animation:hb 1.2s ease-in-out .9s 3}
+.lifeup .hrt svg{width:26px;height:26px;fill:#F4B3C2}
+@keyframes lifeup{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:none}}@keyframes hb{50%{transform:scale(1.2)}}
 .stack{margin-top:34px!important}
 .card.b1{transform:translateY(-18px) scale(.93)!important}.card.b2{transform:translateY(-34px) scale(.86)!important}
 </style></head>
@@ -251,7 +255,7 @@ html,body{margin:0;background:#EFE8E1;font-family:'Segoe UI',system-ui,-apple-sy
 
  <div class="scr on" id="ready">
   <div class="rtitle gold" id="rTitle"></div>
-  <div class="lvl" id="rLvl">Level 1</div>
+  <div class="lvl" id="rLvl">Level 1</div><div class="lvsub" id="rLives"></div>
   <div class="path big2" id="rPath"></div>
   <div class="stage" id="stage"></div>
   <button class="go" id="begin">Begin</button>
@@ -309,7 +313,8 @@ const rankOf=L=>L<=3?'Apprentice':L<=6?'Improver':L<=9?'Craftsperson':'Shokunin 
 const $=id=>document.getElementById(id);
 const S={get(k,d){try{const v=localStorage.getItem('tf-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('tf-'+k,JSON.stringify(v))}catch(e){}}};
 const today=(d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'))(new Date());
-if(S.get('unlday','')!==today){S.set('unl',1);S.set('unlday',today)}
+if(S.get('unlday','')!==today){S.set('unl',1);S.set('lives',0);S.set('unlday',today)}
+let bank=Math.min(5,S.get('lives',0)),startLives=0;
 let unlocked=S.get('unl',1), best=S.get('best',{}), misses=S.get('miss',{});
 let potDay=S.get('potday',''), frenzyPots=potDay===today?S.get('pots',0):0;
 const imgOf=t=>t?`<img src="${BMTOOLS3D.thumb(t.id)}" alt="">`:"";
@@ -411,7 +416,7 @@ $('exit').onclick=closeFz;
 function setReady(l){L=l;
  const tt=$('rTitle');tt.className='rtitle gold';tt.innerHTML=[...'Tool Dash'].map((c,i)=>c===' '?'<span>&nbsp;</span>':`<span style="animation-delay:${.15+i*.06}s">${c}</span>`).join('');
  clearTimeout(window._shim);window._shim=setTimeout(function sh(){if(!$('ready').classList.contains('on'))return;tt.classList.remove('shim');void tt.offsetWidth;tt.classList.add('shim');window._shim=setTimeout(sh,4500)},1500);
-$('rLvl').textContent='Level '+L+' of '+MAXL;$('rPath').innerHTML=Array.from({length:MAXL},(_,i)=>`<i class="${i+1<L?'d':i+1===L?'c':''}"></i>`).join('');
+$('rLvl').textContent='Level '+L+' of '+MAXL;$('rLives').textContent=bank===0?'No spare lives: one wrong answer ends the round. Clear it to earn a life.':'You have '+bank+' spare '+(bank===1?'life':'lives')+'. Clear the level to earn one more.';$('rPath').innerHTML=Array.from({length:MAXL},(_,i)=>`<i class="${i+1<L?'d':i+1===L?'c':''}"></i>`).join('');
  $('pick').innerHTML=Array.from({length:MAXL},(_,i)=>`<option value="${i+1}" ${i+1===L?'selected':''}>Jump to level ${i+1} (${cardsFor(i+1)} cards)</option>`).join('');show('ready')}
 $('pick').onchange=e=>setReady(+e.target.value);
 $('begin').onclick=()=>{au();countdown()};
@@ -435,7 +440,7 @@ function choicesFor(id){
  return [id,...opts].sort(()=>Math.random()-.5)}
 
 function start(){
- TIME=timeFor(L);total=cardsFor(L);deck=buildDeck(total);lives=1;streak=0;tLeft=TIME;cleared=0;missedRun={};freezeTo=0;busy=false;running=true;
+ TIME=timeFor(L);total=cardsFor(L);deck=buildDeck(total);lives=bank;startLives=bank;streak=0;tLeft=TIME;cleared=0;missedRun={};freezeTo=0;busy=false;running=true;
  show('play');$('hLvl').textContent=`Level ${L}`;
  drawLives();renderStack(true);last=performance.now();raf=requestAnimationFrame(tick)}
 function stop(){running=false;cancelAnimationFrame(raf)}
@@ -447,7 +452,7 @@ function tick(now){if(!running)return;const dt=(now-last)/1000;last=now;
 function updClock(){const f=tLeft/TIME;const b=$('barIn');b.style.transform=`scaleX(${f})`;
  b.style.background=$('bar').classList.contains('frozen')?'':f<.1?'var(--rose)':f<.3?'var(--amber)':'';
  const s=Math.ceil(tLeft);$('clock').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-function drawLives(){$('lives').innerHTML=[0].map(i=>`<span class="${i<lives?'':'lost'}"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3.2 4.5 7 4.5c2.2 0 3.6 1.2 5 3 1.4-1.8 2.8-3 5-3 3.8 0 6 3.9 4.3 7.5C19 16.4 12 21 12 21z" fill="#F2A0A8"/></svg></span>`).join('')}
+function drawLives(){$('lives').innerHTML=Array.from({length:Math.max(1,lives)},(_,i)=>i).map(i=>`<span class="${i<lives?'':'lost'}"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3.2 4.5 7 4.5c2.2 0 3.6 1.2 5 3 1.4-1.8 2.8-3 5-3 3.8 0 6 3.9 4.3 7.5C19 16.4 12 21 12 21z" fill="#F2A0A8"/></svg></span>`).join('')}
 function renderStack(first){
  cur=deck[0];const st=$('stack');
  const html=deck.slice(0,3).map((id,i)=>`<div class="card ${i===0?'top':'b'+i}">${i===0?'<div class="tick">✓</div>':''}</div>`).reverse().join('');
@@ -464,12 +469,12 @@ function answer(b){if(busy||!running)return;busy=true;const top=$('stack').query
   setTimeout(()=>{top.classList.add('fly');setTimeout(()=>{deck.shift();busy=false;if(!deck.length)return win();renderStack()},calm?180:220)},calm?260:300)
  }else{
   b.classList.add('wrong');[...$('opts').children].find(x=>x.dataset.id===cur).classList.add('right');
-  top.classList.add('bad');flash('r');thud();buzz([30,40,30]);streak=0;lives--;drawLives();
+  top.classList.add('bad');flash('r');thud();buzz([30,40,30]);streak=0;const out=lives<=0;if(!out){lives--;drawLives()}
   missedRun[cur]=1;misses[cur]=(misses[cur]||0)+1;S.set('miss',misses);
-  setTimeout(()=>{if(lives<=0){busy=false;return fail('lives')}
+  setTimeout(()=>{if(out){busy=false;return fail('lives')}
    const id=deck.shift();deck.push(id);busy=false;renderStack()},900)}}
 
-function win(){stop();
+function win(){stop();bank=Math.min(5,lives+1);S.set('lives',bank);
  const tl=Math.ceil(tLeft);const prev=best[L];const pb=!prev||tl>prev;if(pb){best[L]=tl;S.set('best',best)}
  const wasL=L;if(L>=unlocked&&L<MAXL){unlocked=L+1;S.set('unl',unlocked);S.set('unlday',today)}
  let earned=false;if(frenzyPots<2){frenzyPots++;earned=true;S.set('pots',frenzyPots);S.set('potday',today)}
@@ -479,8 +484,8 @@ function win(){stop();
  $('hl').innerHTML=words.map(w=>`<span class="w">${w}</span>`).join(' ')+
   `<div class="sub">${last?'You cleared all 12 levels':'Level '+(L+1)+' unlocked'}</div><div class="path">${Array.from({length:MAXL},(_,i)=>`<i class="${i+1<=L?'d':''}${i===L&&!last?' ign':''}"></i>`).join('')}</div>`;
  $('celd').className='celd';
- $('celd').innerHTML=`${earned?`<div class="row"><div class="pot empty" id="winPot">${potSVG}</div><div><b>+1 growth spurt</b><small>${frenzyPots} of 2 extra today</small></div></div>`:''}
-  <div class="stat"><div><b>${total}</b><small>tools named</small></div><div><b>${tl}s</b><small>to spare${pb?' · best!':''}</small></div><div><b>${L}</b><small>level</small></div></div>
+ $('celd').innerHTML=`<div class="row lifeup"><div class="hrt"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3.2 4.5 7 4.5c2.2 0 3.6 1.2 5 3 1.4-1.8 2.8-3 5-3 3.8 0 6 3.9 4.3 7.5C19 16.4 12 21 12 21z"/></svg></div><div><b>You’ve earned a life!</b><small>${bank} ${bank===1?'life':'lives'} for the next level</small></div></div>${earned?`<div class="row"><div class="pot empty" id="winPot">${potSVG}</div><div><b>+1 growth spurt</b><small>${frenzyPots} of 2 extra today</small></div></div>`:''}
+  <div class="stat"><div><b>${total}</b><small>tools named</small></div><div><b>${tl}s</b><small>to spare${pb?' · best!':''}</small></div><div><b>${bank}</b><small>${bank===1?'life':'lives'} for next level</small></div></div>
   ${missList()}
   <button class="go" id="next">${last?'Play level 12 again':'Next level'}</button>
   <button class="lnk" id="home2">Back to BenchMark</button><button class="lnk" id="shareB" style="margin-top:4px">Show the class</button>`;
@@ -573,8 +578,8 @@ const puff=document.createElement('canvas');puff.width=puff.height=64;{const px=
   if(t>3.2&&Math.random()<.008*k)burst.push({x:Math.random()*W,y:Math.random()*H*.3,vx:-260,vy:120,l:.8,c:'#FFF6DA',r:1.4,rect:false,a:0,va:0});
   celRaf=requestAnimationFrame(frame)}
  celRaf=requestAnimationFrame(frame)}
-function fail(why){stop();thud();
- $('end').innerHTML=`<div class="lvl">Level ${L}</div><div class="big">${why==='time'?'Time’s up':'Out of lives'}</div>
+function fail(why){stop();thud();bank=lives;S.set('lives',bank);
+ $('end').innerHTML=`<div class="lvl">Level ${L}</div><div class="big">${why==='time'?'Time’s up':startLives===0?'No spare lives yet':'Out of lives'}</div>${why!=='time'&&startLives===0?'<div class="lvsub">Get every tool right to clear this level and earn a life.</div>':''}
   <div class="rank">${cleared} of ${total} named. So close. Have another go.</div>
   ${missList()}
   <button class="go" id="again">Try level ${L} again</button><button class="go alt" id="home2">Back to BenchMark</button>`;
