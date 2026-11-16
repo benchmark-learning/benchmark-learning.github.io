@@ -4180,6 +4180,7 @@ function showTab(t){
   ['enter','progress','learn','cad','ws'].forEach(x=>{const on=x===t;$('tab-'+x).hidden=!on;const b=$('tabbtn-'+x);b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});
   S.tab=t;save();
   if(t==='progress'){renderPrio();renderOverall()}if(t==='cad')renderCad();if(t==='ws'&&!$('wsHome').hidden)makeHomeStart();if(t==='learn')renderLearn();
+  const top=()=>{try{scrollTo({top:0,left:0,behavior:'instant'})}catch(e){scrollTo(0,0)}};top();requestAnimationFrame(top);
 }
 /* ---------- CAD tutorials: Mr P DTE's SketchUp videos. Add each video's ID (the part after watch?v= in its link). ---------- */
 const CAD_LIST='PLp6p320ESAGHRmRAagcbNb78Z8mTIb9Z6';
@@ -4230,7 +4231,7 @@ function loadWorkshop(){if(WSLOAD)return;WSLOAD=1;const el=document.createElemen
 document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;if(b.dataset.tab==='learn'){if(typeof tp!=='undefined'&&!tp.hidden)closePanel();LCUR=null;HUB=null}
   const t=b.dataset.tab;if(t==='ws'&&typeof wsView==='function'&&$('wsHome')&&$('wsHome').hidden)wsView('home');
   {const c=$('cadBody');if(c&&c.querySelector('.cadframe')){c.dataset.done='';c.innerHTML=''}}// stop any CAD video when leaving
-  showTab(t);scrollTo(0,0)});
+  showTab(t)});
 document.querySelector('.tabs').addEventListener('keydown',e=>{const bs=[...document.querySelectorAll('.tabs button')];const i=bs.indexOf(document.activeElement);if(i<0)return;
   if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length];n.focus();showTab(n.dataset.tab)}});
 
@@ -4358,7 +4359,7 @@ function refreshAll(){
   if(FIRSTOPEN){FIRSTOPEN=false;showTab('learn');try{history.scrollRestoration='manual'}catch(e){}scrollTo(0,0);requestAnimationFrame(()=>scrollTo(0,0))}else showTab(S.tab||'learn');
 }
 /* back after a long break (30+ min): start again on Learn at the top */
-{let hid=0;document.addEventListener('visibilitychange',()=>{if(document.hidden){hid=Date.now();return}if(hid&&Date.now()-hid>30*60*1000&&!document.getElementById('tdOv')&&!(document.querySelector('.wsx.fs'))&&!$('app').hidden){showTab('learn');scrollTo(0,0)}hid=0})}
+{let hid=0;document.addEventListener('visibilitychange',()=>{if(document.hidden){hid=Date.now();return}if(hid&&Date.now()-hid>30*60*1000&&!document.getElementById('tdOv')&&!(document.querySelector('.wsx.fs'))&&!$('app').hidden){showTab('learn');showWelcome(true);scrollTo(0,0)}hid=0})}
 
 
 /* ---------- welcome: choose a level ---------- */
@@ -4369,7 +4370,7 @@ function applyLevel(lv){
 }
 function showWelcome(on){$('welcome').hidden=!on;$('app').hidden=on;if(on){const f=document.querySelector('.lvl');if(f)f.focus({preventScroll:true});scrollTo(0,0)}}
 document.querySelector('.levels').addEventListener('click',e=>{const so=e.target.closest('button[data-soon]');if(so){$('soonX').textContent=so.dataset.soon+' is still being built. For now, use National 5 Design and Manufacture.';$('soonPop').hidden=false;$('soonN5').focus();return}
-  const b=e.target.closest('button[data-level]');if(!b)return;applyLevel(b.dataset.level);save();showWelcome(false);showTab(S.tab||'learn');maybeGate();window.scrollTo(0,0)});
+  const b=e.target.closest('button[data-level]');if(!b)return;applyLevel(b.dataset.level);save();showWelcome(false);showTab('learn');maybeGate();window.scrollTo(0,0)});
 $('soonClose').addEventListener('click',()=>{$('soonPop').hidden=true});
 $('soonPop').addEventListener('click',e=>{if(e.target.id==='soonPop')$('soonPop').hidden=true});
 $('soonN5').addEventListener('click',()=>{$('soonPop').hidden=true;document.querySelector('.levels button[data-level=N5]').click()});
@@ -6691,7 +6692,7 @@ function update(){
 renderEntry();renderExtra();
 if(VIEW&&!S.level){const first=CHECKS.find(c=>S.checks[c.id]&&Object.keys(S.checks[c.id].m||{}).length);S.level=first?first.level:'N5'}
 const chosen=S.level;applyLevel(chosen||CK(S.cur).level);if(!chosen&&!VIEW)S.level=null;
-update();showTab(VIEW?'history':(S.tab||'learn'));showWelcome(!S.level&&!VIEW);
+try{history.scrollRestoration='manual'}catch(e){}update();showTab(VIEW?'history':'learn');showWelcome(!VIEW);scrollTo(0,0);requestAnimationFrame(()=>scrollTo(0,0));
 maybeGate();
 /* deep links from the PDF plan: #go=tab:id:level */
 (function(){const m=/^#go=(\w+):([\w-]+)(?::(N5|H))?(?::t([\w-]+))?$/.exec(location.hash);if(!m||VIEW)return;try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
