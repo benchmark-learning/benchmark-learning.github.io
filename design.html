@@ -261,6 +261,7 @@ body.inbm .wrap{max-width:1100px}
 .backbtn{padding:9px 14px}
 </style></head>
 <body class="inbm">
+<script>/* arrow keys in an answer box move the cursor only */addEventListener('keydown',function(e){var t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||''))&&/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
 <div id="dfRoot"><div class="wrap">
  <div id="levels" class="hide"></div>
  <div id="hub" class="hide">

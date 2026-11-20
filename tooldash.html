@@ -300,6 +300,8 @@ html,body{margin:0;background:#EFE8E1;font-family:'Segoe UI',system-ui,-apple-sy
 </div>
 <div class="toast" id="toast"></div>
 
+<script>/* arrow, Home, End and Page keys typed in an answer box move the cursor only: nothing else on the page reacts */
+addEventListener("keydown",function(e){var t=e.target;if(!t||!(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||"")))return;if(/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
 <script src="tools.js"></script>
 <script>
 const DATA={"tools": [], "css": ".tsvg .tw{fill:#E2B27A;stroke:#8A5A2B}.tsvg .tm{fill:#D5DAE1;stroke:#4A5563}.tsvg .th{fill:#3D3D46;stroke:#1f1f25}.tsvg .tb{fill:#D9B44A;stroke:#8A6D1E}.tsvg .tr{fill:#B8323A;stroke:#6d1a1f}\n.tsvg .tw,.tsvg .tm,.tsvg .th,.tsvg .tb,.tsvg .tr{stroke-width:1.5;stroke-linejoin:round}.tsvg .lo{fill:none;stroke:#4A5563;stroke-linecap:round}.tsvg .li{fill:none;stroke:#D5DAE1;stroke-linecap:round}.tsvg .ri{fill:none;stroke:#B8323A;stroke-linecap:round}.tsvg .hl{stroke:#4A5563;stroke-width:1}"};
