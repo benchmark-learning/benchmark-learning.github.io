@@ -520,6 +520,12 @@ body.gated{overflow:hidden}
 .ppsoft .pphard{display:block;margin:6px auto 0}
 @keyframes ppfade{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.ppsoft{animation:none}}
+.stepper{display:flex;align-items:stretch;gap:0;max-width:180px}
+.stepper input{width:64px;text-align:center;font:inherit;font-weight:700;border-radius:0;border-left:0;border-right:0;-moz-appearance:textfield;appearance:textfield;margin:0}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.stepper .stp{min-width:44px;min-height:44px;font-size:22px;font-weight:700;line-height:1;cursor:pointer;border:1.5px solid currentColor;background:transparent;color:inherit}
+.stepper .stp:first-child{border-radius:12px 0 0 12px}.stepper .stp:last-child{border-radius:0 12px 12px 0}
+.planprog{display:flex;gap:6px;margin:8px 0 12px}.planprog i{width:34px;height:10px;border-radius:6px;background:#3a3d44}.planprog i.on{background:#9FE3B0}
 /* Gauge: marking engine badge */
 .gfb{margin:0 0 10px}.gfb p{margin:0 0 6px}
 .gwrap{position:relative;display:inline-block;margin:10px 0 0}
@@ -1732,8 +1738,8 @@ addEventListener("keydown",function(e){var t=e.target;if(!t||!(t.isContentEditab
 <div hidden><div id="historyList"></div></div>
 <div class="chartcard planCard" id="planCard"><h3>Make my revision plan</h3>
   <div class="settings noprint">
-    <div><label for="weeks">Weeks until prelim/final exam</label><select id="weeks"></select></div>
-    <div><label for="per">Revision sessions a week</label><select id="per"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+    <div><label for="weeks">Weeks until prelim/final exam</label><div class="stepper"><button type="button" class="stp" data-stp="weeks" data-d="-1" aria-label="One week fewer">−</button><input id="weeks" type="number" inputmode="numeric" min="1" step="1"><button type="button" class="stp" data-stp="weeks" data-d="1" aria-label="One week more">+</button></div></div>
+    <div><label for="per">Revision sessions a week</label><div class="stepper"><button type="button" class="stp" data-stp="per" data-d="-1" aria-label="One session fewer">−</button><input id="per" type="number" inputmode="numeric" min="1" step="1"><button type="button" class="stp" data-stp="per" data-d="1" aria-label="One session more">+</button></div></div>
   </div>
 <div id="overallBody"></div></div>
 </section>
@@ -4237,10 +4243,22 @@ function renderTiles(s){
 }
 
 /* ---------- plan ---------- */
+/* ---------- the plan works for both levels: N5 uses the skills-check topics (T), Higher uses the Learn topics ---------- */
+let PLV='N5';const PLANH=()=>PLV==='H';
+const hTop=k=>{try{return LEARN.H.find(t=>t.id===k)}catch(e){return null}};
+function planKeys(){return PLANH()?LEARN.H.map(t=>t.id):Object.keys(T)}
+function planW(k){if(!PLANH())return T[k].weight;let w=0;PP_H.forEach(r=>{if(r[4]===k)w+=r[2]||0});return Math.max(4,w)}
+function planName(k){return PLANH()?((hTop(k)||{}).name||k):T[k].name}
+function planSubs(k){if(!PLANH())return SUBS[k]||[];const t=hTop(k);return t?(t.body||[]).filter(b=>b[0]==='h').map(b=>b[1]).slice(0,3):[]}
+function planPast(k){if(!PLANH())return PAST[k].split(';')[0];const rs=PP_H.filter(r=>r[4]===k).sort((a,b)=>b[0]-a[0]).slice(0,3).map(r=>r[0]+' Q'+r[1]);return rs.length?rs.join(', '):'from Real exam questions in Learn'}
+const PLAN_MIN_H=5;
+function planReadyH(){let n=0;LEARN.H.forEach(t=>{const x=S.tq&&S.tq[t.id];if(x&&x[1])n++});return n}
+function liveRankedH(){PLV='H';const out=[];LEARN.H.forEach((t,i)=>{const st=topicStatus(t.id);if(st.pct!==null)out.push({k:t.id,pct:st.pct,i,pri:(1-st.pct)*planW(t.id)})});
+  out.sort((a,b)=>b.pri-a.pri||a.i-b.i);let n=0;out.forEach(t=>{t.band=t.pct>=0.8?'secure':(n++<3?'start':'next')});return out}
 /* fill any empty weeks: weakest topics come back again, spaced out (spaced practice) */
 function planFill(items,s,total){
   const weak=s.ranked.filter(t=>t.band!=='secure').slice(0,6);
-  const seen=new Set(s.ranked.map(t=>t.k)),unstarted=Object.keys(T).filter(k=>!seen.has(k)).sort((a,b)=>T[b].weight-T[a].weight).map(k=>({k,isNew:1}));
+  const seen=new Set(s.ranked.map(t=>t.k)),unstarted=planKeys().filter(k=>!seen.has(k)).sort((a,b)=>planW(b)-planW(a)).map(k=>({k,isNew:1}));
   const pool=weak.concat(unstarted).slice(0,8);if(!pool.length)s.ranked.slice(0,4).forEach(t=>pool.push(t));if(!pool.length)return;
   const lines=['Spaced review: Daily 5 style recall first, then one past paper question','Spaced review: redo Test yourself and Get exam ready without notes','Spaced review: explain it out loud or teach it to someone, then a past paper question'];
   const cnt={};let round=0;
@@ -4248,15 +4266,15 @@ function planFill(items,s,total){
     const n=cnt[t.k]=(cnt[t.k]||0)+1;items.push({k:t.k,what:t.isNew&&n===1?'New topic: work through it in Learn (Learn it, Test yourself, Get exam ready)':lines[(n-1)%lines.length]})});round++}
 }
 function buildSessions(s){
-  const total=S.weeks*S.per;const items=[];
+  PLV=s.H?'H':'N5';const total=S.weeks*S.per;const items=[];
   const todo=s.ranked.filter(t=>t.band==='start'||t.band==='next');
   todo.forEach(t=>items.push({k:t.k,what:'Learn the key facts, do the practice, check against the marking guidance'}));
-  todo.filter(t=>t.pct<0.5).forEach(t=>items.push({k:t.k,what:'Second session: past paper questions '+PAST[t.k].split(';')[0]}));
-  EXTRA.forEach(x=>items.push({x:x.n,what:'Not in the skills check: '+x.w}));
+  todo.filter(t=>t.pct<0.5).forEach(t=>items.push({k:t.k,what:'Second session: past paper questions '+planPast(t.k)}));
+  if(!s.H)EXTRA.forEach(x=>items.push({x:x.n,what:'Not in the skills check: '+x.w}));
   s.ranked.filter(t=>t.band==='secure').forEach(t=>items.push({k:t.k,what:'Quick recap: you’re secure here, so just keep it fresh'}));
   planFill(items,s,total);
   const out=items.slice(0,Math.max(total-1,1));
-  out.push({final:true,what:'Timed past paper question 1 (30 marks, about 40 minutes), marked with the marking instructions'});
+  out.push({final:true,what:s.H?'Timed practice: one full past paper question under exam conditions, marked with the marking instructions':'Timed past paper question 1 (30 marks, about 40 minutes), marked with the marking instructions'});
   return {out,more:items.length>total-1,total};
 }
 function renderSchedule(s){
@@ -4397,7 +4415,7 @@ function drawPlan(src){
   const k=6,Wpx=210*k,Hpx=297*k;const pages=[];let cv,g;
   const BG='#FFFBF5',INK='#3B3340',MUTED='#8A7D8F',HEAD='#5A1A2E',KICK='#9B7FA6',PINK='#D6336C',LILAC='#F3E8FA',TRACK='#EFE8F1',GREEN='#7CC9A0',CARDS=['#FDE2E4','#E2ECFD','#FFF1D6'];
   const newPage=()=>{cv=document.createElement('canvas');cv.width=Wpx;cv.height=Hpx;g=cv.getContext('2d');g.fillStyle=BG;g.fillRect(0,0,Wpx,Hpx);cv.links=[];cv.boxes=[];pages.push(cv)};newPage();
-  const s=src||checkSrc();const LV=S.level||'N5';const goURL=(t,id,tk)=>location.origin+location.pathname+'#go='+t+':'+id+':'+LV+(tk?':t'+tk:'');
+  const s=src||checkSrc();PLV=s.H?'H':'N5';const LV=s.H?'H':(S.level||'N5');const goURL=(t,id,tk)=>location.origin+location.pathname+'#go='+t+':'+id+':'+LV+(tk?':t'+tk:'');
   const SANS="'Segoe UI', Arial, sans-serif";
   const L=20,R=190,W=R-L,BOTTOM=283;let y=22;
   const pt=n=>n*0.3528*k;
@@ -4426,14 +4444,14 @@ function drawPlan(src){
     let col=band(p);try{if(g.createConicGradient&&p<.999){const cg=g.createConicGradient(-Math.PI/2,cx*k,cy*k),e=Math.min(.995,p);cg.addColorStop(0,'#E5484D');if(p>.3)cg.addColorStop(e/2,band(p/2));cg.addColorStop(e,band(p));cg.addColorStop(Math.min(1,e+.003),'#E5484D');cg.addColorStop(1,'#E5484D');col=cg}}catch(e){}
     if(p>0.005){g.lineCap='butt';g.strokeStyle=col;g.beginPath();g.arc(cx*k,cy*k,r*k,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,p));g.stroke();const ea=-Math.PI/2+Math.PI*2*Math.min(1,p);[[-Math.PI/2,'#E5484D'],[ea,band(p)]].forEach(([an,c])=>{g.fillStyle=c;g.beginPath();g.arc((cx+Math.cos(an)*r)*k,(cy+Math.sin(an)*r)*k,1.3*k,0,Math.PI*2);g.fill()})}g.lineCap='butt';
     t(Math.round(100*p)+'%',cx,cy+1.6,{s:11,b:true,c:HEAD,a:'center'})};
-  start.forEach((x,i)=>{const subs=(SUBS[x.k]||[]).slice(0,3),TW=W-16-24;
+  start.forEach((x,i)=>{const subs=planSubs(x.k).slice(0,3),TW=W-16-24;
     /* lay out the pills first to know the card height */
     g.font=`bold ${pt(9.5)}px ${SANS}`;const pills=[];let px=0,row=0;subs.forEach(sb=>{const w=g.measureText(sb).width/k+7;if(px&&px+w>TW){row++;px=0}pills.push({sb,x:px,row,w});px+=w+2.5});
     const h=Math.max(24,20+(subs.length?(row+1)*7:0));const y0=y-5;rr(L,y0,W,h,4,REDS[i%3]);
     g.beginPath();g.arc((L+8)*k,(y0+h/2)*k,4.6*k,0,Math.PI*2);g.fillStyle='#fff';g.fill();t(String(i+1),L+8,y0+h/2+1.5,{s:11,b:true,c:HEAD,a:'center'});
-    t(T[x.k].name,L+16,y0+7.8,{s:12.5,b:true,c:PINK,w:TW});cv.links.push({x:L,y:y0,w:W-24,h:10,url:goURL('plan',x.k)});
+    t(planName(x.k),L+16,y0+7.8,{s:12.5,b:true,c:PINK,w:TW});cv.links.push({x:L,y:y0,w:W-24,h:10,url:goURL(s.H?'learn':'plan',x.k)});
     if(subs.length){t('Priority subtopics',L+16,y0+13.6,{s:9.5,b:true,c:'#1E161A'});
-      pills.forEach(pl=>{const yy=y0+16+pl.row*7;rr(L+16+pl.x,yy,pl.w,5.6,2.8,'#fff');t(pl.sb,L+16+pl.x+3.5,yy+4,{s:9.5,b:true,c:HEAD});cv.links.push({x:L+16+pl.x,y:yy,w:pl.w,h:5.6,url:goURL('plan',x.k)})})}
+      pills.forEach(pl=>{const yy=y0+16+pl.row*7;rr(L+16+pl.x,yy,pl.w,5.6,2.8,'#fff');t(pl.sb,L+16+pl.x+3.5,yy+4,{s:9.5,b:true,c:HEAD});cv.links.push({x:L+16+pl.x,y:yy,w:pl.w,h:5.6,url:goURL(s.H?'learn':'plan',x.k)})})}
     ring(R-12,y0+h/2,7,x.pct);
     y=y0+h+11});
   if(!start.length){y+=t('Enter your marks on the planner first.',L,y)+6}
@@ -4446,13 +4464,13 @@ function drawPlan(src){
     if(y+need>BOTTOM){contHead()}
     if(nw){if(i)y+=2;t(`WEEK ${wk}`,L,y,{s:9,b:true,c:KICK})}
     else if(y<60){t(`WEEK ${wk}`,L,y,{s:9,b:true,c:KICK})}
-    const it=out[i];const name=it.final?'Timed practice: exam question 1':it.k?T[it.k].name+(it.what.startsWith('Second')?' (past papers)':''):it.x;
+    const it=out[i];const name=it.final?(s.H?'Timed practice: a full past paper question':'Timed practice: exam question 1'):it.k?planName(it.k)+(it.what.startsWith('Second')?' (past papers)':''):it.x;
     const key=tickKey(i,name),done=!!TK[key];
     const bx=L+22,by=y-4.1;rr(bx,by,4.8,4.8,1.2,done?GREEN:'#fff',done?GREEN:KICK,0.4);
     if(done){g.strokeStyle='#fff';g.lineWidth=0.7*k;g.lineCap='round';g.beginPath();g.moveTo((bx+1.1)*k,(by+2.5)*k);g.lineTo((bx+2.1)*k,(by+3.5)*k);g.lineTo((bx+3.8)*k,(by+1.3)*k);g.stroke()}
     cv.boxes.push({x:bx,y:by,w:4.8,h:4.8,name:'s'+i,on:done});
     t(name,L+30,y,{s:11.5,b:true,c:done?MUTED:PINK,w:W-30});
-    const url=it.final?goURL('learn','x-past',key):it.k?goURL('plan',it.k,key):XLEARN[it.x]?goURL('learn',XLEARN[it.x],key):null;
+    const url=it.final?(s.H?null:goURL('learn','x-past',key)):it.k?goURL(s.H?'learn':'plan',it.k,key):XLEARN[it.x]?goURL('learn',XLEARN[it.x],key):null;
     if(url)cv.links.push({x:L+29,y:y-4.8,w:Math.min(wid(name,11.5,true),W-30)+3,h:6.4,url});y+=6.6}
   if(pages.length>1)pages.forEach((pc,i)=>{g=pc.getContext('2d');g.font=`${pt(9)}px ${SANS}`;g.fillStyle=MUTED;g.textAlign='right';g.fillText(`Page ${i+1} of ${pages.length}`,R*k,291*k)});
   return pages;
@@ -4490,10 +4508,11 @@ $('planImgBtn2').addEventListener('click',()=>showPlanImage($('planImgBox2'),$('
 
 
 /* ---------- controls ---------- */
-const wk=$('weeks');for(let i=2;i<=10;i++)wk.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`);
-wk.value=S.weeks;$('per').value=S.per;
-wk.addEventListener('change',()=>{S.weeks=+wk.value;save();renderSchedule(score())});
-$('per').addEventListener('change',()=>{S.per=+$('per').value;save();renderSchedule(score())});
+const wk=$('weeks');wk.value=S.weeks;$('per').value=S.per;
+function planSet(key,v){v=Math.max(1,Math.round(+v||1));S[key]=v;$(key).value=v;save();renderSchedule(score());if(!$('tab-progress').hidden)renderOverall();
+  const st=$('ovStatus');if(st)st.textContent='';const ib=$('ovImgBox');if(ib&&!ib.hidden){ib.hidden=true;ib.innerHTML=''}}
+['weeks','per'].forEach(key=>{const el=$(key);el.addEventListener('change',()=>planSet(key,el.value));el.addEventListener('blur',()=>{if(!(+el.value>=1))planSet(key,S[key])})});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-stp]');if(!b)return;const key=b.dataset.stp;planSet(key,(S[key]||1)+(+b.dataset.d))});
 $('example').addEventListener('click',e=>{LASTY=e.currentTarget.getBoundingClientRect().top+window.scrollY;
   const ex={'1ai':0,'1aii':1,'1bi':0,'1bii':1,'1biii':1,'1biv':0,'1ci':1,'1cii':1,'1ciii':1,'1di':1,'1dii':0,'1diii':1,'1div':0,'1ei':1,'1eii':0,'1eiii':0,'1eiv':1,'2ai':2,'2aii':1,'2b':1,'2c':2,'3a':2,'3b':1,'4':1,'5':2,'6':1};
   S.m=Object.assign({},ex);curRec().date=today();curRec().ts=Date.now();save();paintEntry();$('topics').dataset.done='';update();
@@ -4801,13 +4820,16 @@ function liveRanked(){
   let n=0;out.forEach(t=>{t.band=t.pct>=0.8?'secure':(n++<3?'start':'next')});return out;
 }
 function liveSrc(){
+  if(S.level==='H'){if(planReadyH()<PLAN_MIN_H)return null;const r=liveRankedH();if(!r.length)return null;
+    return {H:true,ranked:r,big:String(S.weeks*S.per),small:`sessions over ${S.weeks} week${S.weeks===1?'':'s'}`,label:'Your plan',tag:'Higher Design and Manufacture',sub:'Revision plan',mark:x=>`Where you are now: ${Math.round(100*x.pct)}%`}}
   const r=liveRanked();if(!r.length)return null;const avg=Math.round(100*r.reduce((a,t)=>a+t.pct,0)/r.length);
   return {ranked:r,big:String(S.weeks*S.per),small:`sessions over ${S.weeks} week${S.weeks===1?'':'s'}`,label:'Your plan',tag:'National 5 Design and Manufacture',sub:'Revision plan',mark:x=>`Where you are now: ${Math.round(100*x.pct)}%`};
 }
 function renderOverall(){
-  const box=$('overallBody');if(S.level==='H'){const st=document.querySelector('#planCard .settings');if(st)st.hidden=true;box.innerHTML='<p class="sub">The Higher revision plan is coming soon. Your topic batteries above show where to focus.</p>';return}const src=liveSrc();
+  const box=$('overallBody');const src=liveSrc();
   const set=document.querySelector('#planCard .settings');if(set)set.hidden=!src;
-  if(!src){box.innerHTML=`<p class="sub">Your plan appears once you’ve done some practice in Learn.</p>`;return}
+  if(!src){if(S.level==='H'){const n=planReadyH(),left=PLAN_MIN_H-n;box.innerHTML=`<p class="sub">Your plan appears once you’ve finished <b>Test yourself</b> on ${PLAN_MIN_H} topics in Learn. You’ve done ${n} so far, so ${left} more to go.</p><div class="planprog" aria-hidden="true">${Array.from({length:PLAN_MIN_H},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')}</div><div class="row"><button type="button" class="btn" data-gotab="learn">Go to Learn</button></div>`}
+    else box.innerHTML=`<p class="sub">Your plan appears once you’ve done some practice in Learn.</p>`;return}
   const canShare=!!(navigator.share&&navigator.canShare);
   box.innerHTML=`<p class="sub">Built from everything you’ve done in Learn: exam practice, quizzes and the Daily 5. It changes as you work.</p>
    <div class="row noprint"><button class="btn" type="button" id="ovPdf">Download PDF</button><button class="btn ghost" type="button" id="ovImg">Save as a picture</button>${canShare?'<button class="btn ghost" type="button" id="ovShare">Share…</button>':''}<span class="status" id="ovStatus" aria-live="polite"></span></div>
