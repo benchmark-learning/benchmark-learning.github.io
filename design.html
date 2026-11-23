@@ -259,6 +259,8 @@ body.inbm .wrap{max-width:1100px}
 .dfh1{font-size:clamp(24px,3vw,30px);margin:0}
 .lvcount{font-size:14px}
 .backbtn{padding:9px 14px}
+#dfBusy{position:absolute;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(17,18,21,.94);color:#F3EDE6;font:600 19px/1.3 'Segoe UI',system-ui,sans-serif}#dfBusy.on{display:flex}
+.dfdots{display:inline-flex;gap:7px}.dfdots i{width:8px;height:8px;border-radius:50%;background:#F4B3C2;animation:dfdot 1.2s ease-in-out infinite}.dfdots i:nth-child(2){animation-delay:.2s}.dfdots i:nth-child(3){animation-delay:.4s}@keyframes dfdot{0%,100%{transform:scale(.6);opacity:.4}50%{transform:scale(1);opacity:1}}
 </style></head>
 <body class="inbm">
 <script>/* arrow keys in an answer box move the cursor only */addEventListener('keydown',function(e){var t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||''))&&/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
@@ -5814,8 +5816,18 @@ document.getElementById('dfLogo').outerHTML=LOGO;</script>
       const n=FXL()[f].learn.length;const seen=(s.seen||[]).slice(0,n).map(a=>new Set(a));while(seen.length<n)seen.push(new Set());
       ST[k]=Object.assign({lStep:0,qi:0,qScore:0,qAns:[],qStarted:false,exRes:{},unl:0,act:null},s,{seen,lStep:Math.min(s.lStep||0,n-1)});});
     if(all.pitch&&pitchScore===null){pitchScore=all.pitch.score;pitchRes=all.pitch.res;}}
-  const wrap=(name,after)=>{const f=window[name];window[name]=function(){const r=f.apply(this,arguments);try{after&&after()}catch(e){}save();return r;};};
+  const wrap=(name,after)=>{const f=window[name];window[name]=function(){const r=f.apply(this,arguments);try{after&&after(arguments,r)}catch(e){}save();return r;};};
+  /* results go to BenchMark so the matching Learn topic battery charges */
+  const report=o=>{if(teacher||!FE)return;try{parent.BMLab&&parent.BMLab(Object.assign({src:'design',level:LV==='higher'?'H':'N5',factor:FK},o))}catch(e){}};
+  wrap('quizRender',()=>{const s=S(),n=F().quiz.length;if(s.qi>=n)report({key:'quiz',kind:'quiz',got:s.qScore,max:n})});
+  /* exam practice counts only once every question for this factor has been answered */
+  wrap('markEx',()=>{const s=S(),ex=F().exam;if(ex.every(e=>s.exRes[e.id]!==undefined))report({key:'exam',kind:'exam',got:ex.reduce((a,e)=>a+s.exRes[e.id],0),max:ex.reduce((a,e)=>a+e.m,0)})});
   ['unlock','quizAns','markEx','markPitch','flipCard','revealCard','learnStep','fPick','labPick','labWhy','ppPick','mmPick','plcPick','egPick','sfPick'].forEach(n=>wrap(n));
+  /* loading screens: in the page's own loading screen for activities, and inside the studio for the 3D product */
+  const PB=()=>{try{return FE&&parent.BMBusy}catch(e){return null}};
+  const oGo=window.go,seenAct={};window.go=function(id){const B=PB();if(id==='activity'&&FK!=='aesthetics'&&!seenAct[LV+FK]&&B){seenAct[LV+FK]=1;const a=arguments,t=this;B.run('Loading the '+F().act.toLowerCase(),fin=>{oGo.apply(t,a);requestAnimationFrame(()=>requestAnimationFrame(fin))});return}return oGo.apply(this,arguments)};
+  function ibusy(label){let d=document.getElementById('dfBusy');if(!d){d=document.createElement('div');d.id='dfBusy';d.innerHTML='<b></b><span class="dfdots"><i></i><i></i><i></i></span>';document.getElementById('studio').appendChild(d)}d.querySelector('b').textContent=label;d.className='on';return ()=>{d.className=''}}
+  const oSP=window.startProd;window.startProd=function(k){const off=ibusy('Loading the '+PRODUCTS[k].nm.toLowerCase());const a=arguments,t=this;requestAnimationFrame(()=>requestAnimationFrame(()=>setTimeout(()=>{try{oSP.apply(t,a)}finally{setTimeout(()=>requestAnimationFrame(()=>requestAnimationFrame(off)),120)}},20)))};
   /* the iframe grows to fit its content, and fills the screen while the studio is open */
   const box=document.getElementById('dfRoot');
   function fit(){if(!FE)return;if(document.getElementById('studio').classList.contains('show'))return;FE.style.height=Math.max(520,Math.ceil(box.getBoundingClientRect().height)+8)+'px';}
@@ -5826,6 +5838,7 @@ document.getElementById('dfLogo').outerHTML=LOGO;</script>
   /* scroll the page (not the frame) back to the top of the Design tab */
   window.scrollTo=function(){if(!FE)return;try{const r=FE.getBoundingClientRect();if(r.top<0)parent.scrollBy(0,r.top-10)}catch(e){}};
   chooseLevel(lv);restore();buildHub();fit();
+  if(FE&&FE.dataset.factor&&FXL()[FE.dataset.factor])openFactor(FE.dataset.factor);
 })();
 </script>
 </body></html>
