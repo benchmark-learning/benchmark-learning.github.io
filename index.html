@@ -1314,6 +1314,28 @@ nav.tabs{display:none!important}
 .lt-make .lt-pic{z-index:0}.lt-make::before{z-index:1!important}.lt-make .wf-k,.lt-make .wf-t,.lt-make .wf-s{position:relative;z-index:2}.lt-make .td-play{z-index:3}
 .labtile .td-play{position:absolute;right:16px;bottom:16px;z-index:1;background:#F4B3C2;color:#2B141D;font-weight:800;border-radius:999px;padding:8px 20px;font-size:15px}.labtile .wf-s{padding-right:70px}
 .labmini{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.lg2{margin:0 0 18px}
+.lt-plan{background:linear-gradient(160deg,#2A2530,#1C1A20)}
+.lt-plan .lt-cal{position:absolute;right:14px;top:14px;width:132px;height:auto;opacity:.95}
+.lt-cal .c-h{fill:#F4B3C2;opacity:.9}.lt-cal .c-d{fill:#9FE3B0;opacity:.28}.lt-cal .c-n{fill:#F4B3C2;opacity:.85}.lt-cal .c-e{fill:none;stroke:#5A5464;stroke-width:1.5}
+.lt-cal .c-tk{fill:none;stroke:#9FE3B0;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lt-plan .wf-s,.lt-cad .wf-s{max-width:64%}
+.lt-segs{position:relative;display:flex;gap:5px;margin:6px 0 8px}.lt-segs i{width:28px;height:9px;border-radius:6px;background:#3E3A45}.lt-segs i.on{background:#9FE3B0}
+.lt-bats{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px;font-size:12.5px;font-weight:700}
+.lt-bats span{border-radius:999px;padding:3px 9px}.lt-bats .b-l{background:rgba(242,160,168,.18);color:#F7B7BE}.lt-bats .b-m{background:rgba(242,196,109,.16);color:#F2CF8E}.lt-bats .b-h{background:rgba(124,201,160,.18);color:#A6E3C2}
+.lt-plan.is-ready .td-play{background:#9FE3B0}
+.lt-cad{background-color:#1B2230;background-image:linear-gradient(rgba(168,200,240,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(168,200,240,.07) 1px,transparent 1px);background-size:16px 16px}
+.lt-cad .wf-k{color:#A8C8F0}
+.lt-cadart{position:absolute;right:8px;top:8px;width:180px;height:auto}
+.lt-cadart .f-top{fill:rgba(168,200,240,.22)}.lt-cadart .f-l{fill:rgba(168,200,240,.12)}.lt-cadart .f-r{fill:rgba(168,200,240,.06)}.lt-cadart .f-cut{fill:rgba(244,179,194,.25)}
+.lt-cadart .cd-solid path{stroke:#A8C8F0;stroke-width:1.6;stroke-linejoin:round}.lt-cadart .f-edge{fill:none}
+.lt-cadart .cd-dim path{stroke:#8A93A6;stroke-width:1;fill:none}.lt-cadart .cd-dim text{fill:#8A93A6;font:600 10px system-ui,sans-serif}
+.lt-cadart .cd-axes path{stroke-width:2.2;stroke-linecap:round}.ax-z{stroke:#9FE3B0}.ax-x{stroke:#F4B3C2}.ax-y{stroke:#A8C8F0}
+.lt-cadart .cd-cur path{fill:#FFF6E6;stroke:#1B2230;stroke-width:1}
+.lt-cadn{position:relative;display:inline-block;align-self:flex-start;margin:4px 0 8px;font-size:12.5px;font-weight:700;color:#A8C8F0;background:rgba(168,200,240,.14);border-radius:999px;padding:3px 10px}
+.lt-cad .td-play{background:#A8C8F0}
+@media (max-width:520px){.lt-plan .td-play,.lt-cad .td-play{position:relative;right:auto;bottom:auto;align-self:flex-start;margin-top:12px}.lt-plan .wf-s,.lt-cad .wf-s{padding-right:0!important}.lt-plan .lt-cal{width:96px;right:10px;top:10px}.lt-cadart{width:128px}.lt-plan .wf-s,.lt-cad .wf-s{max-width:100%}.lt-plan,.lt-cad{padding-top:86px}}
+
 .labm{font:inherit;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid #33363C;background:#1F2125;color:#E6E0EA;border-radius:999px;padding:9px 16px;font-size:14.5px}
 .labm:hover{border-color:#F4B3C2;color:#fff}
 .homeback{font:inherit;cursor:pointer;border:1px solid #3A3D44;background:#23252A;color:#fff;border-radius:999px;padding:8px 16px;font-size:14.5px;margin:0 0 12px}
@@ -1490,6 +1512,33 @@ nav.tabs button[data-tab][aria-selected="true"]{border:2px solid #F4B3C2!importa
 .flagq:hover,.flagq:focus-visible{background:rgba(229,72,77,.22)!important;color:#FF8A8C!important}
 .flagq .flagic{flex:0 0 auto}
 .flagq.done{border-color:#2FB565!important;background:rgba(47,181,101,.14)!important;color:#9FE3B8!important;cursor:default}
+/* v10.18 homework pop-up (replaces the Daily 5 on opening) */
+.hwpop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(14,12,16,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:ppfade .2s ease-out}
+.hwbox{max-width:420px;width:100%;background:linear-gradient(160deg,#2D2A33,#1E1C22);border:1px solid #17181B;border-top:6px solid #F4B3C2;border-radius:22px;padding:22px 22px 20px;color:#E9E7EC;box-shadow:0 20px 50px rgba(0,0,0,.55);text-align:left}
+.hw-k{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F4B3C2;margin-bottom:10px}
+.hw-who{margin:0 0 10px;font-size:17.5px;line-height:1.45;color:#FFFFFF}.hw-who b{color:#FFE3EA}
+.hwbox h2{display:flex;align-items:center;gap:12px;margin:0 0 16px;font-family:var(--display,Georgia,serif);font-size:26px;line-height:1.2;color:#FFF6E6}
+.hw-bat{flex:none;display:flex;filter:drop-shadow(0 0 10px rgba(255,46,154,.55))}.hw-bat svg{display:block}
+.hw-count{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}.hw-count b{font-size:52px;line-height:1;font-weight:800;color:#9FE3B0}
+.hw-count.c-r b{color:#FF8A95}.hw-count.c-a b{color:#FFC861}.hw-count.c-g b{color:#7FE0A6}
+.hw-bar.c-r i{background:linear-gradient(90deg,#FF6B7A,#FF9AA4)}.hw-bar.c-a i{background:linear-gradient(90deg,#FFB547,#FFD38A)}.hw-bar.c-g i{background:linear-gradient(90deg,#5FD592,#A6EBC4)}
+.hw-lock{display:flex;gap:10px;align-items:center;margin:0 0 16px;font-size:14.5px;line-height:1.4;color:#FFE3EA;background:rgba(255,46,154,.12);border:1px solid rgba(255,46,154,.45);border-radius:12px;padding:10px 12px}.hw-lock svg{flex:none}
+.hw-later{display:block;margin:12px auto 0;background:none;border:0;color:#CFCAD6;text-decoration:underline;font:inherit;font-size:15px;cursor:pointer;min-height:40px}
+.hwtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:2147483001;display:flex;align-items:center;gap:10px;max-width:min(420px,92vw);background:#24212A;color:#fff;border:1px solid rgba(255,46,154,.6);border-radius:16px;padding:10px 14px;box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:15px;animation:ppfade .2s ease-out}.hwtoast svg{flex:none}.hw-count span{font-size:18px;font-weight:700;color:#E9E7EC}
+.hw-bar{height:12px;border-radius:8px;background:#3E3A45;overflow:hidden}.hw-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#9FE3B0,#A8C8F0)}
+.hw-meta{margin:8px 0 12px;font-size:13.5px;color:#BDB7C6}
+.hw-how{margin:0 0 18px;font-size:14px;line-height:1.45;color:#CFCAD6;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px}
+.hw-go{width:100%;min-height:52px;border:0;border-radius:14px;background:#9FE3B0;color:#16301F;font-family:inherit;font-size:17px;font-weight:800;cursor:pointer}
+.hw-go:hover{filter:brightness(1.05)}.hw-go:focus-visible{outline:3px solid #FFF6E6;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.hwpop{animation:none}}
+.flagask{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,11,13,.55);animation:ppfade .15s ease-out}
+.flagask .fa-card{max-width:360px;width:100%;background:#24262B;border:1.5px solid #4A4D55;border-radius:18px;padding:18px;color:#E6E7EA;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.flagask .fa-t{display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-weight:800;font-size:17px;line-height:1.35;color:#FFF6E6}.flagask .fa-t svg{flex:none;color:#F4B3C2;margin-top:1px}
+.flagask .fa-d{margin:0 0 14px;font-size:14.5px;line-height:1.45;color:#C9CCD1}
+.flagask .fa-row{display:flex;gap:10px}.flagask .fa-row .btn{flex:1;min-height:46px;margin:0}
+.flagask .btn[data-fa=yes]{background:#F4B3C2;border-color:#F4B3C2;color:#2B141D;font-weight:800}
+.flagask .btn.ghost{background:transparent;border:1.5px solid #6A6D75;color:#E6E7EA}
+@media (prefers-reduced-motion:reduce){.flagask{animation:none}}
 .flagwrap{display:flex;justify-content:flex-end;margin:0 0 8px}
 .flagwrap.fwbottom{justify-content:flex-start;margin:18px 0 2px}.flagwrap.fwbottom .flagq{margin-left:0!important;font-size:14px!important}
 .lmc .dtag,.tq .dtag{margin:0 0 10px;align-self:flex-start;width:fit-content;max-width:100%}
@@ -1531,7 +1580,20 @@ body .topbar,body .topbar.bar-mint,body .topbar.bar-black{background:transparent
 .lvl-beta{position:absolute;right:12px;top:10px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid #F7C3A0;color:#F7C3A0;border-radius:6px;padding:0 5px}
 .lvl-soon{font-size:12px;font-weight:700;color:#BFC3C8;border:1px solid #4A4B52;border-radius:999px;padding:2px 10px}
 .lvl[data-soon]{opacity:.92}
-@media (max-width:520px){.levels{grid-template-columns:1fr 1fr!important;gap:10px!important}.lvl{padding:16px 10px!important;gap:6px!important}.lvl-big{width:64px!important;height:64px!important;font-size:30px!important}.lvl-name{font-size:18px!important}.lvl-subj{font-size:10px!important;text-align:center}.lvl.p1{grid-column:1/-1}}
+@media (max-width:520px){.levels{grid-template-columns:1fr 1fr!important;gap:10px!important}.lvl{padding:16px 10px!important;gap:6px!important}.lvl-big{width:64px!important;height:64px!important;font-size:30px!important}.lvl-name{font-size:18px!important}.lvl-subj{font-size:10px!important;text-align:center}}
+/* v10.17: every course tile the same size. Desktop: centred rows of equal tiles (3 + 2). Phone: full-width tiles, circle on the left. */
+.levels{display:flex!important;flex-wrap:wrap;justify-content:center;gap:16px!important}
+.levels .lvl{flex:0 0 calc((100% - 32px)/3);box-sizing:border-box;min-height:300px;justify-content:center;position:relative;margin:0}
+@media (max-width:760px){.levels .lvl{flex-basis:calc((100% - 16px)/2)}}
+@media (max-width:520px){
+ .levels{flex-direction:column;flex-wrap:nowrap;gap:12px!important}
+ .levels .lvl{flex:none;width:100%;min-height:128px;display:grid!important;grid-template-columns:76px 1fr;grid-template-areas:"c s" "c n" "c t";column-gap:16px!important;row-gap:2px!important;align-items:center;align-content:center;justify-items:start;text-align:left;padding:16px 18px!important}
+ .levels .lvl .lvl-big{grid-area:c;width:72px!important;height:72px!important;font-size:30px!important}
+ .levels .lvl .lvl-subj{grid-area:s;text-align:left!important;font-size:11px!important;margin:0}
+ .levels .lvl .lvl-name{grid-area:n;font-size:22px!important}
+ .levels .lvl .lvl-soon{grid-area:t;margin-top:4px}
+ .levels .lvl .lvl-beta{top:12px;right:12px}
+}
 .soonpop{position:fixed;inset:0;z-index:400;background:rgba(10,10,12,.55);display:flex;align-items:center;justify-content:center;padding:20px}.soonpop[hidden]{display:none}
 .soonbox{background:#232428;color:#F4F4F6;border:1px solid #3A3B41;border-radius:20px;padding:22px 22px 18px;max-width:380px;box-shadow:0 20px 50px rgba(0,0,0,.5)}.soonbox .btn.ghost{color:#F4F4F6!important;border-color:#4A4B52!important;background:transparent!important}.soonbox h2{margin:0 0 8px;font-family:Georgia,serif;color:#F4B3C2}.soonbox p{margin:0 0 14px;line-height:1.45}
 .cadlede{margin:0 0 14px;color:#BFC3C8}.cadlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:12px}
@@ -6516,7 +6578,25 @@ function labTilesHTML(lv){if(VIEW)return '';const H=lv==='H',fs=H?['function','p
   const mSub=H?'The factories, the workshop, bench skills and the tool library, all in 3D.':'The workshop, bench skills, the factory and the tool library, all in 3D.';
   return `<div class="labgrid"><button type="button" class="labtile lt-design" data-gotab="design"><span class="wf-k">Lab</span><span class="wf-t">Design lab</span><span class="lt-fs${fs.length>5?' six':''}">${ics}</span><span class="wf-s">Learn each design factor, quiz yourself, then try exam practice.</span><span class="td-play">Open</span></button>
    <button type="button" class="labtile lt-make" data-gotab="ws"><img class="lt-pic" src="${MKLAB_PIC}" alt=""><span class="wf-k">Lab</span><span class="wf-t">Make lab</span><span class="wf-s">${mSub}</span><span class="td-play">Open</span></button></div>
-   <div class="labmini"><button type="button" class="labm" data-gotab="cad">${labIc('cad')}<span>CAD tutorials</span></button><button type="button" class="labm" data-gotab="progress">${labIc('prog')}<span>My progress and revision plan</span></button></div>`}
+   <div class="labgrid lg2">${planTileHTML(lv)}${cadTileHTML()}</div>`}
+/* v10.15: revision plan and CAD tiles (Niall: make both much clearer and more engaging) */
+function planTileHTML(lv){const H=lv==='H';let ready=false;try{ready=!!liveSrc()}catch(e){}
+  let low=0,mid=0,hi=0;try{LEARN[lv].forEach(t=>{const p=topicStatus(t.id).pct;if(p==null)return;if(p>=0.8)hi++;else if(p>=0.5)mid++;else low++})}catch(e){}
+  const n=H?planReadyH():0,need=H?PLAN_MIN_H:0;
+  const cal=`<svg class="lt-cal" viewBox="0 0 132 104" aria-hidden="true">${Array.from({length:15},(_,i)=>{const c=i%5,r=Math.floor(i/5),x=4+c*26,y=26+r*26,st=i<6?'d':i===6?'n':'e';
+     return `<rect x="${x}" y="${y}" width="20" height="20" rx="6" class="c-${st}"/>${st==='d'?`<path d="M${x+5} ${y+10.5}l3.5 3.5 6.5-7" class="c-tk"/>`:''}`}).join('')}<rect x="4" y="4" width="124" height="14" rx="5" class="c-h"/></svg>`;
+  const segs=H&&!ready?`<span class="lt-segs" aria-hidden="true">${Array.from({length:need},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')}</span>`:'';
+  const sub=ready?`Your plan is ready. It puts your weakest topics first and changes as you practise.`:H?`Finish <b>Test yourself</b> on ${need} topics to unlock it: ${n} of ${need} done.`:`Practise a topic in Learn and your plan appears here.`;
+  const chips=(low+mid+hi)?`<span class="lt-bats"><span class="b-l">${low} low</span><span class="b-m">${mid} charging</span><span class="b-h">${hi} charged</span></span>`:'';
+  return `<button type="button" class="labtile lt-plan${ready?' is-ready':''}" data-gotab="progress"${ready?' data-toplan="1"':''}>${cal}<span class="wf-k">${ready?'Ready':'Plan'}</span><span class="wf-t">Revision plan</span>${segs}${chips}<span class="wf-s">${sub}</span><span class="td-play">${ready?'See my plan':'My progress'}</span></button>`}
+function cadTileHTML(){const n=(typeof CAD_VIDEOS!=='undefined'?CAD_VIDEOS.length:16);
+  const art=`<svg class="lt-cadart" viewBox="0 0 180 130" aria-hidden="true"><g class="cd-dim"><path d="M30 104 L86 126"/><path d="M28 98v12M88 120v12"/><text x="48" y="128">120</text></g>
+   <g class="cd-solid"><path d="M30 64 L86 86 L150 58 L94 36 Z" class="f-top"/><path d="M30 64 L30 98 L86 120 L86 86 Z" class="f-l"/><path d="M86 86 L86 120 L150 92 L150 58 Z" class="f-r"/>
+   <ellipse cx="90" cy="61" rx="21" ry="10" transform="rotate(-21 90 61)" class="f-cut"/><path d="M70 64 a21 10 -21 0 0 41 -6" class="f-edge" transform="translate(0 6)" opacity=".55"/></g>
+   <g class="cd-axes"><path d="M152 20v-14" class="ax-z"/><path d="M152 20l12 6" class="ax-x"/><path d="M152 20l-12 6" class="ax-y"/></g>
+   <g class="cd-cur"><path d="M120 92 l0 16 4.5-4.5 3.2 7 3-1.4-3.2-7 6.3-.2z"/></g></svg>`;
+  return `<button type="button" class="labtile lt-cad" data-gotab="cad">${art}<span class="wf-k">Video tutorials</span><span class="wf-t">CAD</span><span class="lt-cadn">${n} short videos</span><span class="wf-s">Step by step from your first 2D shape to full 3D models and components.</span><span class="td-play">Watch</span></button>`}
+document.addEventListener('click',e=>{if(e.target.closest('[data-toplan]'))setTimeout(()=>{const c=$('planCard');c&&c.scrollIntoView({behavior:'smooth',block:'start'})},80)});
 document.addEventListener('click',e=>{if(e.target.closest('[data-gohome]')){e.preventDefault();goHome()}});
 function renderLearnList(lv){
   const list=LEARN[lv];LCUR=null;LGROUPS=lgroups(lv);
@@ -6774,7 +6854,47 @@ window.addEventListener('scroll',hideCw,{passive:true});
 /* ---------- Daily 5 gate: complete today's Daily 5 before using the site ---------- */
 const gate=document.createElement('div');gate.id='d5gate';gate.className='d5gate';gate.hidden=true;gate.setAttribute('role','dialog');gate.setAttribute('aria-modal','true');gate.setAttribute('aria-labelledby','gateTitle');document.body.appendChild(gate);
 const gateDone=()=>!!(S.streak&&S.streak.d===sday());
+/* v10.18 (Niall, 24 Nov): the Daily 5 is switched off for now. In its place, every time the site or app opens, a homework pop-up:
+   supercharge every topic in Learn by Christmas, with the pupil's own count of topics still to go. Set D5_OFF=false to bring the Daily 5 back. */
+const HW_END=new Date(2026,11,20);/* homework mode runs up to and including Fri 19 December 2026 */
+const D5_OFF=Date.now()<HW_END.getTime();let HW_SHOWN=false,HW_HID=0;
+const SUPER_T={p:1,b:1,o:1,l:1};
+function hwCount(){const lv=S.level==='H'?'H':'N5';let tot=0,n=0;try{LEARN[lv].forEach(t=>{tot++;if(SUPER_T[topicStatus(t.id).tier])n++})}catch(e){}return {lv,tot,n,left:tot-n}}
+function hwDays(){const now=new Date(),x=new Date(2026,11,20);return Math.ceil((x-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5)}
+/* the lock: until a pupil supercharges at least one new topic today, only Learn is open */
+function hwSupSet(){const lv=S.level==='H'?'H':'N5';const s=[];try{LEARN[lv].forEach(t=>{if(SUPER_T[topicStatus(t.id).tier])s.push(t.id)})}catch(e){}return s}
+function hwBase(){const d=sday();if(!S.hwday||S.hwday.d!==d){S.hwday={d,base:{}}}const lv=S.level==='H'?'H':'N5';if(!S.hwday.base[lv]){S.hwday.base[lv]=hwSupSet();try{save()}catch(e){}}return S.hwday.base[lv]}
+function hwUnlocked(){if(!D5_OFF||VIEW)return true;const c=hwCount();if(c.left<=0)return true;const base=hwBase();return hwSupSet().some(id=>!base.includes(id))}
+const HW_LOCKED_SEL='[data-gotab="design"],[data-gotab="ws"],[data-gotab="cad"],[data-gotab="progress"],[data-gotab="tools"],[data-tooldash],[data-dlab],[data-mlab],.lt-plan,.lt-cad,#jumpPlan';
+function hwBlock(){document.querySelectorAll('.hwblock').forEach(x=>x.remove());const o=document.createElement('div');o.className='hwpop hwblock';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','hwbT');
+  o.innerHTML=`<div class="hwbox"><span class="hw-k">${hwBat(20)}Homework first</span><h2 id="hwbT">You can’t do this until you supercharge at least 1 topic today</h2><p class="hw-who">Pick a topic in Learn and get its battery to supercharged. Then everything opens up again for the rest of the day.</p><button type="button" class="hw-go" data-hwb="go">Go to my topics</button><button type="button" class="hw-later" data-hwb="x">Not now</button></div>`;
+  document.body.appendChild(o);o.addEventListener('click',e=>{const b=e.target.closest('[data-hwb]');if(!b&&e.target!==o)return;o.remove();if(b&&b.dataset.hwb==='go')hwToTopics()});
+  setTimeout(()=>{const b=o.querySelector('[data-hwb=go]');b&&b.focus()},40)}
+document.addEventListener('click',e=>{if(!D5_OFF)return;const t=e.target.closest(HW_LOCKED_SEL);if(!t||hwUnlocked())return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();hwBlock()},true);
+function hwToTopics(){try{if(typeof tp!=='undefined'&&!tp.hidden)closePanel()}catch(e){}if(!$('welcome').hidden)return;LCUR=null;HUB=null;showTab('learn');renderLearnList(S.level||'N5');
+  setTimeout(()=>{const t=document.querySelector('#learnBody .learnhead')||document.querySelector('#learnBody [data-lt]');t?t.scrollIntoView({behavior:'smooth',block:'start'}):scrollTo(0,0)},80)}
+let HW_WAS=null;function hwCheckUnlock(){if(!D5_OFF||VIEW)return;const u=hwUnlocked();if(HW_WAS===false&&u){const t=document.createElement('div');t.className='hwtoast';t.setAttribute('role','status');t.innerHTML=`${hwBat(22)}<span><b>Topic supercharged!</b> Everything is open again for today.</span>`;document.body.appendChild(t);setTimeout(()=>t.remove(),5200)}HW_WAS=u}
+const hwBat=z=>batSVG('p',z);
+function hwShow(){let o=document.getElementById('hwpop');if(o)o.remove();const c=hwCount(),d=hwDays(),lvN=c.lv==='H'?'Higher':'National 5',pc=c.tot?Math.round(100*c.n/c.tot):0;
+  o=document.createElement('div');o.id='hwpop';o.className='hwpop';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','hwT');o.setAttribute('aria-describedby','hwD');
+  const band=c.left<=0?'g':c.left<5?'g':c.left<10?'a':'r';HW_WAS=hwUnlocked();
+  o.innerHTML=`<div class="hwbox"><span class="hw-k"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Homework</span>
+   <p class="hw-who">If you’re in <b>Mr Patterson’s Higher or National 5 class</b>, your homework is to:</p>
+   <h2 id="hwT"><span class="hw-bat" aria-hidden="true">${hwBat(54)}</span><span>Supercharge every topic in Learn by Christmas</span></h2>
+   <div class="hw-count c-${band}" id="hwD">${c.left>0?`<b>${c.left}</b><span>topic${c.left===1?'':'s'} to go</span>`:`<b>✓</b><span>Every topic supercharged. Brilliant work!</span>`}</div>
+   <div class="hw-bar c-${band}" role="img" aria-label="${c.n} of ${c.tot} ${lvN} topics supercharged"><i style="width:${pc}%"></i></div>
+   <p class="hw-meta">${c.n} of ${c.tot} ${lvN} topics supercharged${d>0?` · ${d} day${d===1?'':'s'} left (until Friday 19 December)`:''}</p>${HW_WAS?'':`<p class="hw-lock">${hwBat(20)}<span>Supercharge at least <b>1 topic today</b> to open the Design lab, Make lab, ${c.lv==='H'?'':'Tool Dash, '}CAD and your revision plan.</span></p>`}
+   <p class="hw-how">A topic is supercharged when its battery is full and you’ve got real past paper questions right.</p>
+   <button type="button" class="hw-go" id="hwGo">${c.left>0?'Continue to supercharge':'Keep them charged'}</button></div>`;
+  document.body.appendChild(o);document.body.classList.add('gated');HW_SHOWN=true;
+  $('hwGo').addEventListener('click',()=>{o.remove();document.body.classList.remove('gated');try{if(typeof tp!=='undefined'&&!tp.hidden)closePanel()}catch(e){}
+    hwToTopics()});
+  o.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();$('hwGo').focus()}if(e.key==='Escape'){e.preventDefault();e.stopPropagation()}});
+  setTimeout(()=>{const b=$('hwGo');b&&b.focus()},40)}
+function hwMaybe(){if(BM_BLOCK)return;const dm=document.getElementById('devModal');if(dm&&!dm.hidden)return;if(VIEW||!$('welcome').hidden)return;if(HW_SHOWN||document.getElementById('hwpop'))return;hwShow()}
+document.addEventListener('visibilitychange',()=>{if(!D5_OFF)return;if(document.hidden){HW_HID=Date.now()}else if(HW_HID&&Date.now()-HW_HID>60000&&!document.getElementById('hwpop')){HW_SHOWN=false;hwMaybe()}});
 function maybeGate(){
+  if(D5_OFF){gate.hidden=true;if(!document.getElementById('hwpop')&&!(typeof tp!=='undefined'&&!tp.hidden))document.body.classList.remove('gated');hwMaybe();return}
   if(BM_BLOCK){gate.hidden=true;return}
   {const dm=document.getElementById('devModal');if(dm&&!dm.hidden){gate.hidden=true;document.body.classList.remove('gated');return}}
   if(VIEW||!$('welcome').hidden||gateDone()){gate.hidden=true;document.body.classList.remove('gated');return}
@@ -6851,7 +6971,7 @@ function dgNote(){if(DG_RETRY)return `<div class="dg-note"><b>Your pine needs re
 function dgRetry(){DAILY={day:sday(),qs:DAILY.qs,i:0,right:0,done:false,ans:{}};DG_RETRY=false}
 const SPROUTS=n=>Array.from({length:n},()=>'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18V9" stroke="#0F2A14" stroke-width="2.2" stroke-linecap="round"/><path d="M10 11C6 11 4 8 4 5c4 0 6 2 6 6zM10 9c0-4 3-6 6-6 0 4-2 6-6 6z" fill="#0F2A14"/></svg>').join('');
 const CLOVER='<svg class="dg-clover" viewBox="-13 -13 26 26" aria-hidden="true"><path d="M0 1Q-2 7-8 9.5Q-10.2 10.3-10.8 9.2" stroke="#5DB84A" stroke-width="1.6" fill="none" stroke-linecap="round"/>'+[-8,82,172,262].map(r=>`<g transform="rotate(${r})"><path d="M0-1.2C-3-3-5.8-5.6-5.2-8.4C-4.6-10.8-1.4-10.8 0-8.8C1.4-10.8 4.6-10.8 5.2-8.4C5.8-5.6 3-3 0-1.2Z" fill="#7FD36B"/><path d="M0-1.2C3-3 5.8-5.6 5.2-8.4C4.9-9.8 3.6-10.4 2.4-10.1C3.4-7.6 2.2-4 0-1.2Z" fill="#5DB84A"/></g>`).join('')+'</svg>';
-function dgTileHTML(){if(!window.DG)return '';window.DG.setDate();
+function dgTileHTML(){if(!window.DG||D5_OFF)return '';window.DG.setDate();
   const g=G0(),h=dgHealth(),st=g.st,td=sday(),done=g.last===td,sp=dgSp(),ev=window.DG.EV();
   const shown=st,hs=st?Math.min(h,3):0;
   const pill=!st?'Plant your seed':h>=3?'Needs reviving':h?`${g.days} days of growth · thirsty`:`${g.days} day${g.days===1?'':'s'} of growth`;
@@ -6866,7 +6986,7 @@ function dgTileHTML(){if(!window.DG)return '';window.DG.setDate();
    <button type="button" class="dg-hit" data-dgview="1" aria-label="See your garden"></button>
    <div class="dg-body"><span class="dg-eb">Daily Zen</span><span class="dg-h">${st?`Stage ${st} of 100`:'Stage 1 of 100'}</span>${ev.luck?`<span class="dg-luck">${ev.luck}${CLOVER}</span>`:''}<span class="dg-bar" aria-hidden="true"><i style="width:${Math.max(1,st)}%"></i></span>${body}</div></div></div>`}
 const DZFINGER='<svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ring" cx="4.6" cy="7.6" r="0" fill="none" stroke="#FFFFFF" stroke-width=".9"/><circle class="ring ring2" cx="4.6" cy="7.6" r="0" fill="none" stroke="#FFFFFF" stroke-width=".7"/><g class="fing"><path d="M9 4.5c0-1 .7-1.7 1.6-1.7s1.6.7 1.6 1.7v6.2l.6-.1c.3-1 1.2-1.4 2-1.1.6.2 1 .7 1.1 1.3l.6-.1c.4-.7 1.2-1 2-.7.7.3 1.1 1 1.1 1.7v4.6c0 3.6-2.6 6.2-6.2 6.2h-1.4c-2 0-3.4-.8-4.6-2.4L3.2 15c-.6-.8-.4-1.9.4-2.4.7-.5 1.7-.3 2.3.3L9 15.4z" fill="#FFD23F" stroke="#1a1a1a" stroke-width="1.2" stroke-linejoin="round"/></g></svg>';
-function dzIntro(){let seen=false;try{seen=localStorage.getItem('dz-intro')==='1'}catch(e){}if(seen||VIEW||!window.DG)return;if(document.querySelector('.rv,.gpop,.dz-fv,.d5pop'))return;if(typeof gate!=='undefined'&&!gate.hidden)return;
+function dzIntro(){if(D5_OFF)return;let seen=false;try{seen=localStorage.getItem('dz-intro')==='1'}catch(e){}if(seen||VIEW||!window.DG)return;if(document.querySelector('.rv,.gpop,.dz-fv,.d5pop'))return;if(typeof gate!=='undefined'&&!gate.hidden)return;
   try{localStorage.setItem('dz-intro','1')}catch(e){}const st=G0().st,f=document.createElement('div');f.className='dz-fv';f.setAttribute('role','dialog');f.setAttribute('aria-modal','true');f.setAttribute('aria-labelledby','dzfvh');
   f.innerHTML=`<div class="dz-fvbox"><div class="pic">${window.DG.garden('dzfv'+Date.now(),st,0)}</div><div class="in"><span class="eb">Take a breath…</span><h3 id="dzfvh">You’ve unlocked your Daily Zen</h3><p class="tag">Grow your knowledge, grow your garden</p>
   <p>Come back every day. Each Daily 5 builds your garden, and new stages bring new trees, a pond, animals and more.</p><button type="button">See my garden</button></div></div>`;
@@ -7505,7 +7625,7 @@ const ragDot=id=>miniIcon(topicStatus(id).tier);
 function ragDot2(b){return miniIcon(b)}
 /* level-up pop-up */
 const LVH={a:'Getting there!',g:'Fully powered!',p:'Supercharged!',b:'Battery installed!',o:'Rolling out!',l:'We have lift-off!'};
-function topicCelebrate(id,bf){
+function topicCelebrate(id,bf){setTimeout(()=>{try{hwCheckUnlock()}catch(e){}},1400);
   if(VIEW||!bf)return;const st=topicStatus(id),t=LFIND(id);if(!t)return;
   const a=TIERS.indexOf(bf.tier||bf.band),b=TIERS.indexOf(st.tier);if(b<=a||b<2)return;
   let o=$('blvl');
@@ -7986,10 +8106,21 @@ function gcLoad(){if(window.goatcounter&&window.goatcounter.count)return;if(docu
  sc.onload=()=>{const q=GC_Q;GC_Q=[];q.forEach(gcSend)};sc.onerror=()=>{const q=GC_Q;GC_Q=[];q.forEach(gcPixel)};document.head.appendChild(sc)}
 function gcPixel(f){try{new Image().src=GC_URL+'?p='+encodeURIComponent(f.l)+'&t='+encodeURIComponent(f.t)+'&e=true&rnd='+Math.random().toString(36).slice(2)}catch(e){}}
 function gcSend(f){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:f.l,title:f.t,event:true});return}}catch(e){}gcPixel(f)}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-flag]');if(!b||b.disabled)return;const f={id:b.dataset.flag,l:b.dataset.flagl||b.dataset.flag,t:b.dataset.flagt||''};
+/* v10.16: ask before flagging, so a stray tap doesn't send a flag (pupils reported accidental flags) */
+function flagAsk(b){document.querySelectorAll('.flagask').forEach(x=>x.remove());const back=document.activeElement;
+  const d=document.createElement('div');d.className='flagask';d.setAttribute('role','alertdialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-labelledby','flagAskT');d.setAttribute('aria-describedby','flagAskD');
+  d.innerHTML=`<div class="fa-card"><p class="fa-t" id="flagAskT"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 21V4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M5 4h11l-2.2 4L16 12H5" fill="currentColor"/></svg>Are you sure you want to flag this question?</p>
+   <p class="fa-d" id="flagAskD">It tells your teacher the question was confusing or not something you’ve been taught.</p>
+   <div class="fa-row"><button type="button" class="btn ghost" data-fa="no">No</button><button type="button" class="btn" data-fa="yes">Yes, flag it</button></div></div>`;
+  const close=()=>{d.remove();document.removeEventListener('keydown',key,true);try{(back&&back.focus)?back.focus():b.focus()}catch(e){}};
+  const key=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close()}};
+  d.addEventListener('click',e=>{e.stopPropagation();const a=e.target.closest('[data-fa]');if(a&&a.dataset.fa==='yes'){close();flagDo(b)}else if(a||e.target===d)close()});
+  document.addEventListener('keydown',key,true);document.body.appendChild(d);setTimeout(()=>{const n=d.querySelector('[data-fa=no]');n&&n.focus()},30)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-flag]');if(!b||b.disabled)return;e.preventDefault();e.stopPropagation();flagAsk(b)},true);
+function flagDo(b){if(!b||b.disabled)return;const f={id:b.dataset.flag,l:b.dataset.flagl||b.dataset.flag,t:b.dataset.flagt||''};
  const all=flagged();all[f.id]=sday();try{localStorage.setItem('bm-flags',JSON.stringify(all))}catch(e){}
  if(window.goatcounter&&window.goatcounter.count)gcSend(f);else{GC_Q.push(f);gcLoad()}
- b.disabled=true;b.classList.add('done');const sp=b.querySelector('span');if(sp)sp.textContent='Flagged. Thanks!';else b.textContent='Flagged. Thanks!'},true);
+ b.disabled=true;b.classList.add('done');const sp=b.querySelector('span');if(sp)sp.textContent='Flagged. Thanks!';else b.textContent='Flagged. Thanks!'}
 let PPCTXS=null;
 /* after marking, show the spellings to learn: markers must be able to recognise the key word, so it is worth getting right in the exam */
 const BMNONOTE=new Set(['ergonomic','ergonomical','anthropometric','thermoset','thermosetts','thermosett','comfy','alot','tak','incase','ok','doesnt','dosent','becuase','becasue','beacuse','untill']),BMUS=new Set(['color','colors','colored','aluminum','caliper','calipers','labor','mold','molds','molding','vise','esthetics','gage']);
