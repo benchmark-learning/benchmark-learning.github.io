@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flashcard Dash</title>
+<style>
+:root{--bg:#111518;--ink:#3B3340;--cream:#FFFBF5;--mint:#9FE3B0;--rose:#F2A0A8;--amber:#F2C46D;--lil:#CDB6F2;--pink:#F4B3C2;--blue:#A8C8F0;--muted:#B9B3C2}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:#F4F1F6;font-family:'Segoe UI',system-ui,Arial,sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{background:radial-gradient(120% 80% at 50% -10%,#1E2A2C 0%,#121719 55%,#0D1012 100%);overflow:hidden}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(168,200,240,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,200,240,.05) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.scr{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;padding:max(64px,env(safe-area-inset-top)) 18px 22px;overflow-y:auto}.scr.on{display:flex}
+.x,.snd{position:fixed;z-index:20;top:max(12px,env(safe-area-inset-top));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.x{right:12px}.snd{left:12px}.snd svg{width:22px;height:22px}
+.wrap{width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center}
+.kick{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--mint);margin:6px 0 4px}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.05;margin:0 0 6px;color:#FFF6E6;text-align:center}
+.sub{color:var(--muted);text-align:center;margin:0 0 14px;font-size:15px;line-height:1.45}
+.lvl{font-size:14px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#E9E3EE;margin:6px 0}
+.path{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:8px 0 16px;max-width:360px}.path i{width:13px;height:13px;border-radius:4px;background:rgba(255,255,255,.13);transform:rotate(-6deg)}.path i.d{background:var(--mint)}.path i.c{background:var(--pink);box-shadow:0 0 0 3px rgba(244,179,194,.25)}.path i.h{outline:1.5px dashed rgba(255,255,255,.35);outline-offset:1px}
+.fan{position:relative;width:220px;height:150px;margin:8px 0 14px}
+.fan b{position:absolute;left:50%;top:14px;width:120px;height:84px;margin-left:-60px;border-radius:12px;background:var(--cream);box-shadow:0 8px 24px rgba(0,0,0,.4);border-top:9px solid var(--c)}
+.fan b:nth-child(1){--c:var(--lil);transform:rotate(-16deg) translate(-40px,10px)}.fan b:nth-child(2){--c:var(--blue);transform:rotate(-5deg) translate(-12px,0)}.fan b:nth-child(3){--c:var(--pink);transform:rotate(6deg) translate(14px,2px)}.fan b:nth-child(4){--c:var(--mint);transform:rotate(17deg) translate(42px,14px)}
+.fan b::after{content:"";position:absolute;left:14px;right:14px;top:22px;height:6px;border-radius:4px;background:#E6DFEA;box-shadow:0 14px 0 #EEE8F1,0 28px 0 #EEE8F1}
+.info{width:100%;display:flex;gap:10px;margin:0 0 14px}.info div{flex:1;background:rgba(255,255,255,.06);border-radius:14px;padding:10px;text-align:center}.info b{display:block;font-size:22px;color:#fff}.info small{color:var(--muted);font-size:12.5px}
+.note{font-size:14px;color:#E2DCE7;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px;margin:0 0 14px;line-height:1.45;width:100%}
+.go{border:0;border-radius:999px;background:var(--mint);color:#13301F;font-size:19px;font-weight:800;padding:15px 0;width:100%;cursor:pointer;font-family:inherit}
+.go.alt{background:rgba(255,255,255,.12);color:#fff;font-weight:600;margin-top:10px}
+.pick{margin-top:14px;background:rgba(255,255,255,.08);color:#ddd;border:0;border-radius:10px;padding:8px 10px;font:inherit;font-size:14px}
+.count{font-family:Georgia,serif;font-size:110px;color:#FFF6E6;animation:pop .8s}@keyframes pop{0%{transform:scale(.4);opacity:0}40%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+.hud{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#E4DEE9;margin-bottom:8px}
+.lives{display:flex;gap:4px;min-width:90px}.lives svg{width:20px;height:20px}.lives .lost{opacity:.22}
+.bar{width:100%;max-width:560px;height:9px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}.bar i{display:block;height:100%;width:100%;background:var(--mint);transform-origin:left;border-radius:9px}
+.clock{width:100%;max-width:560px;text-align:right;font-size:12px;color:var(--muted);margin:4px 0 8px;font-variant-numeric:tabular-nums}
+.card{width:100%;max-width:560px;background:var(--cream);color:var(--ink);border-radius:20px;padding:16px 18px 18px;border-top:10px solid var(--c,var(--lil));box-shadow:0 14px 40px rgba(0,0,0,.45);transition:transform .25s,opacity .25s,box-shadow .2s;position:relative}
+.card .tp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#8A7D8F;margin-bottom:8px}
+.card .q{font-size:21px;line-height:1.35;font-weight:700;margin:0;color:#2B2530}
+.card .fig{margin:12px auto 0;max-width:420px}.card .fig svg{display:block;width:100%;height:auto;max-height:200px}
+.card.ok{box-shadow:0 0 0 5px var(--mint),0 14px 40px rgba(0,0,0,.45)}.card.bad{box-shadow:0 0 0 5px var(--rose),0 14px 40px rgba(0,0,0,.45);animation:shake .35s}
+.card.out{transform:translateX(-120%) rotate(-8deg);opacity:0}.card.in{transform:translateX(60%) rotate(6deg);opacity:0;transition:none}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.opts{width:100%;max-width:560px;display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
+@media (min-width:600px){.opts{grid-template-columns:1fr 1fr}}
+.opts.duo{grid-template-columns:1fr 1fr}
+.opt{min-height:56px;border:0;border-radius:16px;background:#2A2F35;color:#fff;font:inherit;font-size:17px;font-weight:600;padding:12px 14px;text-align:left;cursor:pointer;line-height:1.3;display:flex;gap:10px;align-items:center}
+.opt .k{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.12);font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.opts.duo .opt{min-height:84px;font-size:18px;justify-content:center;text-align:center;flex-direction:column}
+.opt:hover{background:#343A41}.opt.right{background:var(--mint);color:#13301F}.opt.right .k{background:rgba(0,0,0,.12)}.opt.wrong{background:var(--rose);color:#3A1218}
+.hint{font-size:12px;color:#8E8796;margin-top:10px;text-align:center}
+.big{font-family:Georgia,serif;font-size:44px;line-height:1.1;text-align:center;margin:10px 0 6px;color:#FFF6E6}
+.stat{display:flex;gap:10px;width:100%;margin:12px 0}.stat div{flex:1;background:rgba(255,255,255,.06);border-radius:12px;padding:10px;text-align:center}.stat b{display:block;font-size:22px}.stat small{color:var(--muted);font-size:12px}
+.rev{width:100%;margin:6px 0 12px}.rev h3{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin:0 0 8px}
+.rev li{list-style:none;background:var(--cream);color:var(--ink);border-radius:12px;padding:9px 12px;margin-bottom:8px;font-size:15px;line-height:1.4;border-left:6px solid var(--c,var(--lil))}.rev li b{color:#1F6B45}.rev ul{padding:0;margin:0}
+.flycards{position:fixed;inset:0;pointer-events:none;z-index:5}.flycards b{position:absolute;left:50%;top:40%;width:70px;height:48px;border-radius:9px;background:var(--cream);border-top:7px solid var(--c);animation:fly 1.6s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes fly{0%{transform:translate(-50%,0) rotate(0);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),var(--dy)) rotate(var(--r));opacity:0}}
+@media (prefers-reduced-motion:reduce){.flycards{display:none}.card,.count{animation:none!important;transition:none!important}}
+</style></head><body>
+<button class="snd" id="snd" type="button" aria-label="Sound on or off"></button>
+<button class="x" id="x" type="button" aria-label="Close Flashcard Dash">✕</button>
+<div class="scr on" id="ready"><div class="wrap">
+ <div class="kick">Higher Design and Manufacture</div><h1>Flashcard Dash</h1>
+ <div class="fan" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
+ <div class="lvl" id="rLvl">Level 1 of 20</div><div class="path" id="rPath"></div>
+ <div class="info"><div><b id="rCards">8</b><small>cards</small></div><div><b id="rTime">2:00</b><small>on the clock</small></div><div><b id="rLives">1</b><small>lives</small></div></div>
+ <p class="note" id="rNote"></p>
+ <button class="go" id="begin" type="button">Begin</button>
+ <select class="pick" id="pick" aria-label="Choose a level"></select>
+ <p class="sub" id="rBank" style="margin-top:12px"></p>
+</div></div>
+<div class="scr" id="cd"><div class="lvl" id="cdL">Get ready</div><div class="count" id="cdN">3</div></div>
+<div class="scr" id="play">
+ <div class="hud"><div class="lives" id="lives"></div><div id="hLvl">Level 1</div><div id="left">8 left</div></div>
+ <div class="bar"><i id="barIn"></i></div><div class="clock" id="clock">0:00</div>
+ <div class="card" id="card"><div class="tp" id="cTp"></div><p class="q" id="cQ"></p><div class="fig" id="cFig"></div></div>
+ <div class="opts" id="opts"></div><div class="hint">Tip: keys 1 to 4 pick an answer</div>
+</div>
+<div class="scr" id="end"><div class="wrap" id="endW"></div></div>
+<script>
+/* Flashcard Dash bank. Each card: [topic, question, answer, [three distractors], look-alike for 50/50 (or ''), figure key (or '')].
+   Every fact is taken from BenchMark's Higher Learn notes (which follow the SQA Higher D&M course specification). */
+const BANK=[
+/* ---- The design brief ---- */
+['h-brief','Who usually provides the design brief?','The client',['The ergonomist','The production engineer','The lawyer'],'The designer',''],
+['h-brief','A brief with very few constraints that leaves the solution open is…','an open brief',['a technical specification','a performance specification','a closed brief'],'a closed brief',''],
+['h-brief','A brief that sets size, price, material, user and quantity is…','a closed brief',['an open brief','a mood board','a user trip'],'an open brief',''],
+['h-brief','A benefit of an open brief for the client is…','an innovative idea they hadn’t thought of',['a guaranteed lower price','no need for a specification','a quicker finish every time'],'getting exactly what they asked for',''],
+['h-brief','A drawback of an open brief for the client is…','the result may not match what they imagined',['the designer has no freedom','it can’t name a target market','it bans research'],'the designer has too little freedom',''],
+['h-brief','A benefit of a closed brief for the designer is…','clear direction to check ideas against',['complete creative freedom','no research needed','no client meetings'],'complete creative freedom',''],
+['h-brief','A drawback of a closed brief is…','a better solution may be missed',['too much freedom','no constraints at all','no target market'],'the project may lose focus',''],
+['h-brief','Picking out key words like user, cost and size from the brief is called…','analysing the brief',['a user trial','writing a technical specification','morphological analysis'],'writing the specification',''],
+['h-brief','A brief sets out the problem, the main objectives and the…','key constraints',['tolerances for manufacture','advertising slogan','questionnaire results'],'final rendered drawing',''],
+/* ---- Research and evaluation ---- */
+['h-research','Reading product reviews in a magazine is…','secondary research',['primary research','a user trip','a test rig'],'primary research',''],
+['h-research','Handing out a questionnaire you wrote yourself is…','primary research',['secondary research','a literature search','a mood board'],'secondary research',''],
+['h-research','In a user trial, who uses the product?','People from the target market',['The designer, alone','A machine on a rig','The lawyer'],'The designer, in its location of use',''],
+['h-research','In a user trip, who uses the product?','The designer, where it will be used',['A focus group','A test rig','The client only'],'People from the target market',''],
+['h-research','A test rig is useful because it…','repeats an action many times quickly',['collects published data','shows how it looks','gathers many opinions'],'gathers lots of user opinions',''],
+['h-research','Which is a key stage of a questionnaire?','Trial it on a few people first',['Set up a repeating mechanism','Use it yourself on location','Pick one option per row'],'Use the product yourself on location',''],
+['h-research','The first key stage of a product comparison is to…','identify the information required',['compare the results','buy every product','write the advert'],'compare the results',''],
+['h-research','Evaluating existing products finds strengths, weaknesses and…','gaps in the market',['patent numbers','the designer’s salary','tooling costs'],'the client’s budget',''],
+['h-research','The most reliable way to find how long a hinge lasts is…','a test rig opening it thousands of times',['a questionnaire','a mood board','one customer review'],'a questionnaire to hinge owners',''],
+['h-research','Research informs which document?','The design specification',['The patent application','The Gantt chart','The cutting list'],'The trademark registration',''],
+/* ---- Specifications ---- */
+['h-spec','Which specification gives materials, processes and dimensions for manufacture?','Technical specification',['Performance specification','Product design specification','Design brief'],'Product design specification',''],
+['h-spec','Which specification says what a product must achieve, not how?','Performance specification',['Technical specification','Working drawing','Cutting list'],'Technical specification',''],
+['h-spec','“Casing: ABS, injection moulded, 2 mm wall.” This is from a…','technical specification',['performance specification','design brief','mood board'],'performance specification',''],
+['h-spec','“Must boil 1 litre in under 3 minutes.” This is a…','performance specification point',['technical specification point','brief statement','marketing claim'],'technical specification point',''],
+['h-spec','Which specification point is most useful?','Seat height 430 to 470 mm',['The right height for most people','Should look nice','Made to a good standard'],'The right height for most people',''],
+['h-spec','A product design specification gives direction and sets…','parameters to evaluate ideas against',['the advertising budget','legal protection','the CNC code'],'the tolerances on each part',''],
+['h-spec','Most specification points come from…','the brief and the research',['the final evaluation','the advert','the Intellectual Property Office'],'the final evaluation',''],
+['h-spec','Complying with British Standards is usually in the…','performance specification',['technical specification','parts list','design brief'],'technical specification',''],
+/* ---- Idea generation ---- */
+['h-ideas','Borrowing features from a seed pod or a shell is…','analogy',['brainstorming','morphological analysis','a mood board'],'morphological analysis',''],
+['h-ideas','Choosing one option from each factor in a matrix is…','morphological analysis',['analogy','brainstorming','a lifestyle board'],'a lifestyle board','hmorph'],
+['h-ideas','Which technique does this matrix show?','Morphological analysis',['Analogy','A Gantt chart','A mood board'],'A mood board','hmorph'],
+['h-ideas','Setting a time limit and recording every thought is part of…','conducting a brainstorm',['the summary stage','analogy','a mood board'],'the summary of a brainstorm',''],
+['h-ideas','Identifying the most promising ideas happens in the…','summary stage of a brainstorm',['warm-up','planning stage','conducting stage'],'planning stage of a brainstorm',''],
+['h-ideas','A collage of images to capture a target market is a…','lifestyle or mood board',['morphological matrix','Gantt chart','test rig'],'morphological matrix',''],
+['h-ideas','The final stage of a mood board is to…','summarise the reasons for the mood',['invite a group','test on a rig','write the specification'],'gather the images',''],
+['h-ideas','Hook-and-loop fastener inspired by burrs on fur is a famous example of…','analogy',['brainstorming','market pull','a closed brief'],'morphological analysis',''],
+['h-ideas','A key rule when conducting a brainstorm is…','no criticism of ideas',['judge every idea at once','work alone','no time limit'],'judge each idea as it is given',''],
+/* ---- Modelling ---- */
+['h-model','A full-size, working model in the intended materials is a…','prototype',['block model','sketch model','scale model'],'block model',''],
+['h-model','A solid, non-working model to check shape and proportion is a…','block model',['prototype','test rig','simulation'],'prototype',''],
+['h-model','A quick, cheap card or foam model to explore ideas is a…','sketch model',['prototype','block model','scale model'],'block model',''],
+['h-model','A model made smaller than real size, e.g. for a playground, is a…','scale model',['sketch model','prototype','block model'],'block model',''],
+['h-model','Fused deposition modelling (3D printing) is…','additive rapid prototyping',['subtractive rapid prototyping','laser cutting','CNC routing'],'subtractive rapid prototyping',''],
+['h-model','CNC milling a model from a solid block is…','subtractive rapid prototyping',['additive rapid prototyping','stereolithography','3D printing'],'additive rapid prototyping',''],
+['h-model','A benefit of subtractive rapid prototyping is it…','uses the actual material',['needs no CAD model','builds in layers','makes any internal shape'],'builds parts in thin layers',''],
+['h-model','A drawback of rapid prototyping is it…','needs investment in hardware, software and training',['can’t make curved forms','only cuts sheet','can’t be used before production'],'cannot make complex forms',''],
+['h-model','An advantage of a computer simulation is it…','tests without risk to the user',['needs no computer','is quicker than a sketch','makes the final product'],'is quicker than a rough sketch',''],
+['h-model','Models are used to generate and explore, test and refine, and…','communicate',['patent','advertise only','price'],'manufacture',''],
+/* ---- Graphics ---- */
+['h-graphics','Which graphic best shows how parts fit together for assembly?','Exploded view',['Thumbnail sketch','Mood board','Bar chart'],'Planometric view',''],
+['h-graphics','Which view shows hidden internal detail as if cut through?','Sectional view',['Exploded view','Rendered illustration','Perspective sketch'],'Exploded view',''],
+['h-graphics','Dimensions and tolerances are essential on a…','working drawing',['product rendering','mood board','poster'],'annotated sketch',''],
+['h-graphics','A realistic rendering on a poster is used for…','marketing',['manufacture','initial ideas','testing'],'manufacture',''],
+['h-graphics','The key advantage of manual sketching early on is…','speed and freedom with little investment',['exact dimensions','sending to CNC','photo-real renders'],'exact dimensions for manufacture',''],
+['h-graphics','An advantage of CAD is that several drawing types come from…','one computer model',['one hand sketch','a mood board','a questionnaire'],'one rendered image',''],
+['h-graphics','Annotations are added to sketches to…','explain features, materials or functions',['fill space','replace the specification','register a patent'],'replace the specification',''],
+['h-graphics','CAD libraries of standard components mean screws and hinges…','don’t need drawing from scratch',['become free','are not needed','pick materials'],'are free to buy',''],
+['h-graphics','Orthographic drawings with tolerances are used at which stage?','Manufacture',['Marketing','Initial ideas','Brainstorming'],'Development',''],
+/* ---- Function ---- */
+['h-function','The primary function of a kettle is to…','boil water',['show the water level','store the cable','light up'],'show the water level',''],
+['h-function','A phone taking photos is an example of a…','secondary function',['primary function','planned obsolescence','technology push'],'primary function',''],
+['h-function','“Form follows function” means the shape comes mainly from…','the job it does',['decoration','fashion trends','the brand'],'current fashion',''],
+['h-function','A drawback of adding many secondary functions is…','more cost and more to go wrong',['no patent allowed','primary function removed','no testing needed'],'the primary function is lost',''],
+['h-function','An LED giving the same light for less power shows improved…','efficiency',['secondary function','obsolescence','proportion'],'aesthetics',''],
+['h-function','A kettle body must resist heat, so it uses…','stainless steel',['pine','acrylic','polystyrene'],'acrylic',''],
+['h-function','How well a product does its job is its…','performance',['function','form','aesthetics'],'function',''],
+['h-function','Parts that snap fit together shows function influencing…','manufacture and assembly',['the brand','the price','the colour'],'the aesthetics',''],
+/* ---- Performance ---- */
+['h-perf','Designing a product with a limited useful life is…','planned obsolescence',['fitness for purpose','value for money','market pull'],'style obsolescence',''],
+['h-perf','A new model making last year’s look dated is…','style obsolescence',['technical failure','a secondary function','market research'],'technical obsolescence',''],
+['h-perf','Software that stops being supported is an example of…','technical obsolescence',['style obsolescence','value for money','a secondary function'],'style obsolescence',''],
+['h-perf','A benefit of planned obsolescence to the manufacturer is…','increased, predictable sales',['less research needed','a reputation for durability','no disposal to consider'],'a better reputation for durability',''],
+['h-perf','A negative effect of planned obsolescence on the environment is…','more waste and pollution',['less energy used','fewer products made','less material used'],'fewer products being made',''],
+['h-perf','A product is fit for purpose if it…','does its job well for its expected life',['is the cheapest','is fashionable','has the most features'],'has more features than rivals',''],
+['h-perf','Value for money compares what a product offers with…','its price',['its weight','its logo','its labour cost'],'its materials cost',''],
+['h-perf','A filter that unclips for washing improves…','maintenance',['aesthetics','branding','obsolescence'],'style',''],
+['h-perf','A drawback of planned obsolescence for the consumer is…','constant pressure to update',['products are hard to find','repairs are illegal','fewer shops sell them'],'products have fewer features',''],
+/* ---- Safety ---- */
+['h-safety','A food processor that won’t run unless the lid is locked has a…','safety interlock',['secondary function','snap fit','location pin'],'non-slip feet',''],
+['h-safety','Plug and socket casings use which electrical insulator?','Urea formaldehyde',['Copper','Mild steel','Aluminium'],'Melamine formaldehyde',''],
+['h-safety','A CE or UKCA mark shows the maker…','declares it meets safety requirements for sale',['has a patent','used recycled material','made it by hand'],'has had it independently tested',''],
+['h-safety','The BSI Kitemark shows a product has been…','independently tested to a British Standard',['declared safe by the maker','patented','made in the UK'],'declared safe by its maker',''],
+['h-safety','Battery covers on toys are screwed shut so…','young children can’t reach the batteries',['the toy looks expensive','it’s quicker to make','it’s heavier'],'the toy is cheaper to make',''],
+['h-safety','A dangerous product already on sale may be…','recalled',['patented','given a CE mark','repriced'],'re-branded',''],
+['h-safety','Rolling over the edges of a metal toy box removes…','sharp edges',['weight','paint cost','corrosion'],'burrs from drilling',''],
+['h-safety','Using shatter-resistant plastic instead of glass is safety through…','materials',['assembly','branding','pricing'],'processes',''],
+['h-safety','Parts that can only be assembled the right way round is safety through…','assembly',['materials','marketing','finishing'],'materials',''],
+['h-safety','Flame-retardant foam in a sofa is safety through…','materials',['assembly','processes','ergonomics'],'processes',''],
+/* ---- Market ---- */
+['h-market','Consumer demand driving new or improved products is…','market pull',['technology push','planned obsolescence','economies of scale'],'technology push',''],
+['h-market','Wireless charging added once the technology existed is…','technology push',['market pull','niche marketing','price skimming'],'market pull',''],
+['h-market','The four stages of the product life cycle in order are…','introduction, growth, maturity, decline',['growth, introduction, decline, maturity','introduction, maturity, growth, decline','maturity, growth, introduction, decline'],'introduction, maturity, growth, decline',''],
+['h-market','Which stage is labelled 1 on this graph?','Introduction',['Growth','Maturity','Decline'],'Growth','hplc'],
+['h-market','Which stage is labelled 2 on this graph?','Growth',['Introduction','Maturity','Decline'],'Maturity','hplc'],
+['h-market','Which stage is labelled 3 on this graph?','Maturity',['Introduction','Growth','Decline'],'Growth','hplc'],
+['h-market','Which stage is labelled 4 on this graph?','Decline',['Introduction','Growth','Maturity'],'Maturity','hplc'],
+['h-market','In which stage are sales low and marketing costs high?','Introduction',['Growth','Maturity','Decline'],'Decline',''],
+['h-market','In which stage do sales peak and level off?','Maturity',['Growth','Introduction','Decline'],'Growth',''],
+['h-market','In which stage do competitors start to appear as sales rise quickly?','Growth',['Introduction','Maturity','Decline'],'Maturity',''],
+['h-market','Re-launching, extending the range or withdrawing the product happens in which stage?','Decline',['Introduction','Growth','Maturity'],'Maturity',''],
+['h-market','The cost of each unit falling as more are made is…','economies of scale',['market pull','price skimming','planned obsolescence'],'penetration pricing',''],
+['h-market','Launching low to win market share is…','penetration pricing',['price skimming','premium pricing','psychological pricing'],'price skimming',''],
+['h-market','Launching high, then lowering the price later, is…','price skimming',['penetration pricing','competitive pricing','psychological pricing'],'penetration pricing',''],
+['h-market','Pricing at £9.99 instead of £10 is…','psychological pricing',['premium pricing','price skimming','competitive pricing'],'competitive pricing',''],
+['h-market','Paying for a product to appear in a film is…','product placement',['price skimming','niche marketing','market pull'],'sales promotion',''],
+['h-market','A smaller, well-defined group with specific needs is a…','niche market',['mass market','target price','product range'],'global market',''],
+['h-market','An advantage of a niche market is…','less competition and loyal customers',['huge sales volumes','big economies of scale','low prices'],'big economies of scale',''],
+['h-market','A benefit of branding to the manufacturer is…','it can charge a higher price',['no advertising needed','lower quality allowed','every product looks the same'],'it needs no advertising',''],
+['h-market','A drawback of branding to the manufacturer is…','one bad product can damage the whole range',['customers trust it','repeat sales','free word of mouth'],'retailers stock it more readily',''],
+['h-market','A drawback of branding to the consumer is…','paying more for the name',['trust in quality','status','after-sales service'],'trust in quality',''],
+['h-market','Tooling, materials and labour are all…','production costs',['marketing costs','development costs','profit'],'development costs',''],
+/* ---- Aesthetics ---- */
+['h-aesth','How the sizes of parts relate to each other is…','proportion',['texture','contrast','colour'],'balance',''],
+['h-aesth','A bright red button on a matt black case is…','contrast',['harmony','proportion','symmetry'],'harmony',''],
+['h-aesth','Parts, colours and shapes working well together is…','harmony',['contrast','proportion','texture'],'contrast',''],
+['h-aesth','Visual weight spread evenly, as in symmetry, is…','balance',['harmony','proportion','texture'],'proportion',''],
+['h-aesth','The overall 3D shape of a product is its…','form',['texture','colour','contrast'],'proportion',''],
+['h-aesth','How a surface looks and feels is its…','texture',['form','balance','proportion'],'colour',''],
+['h-aesth','A switch is designed to make a satisfying “click” noise. Which sense does this noise appeal to?','Sound',['Taste','Smell','Touch'],'Sight',''],
+['h-aesth','A soft-touch grip on a toothbrush appeals mainly through…','feel',['smell','taste','sound'],'sight',''],
+['h-aesth','Which would score for “how aesthetics influenced the lamp”?','Repeated circles give a sense of balance',['It is silver','It is wood and brass','It looks nice'],'It is made from chrome-plated steel',''],
+['h-aesth','The spangled finish of galvanising shows aesthetics influenced by…','processes',['the target market','fashion','the brand'],'location of use',''],
+['h-aesth','Bright, rounded forms for young children show aesthetics influenced by…','the target market',['location of use','processes','price'],'location of use',''],
+/* ---- Ergonomics ---- */
+['h-ergo','The area of ergonomics about human body sizes is…','anthropometrics',['physiology','psychology','aesthetics'],'physiology',''],
+['h-ergo','The area of ergonomics about strength, fatigue and strain is…','physiology',['anthropometrics','psychology','economics'],'anthropometrics',''],
+['h-ergo','Red for stop and green for go is ergonomics through…','psychology',['anthropometrics','physiology','economics'],'physiology',''],
+['h-ergo','So the shortest adults can reach a handle, use the…','5th percentile',['95th percentile','50th percentile','100th percentile'],'95th percentile','pctl'],
+['h-ergo','So the tallest adults fit through a doorway, use the…','95th percentile',['5th percentile','50th percentile','1st percentile'],'5th percentile','pctl'],
+['h-ergo','Which statement scores for anthropometrics?','The grip diameter suits an adult hand',['It is comfortable for a long time','It is easy to hold','It is a nice colour'],'The handle is comfortable to use',''],
+['h-ergo','Which statement scores for physiology?','The trigger needs little force, so the finger does not strain',['The trigger is red','The trigger is easy to reach','The trigger is 20 mm long'],'The trigger is 20 mm long to suit the finger',''],
+['h-ergo','Office chairs are adjustable to…','suit a wider range of body sizes',['be cheaper','have fewer parts','stack'],'reduce the number of parts',''],
+['h-ergo','A click or beep confirming a button press is…','psychology',['physiology','anthropometrics','proportion'],'physiology',''],
+['h-ergo','A handle angled to keep the wrist straight reduces strain: this is…','physiology',['psychology','anthropometrics','aesthetics'],'anthropometrics',''],
+['h-ergo','Anthropometric data usually covers which range of users?','5th to 95th percentile',['1st to 50th percentile','50th to 100th percentile','Only the 50th percentile'],'50th to 100th percentile','pctl'],
+['h-ergo','Ergonomics is the study of how people…','interact with products',['buy products','recycle products','patent products'],'choose products',''],
+/* ---- Materials ---- */
+['h-materials','Which plastic forms an integral (living) hinge?','Polypropylene',['Acrylic','Urea formaldehyde','Polystyrene'],'ABS',''],
+['h-materials','Which plastic is used for plugs and sockets?','Urea formaldehyde',['Acrylic','Polythene','Expanded polystyrene'],'Melamine formaldehyde',''],
+['h-materials','Which thermoset is used for laminated worktops and tableware?','Melamine formaldehyde',['Urea formaldehyde','ABS','Nylon'],'Urea formaldehyde',''],
+['h-materials','Which metal keeps its cutting edge when hot, for drill bits?','High-speed steel',['Mild steel','Cast iron','Stainless steel'],'Stainless steel',''],
+['h-materials','A sample floats in water. Which plastic could it be?','Polypropylene',['Acrylic','PVC','ABS'],'ABS',''],
+['h-materials','This symbol is moulded on a product. Which plastic is it?','Polypropylene',['Polystyrene','PVC','HDPE'],'Polystyrene','hresin'],
+['h-materials','Which metals does a magnet attract?','Iron and most steels',['Aluminium and copper','Brass and copper','All metals'],'Aluminium and brass',''],
+['h-materials','Canoes and boat hulls that mould into large shapes and resist rot, at low cost, use…','Glass-reinforced plastic',['Chipboard','Cast iron','Melamine formaldehyde'],'Hardboard',''],
+['h-materials','A gold-coloured, corrosion-resistant door handle is…','brass',['mild steel','cast iron','copper'],'copper',''],
+['h-materials','Tough, scratch-resistant casings for electrical products are…','ABS',['acrylic','polythene','urea formaldehyde'],'acrylic',''],
+['h-materials','Transparent, rigid plastic for lenses and signs is…','acrylic',['ABS','nylon','polypropylene'],'polythene',''],
+['h-materials','Low-friction, self-lubricating plastic for gears is…','nylon',['acrylic','polystyrene','PVC'],'ABS',''],
+['h-materials','Rigid uPVC is used for…','window frames and pipes',['carrier bags','gears','lenses'],'cable sheathing',''],
+['h-materials','Flexible, low-density polythene is used for…','carrier bags and squeezy bottles',['buckets and crates','window frames','gears'],'buckets and bottle crates',''],
+['h-materials','Thermoplastics differ from thermosets because they…','can be reheated and reshaped',['set permanently','never melt','are always brittle'],'set permanently when moulded',''],
+['h-materials','Hard, brittle and strong in compression, for vice bodies, is…','cast iron',['mild steel','aluminium','brass'],'mild steel',''],
+['h-materials','Hygienic and corrosion resistant, for cutlery and sinks, is…','stainless steel',['mild steel','cast iron','tin'],'aluminium',''],
+['h-materials','Lightweight and corrosion resistant, for bike frames, is…','aluminium',['cast iron','copper','tin'],'zinc',''],
+['h-materials','Steel is galvanised with which metal?','Zinc',['Tin','Copper','Chromium'],'Tin',''],
+['h-materials','Tinplate for food cans is steel coated with…','tin',['zinc','copper','chromium'],'zinc',''],
+['h-materials','Which timber’s acid can stain and corrode steel fixings?','Oak',['Pine','Spruce','Beech'],'Ash',''],
+['h-materials','Tough, shock-resistant timber for tool handles is…','ash',['mahogany','pine','spruce'],'cedar',''],
+['h-materials','Layers glued with the grain at 90° describes…','plywood',['MDF','chipboard','hardboard'],'blockboard',''],
+['h-materials','Fine fibres with smooth faces that machine and paint well is…','MDF',['chipboard','plywood','hardboard'],'hardboard',''],
+['h-materials','Thin plywood that bends in one direction is…','flexiply',['blockboard','MDF','veneered board'],'hardboard',''],
+['h-materials','A thermoplastic shaves under a cut test; a thermoset…','chips',['melts','floats','bends'],'shaves',''],
+['h-materials','Very high strength-to-weight, stiff and expensive, for racing bikes, is…','carbon-fibre reinforced plastic',['glass-reinforced plastic','aluminium','ABS'],'glass-reinforced plastic',''],
+['h-materials','Expanded polystyrene is used for…','protective packaging and insulation',['vacuum-formed trays','gears','window frames'],'vacuum-formed trays',''],
+['h-materials','Seals, grips and tyres are made from…','elastomers',['thermosets','composites','ferrous metals'],'manufactured boards',''],
+/* ---- Commercial processes ---- */
+['h-processes','A curtain rail with the same cross-section along its length was made by…','extrusion',['blow moulding','sand casting','vacuum forming'],'press forming','extr'],
+['h-processes','A large hollow kayak in one piece is made by…','rotational moulding',['injection moulding','die casting','laser cutting'],'blow moulding',''],
+['h-processes','Pan handles in thermosetting plastic are made by…','compression moulding',['vacuum forming','blow moulding','rotational moulding'],'injection moulding',''],
+['h-processes','Spanners with extra strength and impact resistance are…','drop forged',['sand cast','die cast','extruded'],'die cast',''],
+['h-processes','A rough surface that usually needs finishing suggests…','sand casting',['die casting','injection moulding','extrusion'],'die casting',''],
+['h-processes','Plastic drinks bottles are made by…','blow moulding',['compression moulding','sand casting','piercing'],'rotational moulding',''],
+['h-processes','Visible layers and support marks under overhangs suggest…','3D printing',['laser cutting','die casting','press forming'],'laser cutting',''],
+['h-processes','Scorch marks on thin cut sheet suggest…','laser cutting',['3D printing','piercing','sand casting'],'piercing and blanking',''],
+['h-processes','Punching out a shape and keeping the removed piece is…','blanking',['piercing','press forming','bending'],'piercing',''],
+['h-processes','Punching a hole and keeping the sheet around it is…','piercing',['blanking','extrusion','drop forging'],'blanking',''],
+['h-processes','Kitchen sinks and drinks cans (deep draws in sheet metal) are…','press formed',['vacuum formed','sand cast','blow moulded'],'vacuum formed',''],
+['h-processes','Toy cars and pencil sharpeners in metal are mass-produced by…','die casting',['sand casting','drop forging','extrusion'],'sand casting',''],
+['h-processes','Packaging trays and baths from plastic sheet are…','vacuum formed',['blow moulded','injection moulded','extruded'],'press formed',''],
+['h-processes','Thin, varying wall thickness and draft angles from sheet suggest…','vacuum forming',['injection moulding','rotational moulding','die casting'],'rotational moulding',''],
+['h-processes','A hollow form, uniform wall, thicker in the corners suggests…','rotational moulding',['blow moulding','vacuum forming','extrusion'],'blow moulding',''],
+['h-processes','Seamless thin-walled hollow containers with no internal features suggest…','blow moulding',['rotational moulding','compression moulding','sand casting'],'rotational moulding',''],
+['h-processes','Washers and key blanks are mass-produced by…','piercing and blanking',['laser cutting','3D printing','sand casting'],'laser cutting',''],
+['h-processes','Shear marks on punched edges suggest…','piercing and blanking',['laser cutting','extrusion','3D printing'],'laser cutting',''],
+['h-processes','Low-volume bespoke parts with complex forms suit…','3D printing',['injection moulding','die casting','extrusion'],'injection moulding',''],
+['h-processes','Complex, accurate plastic casings in high volumes are…','injection moulded',['vacuum formed','rotational moulded','compression moulded'],'compression moulded',''],
+['h-processes','Frames from tube or rod, with radiused corners and little joining, suggest…','bending',['sand casting','blow moulding','laser cutting'],'extrusion',''],
+['h-processes','Window frames in uPVC or aluminium are made by…','extrusion',['blow moulding','drop forging','rotational moulding'],'injection moulding','extr'],
+['h-processes','Which process makes this kind of profile?','Extrusion',['Die casting','Vacuum forming','Blow moulding'],'Press forming','extr'],
+/* ---- Finishes and manufacturing features ---- */
+['h-features','Which finish has a characteristic “spangled” look?','Galvanising',['Chrome plating','Plastic dip coating','Anodising'],'Chrome plating','spangle'],
+['h-features','A quality mirrored finish on taps and car trim is…','chrome plating',['galvanising','plastic dip coating','powder coating'],'galvanising','chrome'],
+['h-features','Galvanising dips cleaned steel into molten…','zinc',['chromium','tin','plastic powder'],'tin',''],
+['h-features','Chrome plating is applied by…','electroplating',['dipping in molten zinc','a fluidised bed','spraying paint'],'dipping in molten zinc',''],
+['h-features','Plastic dip coating dips heated metal into…','a fluidised bed of plastic powder',['molten zinc','a chromium bath','liquid paint'],'a chromium bath','dip'],
+['h-features','A smooth coloured coating on dish-rack wire is…','plastic dip coating',['chrome plating','galvanising','anodising'],'galvanising','dip'],
+['h-features','Motorway barriers and outdoor bins are protected by…','galvanising',['chrome plating','plastic dip coating','varnish'],'chrome plating','spangle'],
+['h-features','Small circular marks on the inside of a moulding were left by…','ejector pins',['the injection point','the split line','a laser'],'the injection point','pins'],
+['h-features','The line where two halves of the mould met is the…','split line',['draft angle','rib','boss'],'flashing',''],
+['h-features','Thin excess material where mould halves meet is…','flashing',['a rib','a web','a boss'],'a split line',''],
+['h-features','Slight tapers that let a part come out of the mould are…','draft angles',['ribs','webs','bosses'],'split lines','draft'],
+['h-features','The small mark where material entered the mould is the…','injection point',['ejection mark','split line','boss'],'ejection mark',''],
+['h-features','Raised hollow cylinders that take screws are…','bosses',['ribs','webs','location pins'],'location pins','hboss'],
+['h-features','Which feature is labelled A?','Boss',['Rib','Draft angle','Split line'],'Rib','hboss'],
+['h-features','Pins that fit holes so parts line up exactly are…','location pins',['bosses','ribs','webs'],'bosses',''],
+['h-features','Thin walls that strengthen a part without thickening it are…','ribs',['bosses','location pins','split lines'],'draft angles',''],
+['h-features','Thin sections joining a boss to the wall for support are…','webs',['ribs','draft angles','ejection marks'],'ribs',''],
+['h-features','Keeping walls thin and even means the part…','cools evenly and is less likely to warp',['looks more expensive','is easier to paint','needs no mould'],'needs no draft angle',''],
+/* ---- Assembly ---- */
+['h-assembly','Car body panels on a robotic line are joined by…','spot welding',['dowel joints','adhesive tape','knock-down fittings'],'arc welding',''],
+['h-assembly','A continuous weld bead on a steel gate shows…','arc welding',['spot welding','riveting','thermal bonding'],'spot welding',''],
+['h-assembly','Small round marks where sheets were fused show…','spot welding',['arc welding','pop riveting','snap fit'],'arc welding',''],
+['h-assembly','A battery cover that clicks in with a flexible clip is a…','snap fit',['press fit','rivet','thermal bond'],'press fit',''],
+['h-assembly','A bearing pushed into a slightly smaller hole is a…','press fit',['snap fit','knock-down fitting','rivet'],'snap fit',''],
+['h-assembly','Fusing thermoplastic parts with heat and pressure is…','thermal bonding',['pop riveting','arc welding','press fitting'],'spot welding',''],
+['h-assembly','Pop rivets suit sheet boxes because they need access from…','one side only',['both sides','inside only','no drilled hole'],'both sides',''],
+['h-assembly','Flat-pack furniture is assembled with simple tools using…','knock-down fittings',['spot welds','thermal bonding','press fits'],'mortise and tenon joints',''],
+['h-assembly','A drawback of adhesives is…','parts can’t be taken apart',['screw heads show','metals only','needs a welder'],'visible screw heads',''],
+['h-assembly','Screws cutting their own thread in bosses are…','self-tapping screws',['machine screws','pop rivets','dowels'],'machine screws',''],
+['h-assembly','Screws instead of glue on a vacuum cleaner allow…','repair and recycling',['a lighter casing','hidden fixings','no tools'],'a lighter casing',''],
+['h-assembly','Dowel, biscuit, housing and mortise and tenon are…','carcass and frame joints',['knock-down fittings','snap fits','thermal bonds'],'knock-down fittings',''],
+['h-assembly','Snap fits and spot welds suit…','automated, high-volume assembly',['one-off hand work','customer assembly','small-batch hand assembly'],'one-off production',''],
+/* ---- Production ---- */
+['h-production','A bespoke wedding dress is…','one-off production',['batch production','mass production','continuous flow'],'batch production',''],
+['h-production','A seasonal furniture range made in sets is…','batch production',['one-off production','mass production','just-in-time'],'mass production',''],
+['h-production','Cars and phones on continuous production lines are…','mass production',['batch production','one-off production','prototyping'],'batch production',''],
+['h-production','What type of chart is shown?','Gantt chart',['Flow chart','Morphological matrix','Pie chart'],'Flow chart','hgantt'],
+['h-production','Using the Gantt chart, how long does the whole project take?','8 weeks',['5 weeks','6 weeks','10 weeks'],'6 weeks','hgantt'],
+['h-production','The chain of dependent tasks that sets a project’s length is the…','critical path',['flow chart','lead time','batch'],'production line',''],
+['h-production','In a flow chart, a diamond shows a…','decision',['start or end','process','input or output'],'process','fcd'],
+['h-production','In a flow chart, a rounded box (terminator) shows the…','start or end',['decision','process','input or output'],'process','fct'],
+['h-production','In a flow chart, a rectangle shows a…','process',['decision','start or end','input or output'],'input or output','fcp'],
+['h-production','In a flow chart, a parallelogram shows an…','input or output',['decision','process','start or end'],'process','fci'],
+['h-production','Materials arriving just when needed is…','just-in-time',['batch production','automation','economies of scale'],'mass production',''],
+['h-production','A benefit of just-in-time is…','less money tied up in stock',['large safety stocks','deliver whenever','little planning'],'large stocks just in case',''],
+['h-production','A risk of just-in-time is…','production stops if a supplier is late',['too much stock','more waste','heavier products'],'too much stock builds up',''],
+['h-production','A jig improves production because it…','locates each part without marking out',['replaces every worker','sets the price','removes materials'],'replaces every worker',''],
+['h-production','A benefit of automation is it…','runs 24 hours a day with fewer errors',['needs little investment','creates unskilled jobs','suits one-off work'],'needs little investment',''],
+['h-production','Changes to the CAD model going straight to manufacture is…','CAD/CAM',['just-in-time','batch production','a Gantt chart'],'CNC machining',''],
+['h-production','Bought-in parts of known quality that cut assembly time are…','standard components',['jigs','prototypes','bosses'],'bespoke components',''],
+['h-production','A high unit cost and a skilled workforce suggest…','one-off production',['mass production','batch production','automation'],'batch production',''],
+/* ---- People ---- */
+['h-people','Who advises on the best material for a new kettle body?','Materials technologist',['Market researcher','Lawyer','Project manager'],'Production engineer',''],
+['h-people','Who keeps the project on time and on budget?','Project manager',['Ergonomist','Designer','Materials technologist'],'Production engineer',''],
+['h-people','Who applies for a patent to protect a new mechanism?','Lawyer',['Production engineer','Ergonomist','Market researcher'],'Project manager',''],
+['h-people','Who runs focus groups to find what customers want?','Market researcher',['Production engineer','Materials technologist','Lawyer'],'Designer',''],
+['h-people','Who advises on tooling and efficient manufacture?','Production engineer',['Ergonomist','Market researcher','Lawyer'],'Materials technologist',''],
+['h-people','Who advises on handle size using anthropometric data?','Ergonomist',['Lawyer','Project manager','Market researcher'],'Designer',''],
+['h-people','Who provides the initial creative input and inspiration?','Designer',['Lawyer','Project manager','Production engineer'],'Market researcher',''],
+['h-people','An advantage of an in-house design team is…','less risk of sharing information with rivals',['wider outside expertise','paid only when needed','more flexible'],'access to a wider range of expertise',''],
+['h-people','An advantage of sub-contracting design work is…','a wide range of expertise when needed',['less risk of leaks','knows your products best','always available'],'less risk of sharing information',''],
+['h-people','A disadvantage of an in-house team is…','salaries are paid even with little work',['information leaks','often unavailable','unreliable'],'increased risk of information leaks',''],
+['h-people','When should the lawyer be consulted?','Before ideas are made public',['Only after launch','Never','During brainstorming only'],'Only after the product is launched',''],
+/* ---- IPR ---- */
+['h-ipr','Protecting the shape and appearance of a new chair needs a…','registered design',['patent','copyright','trademark'],'patent',''],
+['h-ipr','A patent protects…','a new invention and how it works',['a brand name','music or artwork','surface pattern'],'a product’s shape and appearance',''],
+['h-ipr','How long can a UK patent last?','Up to 20 years, renewed yearly',['Life plus 70 years','10 years, renewable for ever','Up to 25 years'],'Up to 25 years, renewed every 5 years',''],
+['h-ipr','How long does a registered trademark last?','10 years, renewable indefinitely',['Up to 20 years','Up to 25 years','Life plus 70 years'],'Up to 20 years, renewed yearly',''],
+['h-ipr','How long can a registered design last?','Up to 25 years, renewed every 5 years',['Up to 20 years, renewed yearly','10 years, renewable for ever','Life plus 70 years'],'Up to 20 years, renewed yearly',''],
+['h-ipr','Which protection is automatic, with no need to apply?','Copyright',['Patent','Registered design','Registered trademark'],'Registered design',''],
+['h-ipr','UK design right (unregistered) protects…','shape and configuration',['surface decoration','a brand name','an invention'],'surface decoration',''],
+['h-ipr','A trademark protects…','a brand identity such as a name or logo',['how an invention works','an internal mechanism','a manual'],'the product’s appearance',''],
+['h-ipr','Which symbol shows a trademark is registered?','®',['©','™','℗'],'™',''],
+['h-ipr','Which symbol shows a claimed but unregistered trademark?','™',['®','©','℗'],'®',''],
+['h-ipr','Copyright for written and artistic work lasts…','the creator’s life plus 70 years',['20 years','10 years','25 years'],'up to 25 years',''],
+['h-ipr','A patented invention must be new, have an inventive step and be…','capable of industrial use',['attractive','cheap','handmade'],'already on sale',''],
+['h-ipr','Patents and registered designs are applied for at the…','Intellectual Property Office',['British Standards Institution','Forest Stewardship Council','Trading Standards'],'British Standards Institution',''],
+/* ---- Impact ---- */
+['h-impact','Using screws, not glue, so parts separate for recycling is…','design for disassembly',['planned obsolescence','a throwaway society','style obsolescence'],'design for re-use',''],
+['h-impact','A negative impact of automation on the workforce is…','job losses affecting the local economy',['safer workplaces','cheaper products','more output'],'safer workplaces',''],
+['h-impact','A positive impact of automation on society is…','cheaper, more available products',['more manual jobs','more waste','shorter-lived products'],'more manual factory jobs',''],
+['h-impact','FSC certification on timber shows it comes from…','responsibly managed forests',['fireproof treatment','the strongest trees','abroad'],'the oldest trees',''],
+['h-impact','Products replaced rather than repaired, creating waste, is a…','throwaway society',['circular economy','niche market','life cycle assessment'],'consumer society',''],
+['h-impact','Flat-packing reduces environmental impact because…','more fit in each delivery',['it is heavier','it needs more packaging','it uses more material'],'it needs more packaging',''],
+['h-impact','Making a product repairable with replaceable parts increases its…','life expectancy',['obsolescence','production cost only','weight'],'planned obsolescence',''],
+['h-impact','A life cycle assessment covers raw materials, manufacture, transport, use and…','disposal',['advertising','patenting','pricing'],'packaging',''],
+['h-impact','Refillable containers are an example of design for…','re-use',['disassembly','obsolescence','mass production'],'recyclability',''],
+['h-impact','Nesting parts on a sheet to cut waste improves…','efficiency',['aesthetics','branding','obsolescence'],'recyclability',''],
+['h-impact','Mass production has helped create a…','consumer society',['niche market','one-off economy','closed brief'],'circular economy',''],
+['h-impact','Labelling plastics with identification codes helps…','recycling',['branding','patenting','pricing'],'re-use',''],
+];
+
+const FIGS={"hplc": "<svg viewBox=\"0 0 560 250\" role=\"img\" aria-label=\"Product life cycle graph with four stages numbered 1 to 4\" font-family=\"Public Sans, Arial, sans-serif\" font-size=\"13\" fill=\"none\" stroke=\"#2B141D\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M50 210 H530 M50 210 V20\" stroke=\"#2B141D\" stroke-width=\"2\"/><text x=\"290\" y=\"242\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Time</text><text x=\"20\" y=\"115\" fill=\"#2B141D\" stroke=\"none\" transform=\"rotate(-90 20 115)\" text-anchor=\"middle\">Sales</text>\n  <path d=\"M50 205 C110 204 140 196 170 170 C210 130 230 70 290 52 C340 40 370 44 410 70 C450 100 480 150 520 190\" stroke=\"#C9557A\" stroke-width=\"4\" fill=\"none\"/>\n  <path d=\"M170 210 V30\" stroke=\"#2B141D\" stroke-dasharray=\"5 5\" stroke-width=\"1.2\"/><path d=\"M290 210 V30\" stroke=\"#2B141D\" stroke-dasharray=\"5 5\" stroke-width=\"1.2\"/><path d=\"M410 210 V30\" stroke=\"#2B141D\" stroke-dasharray=\"5 5\" stroke-width=\"1.2\"/>\n  <circle cx=\"110\" cy=\"228\" r=\"0\"/><text x=\"110\" y=\"30\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">1</text><circle cx=\"230\" cy=\"228\" r=\"0\"/><text x=\"230\" y=\"30\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">2</text><circle cx=\"350\" cy=\"228\" r=\"0\"/><text x=\"350\" y=\"30\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">3</text><circle cx=\"470\" cy=\"228\" r=\"0\"/><text x=\"470\" y=\"30\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">4</text></svg>", "hgantt": "<svg viewBox=\"0 0 518 216\" role=\"img\" aria-label=\"Gantt chart: Design parts weeks 1 to 2, Order materials weeks 2 to 3, Make mould weeks 3 to 5, Mould parts weeks 5 to 7, Assemble and pack weeks 7 to 8\" font-family=\"Public Sans, Arial, sans-serif\" font-size=\"13\" fill=\"none\" stroke=\"#2B141D\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><rect x=\"170\" y=\"20\" width=\"42\" height=\"186\" fill=\"#fff\" stroke=\"#E3DACB\"/><text x=\"191\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 1</text><rect x=\"212\" y=\"20\" width=\"42\" height=\"186\" fill=\"#FAF6F0\" stroke=\"#E3DACB\"/><text x=\"233\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 2</text><rect x=\"254\" y=\"20\" width=\"42\" height=\"186\" fill=\"#fff\" stroke=\"#E3DACB\"/><text x=\"275\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 3</text><rect x=\"296\" y=\"20\" width=\"42\" height=\"186\" fill=\"#FAF6F0\" stroke=\"#E3DACB\"/><text x=\"317\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 4</text><rect x=\"338\" y=\"20\" width=\"42\" height=\"186\" fill=\"#fff\" stroke=\"#E3DACB\"/><text x=\"359\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 5</text><rect x=\"380\" y=\"20\" width=\"42\" height=\"186\" fill=\"#FAF6F0\" stroke=\"#E3DACB\"/><text x=\"401\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 6</text><rect x=\"422\" y=\"20\" width=\"42\" height=\"186\" fill=\"#fff\" stroke=\"#E3DACB\"/><text x=\"443\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 7</text><rect x=\"464\" y=\"20\" width=\"42\" height=\"186\" fill=\"#FAF6F0\" stroke=\"#E3DACB\"/><text x=\"485\" y=\"14\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wk 8</text><text x=\"10\" y=\"48\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Design parts</text><rect x=\"173\" y=\"30\" width=\"78\" height=\"24\" rx=\"5\" fill=\"#C9557A\" stroke=\"#5A1A2E\"/><text x=\"10\" y=\"82\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Order materials</text><rect x=\"215\" y=\"64\" width=\"78\" height=\"24\" rx=\"5\" fill=\"#C9557A\" stroke=\"#5A1A2E\"/><text x=\"10\" y=\"116\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Make mould</text><rect x=\"257\" y=\"98\" width=\"120\" height=\"24\" rx=\"5\" fill=\"#C9557A\" stroke=\"#5A1A2E\"/><text x=\"10\" y=\"150\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Mould parts</text><rect x=\"341\" y=\"132\" width=\"120\" height=\"24\" rx=\"5\" fill=\"#C9557A\" stroke=\"#5A1A2E\"/><text x=\"10\" y=\"184\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Assemble and pack</text><rect x=\"425\" y=\"166\" width=\"78\" height=\"24\" rx=\"5\" fill=\"#C9557A\" stroke=\"#5A1A2E\"/></svg>", "hboss": "<svg viewBox=\"0 0 560 230\" role=\"img\" aria-label=\"Section through a moulded casing with a feature labelled A and two thin walls labelled B\" font-family=\"Public Sans, Arial, sans-serif\" font-size=\"13\" fill=\"none\" stroke=\"#2B141D\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M30 40 V190 H530 V40\" stroke=\"#2B141D\" stroke-width=\"3\" fill=\"none\"/><path d=\"M30 40 l0 0\" />\n  <rect x=\"120\" y=\"100\" width=\"40\" height=\"90\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\" stroke-width=\"2\"/><rect x=\"133\" y=\"100\" width=\"14\" height=\"80\" fill=\"#fff\" stroke=\"#5A1A2E\"/>\n  <rect x=\"300\" y=\"120\" width=\"10\" height=\"70\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\" stroke-width=\"2\"/><rect x=\"360\" y=\"120\" width=\"10\" height=\"70\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\" stroke-width=\"2\"/>\n  <path d=\"M160 160 L200 190 M160 175 L180 190\" stroke=\"#5A1A2E\" stroke-width=\"2\"/>\n  <text x=\"140\" y=\"80\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\">A</text><path d=\"M140 86 V98\" stroke=\"#5A1A2E\" stroke-width=\"2\"/>\n  <text x=\"335\" y=\"100\" fill=\"#5A1A2E\" stroke=\"none\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\">B</text><path d=\"M330 106 L308 120 M340 106 L362 120\" stroke=\"#5A1A2E\" stroke-width=\"2\"/>\n  <text x=\"30\" y=\"222\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"start\">Section through the base of a moulded casing (wall shown in black)</text></svg>", "hresin": "<svg viewBox=\"0 0 120 124\" role=\"img\" aria-label=\"Plastic identification code 5, PP\" font-family=\"Public Sans, Arial, sans-serif\" font-size=\"13\" fill=\"none\" stroke=\"#2B141D\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><g transform=\"translate(10,14)\"><path d=\"M50 8 L88 74 L12 74 Z\" stroke=\"#2B141D\" stroke-width=\"3\" fill=\"none\"/><path d=\"M50 8 l-7 12 M50 8 l7 12\" stroke=\"#2B141D\" stroke-width=\"3\"/><text x=\"50\" y=\"62\" fill=\"#2B141D\" stroke=\"none\" font-size=\"28\" font-weight=\"700\" text-anchor=\"middle\">5</text></g></svg>", "hmorph": "<svg viewBox=\"0 0 580 214\" role=\"img\" aria-label=\"Morphological matrix for a desk lamp\" font-family=\"Public Sans, Arial, sans-serif\" font-size=\"13\" fill=\"none\" stroke=\"#2B141D\" stroke-width=\"1.6\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><text x=\"75\" y=\"20\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Factor</text><text x=\"360\" y=\"20\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Options</text><rect x=\"10\" y=\"34\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\"/><text x=\"75\" y=\"57\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\"><tspan font-weight=\"700\">Light source</tspan></text><rect x=\"150\" y=\"34\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#E2F4EA\" stroke=\"#2F6B49\" stroke-width=\"2.4\"/><text x=\"215\" y=\"57\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">LED strip</text><rect x=\"290\" y=\"34\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"355\" y=\"57\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Bulb</text><rect x=\"430\" y=\"34\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"495\" y=\"57\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Fibre optic</text><rect x=\"10\" y=\"78\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\"/><text x=\"75\" y=\"101\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\"><tspan font-weight=\"700\">Base</tspan></text><rect x=\"150\" y=\"78\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"215\" y=\"101\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Weighted disc</text><rect x=\"290\" y=\"78\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#E2F4EA\" stroke=\"#2F6B49\" stroke-width=\"2.4\"/><text x=\"355\" y=\"101\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Clamp</text><rect x=\"430\" y=\"78\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"495\" y=\"101\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Wall bracket</text><rect x=\"10\" y=\"122\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\"/><text x=\"75\" y=\"145\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\"><tspan font-weight=\"700\">Arm</tspan></text><rect x=\"150\" y=\"122\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"215\" y=\"145\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Spring arm</text><rect x=\"290\" y=\"122\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#E2F4EA\" stroke=\"#2F6B49\" stroke-width=\"2.4\"/><text x=\"355\" y=\"145\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Flexible neck</text><rect x=\"430\" y=\"122\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"495\" y=\"145\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Fixed pole</text><rect x=\"10\" y=\"166\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#F3D9E0\" stroke=\"#5A1A2E\"/><text x=\"75\" y=\"189\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\"><tspan font-weight=\"700\">Power</tspan></text><rect x=\"150\" y=\"166\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"215\" y=\"189\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Mains</text><rect x=\"290\" y=\"166\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#fff\" stroke=\"#2B141D\" stroke-width=\"1.4\"/><text x=\"355\" y=\"189\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">Battery</text><rect x=\"430\" y=\"166\" width=\"130\" height=\"36\" rx=\"6\" fill=\"#E2F4EA\" stroke=\"#2F6B49\" stroke-width=\"2.4\"/><text x=\"495\" y=\"189\" fill=\"#2B141D\" stroke=\"none\" text-anchor=\"middle\">USB</text></svg>", "pctl": "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Percentile curve with the 5th and 95th percentiles marked\" font-family=\"Segoe UI,Arial,sans-serif\"><path d=\"M20 125 C80 125 100 25 160 25 C220 25 240 125 300 125\" fill=\"#E2ECFD\" stroke=\"#3B3340\" stroke-width=\"2.5\"/><path d=\"M20 125 C40 125 50 122 58 118 L58 125Z\" fill=\"#F2A0A8\"/><path d=\"M262 118 C270 122 280 125 300 125 L262 125Z\" fill=\"#F2A0A8\"/><path d=\"M58 30 V128 M262 30 V128\" stroke=\"#3B3340\" stroke-width=\"2\" stroke-dasharray=\"5 4\"/><text x=\"58\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#3B3340\">5th</text><text x=\"262\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#3B3340\">95th</text><path d=\"M14 128 H306\" stroke=\"#3B3340\" stroke-width=\"2\"/><text x=\"160\" y=\"146\" text-anchor=\"middle\" font-size=\"12\" fill=\"#8A7D8F\">body size \u2192</text></svg>", "extr": "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A long profile with the same cross-section along its length\" font-family=\"Segoe UI,Arial,sans-serif\"><g stroke=\"#3B3340\" stroke-width=\"2.2\" stroke-linejoin=\"round\"><path d=\"M40 60 L80 40 L280 40 L240 60Z\" fill=\"#D5DAE1\"/><path d=\"M40 60 L240 60 L240 120 L40 120Z\" fill=\"#EEF1F5\"/><path d=\"M240 60 L280 40 L280 100 L240 120Z\" fill=\"#C4CBD5\"/><path d=\"M40 60 L40 120 L60 120 L60 80 L80 80 L80 60Z\" fill=\"#9FB4D6\"/></g><path d=\"M100 138 H220\" stroke=\"#5A1A2E\" stroke-width=\"2.5\" marker-end=\"url(#ar)\"/><defs><marker id=\"ar\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0 0 L8 4 L0 8Z\" fill=\"#5A1A2E\"/></marker></defs><text x=\"160\" y=\"30\" text-anchor=\"middle\" font-size=\"12\" fill=\"#8A7D8F\">same cross-section along the whole length</text></svg>", "spangle": "<svg viewBox=\"0 0 300 140\" role=\"img\" aria-label=\"Close-up of a metal surface finish\" font-family=\"Segoe UI,Arial,sans-serif\"><defs><clipPath id=\"sc\"><rect x=\"4\" y=\"4\" width=\"292\" height=\"132\" rx=\"12\"/></clipPath></defs><g clip-path=\"url(#sc)\"><rect width=\"300\" height=\"140\" fill=\"#B8BEC6\"/><polygon points=\"153,58 144,63 122,63 106,54 111,38 131,29 151,41\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"86,106 67,121 38,104 50,90 77,89\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"230,79 218,84 203,83 196,68 206,58 228,61\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"106,27 88,34 73,25 80,11 95,12\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"66,18 58,32 37,31 18,10 28,-3 38,-10 64,-3\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"242,81 214,101 191,96 192,72 214,58 235,62\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"177,116 158,126 145,124 141,105 152,97 172,104\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"59,44 37,54 20,40 30,25 51,24\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"296,80 275,94 258,81 263,67 283,68\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"215,50 202,60 188,61 170,44 178,35 194,26 214,30\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"111,118 101,127 83,117 91,105 104,107\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"93,53 72,67 37,58 39,36 51,19 84,23\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"140,133 118,147 105,142 95,129 118,111 137,117\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"46,118 23,132 11,125 1,106 22,98 43,104\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"171,122 151,134 127,131 115,102 132,90 162,98\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"165,41 152,47 134,40 136,26 161,25\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"111,57 93,62 80,50 88,40 104,40\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"180,96 161,108 149,107 136,91 146,75 158,72 179,78\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"214,25 202,32 191,26 187,20 193,10 213,16\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"203,100 180,113 160,105 173,84 191,78\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"229,76 214,91 188,83 191,57 218,62\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"154,33 141,44 129,46 119,37 123,24 136,18 151,22\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"164,74 144,92 120,81 106,61 126,46 152,50\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"167,21 150,32 139,25 146,11 162,13\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"308,118 296,132 282,129 271,118 273,106 289,102 307,107\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"184,20 158,29 140,15 149,-8 175,-8\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"186,91 173,103 151,101 130,84 134,63 167,60 177,74\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"187,127 171,132 156,135 148,118 152,103 175,101 186,105\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"284,36 274,47 260,45 255,39 261,23 269,22 283,28\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"245,67 235,81 208,80 197,66 202,48 227,45 242,58\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"176,66 166,80 142,80 138,64 140,51 156,49 175,59\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"258,37 245,45 234,43 222,30 229,18 248,15 258,18\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"145,57 134,62 116,61 110,48 118,39 132,34 143,40\" fill=\"#D3D8DE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"157,117 144,126 127,115 134,105 151,103\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"52,25 42,34 19,29 12,15 33,4 49,11\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"50,72 42,83 20,77 18,63 26,55 47,57\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"177,83 159,99 125,82 139,62 169,60\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"298,94 284,104 268,98 273,82 292,84\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"273,105 258,115 236,116 229,105 239,86 259,82 271,90\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"208,29 180,47 163,33 168,10 197,13\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"137,19 127,42 103,40 80,16 86,5 115,-5 137,-0\" fill=\"#C3C9D1\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"241,134 216,141 205,135 207,113 232,111\" fill=\"#9AA2AC\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"132,97 124,103 107,102 94,89 99,81 116,76 129,83\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"248,46 238,57 228,57 219,45 223,36 234,32 246,38\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"117,61 111,66 96,64 90,54 92,49 109,44 116,49\" fill=\"#B8BEC6\" stroke=\"#8C949E\" stroke-width=\".8\"/><polygon points=\"255,112 241,123 214,119 213,103 223,87 245,89\" fill=\"#AEB5BE\" stroke=\"#8C949E\" stroke-width=\".8\"/></g><rect x=\"4\" y=\"4\" width=\"292\" height=\"132\" rx=\"12\" fill=\"none\" stroke=\"#3B3340\" stroke-width=\"2\"/></svg>", "chrome": "<svg viewBox=\"0 0 300 140\" role=\"img\" aria-label=\"Close-up of a mirror-like metal finish\" font-family=\"Segoe UI,Arial,sans-serif\"><defs><linearGradient id=\"cg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#F7F9FB\"/><stop offset=\".28\" stop-color=\"#9AA4B0\"/><stop offset=\".45\" stop-color=\"#FFFFFF\"/><stop offset=\".62\" stop-color=\"#5D6773\"/><stop offset=\".8\" stop-color=\"#E9EDF1\"/><stop offset=\"1\" stop-color=\"#7C8794\"/></linearGradient></defs><rect x=\"4\" y=\"4\" width=\"292\" height=\"132\" rx=\"12\" fill=\"url(#cg)\" stroke=\"#3B3340\" stroke-width=\"2\"/><path d=\"M40 30 L90 30 L60 110 L20 110Z\" fill=\"#fff\" opacity=\".55\"/><path d=\"M200 20 L215 20 L180 120 L165 120Z\" fill=\"#fff\" opacity=\".45\"/></svg>", "dip": "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A wire rack with a smooth coloured coating\" font-family=\"Segoe UI,Arial,sans-serif\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M30 120 V40 Q30 25 45 25 H275 Q290 25 290 40 V120\" stroke=\"#7CC9A0\" stroke-width=\"13\"/><path d=\"M80 25 V120 M130 25 V120 M180 25 V120 M230 25 V120\" stroke=\"#7CC9A0\" stroke-width=\"11\"/><path d=\"M30 120 V40 Q30 25 45 25 H275 Q290 25 290 40 V120\" stroke=\"#5FB287\" stroke-width=\"2\"/></g><text x=\"160\" y=\"145\" text-anchor=\"middle\" font-size=\"12\" fill=\"#8A7D8F\">wire rack with a thick, smooth coloured coating</text></svg>", "pins": "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"The inside of a plastic casing with small round marks\" font-family=\"Segoe UI,Arial,sans-serif\"><rect x=\"40\" y=\"20\" width=\"240\" height=\"120\" rx=\"14\" fill=\"#E8E2EE\" stroke=\"#3B3340\" stroke-width=\"2.5\"/><rect x=\"56\" y=\"36\" width=\"208\" height=\"88\" rx=\"8\" fill=\"#F5F1F8\" stroke=\"#3B3340\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"/><circle cx=\"80\" cy=\"58\" r=\"7\" fill=\"none\" stroke=\"#5A1A2E\" stroke-width=\"2.2\"/><circle cx=\"80\" cy=\"58\" r=\"2\" fill=\"#5A1A2E\"/><circle cx=\"240\" cy=\"58\" r=\"7\" fill=\"none\" stroke=\"#5A1A2E\" stroke-width=\"2.2\"/><circle cx=\"240\" cy=\"58\" r=\"2\" fill=\"#5A1A2E\"/><circle cx=\"80\" cy=\"102\" r=\"7\" fill=\"none\" stroke=\"#5A1A2E\" stroke-width=\"2.2\"/><circle cx=\"80\" cy=\"102\" r=\"2\" fill=\"#5A1A2E\"/><circle cx=\"240\" cy=\"102\" r=\"7\" fill=\"none\" stroke=\"#5A1A2E\" stroke-width=\"2.2\"/><circle cx=\"240\" cy=\"102\" r=\"2\" fill=\"#5A1A2E\"/><circle cx=\"160\" cy=\"80\" r=\"7\" fill=\"none\" stroke=\"#5A1A2E\" stroke-width=\"2.2\"/><circle cx=\"160\" cy=\"80\" r=\"2\" fill=\"#5A1A2E\"/><text x=\"160\" y=\"156\" text-anchor=\"middle\" font-size=\"12\" fill=\"#8A7D8F\">inside of a plastic casing</text></svg>", "draft": "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Section through a moulded cup with slightly tapered walls\" font-family=\"Segoe UI,Arial,sans-serif\"><path d=\"M70 30 L250 30 L230 130 L90 130Z\" fill=\"none\" stroke=\"#3B3340\" stroke-width=\"3\"/><path d=\"M84 40 L236 40 L220 120 L100 120Z\" fill=\"#E2ECFD\" stroke=\"#3B3340\" stroke-width=\"1.5\"/><path d=\"M70 30 V130\" stroke=\"#5A1A2E\" stroke-width=\"1.6\" stroke-dasharray=\"5 4\"/><path d=\"M70 100 A30 30 0 0 0 76 100\" stroke=\"#5A1A2E\" stroke-width=\"2\" fill=\"none\"/><path d=\"M70 92 Q74 96 78 92\" stroke=\"#5A1A2E\" stroke-width=\"2\" fill=\"none\"/><text x=\"160\" y=\"152\" text-anchor=\"middle\" font-size=\"12\" fill=\"#8A7D8F\">section through a moulded cup: walls taper slightly</text></svg>", "fcd": "<svg viewBox=\"0 0 200 120\" role=\"img\" aria-label=\"A flow chart symbol\" font-family=\"Segoe UI,Arial,sans-serif\"><path d=\"M100 10 L180 60 L100 110 L20 60Z\" fill=\"#FFF1D6\" stroke=\"#3B3340\" stroke-width=\"3\"/></svg>", "fct": "<svg viewBox=\"0 0 200 120\" role=\"img\" aria-label=\"A flow chart symbol\" font-family=\"Segoe UI,Arial,sans-serif\"><rect x=\"20\" y=\"30\" width=\"160\" height=\"60\" rx=\"30\" fill=\"#FFF1D6\" stroke=\"#3B3340\" stroke-width=\"3\"/></svg>", "fcp": "<svg viewBox=\"0 0 200 120\" role=\"img\" aria-label=\"A flow chart symbol\" font-family=\"Segoe UI,Arial,sans-serif\"><rect x=\"25\" y=\"30\" width=\"150\" height=\"60\" fill=\"#FFF1D6\" stroke=\"#3B3340\" stroke-width=\"3\"/></svg>", "fci": "<svg viewBox=\"0 0 200 120\" role=\"img\" aria-label=\"A flow chart symbol\" font-family=\"Segoe UI,Arial,sans-serif\"><path d=\"M50 30 H185 L150 90 H15Z\" fill=\"#FFF1D6\" stroke=\"#3B3340\" stroke-width=\"3\"/></svg>"};
+
+/* Flashcard Dash (Higher D&M), v10.24. 20 levels. Levels 1-10: four answers. Levels 11-20: 50/50 between the answer and its closest look-alike.
+   Cards per level = 7 + level. The clock is worked out from the words on each card (reading time) and gets tighter level by level. */
+const MAXL=20,HARD=10;
+const TNAME={'h-brief':'The design brief','h-research':'Research and evaluation','h-spec':'Specifications','h-ideas':'Idea generation','h-model':'Modelling','h-graphics':'Graphics','h-function':'Function','h-perf':'Performance','h-safety':'Safety','h-market':'Market','h-aesth':'Aesthetics','h-ergo':'Ergonomics','h-materials':'Materials','h-processes':'Commercial processes','h-features':'Finishes and features','h-assembly':'Assembly methods','h-production':'Production and planning','h-people':'People who influence design','h-ipr':'Intellectual property','h-impact':'Impact and sustainability'};
+const TCOL=t=>/h-(brief|research|spec|ideas|model|graphics)/.test(t)?'var(--lil)':/h-(function|perf|safety|market|aesth|ergo)/.test(t)?'var(--pink)':/h-(materials|processes|features|assembly|production)/.test(t)?'var(--blue)':'var(--mint)';
+const $=id=>document.getElementById(id);
+const ST={get(k,d){try{const v=localStorage.getItem('fd-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('fd-'+k,JSON.stringify(v))}catch(e){}}};
+let unlocked=ST.get('unl',1),best=ST.get('best',{}),misses=ST.get('miss',{}),bank=Math.min(3,ST.get('lives',0)),sound=ST.get('snd',true);
+let L=Math.min(unlocked,MAXL),deck=[],cur=null,lives=0,TIME=60,tLeft=60,running=false,busy=false,raf=0,last=0,missedRun={},cleared=0;
+const cardsFor=L=>7+L;
+const words=s=>String(s).split(/\s+/).filter(Boolean).length;
+const factor=L=>L<=HARD?1.6-(L-1)*0.6/9:1.25-(L-HARD-1)*0.4/9;
+function optsFor(i,L){const c=BANK[i];if(L>HARD){const o=c[4]||c[3][0];return Math.random()<.5?[c[2],o]:[o,c[2]]}return [c[2],...c[3]].sort(()=>Math.random()-.5)}
+function allow(i,L){const c=BANK[i];const ow=L>HARD?words(c[2])+words(c[4]||c[3][0]):words(c[2])+c[3].reduce((a,x)=>a+words(x),0);return 2.5+0.32*words(c[1])+0.2*ow+(c[5]?2:0)}
+function buildDeck(n){const pool=[];BANK.forEach((c,i)=>{const w=1+Math.min(3,misses[i]||0);for(let k=0;k<w;k++)pool.push(i)});const out=[];let g=0;
+  while(out.length<n&&g++<6000){const i=pool[Math.random()*pool.length|0];if(out.includes(i))continue;
+    if(out.length&&BANK[out[out.length-1]][0]===BANK[i][0]&&Math.random()<.7)continue;out.push(i)}return out}
+const fmt=s=>{s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id))}
+/* sound */
+let AC=null;function tone(f,d,type='sine',v=.1,dl=0){if(!sound)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+dl;o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+const ding=n=>{tone(660+Math.min(n,8)*40,.18,'triangle',.09)},thud=()=>{tone(180,.35,'sine',.14)};
+function drawSnd(){$('snd').innerHTML=sound?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>'}
+$('snd').onclick=()=>{sound=!sound;ST.set('snd',sound);drawSnd()};drawSnd();
+$('x').onclick=()=>{stop();try{parent.postMessage('td-close','*')}catch(e){}};
+/* ready */
+function pathHTML(upto,hi){return Array.from({length:MAXL},(_,i)=>`<i class="${i+1<upto?'d':i+1===upto?'c':''}${i>=HARD?' h':''}"></i>`).join('')}
+function setReady(l){L=Math.max(1,Math.min(l,unlocked,MAXL));const n=cardsFor(L),sample=buildDeck(n);const t=Math.round(sample.reduce((a,i)=>a+allow(i,L),0)*factor(L));
+  $('rLvl').textContent=`Level ${L} of ${MAXL}`+(L>HARD?' · 50/50':'');$('rPath').innerHTML=pathHTML(L);$('rCards').textContent=n;$('rTime').textContent=fmt(t);$('rLives').textContent=2+bank;
+  $('rNote').textContent=L>HARD?'50/50: each card has two answers that look alike. Read both carefully before you choose.':L===1?'Read each card and pick the right answer. You start with two lives. A wrong answer costs one and the card comes back later. Clear a level to unlock the next one, and keep any spare lives for the next round.':'Four answers on each card. The clock is set by how much there is to read on each card.';
+  $('pick').innerHTML=Array.from({length:unlocked},(_,i)=>`<option value="${i+1}" ${i+1===L?'selected':''}>Level ${i+1}${i+1>HARD?' (50/50)':''}${best[i+1]?` · best ${fmt(best[i+1])} left`:''}</option>`).join('');
+  const m=Object.keys(misses).length;$('rBank').textContent=`${BANK.length} cards across the Higher course`+(m?` · ${m} you’ve missed come up more often`:'');show('ready')}
+$('pick').onchange=e=>setReady(+e.target.value);
+$('begin').onclick=()=>countdown();
+function countdown(){show('cd');$('cdL').textContent='Level '+L+(L>HARD?' · 50/50':'')+' · get ready';let n=3;const step=()=>{if(!$('cd').classList.contains('on'))return;if(n===0){start();return}$('cdN').textContent=n;$('cdN').style.animation='none';void $('cdN').offsetWidth;$('cdN').style.animation='';tone(n===1?523:392,.3,'sine',.1);n--;setTimeout(step,750)};step()}
+/* play */
+function start(){deck=buildDeck(cardsFor(L));TIME=Math.round(deck.reduce((a,i)=>a+allow(i,L),0)*factor(L));tLeft=TIME;lives=2+bank;missedRun={};cleared=0;busy=false;running=true;
+  $('hLvl').textContent='Level '+L;show('play');drawLives();paint(true);last=performance.now();raf=requestAnimationFrame(tick)}
+function stop(){running=false;cancelAnimationFrame(raf)}
+function tick(now){if(!running)return;const dt=(now-last)/1000;last=now;if(!busy)tLeft-=dt;if(tLeft<=0){tLeft=0;upd();return end(false,'time')}upd();raf=requestAnimationFrame(tick)}
+function upd(){const f=tLeft/TIME;const b=$('barIn');b.style.transform=`scaleX(${Math.max(0,f)})`;b.style.background=f<.12?'var(--rose)':f<.3?'var(--amber)':'var(--mint)';$('clock').textContent=fmt(tLeft)}
+function drawLives(){$('lives').innerHTML=Array.from({length:Math.max(2,2+bank)},(_,i)=>`<span class="${i<lives?'':'lost'}"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3.2 4.5 7 4.5c2.2 0 3.6 1.2 5 3 1.4-1.8 2.8-3 5-3 3.8 0 6 3.9 4.3 7.5C19 16.4 12 21 12 21z" fill="#F2A0A8"/></svg></span>`).join('')}
+function paint(first){cur=deck[0];const c=BANK[cur],card=$('card');card.className='card'+(first?'':' in');card.style.setProperty('--c',TCOL(c[0]));
+  $('cTp').textContent=TNAME[c[0]]||'';$('cQ').textContent=c[1];$('cFig').innerHTML=c[5]&&FIGS[c[5]]?FIGS[c[5]]:'';$('cFig').hidden=!c[5];
+  const os=optsFor(cur,L);$('opts').className='opts'+(L>HARD?' duo':'');$('opts').innerHTML=os.map((o,k)=>`<button type="button" class="opt" data-a="${o===c[2]?1:0}"><span class="k">${k+1}</span><span>${o.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</span></button>`).join('');
+  [...$('opts').children].forEach(b=>b.onclick=()=>answer(b));$('left').textContent=deck.length+' left';
+  if(!first)requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.remove('in')))}
+function answer(b){if(busy||!running)return;busy=true;const card=$('card');
+  if(b.dataset.a==='1'){b.classList.add('right');card.classList.add('ok');ding(++cleared);if(misses[cur]){misses[cur]--;if(!misses[cur])delete misses[cur];ST.set('miss',misses)}
+    setTimeout(()=>{card.classList.add('out');setTimeout(()=>{deck.shift();busy=false;if(!deck.length)return end(true);paint()},230)},420)}
+  else{b.classList.add('wrong');[...$('opts').children].find(x=>x.dataset.a==='1').classList.add('right');card.classList.add('bad');thud();try{navigator.vibrate&&navigator.vibrate([30,40,30])}catch(e){}
+    missedRun[cur]=1;misses[cur]=(misses[cur]||0)+1;ST.set('miss',misses);lives--;drawLives();
+    setTimeout(()=>{if(lives<=0){busy=false;return end(false,'lives')}const id=deck.shift();deck.push(id);card.classList.add('out');setTimeout(()=>{busy=false;paint()},230)},1500)}}
+document.addEventListener('keydown',e=>{if(!$('play').classList.contains('on'))return;const n=+e.key;if(n>=1&&n<=4){const b=$('opts').children[n-1];if(b)b.click()}});
+function revHTML(){const ids=Object.keys(missedRun).map(Number);if(!ids.length)return '';return `<div class="rev"><h3>Cards to revise</h3><ul>${ids.map(i=>`<li style="--c:${TCOL(BANK[i][0])}">${BANK[i][1].replace(/</g,'&lt;')} <b>${BANK[i][2].replace(/</g,'&lt;')}</b></li>`).join('')}</ul></div>`}
+function fly(){const f=document.createElement('div');f.className='flycards';const cs=['var(--lil)','var(--pink)','var(--blue)','var(--mint)'];f.innerHTML=Array.from({length:18},(_,i)=>`<b style="--c:${cs[i%4]};--dx:${(Math.random()*2-1)*45}vw;--dy:${-20-Math.random()*50}vh;--r:${(Math.random()*2-1)*200}deg;animation-delay:${i*40}ms"></b>`).join('');document.body.appendChild(f);setTimeout(()=>f.remove(),2600)}
+function end(won,why){stop();const tl=Math.ceil(tLeft),wasL=L;let html;
+  if(won){bank=Math.min(3,lives-1);ST.set('lives',bank);const pb=!best[L]||tl>best[L];if(pb){best[L]=tl;ST.set('best',best)}if(L>=unlocked&&L<MAXL){unlocked=L+1;ST.set('unl',unlocked)}
+    const lastL=L>=MAXL;tone(523,.2,'triangle',.1);tone(659,.2,'triangle',.1,.12);tone(784,.35,'triangle',.1,.24);fly();
+    html=`<div class="kick">Level ${L} cleared</div><div class="big">${lastL?'Flashcard master!':['Sharp!','Nailed it!','On fire!','Top marks!'][(L-1)%4]}</div>
+     <p class="sub">${lastL?'You cleared all 20 levels.':`Level ${L+1} unlocked`+(L+1===HARD+1?': now it’s 50/50 look-alikes.':'.')}</p><div class="path">${pathHTML(L+1)}</div>
+     <div class="stat"><div><b>${fmt(tl)}</b><small>time left${pb?' · best!':''}</small></div><div><b>${Math.max(0,lives)}</b><small>lives kept · spare ${bank}</small></div></div>${revHTML()}
+     <button class="go" id="nx" type="button">${lastL?'Play level 20 again':'Next level'}</button><button class="go alt" id="again" type="button">Play level ${L} again</button>`}
+  else{bank=0;ST.set('lives',0);tone(220,.4,'sine',.12);tone(165,.5,'sine',.1,.15);
+    html=`<div class="kick">Level ${L}</div><div class="big">${why==='time'?'Out of time':'Out of lives'}</div><p class="sub">${cleared} of ${cardsFor(L)} cards done. ${why==='time'?'Read each card once, then trust your first answer.':'Every card you got wrong is below, with its answer.'}</p>${revHTML()}
+     <button class="go" id="again" type="button">Try again</button><button class="go alt" id="home" type="button">Levels</button>`}
+  $('endW').innerHTML=html;show('end');
+  const nx=$('nx');if(nx)nx.onclick=()=>setReady(Math.min(wasL+1,MAXL));$('again').onclick=()=>{L=wasL;countdown()};const hm=$('home');if(hm)hm.onclick=()=>setReady(wasL)}
+setReady(L);
+
+</script></body></html>

@@ -1530,6 +1530,11 @@ nav.tabs button[data-tab][aria-selected="true"]{border:2px solid #F4B3C2!importa
 .hw-s3r input:focus{outline:2px solid #A8C8F0;outline-offset:1px}.hw-s3r button{min-height:46px;padding:0 16px;border-radius:12px;border:0;background:#A8C8F0;color:#16243A;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
 .hw-s3e{margin:8px 0 0;font-size:14px;color:#FFB3BD}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.htile.is-locked{opacity:.6;filter:saturate(.5)}.htile.is-locked .hlock{display:flex;align-items:center;justify-content:center}
+.ppchip.pp-locked{opacity:.45;cursor:not-allowed}
+.pppract{font-size:13.5px;color:#6b5a72;background:#F3E8FA;border-radius:10px;padding:6px 10px;margin:4px 0 10px}
+.ppchip.pp-prac b{font-weight:800}
+.pplockn{display:flex;gap:8px;align-items:center;margin:2px 0 10px;font-size:14px;font-weight:600;color:#FFD3D9}.tp-body .pplockn{color:#7a2338}.pplockn svg{flex:none}
 .hwtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:2147483001;display:flex;align-items:center;gap:10px;max-width:min(420px,92vw);background:#24212A;color:#fff;border:1px solid rgba(255,46,154,.6);border-radius:16px;padding:10px 14px;box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:15px;animation:ppfade .2s ease-out}.hwtoast svg{flex:none}.hw-count span{font-size:18px;font-weight:700;color:#E9E7EC}
 .hw-bar{height:12px;border-radius:8px;background:#3E3A45;overflow:hidden}.hw-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#9FE3B0,#A8C8F0)}
 .hw-meta{margin:8px 0 12px;font-size:13.5px;color:#BDB7C6}
@@ -1548,6 +1553,16 @@ body.hw-locked #dgTile>div:first-child::after{top:46px}
 @keyframes bmbreathe{0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.3),0 0 0 1px color-mix(in srgb,var(--g) 30%,transparent),0 0 4px color-mix(in srgb,var(--g) 8%,transparent)}
  50%{box-shadow:0 10px 30px rgba(0,0,0,.3),0 0 0 1px color-mix(in srgb,var(--g) 95%,transparent),0 0 14px color-mix(in srgb,var(--g) 42%,transparent)}}
 @media (prefers-reduced-motion:reduce){:is(.lt-design,.lt-make,.lt-plan,.lt-cad,.wf-dash,#dgTile .dg-tile){animation:none;box-shadow:0 10px 30px rgba(0,0,0,.3),0 0 0 1px color-mix(in srgb,var(--g) 65%,transparent)}}
+.wfeature.wf-tools.wf-dash.wf-fc{background:radial-gradient(120% 90% at 80% 10%,#22343A 0%,#151C20 60%,#101416 100%)!important;background-image:linear-gradient(rgba(168,200,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(168,200,240,.06) 1px,transparent 1px),radial-gradient(120% 90% at 80% 10%,#22343A 0%,#151C20 60%,#101416 100%)!important;background-size:20px 20px,20px 20px,auto!important;overflow:hidden;--g:#9FE3B0}
+.wf-dash.wf-fc>.fcfan{position:absolute!important;z-index:1!important;right:34px;top:50%;width:150px;height:110px;margin-top:-62px;pointer-events:none}
+.wf-fc .fcfan b{position:absolute;left:30px;top:10px;width:92px;height:64px;border-radius:10px;background:#FFFBF5;border-top:8px solid var(--c);box-shadow:0 8px 20px rgba(0,0,0,.45);animation:fcdeal 7s ease-in-out infinite}
+.wf-fc .fcfan b::after{content:"";position:absolute;left:10px;right:10px;top:14px;height:5px;border-radius:3px;background:#E6DFEA;box-shadow:0 11px 0 #EEE8F1,0 22px 0 #EEE8F1}
+.wf-fc .fcfan b:nth-child(1){--c:#CDB6F2;--r:-16deg;--x:-34px;--y:12px}.wf-fc .fcfan b:nth-child(2){--c:#A8C8F0;--r:-5deg;--x:-10px;--y:2px}.wf-fc .fcfan b:nth-child(3){--c:#F4B3C2;--r:6deg;--x:14px;--y:4px}.wf-fc .fcfan b:nth-child(4){--c:#9FE3B0;--r:17deg;--x:38px;--y:16px}
+.wf-fc .fcfan b{transform:translate(var(--x),var(--y)) rotate(var(--r))}
+@keyframes fcdeal{0%,100%{transform:translate(var(--x),var(--y)) rotate(var(--r))}50%{transform:translate(calc(var(--x)*1.25),calc(var(--y) - 6px)) rotate(calc(var(--r)*1.3))}}
+@media (prefers-reduced-motion:reduce){.wf-fc .fcfan b{animation:none}}
+@media (min-width:700px){.wf-dash.wf-fc>.fcfan{right:12%;transform:scale(1.6);transform-origin:center}}
+@media (max-width:520px){.wf-dash.wf-fc>.fcfan{right:6px;top:18px;margin-top:0;transform:scale(.72);transform-origin:top right}.wf-fc .wf-s{max-width:62%}}
 .flagask{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,11,13,.55);animation:ppfade .15s ease-out}
 .flagask .fa-card{max-width:360px;width:100%;background:#24262B;border:1.5px solid #4A4D55;border-radius:18px;padding:18px;color:#E6E7EA;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .flagask .fa-t{display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-weight:800;font-size:17px;line-height:1.35;color:#FFF6E6}.flagask .fa-t svg{flex:none;color:#F4B3C2;margin-top:1px}
@@ -3457,7 +3472,14 @@ const PP_N5=[
  [2022, "10(a)", 4, "Describe", "c-cam", "Benefits or drawbacks of laser cutters.", "", ["Repeatable, consistent identical parts", "Accurate", "Very detailed or complex shapes, including internal shapes", "Faster production, high volumes", "Less waste material", "Can etch and engrave", "Lower labour costs", "Shorter lead time because less tooling is needed", "Made directly from the CAD drawing; files easy to email", "Runs 24 hours a day, more efficient"], ["Unqualified “cheap” or “easy”"], "“Fast”, “more efficient” and “more reliable” each score."],
  [2022, "10(b)", 2, "Describe", "c-impact", "Two effects of manufacturing technology on society.", "", ["Fewer workers needed", "Workers need new skills", "Local economic decline or factory closures from outsourcing", "More jobs in training or repairing technology", "Products cheaper than traditional manufacture", "Wider range of products available", "Throwaway society", "Safer workplace, fewer people injured"], ["Unqualified “quick”, “cheap” or “easy”"], ""],
  [2022, "11(a)", 2, "Explain", "c-systems", "Two benefits of one-off production.", "", ["Better quality, made by a skilled craftsperson", "Personalised or made to measure", "Made locally from local materials", "Unique product, satisfaction of owning one", "Less storage needed when made to order", "Skilled workers keep their jobs", "Can charge a higher price", "Lasts longer than mass-produced products", "No expensive moulds needed"], ["“Gives people jobs”"], ""],
- [2022, "11(b)", 4, "Describe", "c-impact", "Sustainable and environmental choices of materials.", "", ["Use locally sourced materials", "Transporting materials from overseas causes air pollution", "Deforestation destroys wildlife habitat", "Use FSC-certified wood", "Use recycled or recyclable materials", "Reduce material waste; design to use less material", "Replant trees for sustainable forestry", "Apply a finish to extend the lifespan", "Design for disassembly", "Upcycle or repurpose materials"], [], ""]
+ [2022, "11(b)", 4, "Describe", "c-impact", "Sustainable and environmental choices of materials.", "", ["Use locally sourced materials", "Transporting materials from overseas causes air pollution", "Deforestation destroys wildlife habitat", "Use FSC-certified wood", "Use recycled or recyclable materials", "Reduce material waste; design to use less material", "Replant trees for sustainable forestry", "Apply a finish to extend the lifespan", "Design for disassembly", "Upcycle or repurpose materials"], [], ""],
+ /* v10.24 practice questions (BenchMark, SQA style) for N5 topics with fewer than three SQA questions */
+ ['Practice','E1',2,'Describe','d-eval','Two methods a designer could use to evaluate a prototype of a new kettle.','',
+  ['A user trial: people from the target market use it and give feedback','Comparing it against each point of the specification','A questionnaire or survey of users after they have used it','Testing it, for example timing how long it takes to boil or checking it does not leak','Asking an expert to evaluate it'],
+  ['“See if it works”'],'Two different methods, each described.'],
+ ['Practice','E2',1,'Explain','d-eval','One way the marketing team could influence the design of a new product.','',
+  ['They research what consumers want, so the product meets the needs of the market','They identify the target market, so the design appeals to the right people','They advise on price or brand image, so the product will sell'],
+  ['“They sell it”'],'The influence must be explained.']
 ];
 
 /* N5 D&M 2025 and 2026 question papers: every part. Questions and marking points are paraphrased from the
@@ -4010,7 +4032,35 @@ const PPH_2022=[
   [],'Marked as a whole in four bands. The top band links each model type to a stage and the information gained, with clear examples.']
 ];
 
-const PP_H=[...PPH_2026,...PPH_2025,...PPH_2024,...PPH_2023,...PPH_2022];
+/* v10.24 practice questions (written by BenchMark in the SQA style) for Higher topics with fewer than three SQA questions, so the battery
+   and rocket ladder has steps. Year 'Practice'; appended at the end so stored keys (H0, H1, …) never move. */
+const PPH_PRAC=[
+ ['Practice','B1',2,'State','h-brief','Two pieces of information that would be included in a design brief.','',
+  ['Description of the problem / the need','Target market / who the product is for / the user','Budget / cost limit','Timescale / deadline','Quantity / scale of production','Where the product will be used / the environment it is used in'],
+  ['“What it looks like” (that is a specification detail, not the brief)'],'Any two, 1 mark each.'],
+ ['Practice','B2',1,'Explain','h-brief','One advantage, to the designer, of being given a closed brief.','',
+  ['Clear constraints, so the designer knows exactly what the client wants','Less time is wasted on ideas the client would reject','Less risk of the final design not matching what the client wanted'],
+  ['“It is easier” with no reason'],'The advantage must be explained: say what it leads to for the designer.'],
+ ['Practice','P1',2,'Explain','h-perf','Two ways the performance of a cordless drill could be improved.','',
+  ['A higher capacity battery, so it works for longer between charges','A more powerful motor, so it can drill harder materials','An impact-resistant casing such as ABS, so it survives being dropped','Variable speed, so it suits different materials and drill sizes','A faster-charging battery, so less time is spent waiting','Better grip or balance, so it can be used for longer without tiring'],
+  ['“Make it better” or “make it stronger” with no explanation'],'Two different improvements, each explained.'],
+ ['Practice','P2',1,'Describe','h-perf','The difference between the function and the performance of a product.','',
+  ['Function is what the product does, performance is how well it does it'],
+  ['Describing function only, or performance only'],'Both parts are needed for the mark.'],
+ ['Practice','S1',2,'Explain','h-safety','Two ways a designer could make a toy for young children safe to use.','',
+  ['No small parts, so it cannot be swallowed or cause choking','Rounded edges and corners, so it cannot cut or injure the child','Non-toxic paint or finish, so it is safe if chewed','Durable materials, so it will not break into sharp pieces','Parts fixed securely, so they cannot come loose','Tested to safety standards (such as the CE mark), so it is proven safe'],
+  ['“Make it safe” or “use safe materials” with no explanation'],'Two different ways, each explained.'],
+ ['Practice','S2',2,'Describe','h-safety','How safety standards influence the design of an electrical product.','',
+  ['It must meet British or European standards (BSI or CE) before it can be sold','It is tested by an independent body and can carry the Kitemark','Insulation, double insulation or earthing to prevent electric shock','A fuse or cut-out to stop overheating or fire','Warning labels and clear instructions must be included'],
+  ['“It has to be safe”'],'Two different points, 1 mark each.'],
+ ['Practice','S3',2,'State','h-safety','Two safety features of a kitchen food mixer.','',
+  ['Interlock (will not run unless the bowl or lid is fitted)','Blade guard / guard over the blades','Non-slip feet / rubber feet','Overload cut-out / thermal cut-out','Insulated casing','Low-speed start / pulse setting'],
+  [],'Any two, 1 mark each.'],
+ ['Practice','F1',2,'Describe','h-features','Two features that show a plastic product has been injection moulded.','',
+  ['Ejector pin marks: small round marks on a hidden or inside surface','A sprue or gate mark where the plastic entered the mould','A split or parting line where the two halves of the mould met','Draft angles: slightly tapered sides so it releases from the mould','Ribs or webs with an even wall thickness'],
+  ['“It is smooth”','“It is plastic”'],'Two different features, each described.']
+];
+const PP_H=[...PPH_2026,...PPH_2025,...PPH_2024,...PPH_2023,...PPH_2022,...PPH_PRAC];
 const PP_PAGE_H={"2022": {"1": 2, "1(a)": 3, "1(b)": 3, "1(c)": 3, "1(d)": 3, "1(e)": 3, "2": 4, "2(a)": 4, "2(b)": 4, "2(c)": 4, "3": 5, "3(a)": 5, "3(b)": 5, "3(c)": 5, "4": 6, "4(a)": 6, "4(b)": 6, "4(c)": 6, "5": 7, "5(a)": 7, "5(b)": 7, "6": 7, "7": 8, "7(a)": 8, "7(b)": 8, "8": 8}, "2023": {"1": 2, "1(a)": 3, "1(b)": 3, "1(c)": 3, "1(d)": 3, "1(e)": 3, "2": 4, "2(a)": 4, "2(b)": 4, "2(c)": 4, "3": 5, "3(a)": 5, "3(b)": 5, "3(c)": 5, "4": 6, "4(a)": 6, "4(b)": 6, "4(c)": 6, "5": 6, "5(a)": 6, "5(b)": 6, "5(c)": 6, "6": 7, "6(a)": 7, "6(b)": 7, "6(c)": 7, "7": 7}, "2024": {"1": 2, "1(a)": 3, "1(b)": 3, "1(c)": 3, "1(d)": 3, "1(e)": 3, "2": 4, "2(a)": 4, "2(b)": 4, "2(c)": 4, "3": 5, "3(a)": 5, "3(b)": 5, "4": 5, "4(a)": 5, "4(b)": 5, "5": 6, "5(a)": 6, "5(b)": 6, "5(c)": 6, "5(d)": 6, "6": 7, "6(a)": 7, "6(b)": 7, "6(c)": 7, "7": 7}, "2025": {"1": 2, "1(a)": 3, "1(b)": 3, "1(c)": 3, "1(d)": 3, "1(e)": 3, "2": 4, "2(a)": 4, "2(b)": 4, "2(c)": 4, "3": 5, "3(a)": 5, "3(b)": 5, "3(c)": 5, "3(d)": 5, "4": 5, "4(a)": 5, "4(b)": 5, "5": 6, "5(a)": 6, "5(b)": 6, "5(c)": 6, "6": 7, "6(a)": 7, "6(b)": 7, "6(c)": 7, "7": 7}, "2026": {"1": 2, "1(a)": 3, "1(b)": 3, "1(c)": 3, "1(d)": 3, "1(e)": 3, "2": 4, "2(a)": 4, "2(b)": 4, "2(c)": 4, "3": 5, "3(a)": 5, "3(b)": 5, "4": 5, "4(a)": 5, "4(b)": 5, "4(c)": 5, "5": 6, "5(a)": 6, "5(b)": 6, "5(c)": 6, "6": 7, "6(a)": 7, "6(b)": 7, "6(c)": 7, "7": 7}};
 const PP_ALL=PP_RECENT.concat(PP_N5,PP_H).filter(ppShow);
 const ppIsH=r=>!!r&&/^h-/.test(r[4]);
@@ -4111,7 +4161,7 @@ function bindM(){Object.defineProperty(S,'m',{configurable:true,enumerable:false
 bindM();
 
 /* ---------- topics, mapped to the course specification ---------- */
-const CONNECT=/\b(so|so that|which means|meaning|therefore|as a result|this means|this allows|because|allowing|reduc\w*|prevent\w*)\b/i;
+const CONNECT=/\b(so|so that|which means|meaning|therefore|thus|hence|as a result|this means|this allows|because|due to|allow\w*|enabl\w*|mean|means|meant|lead(s|ing)? to|result(s|ed)? in|ensur\w*|reduc\w*|prevent\w*|caus(e|es|ing))\b/i;
 const T={
  W1:{name:'Materials: woods, metals and plastics',area:'w',weight:9,
   spec:'Uses of common materials: properties and uses of hardwoods (beech, ash, mahogany, oak), softwoods (red pine, spruce), manufactured boards, non-ferrous metals (aluminium, copper, brass), ferrous metals, thermoplastics and thermosetting plastics.',
@@ -6567,7 +6617,7 @@ Object.assign(SVGS,{
 const LEARN={N5:[...LEARN_N5_DESIGN,...LEARN_N5_MM,...LEARN_N5_COM],H:[...LEARN_H1,...LEARN_H2,...LEARN_H3,...LEARN_H4]};
 const LFIND=id=>LEARN.N5.find(x=>x.id===id)||LEARN.H.find(x=>x.id===id);
 const LVOF=id=>LEARN.H.some(x=>x.id===id)?'H':'N5';
-if(/bmdebug/.test(location.search))window.__BMD=()=>({LEARN,SVGS,MK,SUM,S,markAnswer,renderHub,openPanel,pickDaily,setHUB:v=>{HUB=v},ppCheck,paintPPQ,PP_H,ppGet,topicStatus:id=>topicStatus(id),PP_ALL,PPBANK_H:typeof PPBANK_H!=='undefined'?PPBANK_H:null});
+if(/bmdebug/.test(location.search))window.__BMD=()=>({LEARN,SVGS,MK,SUM,S,markAnswer,renderHub,openPanel,pickDaily,setHUB:v=>{HUB=v},ppCheck,paintPPQ,PP_H,ppGet,topicStatus:id=>topicStatus(id),blockHTML,mk:(id,t)=>{const h=HUB;HUB=id;try{return markAnswer(id,t)}finally{HUB=h}},PP_ALL,PPBANK_H:typeof PPBANK_H!=='undefined'?PPBANK_H:null});
 const qFig=m=>m&&m.f&&SVGS[m.f]?`<figure class="lfig qfig">${SVGS[m.f]()}</figure>`:'';
 const LGROUPS_N5=[['d','Design'],['w','Materials and workshop manufacture'],['c','Commercial manufacture']],LGROUPS_H=[['d','Design'],['m','Materials and manufacturing']];let LGROUPS=LGROUPS_N5;const lgroups=lv=>lv==='H'?LGROUPS_H:LGROUPS_N5;
 let LCUR=null;
@@ -6668,12 +6718,12 @@ function tdScene(){const btn=document.querySelector('.wf-launch');if(!btn)return
   TDSC={stop(){cancelAnimationFrame(raf);io.disconnect();ro.disconnect();document.removeEventListener('visibilitychange',onVis)}}}
 function renderLearnList(lv){
   const list=LEARN[lv];LCUR=null;LGROUPS=lgroups(lv);setTimeout(()=>{try{hwPaint()}catch(e){}try{tdScene()}catch(e){}},0);
-  $('learnBody').innerHTML=(lv==='H'?`<div class="wfgrid"><div id="dgTile" class="dg-wrap">${dgTileHTML()}</div><div class="wfeature wf-tools wf-dash wf-soon" aria-disabled="true"><span class="tdf rk" aria-hidden="true"></span><span class="tdf sq" aria-hidden="true"></span><span class="tdf ch" aria-hidden="true"></span><span class="wf-k">Coming soon</span><span class="wf-t">Higher game</span><span class="wf-s">A new game for Higher is on its way.</span></div></div>`:'')+(lv==='N5'?`<div class="wfgrid"><div id="dgTile" class="dg-wrap">${dgTileHTML()}</div><button type="button" class="wfeature wf-tools wf-dash wf-launch" data-tooldash="1"><canvas class="tdcv" aria-hidden="true"></canvas><span class="wf-k">Game</span><span class="wf-t">Tool Dash</span><span class="wf-s">Name the tools before the clock runs out.</span><span class="td-lv">${tdLevel()}</span><span class="td-play">Play</span></button></div>`:'')+labTilesHTML(lv)+(lv==='N5'&&!S.welcomed&&!VIEW?`<div class="welcome1" id="welcomeCard"><h3>New to BenchMark?</h3><ol><li>Pick a topic your teacher has covered and learn it.</li><li>Test yourself, then try the exam question.</li><li>Do the Daily 5 each day, and set a reminder there.</li></ol><p class="sub">Every topic starts grey and changes colour as you practise.</p><div class="row"><button type="button" class="btn" data-welcome="skip">Got it</button></div></div>`:'')+`<div class="stephead learnhead"><h2>Learn</h2><span class="sub">Revision for the whole course</span></div>`+`<p class="sub learnintro">${esc(LEVELS[lv])} · ${list.length} topics from the course specification. Pick a topic to read, then test yourself.</p>`+
+  $('learnBody').innerHTML=(lv==='H'?`<div class="wfgrid"><div id="dgTile" class="dg-wrap">${dgTileHTML()}</div>${fcTileHTML()}</div>`:'')+(lv==='N5'?`<div class="wfgrid"><div id="dgTile" class="dg-wrap">${dgTileHTML()}</div><button type="button" class="wfeature wf-tools wf-dash wf-launch" data-tooldash="1"><canvas class="tdcv" aria-hidden="true"></canvas><span class="wf-k">Game</span><span class="wf-t">Tool Dash</span><span class="wf-s">Name the tools before the clock runs out.</span><span class="td-lv">${tdLevel()}</span><span class="td-play">Play</span></button></div>`:'')+labTilesHTML(lv)+(lv==='N5'&&!S.welcomed&&!VIEW?`<div class="welcome1" id="welcomeCard"><h3>New to BenchMark?</h3><ol><li>Pick a topic your teacher has covered and learn it.</li><li>Test yourself, then try the exam question.</li><li>Do the Daily 5 each day, and set a reminder there.</li></ol><p class="sub">Every topic starts grey and changes colour as you practise.</p><div class="row"><button type="button" class="btn" data-welcome="skip">Got it</button></div></div>`:'')+`<div class="stephead learnhead"><h2>Learn</h2><span class="sub">Revision for the whole course</span></div>`+`<p class="sub learnintro">${esc(LEVELS[lv])} · ${list.length} topics from the course specification. Pick a topic to read, then test yourself.</p>`+
    LGROUPS.map(([a,n])=>`<h3 class="lgh ${AREAS[a].cls}">${esc(n)}</h3><div class="lgrid">${list.filter(t=>t.area===a).map(t=>topicCard(t,lv)).join('')}</div>`).join('');
 }
 $('tab-learn').addEventListener('keydown',e=>{const hn=e.target.closest&&e.target.closest('#learnBody [data-next]');if(hn&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openPanel(hn.dataset.next)}});
 $('tab-learn').addEventListener('click',e=>{
-  if(e.target.closest('#learnBody [data-tooldash]')){openToolDash();return}
+  {const t=e.target.closest('#learnBody [data-tooldash]');if(t){openToolDash(t.dataset.tooldash);return}}
   const hp=e.target.closest('#learnBody [data-panel]');if(hp){openPanel(hp.dataset.panel);return}
   const hn=e.target.closest('#learnBody [data-next]');if(hn){openPanel(hn.dataset.next);return}
   const c=e.target.closest('button[data-lt]');if(c){LVIEW=c.dataset.lv;renderLearnTopic(c.dataset.lt);return}
@@ -7020,9 +7070,12 @@ function dgSp(){const g=G0();if(!g.sp||g.sp.d!==sday())g.sp={d:sday(),won:0,fail
 /* Tool Dash: each level cleared fills a pot = one extra Growth Spurt today (max 2 extra) */
 const dgCap=()=>{let x=0;try{if(JSON.parse(localStorage.getItem('tf-potday'))===sday())x=+JSON.parse(localStorage.getItem('tf-pots'))||0}catch(e){}return 2+Math.max(0,Math.min(2,x))};
 const tdLevel=()=>{let u=1;try{if(JSON.parse(localStorage.getItem('tf-unlday'))===sday())u=+JSON.parse(localStorage.getItem('tf-unl'))||1}catch(e){}return 'Level '+Math.min(20,u)+' of 20'};
-function openToolDash(){if(document.getElementById('tdOv'))return;const o=document.createElement('div');o.id='tdOv';o.setAttribute('role','dialog');o.setAttribute('aria-label','Tool Dash');
-  o.innerHTML='<iframe src="tooldash.html" title="Tool Dash" allow="autoplay"></iframe>';document.body.appendChild(o);document.documentElement.style.overflow='hidden';
-  const bid=BMBusy.show('Loading Tool Dash');const f=o.querySelector('iframe');f.addEventListener('load',()=>{afterFrames(2,()=>BMBusy.done(bid));try{f.contentWindow.focus()}catch(e){}})}
+/* v10.24 Flashcard Dash (Higher): same overlay as Tool Dash */
+const fdLevel=()=>{let u=1;try{u=+JSON.parse(localStorage.getItem('fd-unl'))||1}catch(e){}return 'Level '+Math.min(20,u)+' of 20'};
+function fcTileHTML(){return `<button type="button" class="wfeature wf-tools wf-dash wf-fc" data-tooldash="fc"><span class="fcfan" aria-hidden="true"><b></b><b></b><b></b><b></b></span><span class="wf-k">Game · ${fdLevel()}</span><span class="wf-t">Flashcard Dash</span><span class="wf-s">Quick-fire Higher theory: hundreds of flashcards, 20 levels, 50/50 look-alikes from level 11.</span><span class="td-play">Play</span></button>`}
+function openToolDash(kind){if(document.getElementById('tdOv'))return;const fc=kind==='fc',nm=fc?'Flashcard Dash':'Tool Dash';const o=document.createElement('div');o.id='tdOv';o.setAttribute('role','dialog');o.setAttribute('aria-label',nm);
+  o.innerHTML=fc?'<iframe src="fcdash.html" title="Flashcard Dash" allow="autoplay"></iframe>':'<iframe src="tooldash.html" title="Tool Dash" allow="autoplay"></iframe>';document.body.appendChild(o);document.documentElement.style.overflow='hidden';
+  const bid=BMBusy.show('Loading '+nm);const f=o.querySelector('iframe');f.addEventListener('load',()=>{afterFrames(2,()=>BMBusy.done(bid));try{f.contentWindow.focus()}catch(e){}})}
 function closeToolDash(){const o=document.getElementById('tdOv');if(!o)return;o.remove();document.documentElement.style.overflow='';if(S.tab==='learn'&&!LCUR)renderLearnList(LVIEW||S.level||'N5')}
 addEventListener('message',e=>{if(e.data==='td-close')closeToolDash()});
 const dgSpurtOK=()=>{const g=G0(),sp=dgSp();return g.last===sday()&&g.st<100&&sp.won<dgCap()&&sp.fail<2};
@@ -7171,7 +7224,7 @@ const MK={
   {t:'Hand it out',a:[[/\b(hand|give|send|email|post|distribut|share|ask)\w*/i,/\b(out|people|audience|users?|online|them|public)\b/i]],add:'Add handing it out to the target audience.'},
   {t:'Collect the results',a:[[/\b(collect|gather|get back|receive|record)\w*/i,/\b(results?|answers?|responses?|data|them|it|questionnaires?)\b/i]],add:'Add collecting the results.'},
   {t:'Analyse the results',a:[[/\b(analys|analyz|graph|chart|conclusion|look at the results|compare the results|use the results)\w*/i]],add:'Finish with analysing the results, e.g. in graphs or charts.'}]},
- 'd-ideas':{type:'describe',zero:[[/^\s*(think of|come up with) (lots of|many) ideas\.?\s*$/i,'“Think of lots of ideas” on its own scores zero: say it is a group.']],pts:[
+ 'd-ideas':{type:'describe',pair:true,zero:[[/^\s*(think of|come up with) (lots of|many) ideas\.?\s*$/i,'“Think of lots of ideas” on its own scores zero: say it is a group.']],pts:[
   {t:'Explain the purpose or topic to the group',a:[[/\b(purpose|aim|topic|problem|theme|brief|task)\b/i]],add:'Start by explaining the purpose or topic to the group.'},
   {t:'A group activity',a:[[/\b(group|people|team|everyone|class|others|together)\b/i]],add:'Make it clear that it is a group of people.'},
   {t:'A set time',a:[[/\b(time limit|set time|minutes?|timed|time)\b/i]],add:'Add that it happens within a set time.'},
@@ -7189,7 +7242,7 @@ const MK={
   {t:'Shows the materials or texture',a:[[/\b(material|texture|wood|oak|metal|aluminium|plastic|grain)\w*/i]],add:'Describe how it shows the materials or textures.'},
   {t:'Shows the colours',a:[[/colou?r/i]],add:'Describe how it shows the colours.'},
   {t:'Shows the finished product realistically',a:[[/realistic|real life|finished|final product|what it will look like|like the real/i]],add:'Describe how it shows what the finished lamp will look like.'},
-  {t:'Used to present to a client or for marketing',a:[[/\b(client|customer|market|advert|present|sell)\w*/i]],add:'Describe how it helps present the lamp to the client.'},
+  {t:'Used to present to a client or for marketing',a:[[/\b(present|market|advert|sell|pitch|approv|feedback|decid|brochure|website|catalogue)\w*/i]],add:'Describe how it helps present the lamp to the client.'},
   {t:'Shows the 3D form',a:[[/\b(3d|three.dimension|form|tone|shad|depth)\w*/i]],add:'Describe how it shows the 3D form, using tone or shading.'}]},
  'd-function':{type:'describe',pts:[
   {t:'Light source to see in the dark',a:[[/\b(light|led|bulb|bright|lamp)\w*/i,/\b(see|dark|night|tent|so|to|for|allows?|lets|can)\b/i]],add:'Describe the light itself and what it lets the user do.'},
@@ -7201,13 +7254,13 @@ const MK={
  'd-market':{type:'describe',pts:[
   {t:'Advertising',a:[[/\b(advert|tv|television|social media|instagram|tiktok|youtube|online|posters?|billboards?|radio|magazines?)\w*/i]],add:'Describe advertising, e.g. adverts on social media aimed at teenagers.'},
   {t:'Celebrity or influencer endorsement',a:[[/\b(celebrit|influencer|endorse|famous|athlete|footballer|musician|singer|star)\w*/i]],add:'Describe an endorsement, e.g. a famous musician wearing them.'},
-  {t:'Promotions or offers',a:[[/\b(discount|offer|promotion|free|deal|competition|sale|giveaway|bundle)\w*/i]],add:'Describe a promotion, e.g. a launch discount or a free case.'},
+  {t:'Promotions or offers',a:[[/\b(discount|offer|promotion|free|deal|competition|sale|giveaway|bundle|half price|money off|\d+ ?% off|% off|cashback|voucher)\w*/i]],add:'Describe a promotion, e.g. a launch discount or a free case.'},
   {t:'Product placement',a:[[/product placement|\b(films?|movies?|tv shows?|series)\b/i]],add:'Describe product placement in a film or TV show.'},
   {t:'Packaging or in-store display',a:[[/\b(packag|display|point.of.sale|shop window|in.store)\w*/i]],add:'Describe eye-catching packaging or an in-store display.'}]},
  'd-aesthetics':{type:'describe',zero:[[/\b(colourful|colorful|looks? (nice|good|cool)|nice colou?rs?|it.?s bright|attractive)\b/i,'Opinion words like “colourful” or “looks good” score zero: describe the colour, shape or texture of a part.']],pts:[
-  {t:'Colour of a part',a:[[/\b(red|blue|green|black|white|yellow|orange|pink|purple|grey|silver|gold|natural|colou?r)\w*/i,/\b(shade|base|arm|lamp|stand|wood|metal|it)\b/i]],add:'Describe the colour of one part, e.g. the shade is bright red.'},
+  {t:'Colour of a part',a:[[/\b(red|blue|green|black|white|yellow|orange|pink|purple|grey|silver|gold|natural|(light|dark|pale|bright|warm|cool|neutral)[ -]colou?r)\w*/i,/\b(shade|base|arm|lamp|stand|wood|metal|it|its)\b/i]],add:'Describe the colour of one part, e.g. the shade is bright red.'},
   {t:'Shape or form of a part',a:[[/\b(shape|form|curv|round|angular|geometric|organic|cone|conical|cylind|rectang|square|circular|streamlin)\w*/i]],add:'Describe the shape of one part, e.g. the shade is a curved cone.'},
-  {t:'Texture or finish',a:[[/\b(textur|smooth|rough|grain|matt|gloss|shiny|polish|brushed)\w*/i]],add:'Describe a texture, e.g. the smooth, glossy shade or the grain of the wood.'},
+  {t:'Texture or finish',a:[[/\b(textur|smooth|rough|grain|matt|gloss|shiny|polish|brushed|satin|powder.?coat|sheen|lustre)\w*/i]],add:'Describe a texture, e.g. the smooth, glossy shade or the grain of the wood.'},
   {t:'Contrast',a:[[/contrast/i]],add:'Describe a contrast between two parts.'},
   {t:'Proportion, symmetry or line',a:[[/\b(proportion|symmetr|balance|slim|thin|thick|tall|lines?)\w*/i]],add:'Describe the proportions or lines, e.g. the slim arm.'}]},
  'd-ergo':{type:'describe',zero:[[/\b(\d+(st|th|nd|rd)? ?(%|percentile))/i,'Percentiles on their own score zero: link a part of the kettle to a part of the body.']],pts:[
@@ -7218,8 +7271,8 @@ const MK={
   {t:'Shows the user information (psychology)',a:[[/\b(colou?r|light|led|glow|sound|click|beep|whistle|window|gauge|level|indicat|markings?)\w*/i,/\b(on|boil|boiled|ready|water|see|know|show|tell|full)\b/i]],add:'Describe something the user sees or hears, e.g. a light that shows it is on.'},
   {t:'Safety: no burns or spills',a:[[/\b(cool.?touch|insulat|burn|steam|cordless|stable|spill|lid lock)\w*/i]],add:'Describe a safety feature, e.g. a cool-touch body so the user isn’t burned.'}]},
  'd-eval':{type:'describe',pts:[
-  {t:'Retailer: feeds back what sells, price or display',a:[[/\b(retailers?|shops?|stores?)\b/i,/\b(sell|sells|sales|selling|price|packag|display|shelf|shelves|feedback|popular|customers)\w*/i]],add:'Describe how the retailer influences it, e.g. telling the company what sells or what fits their shelves.'},
-  {t:'Consumer: needs, demand or feedback',a:[[/\b(consumers?|customers?|users?|buyers?)\b/i,/\b(demand|need|want|review|feedback|buy|complain|opinion)\w*/i]],add:'Describe how the consumer influences it, e.g. reviews or demand for new features.'}]},
+  {t:'Retailer: feeds back what sells, price or display',a:[[/\b(retailers?|shops?|stores?)\b/i,/\b(sell well|sells? (well|best|badly)|sales (data|figures)|best.?sell|what sells|price|packag|display|shelf|shelves|feedback|popular|tell|ask|request|demand|order)\w*/i]],add:'Describe how the retailer influences it, e.g. telling the company what sells or what fits their shelves.'},
+  {t:'Consumer: needs, demand or feedback',a:[[/\b(consumers?|customers?|users?|buyers?)\b/i,/\b(demand|need|want|review|feedback|complain|opinion|stop buying|buying (habits|choices|trends)|choose what)\w*/i]],add:'Describe how the consumer influences it, e.g. reviews or demand for new features.'}]},
  'm-woods':{type:'state',pts:[
   {t:'Smooth surface, easy to paint',a:[[/\b(smooth|paint|veneer|finish|surface)\w*/i]],add:'Give its smooth surface, which takes paint well.'},
   {t:'Stable: doesn’t warp',a:[[/\b(stable|warp|twist|split|crack)\w*/i]],add:'Give that it is stable and won’t warp.'},
@@ -7272,21 +7325,24 @@ const MK={
   {t:'Every shelf in the batch is the same',a:[[/\b(identical|same|batch|consistent)\w*/i]],add:'Explain that every shelf in the batch comes out the same.'}]},
  'c-processes':{type:'describe',pts:[
   {t:'Rough or uneven surface',a:[[/\b(rough|grain|uneven|textur|sandy)\w*/i]],add:'Describe the rough, uneven surface left by the sand.'},
-  {t:'Split line',a:[[/\b(split|parting|seam)\w*/i]],add:'Describe the split line where the two halves of the mould met.'},
+  {t:'Split line',a:[[/\b(split|parting|seam)\w*/i],[/\bline\b/i,/\b(halves|mould|joined|met|around)\b/i]],add:'Describe the split line where the two halves of the mould met.'},
   {t:'Simple shape',a:[[/\b(simple|basic|plain|chunky)\w*/i],[/\bno (fine )?detail/i]],add:'Describe the simple shape: sand can’t hold fine detail.'},
+  {t:'Draft angle or tapered sides',a:[[/\b(draft|taper)\w*/i]],add:'Describe the tapered sides (draft angle) that let the pattern come out of the sand.'},
+  {t:'Fettling or sprue marks',a:[[/\b(fettl|sprue|riser|runner|ground off|grind)\w*/i]],add:'Describe the marks left where the sprue was cut off.'},
+  {t:'Not very accurate sizes',a:[[/\b(not (very )?(precise|accurate)|aren.?t (very )?(precise|accurate)|inaccura|imprecise|less accurate)\w*/i]],add:'Describe how the sizes are not very accurate.'}
   ]},
  'c-cam':{type:'describe',zero:[[/3d print\w*[^.]{0,30}\b(quick|quicker|fast|faster)\b/i,'3D printing is slow per part, so “quick” is wrong for 3D printers.']],pts:[
   {t:'Made directly from the CAD file',a:[[/\b(cad|file|drawing|computer)\b/i]],add:'Describe how parts are made directly from the CAD file.'},
-  {t:'Accurate, identical parts',a:[[/\b(accura|identical|consisten|same)\w*/i]],add:'Describe how every part is accurate and identical.'},
-  {t:'Can run 24 hours a day',a:[[/\b(24|all day|night|continu|efficien|automat)\w*/i]],add:'Describe how the machines can run 24 hours a day.'},
-  {t:'Complex shapes',a:[[/\b(complex|intricate|detail)\w*/i]],add:'Describe how complex shapes can be made.'},
+  {t:'Accurate, identical parts',a:[[/\b(accura|identical|consisten|same|precis|repeatab)\w*/i]],add:'Describe how every part is accurate and identical.'},
+  {t:'Can run 24 hours a day',a:[[/\b(24|all day|night|overnight|continu|efficien|automat|output|non.?stop)\w*/i]],add:'Describe how the machines can run 24 hours a day.'},
+  {t:'Complex shapes',a:[[/\b(complex|complicated|intricate|detail)\w*/i]],add:'Describe how complex shapes can be made.'},
   {t:'Fewer workers needed',a:[[/\b(skill|workers?|labour|staff|wages?)\w*/i]],add:'Describe how fewer skilled workers are needed.'},
   {t:'Designs easy to change or send',a:[[/\b(edit|change|modif|email|send)\w*/i]],add:'Describe how the files are easy to change or send.'},
-  {t:'Laser cutters are fast',a:[[/\blaser\w*/i,/\b(fast|faster|quick|quicker|speed)\b/i]],add:'Describe how laser cutters are fast.'},
+  {t:'Laser cutters are fast',a:[[/\blaser\w*/i,/\b(fast|faster|quick|quicker|quickly|speed|rapid|rapidly)\b/i]],add:'Describe how laser cutters are fast.'},
   {t:'Less waste',a:[[/\bwast\w*/i]],add:'Describe how little material is wasted.'}]},
  'c-standard':{type:'describe',pts:[
   {t:'Standard sizes, easy to plan in',a:[[/\b(standard sizes?|range of sizes|sizes?)\b/i]],add:'Describe how they come in standard sizes, so they are easy to plan into the product.'},
-  {t:'Bought in, not made',a:[[/\b(buy|bought|in.?house|supplier|don.?t (have|need) to make|doesn.?t (have|need) to make)\w*/i]],add:'Describe how they are bought in, so the manufacturer doesn’t have to make them.'},
+  {t:'Bought in, not made',a:[[/\b(don.?t (have|need) to make|doesn.?t (have|need) to make|no need to make|not (made|make) (them )?in.?house|instead of making|rather than making)\w*/i],[/\b(buy|bought|buying)\b/i,/\b(so|mean\w*|saves?|instead|rather|don.?t|doesn.?t|supplier|specialist|ready.?made|time)\b/i]],add:'Describe how they are bought in, so the manufacturer doesn’t have to make them.'},
   {t:'Fewer stages in production',a:[[/\b(fewer|less|speed|quicker|faster)\w*/i,/\b(stages?|production|assembl|process)\w*/i]],add:'Describe how there are fewer stages in production.'},
   {t:'Consistent quality',a:[[/\b(consisten|quality|reliab)\w*/i]],add:'Describe their consistent quality.'},
   {t:'Easy to source in large quantities',a:[[/\b(source|bulk|large quantit|available|supplier)\w*/i]],add:'Describe how they are easy to get in large quantities.'},
@@ -7294,14 +7350,14 @@ const MK={
   {t:'Cheaper than making them',a:[[/\b(cheap|cheaper|cost)\w*/i,/\b(than|in.?house|making)\b/i]],add:'Describe how buying them is cheaper than making them in-house.'}]},
  'c-systems':{type:'explain',pts:[
   {t:'Huge numbers are needed',a:[[/\b(millions?|huge|large (number|quantit)|many|demand|thousands)\b/i]],add:'Explain that millions of caps are needed.'},
-  {t:'Mould cost spread, so each cap is cheap',a:[[/\b(mould|tooling|set.?up)\b/i,/\b(spread|shared|many|over|each)\b/i],[/\b(cheap|low cost|unit cost|each)\b/i,/\b(many|millions?|volume|spread|mass)\b/i]],add:'Explain that the cost of the mould is spread over millions of caps, so each one is cheap.'},
+  {t:'Mould cost spread, so each cap is cheap',nolink:true,a:[[/\b(mould|tooling|set.?up)\b/i,/\b(spread|shared|many|over|each)\b/i],[/\b(cheap|low cost|unit cost|each)\b/i,/\b(many|millions?|volume|spread|mass|divided|across)\b/i]],add:'Explain that the cost of the mould is spread over millions of caps, so each one is cheap.'},
   {t:'Every cap is identical',a:[[/\b(identical|consisten|same)\w*/i]],add:'Explain that every cap comes out identical, so they all fit.'},
   {t:'Automated, so fewer workers',a:[[/\b(automat|machines?|workers?|labour)\w*/i]],add:'Explain that it is automated, so few workers are needed.'}]},
  'c-impact':{type:'describe',zero:[[/\b(sustainable materials|environmentally friendly materials|eco.?friendly)\b/i,'“Sustainable” or “eco-friendly materials” on their own scored zero in 2025: say how.']],pts:[
-  {t:'Reduce material, parts or packaging',a:[[/\b(reduc|less material|fewer parts|less packaging|less energy|minimi)\w*/i]],add:'Describe reducing the material, parts or packaging used.'},
+  {t:'Rethink the design',a:[[/\b(rethink|refill|redesign|designed differently|design it differently)\w*/i]],add:'Describe rethinking the design, e.g. making it refillable.'},
+  {t:'Reduce material, parts or packaging',a:[[/\b(reduc|less (material|plastic|metal|wood|timber|packaging|energy)|fewer (parts|components)|minimi|thinner|smaller)\w*/i]],add:'Describe reducing the material, parts or packaging used.'},
   {t:'Reuse',a:[[/\b(reus|re-use)\w*/i]],add:'Describe reusing parts or materials.'},
   {t:'Recycle',a:[[/\brecycl\w*/i]],add:'Describe using recyclable materials, or labelling parts so they can be recycled.'},
-  {t:'Rethink the design',a:[[/\b(rethink|refill|redesign)\w*/i]],add:'Describe rethinking the design, e.g. making it refillable.'},
   {t:'Extend the lifespan',a:[[/\b(lifespan|last longer|durab|repair|replac|upgrad|protect)\w*/i]],add:'Describe making it last longer, e.g. repairable or with a protective finish.'},
   {t:'Design for disassembly',a:[[/\b(disassembl|take apart|taken apart|come apart|separat)\w*/i]],add:'Describe designing it to come apart so materials can be separated.'},
   {t:'Renewable energy or less factory waste',a:[[/\b(renewable|solar|wind|offcut|scrap)\w*/i]],add:'Describe how a manufacturer could use renewable energy or recycle offcuts.'}]}
@@ -7334,25 +7390,25 @@ Object.entries(MKX).forEach(([id,arr])=>{const m=MK[id];if(!m)return;arr.forEach
    Each point: t = what it credits, a = alternative sets of patterns that must all appear in one sentence, add = hint. */
 const MK_H={
  'h-brief':{type:'explain',pts:[
-  {t:'Benefit: freedom to explore leads to an innovative or unexpected solution',a:[[/\b(innovat|creativ|freedom|free to|explore|wide range|range of ideas|new ideas|original|unique|not thought of|hadn.?t thought|didn.?t think|think outside)\w*/i,/\b(innovat|new|original|unique|better|stand out|not thought|hadn.?t thought|didn.?t think|wouldn.?t have|unexpected|different|wider|best)\w*/i]],add:'Give a benefit to the client, such as the designer exploring freely, so the client may get an innovative idea they hadn’t thought of.'},
-  {t:'Drawback: result may not match what the client wanted, or takes longer and costs more',a:[[/\b(not (what|match|meet|be what)|different (from|to) what|didn.?t want|doesn.?t want|not want|imagin|expect|envisag|had in mind|wrong direction|off track|might not like|may not like)\w*/i],[/\b(longer|more time|time.?consuming|delay|cost more|more expensive|more money|costly|extra cost)\b/i,/\b(research|explor|develop|ideas|change|communicat|meeting|design)\w*/i]],add:'Give a drawback to the client, such as the final design not matching what they imagined, or development taking longer and costing more.'}] },
+  {t:'Benefit: freedom to explore leads to an innovative or unexpected solution',a:[[/\b(innovat|creativ|freedom|free(ly)? to|free hand|explore|wide range|range of|variety|divers|lots of ideas|many ideas|more ideas|new ideas|options|flexib|open.?minded|original|unique|not thought of|hadn.?t thought|didn.?t think|think outside|no (limits|restrictions|constraints)|fewer (limits|restrictions|constraints))\w*/i,/\b(innovat|new|original|unique|better|best|stand out|not thought|hadn.?t thought|didn.?t think|wouldn.?t have|unexpected|different|wider|divers|range|variety|ideas|options|choice|exciting|interesting|creative|suits?|improv)\w*/i]],add:'Give a benefit to the client, such as the designer exploring freely, so the client may get an innovative idea they hadn’t thought of.'},
+  {t:'Drawback: result may not match what the client wanted, or takes longer and costs more',a:[[/\b(not (really )?(what|match|meet|be what|want|like|happy|satisf|suit)|different (from|to) what|didn.?t (really )?(want|like)|doesn.?t (really )?(want|like)|don.?t (really )?(want|like)|do not (really )?(want|like)|won.?t (really )?(want|like)|unhappy|dissatisf|disappoint|imagin|expect|envisag|had in mind|have in mind|wrong direction|off track|might not like|may not like|not (be )?(right|suitable)|unsuitable|reject)\w*/i],[/\b(longer|more time|time.?consuming|delay|cost more|costs? more|more costs?|more expensive|more money|costly|extra (cost|money|time)|pay (more|for more)|waste (of )?(time|money)|more designs|redesign|start again|go back|over (the |their |the client.?s )?budget|over.?budget|overspend|run over)\b/i,/\b(research|explor|develop|ideas|change|communicat|meeting|design|pay|client|they|time|money)\w*/i]],add:'Give a drawback to the client, such as the final design not matching what they imagined, or development taking longer and costing more.'}] },
  'h-research':{type:'describe',pts:[
   {t:'Identify the function or information to be tested',a:[[/\b(identify|decide|establish|choose|define|work out|plan)\w*/i,/\b(function|what (is|to be|will be|needs to be) test|information|purpose|aspect|hinge|part|what to test|test(ed)?)\w*/i]],add:'Start by identifying which function is to be tested.'},
-  {t:'Set up a rig or mechanism to repeat the action',a:[[/\b(set up|build|make|design|construct|create|use)\w*/i,/\b(rig|mechanism|machine|motor|repeat|over and over|again and again|cycles?|simulat)\w*/i]],add:'Describe setting up a rig with a mechanism that repeats the action, such as folding the chair.'},
+  {t:'Set up a rig or mechanism to repeat the action',a:[[/\b(set up|setting up|sets up|build|make|design|construct|create|attach|mount|fix|clamp|place|put)\w*/i,/\b(rig|mechanism|machine|motor|repeat|over and over|again and again|cycles?|simulat|robot|arm)\w*/i],[/\b(use|using|run|runs|program)\w*/i,/\b(repeat\w*|over and over|again and again|keeps?|continuous\w*|cycles?|thousands|hundreds|many times)\b/i]],add:'Describe setting up a rig with a mechanism that repeats the action, such as folding the chair.'},
   {t:'Carry out the test and record the results',a:[[/\b(record|note|count|measure|log|write down|collect)\w*/i,/\b(results?|cycles?|times|number|data|readings?|how many|when it (fails|breaks))\b/i]],add:'Add recording the results, such as the number of cycles before the hinge fails.'},
-  {t:'Analyse the results to inform changes',a:[[/\b(analys|evaluat|compar|review|look at|study|interpret)\w*/i,/\b(results?|data|findings|information|improv|change|modif|decide)\w*/i]],add:'Finish by analysing the results to decide whether the design needs to be improved.'}],
+  {t:'Analyse the results to inform changes',a:[[/\b(analys|evaluat|compar|review|look at|study|interpret|use|using|act on)\w*/i,/\b(results?|data|findings|information|improv|change|modif|decide|redesign)\w*/i]],add:'Finish by analysing the results to decide whether the design needs to be improved.'}],
   zero:[[/\b(test rigs?|it) (determines?|shows?|tests?) how strong\b/i,'Saying what a test rig shows is not a stage: describe what is done at each step.']]},
- 'h-spec':{type:'describe',pts:[
-  {t:'Purpose: gives direction and parameters, used to evaluate ideas',a:[[/\b(direction|guide|guidance|parameters?|checklist|check list|evaluat|compare|refer back|targets?|requirements?|criteria)\b/i,/\b(design|team|designer|ideas?|proposal|decisions?|product|kettle|meets?|evaluat)\w*/i]],add:'Say what the specification is for: it gives direction to the design team and is used to evaluate ideas.'},
+ 'h-spec':{type:'describe',short:true,pair:true,pts:[
+  {t:'Purpose: gives direction and parameters, used to evaluate ideas',a:[[/\b(direction|guide|guides|guidance|parameters?|checklist|check list|evaluat|compare|refer back|targets?|requirements?|criteria|limits?|constraints?|checked against|tells? the (designer|team)|needs? to (do|meet)|must (do|meet|achieve))\b/i,/\b(design|team|designer|ideas?|proposal|decisions?|product|kettle|meets?|evaluat|work within|do)\w*/i]],add:'Say what the specification is for: it gives direction to the design team and is used to evaluate ideas.'},
   {t:'Function',a:[[/\b(function|boil|capacity|litres?|hold|purpose|job)\w*/i]],add:'Add a function point, such as how much water it must boil.'},
   {t:'Safety',a:[[/\b(safe|safety|switch.?off|cut.?out|lid lock|locks?|burn|scald|insulat|standard|regulation|bs\b|ce\b|ukca)\w*/i]],add:'Add a safety point, such as an automatic switch-off.'},
   {t:'Ergonomics',a:[[/\b(ergonom|anthropometr|handle|grip|percentile|hand|comfort|weight to lift|pour)\w*/i]],add:'Add an ergonomics point, such as a handle to fit the hand.'},
   {t:'Cost',a:[[/\b(cost|price|£|pounds|retail|budget|cheaper than|under \d)\w*/i]],add:'Add a cost point, such as a target retail price.'},
-  {t:'Aesthetics',a:[[/\b(aesthetic|colour|color|look|style|finish|appearance|match|modern|kitchen d.cor)\w*/i]],add:'Add an aesthetics point, such as colours that suit a modern kitchen.'},
+  {t:'Aesthetics',a:[[/\b(aesthetic|colour|color|style|stylish|finish|appearance|match|modern|sleek|kitchen d.cor|look\w* (modern|sleek|stylish|minimal|retro|premium|good in|nice in|like|to match))\w*/i]],add:'Add an aesthetics point, such as colours that suit a modern kitchen.'},
   {t:'Performance, environment or location of use',a:[[/\b(performance|minutes|seconds|quickly boil|energy|efficien|environment|recycl|sustainab|location|worktop|guarantee|warranty|last \d|years)\w*/i]],add:'Add a performance, environment or location point.'}]},
  'h-ideas':{type:'describe',pts:[
-  {t:'Analyse the problem and identify the important factors',a:[[/\b(analys|identify|list|decide|choose|break down|pick out|think of)\w*/i,/\b(factors?|aspects?|headings?|parameters?|features?|categor|problem|parts? of the lamp|attributes?)\w*/i]],add:'Start by identifying the important factors, such as light source, base and arm.'},
-  {t:'Generate options for each factor in a matrix',a:[[/\b(options?|alternatives?|possibilit|choices|variations?|ideas)\b/i,/\b(each|every|matrix|table|grid|for the)\b/i]],add:'Add generating a range of options for each factor and putting them in a matrix.'},
+  {t:'Analyse the problem and identify the important factors',a:[[/\b(analys|identify|list|decide|choose|break\w*(?: \w+){0,3} down|break down|pick out|think of|work out|split)\w*/i,/\b(factors?|aspects?|headings?|parameters?|features?|categor|problem|parts? of the lamp|attributes?)\w*/i]],add:'Start by identifying the important factors, such as light source, base and arm.'},
+  {t:'Generate options for each factor in a matrix',a:[[/\b(options?|alternatives?|possibilit\w*|choices|variations?|ideas|ways)\b/i,/\b(each|every|matrix|table|grid|column|row|chart|factor|attribute)\w*/i]],add:'Add generating a range of options for each factor and putting them in a matrix.'},
   {t:'Select one option from each factor to make combinations',a:[[/\b(select|pick|choose|combine|take|randomly|systematically)\w*/i,/\b(one|an option|each|combin|row|column|different|alternative)\w*/i]],add:'Describe selecting one option from each factor, randomly or systematically, to create combinations.'},
   {t:'Disregard weak ideas and identify the most promising',a:[[/\b(disregard|discard|reject|remove|eliminate|get rid|throw out|cross out|narrow|best|promising|strongest|most suitable|develop)\w*/i,/\b(ideas?|combinations?|weak|promising|best|develop|solutions?)\w*/i]],add:'Finish by disregarding the weakest combinations and identifying the most promising.'}]},
  'h-model':{type:'explain',pts:[
@@ -7360,44 +7416,47 @@ const MK_H={
   {t:'Check proportions and aesthetics in 3D',a:[[/\b(proportion|aesthetic|look|appearance|shape|form|size|all angles|3d|real life|scale)\w*/i,/\b(check|see|judge|evaluat|refin|visualis|understand|better than|hard to)\w*/i]],add:'Add how a model lets you judge the proportions and aesthetics in 3D.'},
   {t:'Find and fix problems before expensive tooling or manufacture',a:[[/\b(problems?|faults?|issues?|flaws?|errors?|mistakes?|weakness)\w*/i,/\b(before|early|tooling|moulds?|manufactur|production|expensive|cost|money)\w*/i]],add:'Explain that problems can be found before money is spent on moulds and manufacture.'},
   {t:'Test function or durability, e.g. buttons or a drop test',a:[[/\b(test|try|check)\w*/i,/\b(function|work|buttons?|strength|strong|durab|drop|mechanism|balance|movement|moving parts)\w*/i]],add:'Add how a working model can test the function, such as the buttons.'},
-  {t:'Communicate with the client or users for feedback',a:[[/\b(client|users?|customers?|consumers?|manufacturer|team|focus group|show)\w*/i,/\b(feedback|opinions?|views|communicat|understand|show|present|comment)\w*/i]],add:'Add that the model can be shown to the client or users to get feedback.'}],
+  {t:'Communicate with the client or users for feedback',a:[[/\b(client|users?|customers?|consumers?|manufacturer|team|focus group|show)\w*/i,/\b(feedback|opinions?|views|communicat|understand|show|present|comment|approve|suggest|sign off|agree|decide|react)\w*/i]],add:'Add that the model can be shown to the client or users to get feedback.'}],
   zero:[[/\bworks? with cam\b/i,'“CAD works with CAM” is not a benefit of physical modelling.']]},
  'h-graphics':{type:'describe',pts:[
-  {t:'Working or orthographic drawings give dimensions and tolerances for accurate manufacture',a:[[/\b(orthographic|working drawing|third angle|engineering drawing|technical drawing|dimension|tolerance|measurements?|sizes?)\w*/i,/\b(accura|exact|precise|manufactur|make|produc|cut|machin|correct)\w*/i]],add:'Describe how working drawings give dimensions and tolerances so parts are made accurately.'},
+  {t:'Working or orthographic drawings give dimensions and tolerances for accurate manufacture',a:[[/\b(orthographic|working drawing|third angle|engineering drawing|technical drawing|dimension|tolerance|measurements?|sizes?)\w*/i,/\b(accura|exact|precise|manufactur|make|made|produc|cut|machin|correct|right size|fit|ensure)\w*/i]],add:'Describe how working drawings give dimensions and tolerances so parts are made accurately.'},
   {t:'Sectional views show hidden internal detail',a:[[/\b(section|sectional|cut.?away|cross.?section|hidden detail|inside|internal)\w*/i,/\b(show|see|reveal|detail|wall|boss|inside|internal|hidden)\w*/i]],add:'Add how a sectional view shows the hidden internal detail, such as wall thickness or bosses.'},
   {t:'Exploded views show how parts fit together for assembly',a:[[/\b(exploded|assembly drawing)\w*/i],[/\b(how|where|order)\b/i,/\b(fit|assembl|go together|put together|join|attach)\w*/i]],add:'Add how an exploded view shows how the parts fit together for assembly.'},
-  {t:'Parts list, materials or finishes communicated',a:[[/\b(parts list|parts lists|list of parts|bill of materials|materials?|surface finish|finish|components? list|quantit)\w*/i,/\b(show|list|tell|give|state|communicat|need|order|know)\w*/i]],add:'Add how a parts list tells the manufacturer the materials and quantities needed.'},
+  {t:'Parts list, materials or finishes communicated',a:[[/\b(parts list|parts lists|list of parts|bill of materials|materials?|surface finish|finish|components? list|quantit)\w*/i,/\b(show|list|tell|give|state|communicat|need|order|know|specif|detail|includ)\w*/i]],add:'Add how a parts list tells the manufacturer the materials and quantities needed.'},
   {t:'CAD drawings can be sent to CNC machines or shared electronically',a:[[/\b(cad|computer)\w*/i,/\b(cnc|cam|machine|3d print|send|email|share|edit|change|update)\w*/i]],add:'Add how CAD drawings can be shared or sent straight to CNC machines.'}],
   zero:[[/^\s*(an? )?(orthographic|exploded|sectional)( view| drawing)?s?\.?\s*$/im,'Naming a graphic scores zero: describe what it communicates.']]},
  'h-function':{type:'describe',pts:[
-  {t:'Battery powered or cordless, so it can be used anywhere',a:[[/\b(battery|batteries|cordless|no (cable|cord|wire)|rechargeable|charg)\w*/i,/\b(anywhere|portable|move|car|stairs|without|plug|socket|carry|freely|reach)\w*/i]],add:'Describe the battery and how it lets the vacuum be used anywhere.'},
-  {t:'Light weight or balanced handle, so it is easy to control',a:[[/\b(light|weight|balanc|handle|grip)\w*/i,/\b(control|hold|carry|one hand|manoeuv|maneuv|lift|easy|move)\w*/i]],add:'Describe how the weight or handle position makes it easy to control.'},
+  {t:'Battery powered or cordless, so it can be used anywhere',a:[[/\b(battery|batteries|cordless|no (cable|cord|wire)|rechargeable|charg)\w*/i,/\b(anywhere|portable|move|car|stairs|without|plug|socket|carry|freely|reach|wires?|cables?|in the way|trip|room to room)\w*/i]],add:'Describe the battery and how it lets the vacuum be used anywhere.'},
+  {t:'Light weight or balanced handle, so it is easy to control',a:[[/\b(light|weight|balanc|handle|grip|motor (sits|is))\w*/i,/\b(control\w*|hold\w*|carry\w*|one hand|manoeuv\w*|maneuv\w*|lift\w*|easy|easier|move\w*|hands?|tired|tiring|strain\w*|arms?|wrists?)\b/i]],add:'Describe how the weight or handle position makes it easy to control.'},
   {t:'Dust container or filter removes easily for emptying or cleaning',a:[[/\b(dust|bin|container|canister|cup|filter|tank)\w*/i,/\b(empt|remov|clip|detach|clean|release|take off|wash|button)\w*/i]],add:'Describe how the dust container clips off to be emptied.'},
-  {t:'Attachments or nozzles for different cleaning tasks',a:[[/\b(attach|nozzle|accessor|tool|brush|crevice|head)\w*/i,/\b(corner|gap|upholster|sofa|car|stairs|different|clean|reach|narrow)\w*/i]],add:'Describe the attachments and the tasks they help with.'},
+  {t:'Attachments or nozzles for different cleaning tasks',a:[[/\b(attach|nozzle|accessor|tool|brush|crevice|head)\w*/i,/\b(corner|gap|upholster|sofa|car|stairs|different|clean|reach|narrow|dust|crumbs|pet|hair|shel)\w*/i]],add:'Describe the attachments and the tasks they help with.'},
   {t:'Controls: switch, power settings or trigger',a:[[/\b(switch|button|trigger|setting|mode|power|boost|speed)\w*/i,/\b(suction|power|control|turn on|turn off|change|adjust|stronger|saves?|battery)\w*/i]],add:'Describe how a control, such as a boost setting, helps it clean.'},
-  {t:'Light, charging dock or other function feature',a:[[/\b(light|led|dock|wall mount|stand|indicator|charge level)\w*/i,/\b(see|show|store|charg|dark|under|level|hang)\w*/i]],add:'Describe another feature, such as a light that shows dust under furniture.'}]},
+  {t:'Light, charging dock or other function feature',a:[[/\b(light|led|dock|wall mount|stand|indicator|charge level)\w*/i,/\b(see|show|store|charg|dark|under|level|hang|ready|tidy|wall)\w*/i]],add:'Describe another feature, such as a light that shows dust under furniture.'}]},
  'h-perf':{type:'explain',pts:[
   {t:'Manufacturer: repeat or predictable sales',a:[[/\b(repeat|again|replace|new one|buy another|more sales|predictable|regular|keep buying|come back|sales|income|profit|money)\w*/i,/\b(manufactur|company|business|they|sell|sales|customers?)\w*/i]],add:'Explain how the manufacturer benefits, such as repeat sales because customers must replace the product.'},
   {t:'Manufacturer: must invest in research and development',a:[[/\b(research|develop|r\s?&\s?d|new models?|innovat|design new|keep up|improve)\w*/i,/\b(manufactur|company|invest|cost|need|must|keep|always|constantly)\w*/i]],add:'Add that the manufacturer must keep investing in research and development.'},
   {t:'Manufacturer: risk to reputation if products fail too soon',a:[[/\b(reputation|trust|brand|image|bad reviews|loyal)\w*/i]],add:'Add the risk to the manufacturer’s reputation if products fail too soon.'},
   {t:'Environment: more waste and landfill',a:[[/\b(waste|landfill|thrown away|throw away|disposed|dump|rubbish|e.?waste)\w*/i]],add:'Explain the effect on the environment, such as more products going to landfill.'},
   {t:'Environment: more raw materials, energy and pollution',a:[[/\b(raw materials?|resources?|energy|pollut|emissions?|carbon|fossil|mining|extract)\w*/i]],add:'Add that more raw materials and energy are used, increasing pollution.'},
-  {t:'Environment: can promote efficient resources or design for recycling',a:[[/\b(recycl|recover|efficient use|disassembl|reuse|re.?use)\w*/i,/\b(design|plan|end of|materials?|parts?|efficient)\w*/i]],add:'Add that knowing the product’s life can promote design for recycling.'}]},
+  {t:'Environment: can promote efficient resources or design for recycling',a:[[/\b(recycl|recover|efficient use|disassembl|reuse|re.?use)\w*/i,/\b(design|plan|end of|materials?|parts?|efficient)\w*/i],[/\b(design|plan)\w*/i,/\b(recycl|disassembl|reus|re.?use|take apart)\w*/i]],add:'Add that knowing the product’s life can promote design for recycling.'}]},
  'h-safety':{type:'describe',pts:[
   {t:'Tip-over or automatic cut-out switch',a:[[/\b(tip.?over|tilt|cut.?out|thermostat|auto\w*|switch.?off|turns? (itself )?off|overheat)\w*/i]],add:'Describe a cut-out, such as a tip-over switch that turns the heater off if it falls.'},
   {t:'Guard over hot or moving parts',a:[[/\b(guard|grill|grille|mesh|cover|cage)\w*/i,/\b(element|hot|fingers?|touch|burn|fan|blade|reach)\w*/i]],add:'Describe a guard that stops fingers touching the hot element.'},
   {t:'Testing proposals, e.g. test rigs, simulations or temperature tests',a:[[/\b(test|simulat|trial|prototype)\w*/i,/\b(rig|safe|temperature|hot|heat|fire|drop|fall|electric|shock|before|prototype|users?)\w*/i]],add:'Describe testing the design before sale, such as checking the casing temperature.'},
   {t:'Meeting British Standards, CE or UKCA requirements',a:[[/\b(british standard|bsi|bs\s?en|kitemark|\bce\b|ukca|regulations?|standards?|legislation|law)\b/i]],add:'Add meeting British Standards and safety regulations before sale.'},
   {t:'Materials or insulation: heat-resistant or insulating casing',a:[[/\b(insulat|heat.?resist|flame.?retard|fire.?resist|non.?conduct|thermoset|double insulat|earth)\w*/i]],add:'Describe a material choice, such as a heat-resistant or insulated casing.'},
-  {t:'Stable base, rounded edges, warnings or instructions',a:[[/\b(stable|wide base|heavy base|rounded|no sharp|warning|label|instruction|cable length|child.?proof|lock)\w*/i]],add:'Add another feature, such as a stable base or clear warning labels.'}]},
+  {t:'Stable base or rounded edges',a:[[/\b(stable|wide base|heavy base|weighted|rounded|no sharp|child.?proof|won.?t (tip|fall)|not (tip|fall)|keeps? it upright|cable length|child lock)\w*/i]],add:'Add another feature, such as a stable base or rounded edges.'},
+  {t:'Warning labels or instructions',a:[[/\b(warning|label|instruction|sticker|sign)\w*/i,/\b(tell|warn|explain|hot|cover|don.?t|do not|not to|user|safe|burn|away)\w*/i]],add:'Add another feature, such as a stable base or clear warning labels.'}]},
  'h-market':{type:'describe',pts:[
   {t:'Health or fitness tracking added because customers wanted it',a:[[/\b(fitness|health|heart|steps?|pedometer|track|sleep|calorie)\w*/i]],add:'Describe a feature consumers asked for, such as fitness tracking.'},
   {t:'Contactless payment or e-tickets',a:[[/\b(contactless|pay|payment|wallet|e.?ticket|ticket|banking)\w*/i]],add:'Describe a feature such as contactless payment.'},
   {t:'More colours, styles or finishes',a:[[/\b(colours?|colors?|styles?|finish|customis|personalis|options|design choices|cases?)\b/i]],add:'Describe how demand led to more colours or styles.'},
-  {t:'Portability: smaller, lighter or foldable',a:[[/\b(portab|smaller|lighter|compact|fold|pocket|carry|slim|thin)\w*/i]],add:'Describe a change to make products more portable.'},
-  {t:'Affordability: cheaper versions or budget ranges',a:[[/\b(afford|cheaper|budget|lower price|less expensive|value|price range)\w*/i]],add:'Describe cheaper versions made because consumers wanted them.'},
+  {t:'Portability: smaller, lighter or foldable',a:[[/\b(portab|smaller|lighter|compact|fold|pocket|carry|slim|thin|on trains?)\w*/i]],add:'Describe a change to make products more portable.'},
+  {t:'Affordability: cheaper versions or budget ranges',a:[[/\b(afford|cheaper|budget|lower price|less expensive|value|price range|cost less)\w*/i]],add:'Describe cheaper versions made because consumers wanted them.'},
   {t:'Accessibility or ease of use',a:[[/\b(accessib|disab|elderly|older|large buttons?|voice|hearing|sight|easier to use|simple|intuitive)\w*/i]],add:'Describe a change for accessibility, such as larger controls.'},
-  {t:'Longer battery, bigger memory, better camera or other improvement customers demanded',a:[[/\b(battery|memory|storage|camera|screen|waterproof|durab|charging|connect|compatib|eco|sustainab|recycl)\w*/i,/\b(want|demand|ask|need|customers?|consumers?|people|users?|market|longer|bigger|better|more)\w*/i]],add:'Describe another improvement that customers demanded.'}],
+  {t:'Better camera customers demanded',a:[[/\b(camera|photo|lens|selfie)\w*/i,/\b(want|demand|ask|need|customers?|consumers?|people|users?|market|better|improv|more|higher)\w*/i]],add:'Describe another improvement that customers demanded.'},
+  {t:'Longer battery life or faster charging customers demanded',a:[[/\b(battery|batteries|charging|charge)\w*/i,/\b(want|demand|ask|need|complain|customers?|consumers?|people|users?|market|longer|last|better|faster|improv)\w*/i]],add:'Describe another improvement that customers demanded.'},
+  {t:'Bigger memory, screen, waterproofing, durability or eco improvement customers demanded',a:[[/\b(memory|storage|screen|waterproof|durab|tough|connect|compatib|eco|sustainab|recycl|less effort|e.?bikes?|motor|electric|gears?)\w*/i,/\b(want|demand|ask|need|customers?|consumers?|people|users?|market|longer|bigger|better|more|led to|so)\w*/i]],add:'Describe another improvement that customers demanded.'}],
   zero:[[/\bmarket pull is (when|where|the)\b/i,'A definition of market pull scores zero: describe how it changed real products.']]},
  'h-aesth':{type:'describe',pts:[
   {t:'Form or shape and its effect',a:[[/\b(form|shape|curve|curved|flowing|smooth|angular|geometric|organic|sleek|line|lines)\w*/i,/\b(gives?|makes?|creat|looks?|appear|elegant|modern|flow|soft|sleek|stylish|feel|suit|so|which)\w*/i]],add:'Describe the form or shape and the effect it has.'},
@@ -7408,18 +7467,18 @@ const MK_H={
   {t:'Style, fashion, pattern or light',a:[[/\b(style|fashion|trend|retro|minimal|industrial|scandi|pattern|repeat|light|glow|shadow|brand)\w*/i,/\b(gives?|makes?|creat|suit|appeal|look|modern|so|which|follow|current)\w*/i]],add:'Describe a style or fashion influence, or the effect of the light it gives.'}],
   zero:[[/\b(it|the lamp) is (silver|black|white|red|blue|green|wooden|metal)\.\s*$/im,'Stating a fact, such as its colour, scores zero: say what effect it has.']]},
  'h-ergo':{type:'describe',pts:[
-  {t:'Anthropometrics: seat height suits lower leg length',a:[[/\b(seat|height)\b/i,/\b(leg|knee|popliteal|lower leg|thigh|feet|floor)\w*/i]],add:'Link the seat height to the user’s lower leg length.'},
-  {t:'Anthropometrics: armrest suits forearm or elbow height',a:[[/\barm.?rests?\b/i,/\b(forearm|arm|elbow)\w*/i]],add:'Link the armrests to the length of the forearm or elbow height.'},
+  {t:'Anthropometrics: seat height suits lower leg length',a:[[/\b(seat height|height of the seat|seat (is|should be|can be) (high|low|raised|lowered)|height)\b/i,/\b(leg|knee|popliteal|lower leg|feet|floor)\w*/i]],add:'Link the seat height to the user’s lower leg length.'},
+  {t:'Anthropometrics: armrest suits forearm or elbow height',a:[[/\barm.?rests?\b/i,/\b(forearm\w*|elbows?|arm length|length of (the |their |your )?arms?|arms? (rest|sit|length)|lower arm|shoulder\w*|percentile)\b/i]],add:'Link the armrests to the length of the forearm or elbow height.'},
   {t:'Anthropometrics: seat width or depth suits hip width or thigh length',a:[[/\bseat\b/i,/\b(width|wide|depth|deep)\b/i,/\b(hip|bottom|buttock|thigh|body)\w*/i]],add:'Link the seat width or depth to the user’s hips or thighs.'},
   {t:'Anthropometrics: backrest height suits back or shoulder height, or adjustable range',a:[[/\b(back.?rest|back|headrest|adjust)\w*/i,/\b(shoulder|spine|percentile|range of users|users? of different|different sizes?|body sizes?|heights?)\w*/i]],add:'Describe adjustability for a range of body sizes.'},
   {t:'Physiology: support reduces strain on the back or posture',a:[[/\b(lumbar|lower back|spine|posture|support|curve|back)\w*/i,/\b(strain|stress|pain|ache|fatigue|tired|injur|reduc|prevent)\w*/i]],add:'Describe how the backrest support reduces strain on the spine.'},
-  {t:'Physiology: little force needed for controls or reduced fatigue',a:[[/\b(force|effort|lever|push|pull|press|adjust|padding|cushion|pressure|swivel|castor|wheels?)\w*/i,/\b(strain|stress|fatigue|tired|pressure|ache|reduc|prevent|without straining)\w*/i]],add:'Describe how a control needs little force, so the hand is not strained.'}]},
+  {t:'Physiology: little force needed for controls or reduced fatigue',a:[[/\b(force|effort|lever|push|pull|press|adjust|padd|cushion|pressure|swivel|castor|wheels?|tilt|reclin|posture|change position|mesh|cool|ventilat|breath)\w*/i,/\b(strain|stress|fatigue|tired|pressure|ache|reduc|prevent|without straining)\w*/i]],add:'Describe how a control needs little force, so the hand is not strained.'}]},
  'h-materials':{type:'describe',pts:[
   {t:'Magnet test identifies ferrous metals',a:[[/\b(magnet)\w*/i,/\b(steel|iron|ferrous|attract|stick|metal|aluminium|copper|brass)\w*/i]],add:'Describe a magnet test and what it shows about metals.'},
   {t:'Float test identifies some plastics by density',a:[[/\b(float|sink|water|density|dense)\w*/i,/\b(polypropylene|polythene|polyethylene|pp|pe|plastics?|less dense|denser|density)\b/i]],add:'Describe a float test and how density shows which plastic it is.'},
   {t:'Flame test: different plastics burn with different colours, smells or smoke',a:[[/\b(flame|burn|fire|heat)\w*/i,/\b(colou?r|smell|smoke|soot|odou?r|drip|different)\w*/i]],add:'Describe a flame test and what changes show which plastic it is.'},
   {t:'Scratch or cut test: thermoplastics shave, thermosets chip',a:[[/\b(scratch|cut|scrape|knife|shav|slice)\w*/i,/\b(chip|shav|slice|thermoset|thermoplastic|plastic|curl)\w*/i]],add:'Describe a scratch test and what it shows.'},
-  {t:'Grain pattern or colour identifies woods',a:[[/\b(grain|knots?|rings?)\w*/i,/\b(wood|timber|oak|ash|beech|pine|mahogany|spruce|hardwood|softwood)\w*/i],[/\b(colou?r)\w*/i,/\b(wood|timber|mahogany|oak|pine|beech)\w*/i]],add:'Describe how the grain pattern or colour identifies a wood.'},
+  {t:'Grain pattern or colour identifies woods',a:[[/\b(grain|knots?|rings?)\w*/i,/\b(wood|timber|oak|ash|beech|pine|mahogany|spruce|hardwood|softwood)\w*/i],[/\b(colou?r)\w*/i,/\b(wood|timber|mahogany|oak|pine|beech)\w*/i],[/\b(woods?|timbers?|hardwoods?|softwoods?)\b/i,/\b(grain|colou?r|knots?|rings?)\w*/i]],add:'Describe how the grain pattern or colour identifies a wood.'},
   {t:'Colour or weight compared with known samples (metals)',a:[[/\b(colou?r|weight|heavy|light|compar|known sample)\w*/i,/\b(copper|brass|aluminium|steel|metal|lead|gold|reddish|yellow)\w*/i]],add:'Describe comparing colour or weight with known metal samples.'}],
   zero:[[/^\s*(a |you could use a )?(flame|float|magnet|scratch) test( could be used)?( to test the material)?\.?\s*$/im,'Naming a test scores zero: say what it shows.']]},
  'h-processes':{type:'state',pair:true,pts:[
@@ -7431,45 +7490,47 @@ const MK_H={
   {t:'Explained: high volume, fast cycle, economies of scale',a:[[/\b(high volume|large (numbers?|quantit|volume)|mass|economies|quick(ly)? (to )?(produc|make)|fast cycle|short cycle|cheap(er)? per|unit cost|automat)\w*/i]],add:'Explain why the process suits the volume, such as low unit cost in high volumes.'},
   {t:'Explained: finish or strength from the process',a:[[/\b(finish|smooth|no further|polish|textur|strong|strength|stiff|weatherproof|waterproof)\w*/i,/\b(mou?ld|process|straight|comes out|produc|gives|creat|so|as|because|which)\w*/i]],add:'Explain a finish or strength the process gives straight from the mould or die.'}]},
  'h-features':{type:'explain',pts:[
-  {t:'Bosses take screws so parts can be fixed together',a:[[/\bboss\w*/i,/\b(screw|fix|fasten|join|hold|attach|secure|together|assembl)\w*/i]],add:'Explain what bosses do: they take screws so the halves can be fixed together.'},
+  {t:'Bosses take screws so parts can be fixed together',a:[[/\bboss\w*/i,/\b(screw|fix|fasten|join|attach|secure|assembl|bolt|thread)\w*/i]],add:'Explain what bosses do: they take screws so the halves can be fixed together.'},
   {t:'Location pins line parts up during assembly',a:[[/\b(location|locating|pins?|lugs?)\b/i,/\b(line|align|position|locat|in place|correct|line up|fit|assembl)\w*/i]],add:'Explain what location pins do: they line the parts up during assembly.'},
   {t:'Ribs strengthen without thickening the wall',a:[[/\bribs?\b/i,/\b(strength|stronger|strong|stiff|rigid|support|flex|bend|crack|distort|warp)\w*/i]],add:'Explain what ribs do: they strengthen the casing without thickening the whole wall.'}],
   zero:[[/\b(jig|template)s?\b/i,'Jigs and templates are not features made during manufacture.']]},
  'h-assembly':{type:'explain',pts:[
-  {t:'Shipped flat-packed, cutting transport or storage costs',a:[[/\b(flat.?pack|flat|pack|ship|transport|deliver|lorry|van|box|store|storage|space)\w*/i,/\b(cheap|cost|less space|more fit|smaller|easier|save|fewer|reduc)\w*/i]],add:'Explain the flat-pack advantage: more fits in a lorry, so transport costs less.'},
-  {t:'Assembled with simple tools or no specialist skills',a:[[/\b(simple tools?|allen key|hex key|screwdriver|minimal tools?|few tools?|no tools?|no special|without special|no skills?|unskilled|anyone|customer|user|themselves|diy|at home)\w*/i]],add:'Explain that the customer can assemble it with simple tools and no specialist skills.'},
+  {t:'Shipped flat-packed, cutting transport or storage costs',a:[[/\b(flat.?pack|flat|pack|ship|transport|deliver|lorry|van|box|store|storage|space)\w*/i,/\b(cheap|cost|less space|more fit|more can|more (can|will) (fit|be)|compact|stored|smaller|easier|save|fewer|reduc|lorry|van)\w*/i]],add:'Explain the flat-pack advantage: more fits in a lorry, so transport costs less.'},
+  {t:'Assembled with simple tools or no specialist skills',a:[[/\b(simple tools?|allen key|hex key|screwdriver|minimal tools?|few tools?|no tools?|no special|without special|no skills?|no \w+ skills?|no specialist|unskilled|basic tools?|just an? |anyone|customer|user|themselves|diy|at home)\w*/i]],add:'Explain that the customer can assemble it with simple tools and no specialist skills.'},
   {t:'Can be taken apart and reassembled, e.g. to move',a:[[/\b(take apart|taken apart|dismantl|disassembl|reassembl|re.?assembl|undo|take it down|knock.?down)\w*/i]],add:'Explain that it can be taken apart and reassembled, for example when moving house.'},
   {t:'Parts easily replaced or modular design',a:[[/\b(replac|spare|swap|modular|add on|extend|repair)\w*/i]],add:'Explain that broken parts can be replaced without replacing the whole product.'}],
   zero:[[/\bbought in bulk\b/i,'“Bought in bulk” is about standard components in general, not the advantages of knock-down fittings.']]},
  'h-production':{type:'describe',pts:[
-  {t:'Jigs locate parts so no marking out and accurate repeat drilling',a:[[/\bjigs?\b/i,/\b(marking out|mark out|accura|same place|position|locat|hold|repeat|identical|error|mistake|skill|quick|faster)\w*/i]],add:'Describe how a jig improves efficiency, such as holding each leg so holes are drilled in the same place without marking out.'},
-  {t:'CNC or CAD/CAM produces identical parts quickly with less skilled labour',a:[[/\b(cnc|cad.?cam|cam\b|computer.?controlled|router|laser)\w*/i,/\b(identical|accura|same|repeat|quick|fast|less labour|fewer workers|skill|24|automat|efficien|waste)\w*/i]],add:'Describe how CNC machines cut identical parts quickly from the CAD drawing.'},
+  {t:'Jigs locate parts so no marking out and accurate repeat drilling',a:[[/\bjigs?\b/i,/\b(marking out|mark out|accura|same place|position|locat|hold|repeat|identical|error|mistake|skill|quick|faster|speed|consistent)\w*/i]],add:'Describe how a jig improves efficiency, such as holding each leg so holes are drilled in the same place without marking out.'},
+  {t:'CNC or CAD/CAM produces identical, accurate parts quickly',a:[[/\b(cnc|cad.?cam|cam\b|computer.?controlled|router|laser)\w*/i,/\b(identical|accura|same|repeat|quick|fast|efficien|waste)\w*/i]],add:'Describe how CNC machines cut identical parts quickly from the CAD drawing.'},
+  {t:'CNC needs fewer or less skilled workers',a:[[/\b(cnc|cad.?cam|computer.?controlled|router|laser|machines?)\w*/i,/\b(less labour|fewer (skilled )?workers|less skilled|skill|labour costs?|wages|staff)\w*/i]],add:'Describe how CNC needs fewer skilled workers.'},
+  {t:'CNC machines run continuously, raising output',a:[[/\b(cnc|cad.?cam|computer.?controlled|router|laser|machines?)\w*/i,/\b(24|all day|all night|continuous|non.?stop|without (a )?break|output|overnight)\w*/i]],add:'Describe how CNC machines can run continuously.'},
   {t:'Gantt chart plans tasks and identifies critical tasks',a:[[/\bgantt\b/i,/\b(plan|order|time|critical|organis|schedule|overlap|deadline|workers?|workforce)\w*/i]],add:'Describe how a Gantt chart plans the tasks and organises the workforce.'},
   {t:'Flow chart shows the sequence and quality checks',a:[[/\bflow ?charts?\b/i,/\b(order|sequence|steps?|check|quality|decision|know what|next)\w*/i]],add:'Describe how a flow chart shows the order of tasks and where checks happen.'},
   {t:'Just-in-time reduces stock and waste',a:[[/\b(just.?in.?time|jit)\b/i,/\b(stock|storage|waste|space|money|cost|cash|lead time|flexib)\w*/i]],add:'Describe how JIT reduces stock and storage, so money isn’t tied up.'},
-  {t:'Standard components bought in save making time',a:[[/\bstandard (components?|parts?)\b/i,/\b(time|bought|buy|in.?house|making|reliable|known quality|quick|assembl)\w*/i]],add:'Describe how buying in standard components saves time making them.'},
+  {t:'Standard components bought in save making time',a:[[/\bstandard (components?|parts?|fixings?|fittings?)\b/i,/\b(time|bought|buy|in.?house|making|reliable|known quality|quick|assembl)\w*/i]],add:'Describe how buying in standard components saves time making them.'},
   {t:'Automation or batch/mass production increases output',a:[[/\b(automat|robot|batch|mass|production line|assembly line)\w*/i,/\b(output|faster|24|consistent|errors?|more chairs|efficien|continuous|quick|labour|costs?)\w*/i]],add:'Describe how automation or batch production increases output.'}]},
  'h-people':{type:'describe',pts:[
-  {t:'Materials technologist: advises on suitable materials for the use',a:[[/\b(materials? technologist|technologist)\b/i,/\b(material|aluminium|steel|carbon|advis|choose|select|suitab|propert)\w*/i],[/\b(advis|choose|select|recommend|decide)\w*/i,/\b(materials?)\b/i,/\b(frame|bike|weight|strong|light|corrosion|suit|propert)\w*/i]],add:'Describe how the materials technologist advises on which material to use for the frame.'},
-  {t:'Materials technologist: materials suit production methods or environment',a:[[/\b(materials?)\b/i,/\b(production method|manufactur|process|weld|environment|recycl|sustainab|cost)\w*/i]],add:'Add that the materials technologist checks the material suits the production methods or the environment.'},
-  {t:'Production engineer: plans manufacture, tooling or jigs',a:[[/\b(production engineer|engineer)\b/i,/\b(plan|tool|jig|machine|process|manufactur|make|weld|production)\w*/i],[/\b(plan|decide|organis)\w*/i,/\b(tooling|jigs?|processes|production|manufactur)\w*/i]],add:'Describe how the production engineer plans how the frame will be made, including tooling and jigs.'},
-  {t:'Production engineer: makes production efficient and low cost',a:[[/\b(efficien|cost|order of|sequence|quick|fast|waste|lowest|cheap)\w*/i,/\b(production|manufactur|made|make|produc|engineer)\w*/i]],add:'Add that the production engineer makes production as efficient as possible.'}]},
+  {t:'Materials technologist: advises on suitable materials for the use',a:[[/\b(materials? technologist|technologist)\b/i,/\b(aluminium|steel|carbon|alloy|titanium|advis|choose|chooses|select|suitab|propert|research)\w*/i],[/\b(advis|choose|select|recommend|decide)\w*/i,/\b(materials?)\b/i,/\b(frame|bike|weight|strong|light|corrosion|suit|propert)\w*/i]],add:'Describe how the materials technologist advises on which material to use for the frame.'},
+  {t:'Materials technologist: materials suit production methods or environment',a:[[/\b(materials?|alloy|metal)\b(?! technologist)/i,/\b(production method|methods available|manufactur|process|weld|form|environment|recycl|sustainab|cost|corro|rust|wet|weather|conditions|mud|trail|impact)\w*/i],[/\b(won.?t|not|doesn.?t)\s+(corrode|rust)\w*/i],[/\b(makes? sure|checks?|ensur\w*|suit\w*|handle|withstand|cope)\b/i,/\b(manufactur\w*|production method|methods available|process\w*|weld\w*|forming|impacts?|trails?|weather|wet|conditions|environment)\b/i]],add:'Add that the materials technologist checks the material suits the production methods or the environment.'},
+  {t:'Production engineer: plans manufacture, tooling or jigs',a:[[/\b(production engineer|engineer)\b/i,/\b(plan|tool|jig|machine|process|manufactur|weld|stages?|works? out)\w*/i],[/\b(plan|decide|organis)\w*/i,/\b(tooling|jigs?|processes|production|manufactur)\w*/i]],add:'Describe how the production engineer plans how the frame will be made, including tooling and jigs.'},
+  {t:'Production engineer: makes production efficient and low cost',a:[[/\b(keep|make|making|keeps|makes)s? (it|production|the process|costs?|the line) (as )?(efficient|cheap|low)\w*/i],[/\b(efficien|cost|order of|sequence|quick|fast|waste|lowest|cheap)\w*/i,/\b(production|manufactur|made|make|produc|engineer)\w*/i]] ,add:'Add that the production engineer makes production as efficient as possible.'}]},
  'h-ipr':{type:'state',pair:true,pts:[
   {t:'Patent named',a:[[/\bpatent\w*/i]],add:'Name a method, such as a patent.'},
   {t:'Patent protects a new invention, how it works or is made',a:[[/\bpatent\w*/i,/\b(invent|how it works|how (it is|it's) made|function|mechanism|technical|process|new idea|innovation|made from)\w*/i],[/\b(invention|inventions|how it works|mechanism)\b/i]],add:'Say what a patent protects: a new invention, how it works and how it is made.'},
   {t:'Trademark named',a:[[/\btrade.?marks?\b/i]],add:'Name a method, such as a trademark.'},
-  {t:'Trademark protects a name, logo or brand identity',a:[[/\b(logo|brand|name|slogan|symbol|identity)\w*/i]],add:'Say what a trademark protects: the brand name, logo or identity.'},
+  {t:'Trademark protects a name, logo or brand identity',a:[[/\b(trade.?mark|brand|logo)\w*/i,/\b(logo|brand|name|slogan|symbol|identity)\w*/i]],add:'Say what a trademark protects: the brand name, logo or identity.'},
   {t:'Design right or registered design named',a:[[/\b(design right|registered design|register(ed|ing)? the design)\b/i]],add:'Name a method, such as a registered design.'},
-  {t:'Design right protects shape, configuration or appearance',a:[[/\b(shape|configuration|appearance|look|form|pattern|aesthetic)\w*/i]],add:'Say what design rights protect: the shape, configuration or appearance.'},
+  {t:'Design right protects shape, configuration or appearance',a:[[/\b(design right|registered design|design)\w*/i,/\b(shape|configuration|appearance|look|form|pattern|aesthetic)\w*/i]],add:'Say what design rights protect: the shape, configuration or appearance.'},
   {t:'Copyright named',a:[[/\bcopy.?right\w*/i]],add:'Name a method, such as copyright.'},
-  {t:'Copyright protects published work, drawings, music or writing',a:[[/\b(written|writing|drawings?|artwork|art\b|music|photo|film|software|published|literary|manual|instructions|web)\w*/i]],add:'Say what copyright protects: published work such as drawings, writing or music.'}]},
- 'h-impact':{type:'explain',pts:[
-  {t:'Job losses affect workers and the local economy',a:[[/\b(jobs?|unemploy|redundan|lose (their )?work|out of work|workers? (are )?replaced|fewer workers|less workers)\w*/i,/\b(econom|communit|income|money|spend|poverty|area|town|families|lives|living|afford|benefits?)\w*/i]],add:'Explain how job losses affect people, such as the local economy suffering.'},
+  {t:'Copyright protects published work, drawings, music or writing',a:[[/\bcopy.?right\w*/i,/\b(written|writing|drawings?|artwork|art\b|music|photo|film|software|published|literary|manual|instructions|web)\w*/i]],add:'Say what copyright protects: published work such as drawings, writing or music.'}]},
+ 'h-impact':{type:'explain',nolink:true,pts:[
+  {t:'Job losses affect workers and the local economy',a:[[/\b(job loss\w*|los(e|ing) (their |his |her )?jobs?|jobs? (are |will be )?lost|unemploy\w*|redundan\w*|lose (their )?work|out of work|workers? (are |could be |will be )?replaced|replace (the )?workers|fewer (jobs|workers)(?! (get|are|will be) (hurt|injured))|less workers)\b/i,/\b(econom|communit|income|money|spend|poverty|area|town|families|lives|living|afford|benefits?)\w*/i]],add:'Explain how job losses affect people, such as the local economy suffering.'},
   {t:'Retraining or new technical skills needed',a:[[/\b(retrain|re.?train|new skills?|upskill|training|technical skills?|programm|maintain)\w*/i]],add:'Explain how workers need retraining to programme and maintain machines.'},
-  {t:'De-skilling of traditional work',a:[[/\b(de.?skill|skills? (are )?lost|craft skills|traditional skills|less skilled)\w*/i]],add:'Explain the loss of traditional craft skills.'},
-  {t:'Safer workplaces: robots do dangerous tasks',a:[[/\b(safe|danger|hazard|injur|accident|risk)\w*/i,/\b(robot|machine|automat|instead|workers?|people|workplace)\w*/i]],add:'Explain how the workplace becomes safer.'},
-  {t:'Cheaper products, more widely available',a:[[/\b(cheap|lower price|afford|less expensive|reduced cost|available|accessible)\w*/i,/\b(products?|goods|people|consumers?|everyone|wider|society|quality of life)\w*/i]],add:'Explain how products become cheaper and more available for society.'},
-  {t:'Changed work patterns or economic migration',a:[[/\b(shift|work patterns?|hours|migrat|move away|relocat|commut)\w*/i]],add:'Explain a change in work patterns, or people moving away to find work.'}],
+  {t:'De-skilling of traditional work',a:[[/\b(de.?skill|(skills?|knowledge|crafts?) (is |are )?lost|craft (skills|knowledge)|traditional (skills|craft)|less skilled)\w*/i]],add:'Explain the loss of traditional craft skills.'},
+  {t:'Safer workplaces: robots do dangerous tasks',a:[[/\b(safe|danger|hazard|injur|accident|risk)\w*/i,/\b(robot|machine|automat|instead|workers?|people|workplace)\w*/i],[/\b(fewer|less|no) (workers|people|staff) (get |are |being )?(hurt|injured)/i]],add:'Explain how the workplace becomes safer.'},
+  {t:'Cheaper products, more widely available',a:[[/\b(cheap|lower price|afford|less expensive|reduced cost|available|accessible)\w*/i,/\b(products?|goods|people|consumers?|everyone|wider|society|quality of life|standard of living)\w*/i]],add:'Explain how products become cheaper and more available for society.'},
+  {t:'Changed work patterns or economic migration',a:[[/\b(shift|work patterns?|hours|migrat|move away|moving away|relocat|commut|move to (other|another|a different)|other (areas|countries|towns))\w*/i]],add:'Explain a change in work patterns, or people moving away to find work.'}],
   zero:[[/\b(save|saves|saving) money\b[^.]*\b(wages?|jobs|pay)\b/i,'Savings for the manufacturer are not an impact on the workforce or society.']]}
 };
 const SUM_H={
@@ -7652,7 +7713,7 @@ function topicStatus(id){
   const tl=S.tq&&S.tq[id],t=tqEff(id),e=exEff(id);
   const tqs=tl&&tl[1]?tl[0]/tl[1]:null,tq2=t&&t[1]?t[0]/t[1]:null,exs=e&&e[1]?e[0]/e[1]:null;
   const RK={n:0,r:1,a:2,g:3};
-  const tb=tq2===null?'n':tq2>=.7-1e-9?'a':'r',eb=exs===null?'n':exs>=1?'g':exs>=.5?'a':'r';
+  const tb=tq2===null?'n':tq2>=.7-1e-9?'a':'r',eb=exs===null?'n':(exs>=1&&tq2!==null&&tq2>=1-1e-9)?'g':exs>=.5?'a':'r';/* v10.24: Charged needs full Test yourself and full Get exam ready */
   const band=RK[eb]>RK[tb]?eb:tb;
   if(band==='n')return {band:'n',tier:'n',pct:null,diamond:false,tqs,exs,pp:0,need:0};
   const sc=[tq2,exs].filter(v=>v!==null),pct=sc.reduce((a,b)=>a+b,0)/sc.length;
@@ -7665,8 +7726,8 @@ function topicStatus(id){
 function nextStep(st){
   switch(st.tier){
     case 'n':return 'Do Test yourself to start charging this topic.';
-    case 'r':return 'Get 7 out of 10 or better in Test yourself to reach Charging.';
-    case 'a':return 'Get full marks on the Get exam ready question to reach Charged.';
+    case 'r':return 'Get most of Test yourself right to reach Charging, then all of it right to unlock Get exam ready.';
+    case 'a':return st.tqs!==1?'Get every Test yourself question right to unlock Get exam ready.':'Get full marks on the Get exam ready question to reach Charged.';
     case 'g':{if(!st.avail)return 'Charged is the top level for this topic for now: it has no past paper questions yet.';
       const need=[];if(st.tqs!==1)need.push('get every Test yourself question right');if(st.pp<1)need.push('get full marks on 1 past paper question');
       return 'To Supercharge it, '+need.join(' and ')+'.'}
@@ -7719,28 +7780,41 @@ function topicCelebrate(id,bf){setTimeout(()=>{try{hwCheckUnlock()}catch(e){}},1
 
 
 /* ---------- estimated marking ---------- */
-const LINK=/\b(so|because|which|means|meaning|therefore|so that|allowing|allows|lets|letting|stopping|preventing|whereas|than|otherwise|making it)\b/i;
+/* v10.23 (Niall, 25 Nov): accept every way pupils link a point to its consequence, not only "so" and "because"
+   (e.g. "it will allow the designer to…", "may mean that…") */
+const LINK=/\b(so|because|which|therefore|thus|hence|so that|whereas|than|otherwise|making (it|them|the)|due to|as a result|resulting|sav(e|es|ed|ing)|to (see|check|test|find|make sure|ensure|judge|spot|tell|get|gain|receive|let|help|improve|stop|avoid|decide|approve)|in order to|for (feedback|approval|comments)|to keep|keeps?|keeping|make(s)? sure|guarantee\w*|without|to (hold|join|fix|fasten|attach|secure|line|align|strengthen|support|stop|protect|allow|reduce|increase|keep|give|cool|handle|withstand|cope)|to (move|store|transport|carry|fit|reuse|build|assemble|repair|replace|clean)|to be (moved|stored|carried|transported|reused|repaired|replaced)|(needed|required|necessary)|push(es|ing)?|encourag\w*|forc(e|es|ing)|polluting|pollutes?|depletes?|depleting|using up|uses up|wasting|wastes?|before|meaning that|which is (hard|difficult)|can be (improved|changed|adjusted|fixed|refined|altered)|result(s|ed)? in|lead(s|ing)? to|led to|allow\w*|enabl\w*|let|lets|letting|mean|means|meaning|meant|ensur\w*|stop(s|ping)?|prevent\w*|help(s|ing)?|caus(e|es|ing)|avoid\w*|reduc\w*|increas\w*|giv(e|es|ing) (the|them|it|a|an)|if\b[^.]{3,80}\b(it|this|they|the)\b[^.]{0,20}\b(will|would|can|could|may|might))\b/i;
 function markAnswer(id,text0){
-  const fx=bmFix(text0,(curTopic().name||'')+' '+((curTopic().exam||{}).q||'')),text=fx.t;
+  const fx=bmFix(text0,(curTopic().name||'')+' '+((curTopic().exam||{}).q||'')),text=fx.t.replace(/\b([ei])\.([ge])\./gi,'$1$2, ');/* v10.26: e.g. and i.e. are not full stops (same length, so highlights line up) */
   const spec=MK[id],max=curTopic().exam.max,res={score:0,max,spans:[],tip:'',credited:[]};
   const sents=[];const re=/[^.!?\n]+[.!?]*/g;let m;while((m=re.exec(text))){if(m[0].trim())sents.push({s:m.index,t:m[0]})}
+  /* v10.26: dictated or run-on answers often have no full stops. Split a sentence again where a new point clearly starts. */
+  {const SPLIT=/\s(?=(?:(?:one|another|a|the|my|the other|second|first|other)\s+(?:main\s+|big\s+|key\s+)?(?:benefit|drawback|advantage|disadvantage|reason|way|feature|problem|issue|point|stage|method|factor|downside|upside|negative|positive|con|pro)s?\b|but (?:the|a|one|it|this)\b|secondly\b|firstly\b|thirdly\b|finally\b|however\b|on the other hand\b|whereas\b|also\b|in addition\b|additionally\b))/gi;
+   const out=[];sents.forEach(se=>{let last=0,mm;SPLIT.lastIndex=0;const cuts=[];while((mm=SPLIT.exec(se.t))){if(mm.index-last>=18){cuts.push(mm.index+1);last=mm.index}}
+     let st=0;const grp=[];cuts.concat([se.t.length]).forEach(c=>{const piece=se.t.slice(st,c);if(piece.trim()){const o={s:se.s+st,t:piece};grp.push(o);out.push(o)}st=c});grp.forEach((o,i)=>{if(grp[i+1])o.nx=grp[i+1].t})});sents.length=0;out.forEach(x=>sents.push(x))}
   const add=(a,b,c)=>res.spans.push([a,b,c]);
   let why=false,shortish=false,listy=false;const done=new Set();
   sents.forEach(se=>{
     const words=(se.t.match(/[A-Za-z’']+/g)||[]).length;
     const clauses=[];const cr=/[^,;]+/g;let c;
-    while((c=cr.exec(se.t))){const parts=c[0].split(/\b(?=and\b|then\b|also\b)/i);let o=c.index;parts.forEach(p=>{clauses.push({s:se.s+o,e:se.s+o+p.length,w:(p.match(/[A-Za-z’']+/g)||[]).length});o+=p.length})}
-    const used=new Set();
+    while((c=cr.exec(se.t))){const parts=c[0].split(/\b(?=and\b|then\b|also\b|but\b|however\b|whereas\b|although\b|though\b|while\b|another\b|because\b)/i);let o=c.index;parts.forEach(p=>{clauses.push({s:se.s+o,e:se.s+o+p.length,w:(p.match(/[A-Za-z’']+/g)||[]).length});o+=p.length})}
+    const used=new Set(),usedAt=[];const usedNear=(k,pos)=>used.has(k)&&((clauses[k]&&clauses[k].w<22)||usedAt.some(([kk,p])=>kk===k&&Math.abs(p-pos)<45));
     spec.pts.forEach((pt,pi)=>{if(done.has(pi))return;
       for(const set of pt.a){const hits=set.map(r=>{const mm=r.exec(se.t);return mm?[se.s+mm.index,se.s+mm.index+mm[0].length]:null});
         if(hits.some(h=>!h))continue;
+        /* v10.26: try each match of the key (first) pattern; the other patterns must appear after it and close by (or just before it),
+           so words from a different point in a long run-on sentence don't count. */
+        {const all=(r)=>{const g=new RegExp(r.source,r.flags.includes('g')?r.flags:r.flags+'g'),o=[];let mm;while((mm=g.exec(se.t))){o.push([se.s+mm.index,se.s+mm.index+mm[0].length]);if(!mm[0].length)g.lastIndex++}return o};
+         const keys=all(set[0]),rest=set.slice(1).map(all);let pick=null;
+         for(const k of keys){const near=rest.map(ms=>ms.filter(m=>(m[0]>=k[0]&&m[0]-k[1]<=170)||(m[1]<=k[0]&&k[0]-m[1]<=20)).sort((a,b)=>Math.abs(a[0]-k[0])-Math.abs(b[0]-k[0]))[0]);
+           if(near.some(x=>!x))continue;const cand=[k,...near];if(!pick)pick=cand;const kc=clauses.findIndex(cl=>k[0]>=cl.s&&k[0]<cl.e);if(!usedNear(kc,k[0])){pick=cand;break}}
+         if(!pick)continue;pick.forEach((x,i)=>hits[i]=x)}
         const ci=clauses.findIndex(cl=>hits[0][0]>=cl.s&&hits[0][0]<cl.e);
         let ok=true,cls='ok';
-        if(spec.type!=='state'&&words<4){ok=false;shortish=true}
-        else if(clauses[ci]&&clauses[ci].w<2&&spec.type!=='state'){ok=false;listy=true}
-        else if(spec.type==='explain'&&!LINK.test(se.t)){ok=false;why=true}
-        else if(used.has(ci)&&!spec.pair){ok=false}
-        if(ok){used.add(ci);done.add(pi);res.credited.push(pt.t)}else cls='amb';
+        if(spec.type!=='state'&&!spec.short&&words<(spec.type==='describe'?3:4)){ok=false;shortish=true}
+        else if(((clauses[ci]&&clauses[ci].w<2&&words<6)||(clauses.length>=2&&clauses.every(c=>c.w<=3)&&words<10))&&spec.type!=='state'&&!spec.short){ok=false;listy=true}
+        else if(spec.type==='explain'&&!spec.nolink&&!pt.nolink&&!LINK.test(se.t)&&!(se.nx&&LINK.test(se.nx))){ok=false;why=true}
+        else if(usedNear(ci,hits[0][0])&&!spec.pair){if(set!==pt.a[pt.a.length-1])continue;ok=false}
+        if(ok){used.add(ci);usedAt.push([ci,hits[0][0]]);done.add(pi);res.credited.push(pt.t)}else cls='amb';
         if(ok){const lead=se.t.length-se.t.trimStart().length;add(se.s+lead,se.s+se.t.trimEnd().length,'ok')}else hits.forEach(h=>add(h[0],h[1],cls));break}
     });
   });
@@ -7801,9 +7875,20 @@ function renderHub(id){
     ${hubTile('learn','Learn it',S.lr[id]?1:null,S.lr[id]?'Read':'Not read yet',nCards+' short cards')}
     ${(()=>{const pg=S.tqp&&S.tqp[id],n=t.mcq.length;if(pg&&pg.i<n){const dn=pg.done===pg.i?pg.i+1:pg.i;if(dn>0)return hubTile('test','Test yourself',dn/n,`${dn} of ${n} done · tap to carry on`,'',`${dn}/${n}`)}return hubTile('test','Test yourself',tq?tq[0]/tq[1]:null,tq?`Best ${tq[0]} / ${tq[1]}`:'Not tried yet',n+' quick questions',tq?`${tq[0]}/${tq[1]}`:'')})()}
     ${hubTile('exam','Get exam ready',exb?exb[0]/exb[1]:null,exb?`Best ${exb[0]} / ${exb[1]}`:'Not tried yet','Exam question, marked for you',exb?`${exb[0]}/${exb[1]}`:'')}
-   </div>${labHTML(id)}<div class="hnext"><span class="hnl">Next step</span>${esc((()=>{const np=nextPanel(id),pg=S.tqp&&S.tqp[id];if(np==='learn')return 'Start with Learn it: read the short cards, then Test yourself.';if(np==='test'&&pg&&(pg.i>0||pg.done===0)){const dn=pg.done===pg.i?pg.i+1:pg.i;return `Finish Test yourself: ${dn} of ${t.mcq.length} done.`}return nextStep(topicStatus(id))})())}</div><p class="hguide">${LVOF(id)==='H'?'Test yourself 6/8 → Charging · Full marks on Get exam ready → Charged · All Test yourself right + 2 past papers → Supercharged · 5 past papers → Flying high 🚀':'Test yourself 7/10 → Charging · Full marks on Get exam ready → Charged · All Test yourself right + 2 past papers → Supercharged · 5 past papers → Flying high 🚀'}</p></article>`;
+   </div>${labHTML(id)}<div class="hnext"><span class="hnl">Next step</span>${esc((()=>{const np=nextPanel(id),pg=S.tqp&&S.tqp[id];if(np==='learn')return 'Start with Learn it: read the short cards, then Test yourself.';if(np==='test'&&pg&&(pg.i>0||pg.done===0)){const dn=pg.done===pg.i?pg.i+1:pg.i;return `Finish Test yourself: ${dn} of ${t.mcq.length} done.`}return nextStep(topicStatus(id))})())}</div><p class="hguide">${'Learn it → Test yourself → all right unlocks Get exam ready → full marks there = Charged and unlocks past papers → 1 past paper at full marks = Supercharged → every past paper = Flying high 🚀'}</p></article>`;
 }
-function hubTile(k,title,f,sub,todo,txt){
+/* v10.24 (Niall): steps in order. Learn it → Test yourself (opens once Learn it has been clicked through) → Get exam ready (opens at full marks
+   on Test yourself) → past paper questions (open at full marks on the Get exam ready question). Teacher view is never locked. */
+function stepLock(id,k){if(VIEW)return '';const tq=S.tq&&S.tq[id],exb=(S.exb&&S.exb[id])||(S.ex&&S.ex[id]);
+  if(k==='test'&&!(S.lr&&S.lr[id]))return 'Click through Learn it first';
+  if(k==='exam'&&!(tq&&tq[1]&&tq[0]>=tq[1]))return (S.lr&&S.lr[id])?'Get full marks on Test yourself first':'Learn it, then full marks on Test yourself';
+  if(k==='pp'&&!(exb&&exb[1]&&exb[0]>=exb[1]))return 'Get full marks on the exam question above to unlock the past paper questions';
+  return ''}
+const LOCKIC='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="11" rx="3" fill="#FFB3BD"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="#FFB3BD" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1.7" fill="#5A1A2E"/></svg>';
+function stepNote(msg){let n=document.querySelector('.steplock-note');if(n)n.remove();n=document.createElement('div');n.className='hwtoast steplock-note';n.setAttribute('role','status');n.innerHTML=LOCKIC+'<span>'+esc(msg)+'.</span>';document.body.appendChild(n);setTimeout(()=>n.remove(),3600)}
+document.addEventListener('click',e=>{const q=e.target.closest('[data-ppq]');if(q){const r=ppGet(q.dataset.ppq),m=r&&stepLock(r[4],'pp');if(m){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();stepNote(m);return}}},true);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-panel="test"],[data-panel="exam"],[data-next="test"],[data-next="exam"]');if(!b||!HUB)return;const k=b.dataset.panel||b.dataset.next,m=stepLock(HUB,k);if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();stepNote(m)},true);
+function hubTile(k,title,f,sub,todo,txt){const lk=HUB&&(k==='test'||k==='exam')?stepLock(HUB,k):'';if(lk)return `<button type="button" class="htile ht-${k} is-todo is-locked" data-panel="${k}" aria-disabled="true"><span class="hti hlock">${LOCKIC}</span><span class="htt">${title}</span><span class="hts">${esc(lk)}</span></button>`;
   const done=f!==null;let ic=`<span class="hti">${ICON[k]}</span>`;
   if(done){const r=20,cc=2*Math.PI*r,col=k==='learn'?'#5A1A2E':f>=1?'#5EE08F':'#FFD978',tr=k==='learn'?'rgba(90,26,46,.15)':'rgba(255,255,255,.25)';
     ic=`<span class="hring"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="${r}" fill="none" stroke="${tr}" stroke-width="5"/><circle cx="24" cy="24" r="${r}" fill="none" stroke="${col}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(cc*Math.max(.04,f)).toFixed(1)} ${cc.toFixed(1)}"/></svg><span>${txt||'✓'}</span></span>`}
@@ -8057,10 +8142,12 @@ function ppChips(id,acc){
   const rec=PP_RECENT.map((r,i)=>[r,'R'+i]).filter(x=>x[0][4]===id),old=PP_N5.map((r,i)=>[r,'O'+i]).filter(x=>x[0][4]===id&&ppShow(x[0])),hh=PP_H.map((r,i)=>[r,'H'+i]).filter(x=>x[0][4]===id);
   if(!rec.length&&!old.length&&!hh.length)return '';
   const all=rec.concat(old,hh),tried=all.filter(([r,k])=>S.ppd&&S.ppd[k]!=null),full=tried.filter(([r,k])=>S.ppd[k]>=(r[2]||1));
-  const chip=([r,k])=>{const d=S.ppd&&S.ppd[k]!=null,f=d&&S.ppd[k]>=(r[2]||1);
+  const lk=stepLock(id,'pp');
+  const chip=([r,k])=>{const d=S.ppd&&S.ppd[k]!=null,f=d&&S.ppd[k]>=(r[2]||1);if(lk)return `<button type="button" class="ppchip pp-n pp-locked" data-ppq="${k}" aria-disabled="true" aria-label="${r[0]} question ${esc(r[1])}, locked"><b>${r[0]}</b> Q${esc(r[1])}</button>`;
     return `<button type="button" class="ppchip ${f?'pp-full':d?'pp-done':'pp-n'}" data-ppq="${k}" aria-label="${r[0]} question ${esc(r[1])}${d?`, ${S.ppd[k]} out of ${r[2]||1}${f?', full marks':''}`:', not tried yet'}"><b>${r[0]}</b> Q${esc(r[1])}${d?` <span class="ppdone">${S.ppd[k]}/${r[2]||'?'}</span>`:''}</button>`};
-  if(acc)return accItem(acc,`More past paper questions <span class="accn">${tried.length} of ${all.length} tried</span>`,`<div class="ppchips"><p class="ppsum"><b>${full.length}</b> at full marks</p><div class="ppcrow">${all.map(chip).join('')}</div></div>`);
-  return `<div class="ppchips"><h3>Real exam questions</h3><p class="ppsum">${tried.length} of ${all.length} tried · <b>${full.length}</b> at full marks</p><div class="ppcrow">${all.map(chip).join('')}</div></div>`;
+  const lkN=lk?`<p class="pplockn">${LOCKIC}<span>${esc(lk)}.</span></p>`:'';
+  if(acc)return accItem(acc,`More past paper questions <span class="accn">${lk?'locked':tried.length+' of '+all.length+' tried'}</span>`,`<div class="ppchips">${lkN}${lk?'':`<p class="ppsum"><b>${full.length}</b> at full marks</p>`}<div class="ppcrow">${all.map(chip).join('')}</div></div>`);
+  return `<div class="ppchips"><h3>Real exam questions</h3>${lkN||`<p class="ppsum">${tried.length} of ${all.length} tried · <b>${full.length}</b> at full marks</p>`}<div class="ppcrow">${all.map(chip).join('')}</div></div>`;
 }
 const PPSTOP=new Set('the and for are was its can use you not but has had all any one two how why who way get got put out off too our own per via let lot see may also into from that this with have will your what them they then than more most such each some very just only make made used uses like over under does done much many must need about above after again their there these those which while would could should other using being because through where when it is'.split(' '));
 const PPSYN={grease:'lubricant',oil:'lubricant',lube:'lubricant',visor:'guard',shield:'guard',chizel:'chisel',chisle:'chisel',scribber:'scriber',identicle:'identical',same:'identical',paided:'paid',wages:'paid',salary:'paid',cramp:'clamp',cramps:'clamp',clamps:'clamp',vice:'clamp',secure:'clamp',secured:'clamp',tight:'clamp',tighten:'clamp',hold:'clamp',holding:'clamp',fitted:'fit',fits:'fit',opinion:'opinions',views:'opinions',feedback:'opinions',quicker:'faster',speed:'faster',speeds:'faster',quickly:'faster',twist:'turn',turns:'turn',rotate:'turn',sandpaper:'sand',sanding:'sand',sanded:'sand',abrasive:'sand',wet:'damp',dampen:'damp',water:'damp',heater:'heat',heating:'heat',heated:'heat',warm:'heat',cracking:'crack',cracks:'crack',snap:'crack',break:'crack',breaking:'crack',shatter:'crack',less:'fewer',wider:'wide',bigger:'large',biggest:'large',lots:'many',lot:'many',loads:'many',wide:'many',everyone:'people',others:'people',public:'people',customers:'people',consumers:'people',buyers:'people',checklist:'evaluate',check:'evaluate',test:'evaluate',testing:'evaluate',tested:'evaluate',compare:'evaluate',hands:'hand',fingers:'finger',thumbs:'thumb',lift:'weight',heavy:'weight',heavier:'weight',strength:'strong',stronger:'strong',sturdy:'strong',robust:'strong',rust:'corrosion',rusting:'corrosion',corrode:'corrosion',accurately:'accurate',accuracy:'accurate',precise:'accurate',error:'mistakes',errors:'mistakes',mistake:'mistakes',efficiency:'efficient',automatic:'automated',automation:'automated',robots:'automated',machines:'automated'};
@@ -8253,10 +8340,11 @@ function ppGet(k){return k[0]==='R'?PP_RECENT[+k.slice(1)]:k[0]==='H'?PP_H[+k.sl
 const PPSTAGE={};
 function ppHead(y,q,mk,cmd,txt){return `<div class="ppqtop"><p class="pphead"><span class="ppy">${y}</span> <b>Q${esc(q)}</b>${mk?` · ${mk} mark${mk>1?'s':''}`:''} ${cmd?`<button type="button" class="ppc cw" data-cw="${esc(cmd)}">${esc(cmd)}</button>`:''}</p>${flagBtn('pp/'+y+'/'+q,'Past paper · '+y+' Q'+q,txt)}</div>
    <p class="qtext">${esc(cmd?cmd+' '+txt.charAt(0).toLowerCase()+txt.slice(1):txt)}</p>
-   <p class="pppic"><a href="${ppPaper(y,q,PPK&&PPK[0]==='H')}" target="_blank" rel="noopener" data-pppic="1">🖼 See the picture</a></p>`}
+   ${y==='Practice'?'<p class="pppract">Practice question written by BenchMark in the SQA style (not from a real exam paper).</p>':`<p class="pppic"><a href="${ppPaper(y,q,PPK&&PPK[0]==='H')}" target="_blank" rel="noopener" data-pppic="1">🖼 See the picture</a></p>`}`}
 const PPFOOT=`<button type="button" class="btn ghost" data-panel="exam">← Exam questions</button><button type="button" class="btn ghost" data-pclose="1" data-pdone="1" disabled title="Check your answer first">Done</button>`;
 function paintPPQ(k,stage){
   PPK=k;const [y,q,mk,cmd,l,txt]=ppGet(k);S.ppa=S.ppa||{};
+  {const lk=stepLock(l,'pp');if(lk){setBody(`<p class="pplockn">${LOCKIC}<span>${esc(lk)}.</span></p><p>Past paper questions open once you have full marks on this topic’s Get exam ready question.</p>`,PPFOOT);return}}
   const tried=!!(S.ppa[k]||(S.ppd&&S.ppd[k]!=null));
   stage=stage||PPSTAGE[k]||(tried?'answer':'intro');PPSTAGE[k]=stage;
   const soft=stage==='intro';if(soft)stage='answer';
