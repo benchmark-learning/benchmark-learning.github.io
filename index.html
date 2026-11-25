@@ -1513,7 +1513,7 @@ nav.tabs button[data-tab][aria-selected="true"]{border:2px solid #F4B3C2!importa
 .flagq .flagic{flex:0 0 auto}
 .flagq.done{border-color:#2FB565!important;background:rgba(47,181,101,.14)!important;color:#9FE3B8!important;cursor:default}
 /* v10.18 homework pop-up (replaces the Daily 5 on opening) */
-.hwpop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(14,12,16,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:ppfade .2s ease-out}
+.hwpop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:safe center;justify-content:center;overflow-y:auto;padding:18px;background:rgba(14,12,16,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);animation:ppfade .2s ease-out}
 .hwbox{max-width:420px;width:100%;background:linear-gradient(160deg,#2D2A33,#1E1C22);border:1px solid #17181B;border-top:6px solid #F4B3C2;border-radius:22px;padding:22px 22px 20px;color:#E9E7EC;box-shadow:0 20px 50px rgba(0,0,0,.55);text-align:left}
 .hw-k{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#F4B3C2;margin-bottom:10px}
 .hw-who{margin:0 0 10px;font-size:17.5px;line-height:1.45;color:#FFFFFF}.hw-who b{color:#FFE3EA}
@@ -1524,6 +1524,12 @@ nav.tabs button[data-tab][aria-selected="true"]{border:2px solid #F4B3C2!importa
 .hw-bar.c-r i{background:linear-gradient(90deg,#FF6B7A,#FF9AA4)}.hw-bar.c-a i{background:linear-gradient(90deg,#FFB547,#FFD38A)}.hw-bar.c-g i{background:linear-gradient(90deg,#5FD592,#A6EBC4)}
 .hw-lock{display:flex;gap:10px;align-items:center;margin:0 0 16px;font-size:14.5px;line-height:1.4;color:#FFE3EA;background:rgba(255,46,154,.12);border:1px solid rgba(255,46,154,.45);border-radius:12px;padding:10px 12px}.hw-lock svg{flex:none}
 .hw-later{display:block;margin:12px auto 0;background:none;border:0;color:#CFCAD6;text-decoration:underline;font:inherit;font-size:15px;cursor:pointer;min-height:40px}
+.hw-s3{margin:18px 0 0;padding:14px 0 0;border-top:1px solid rgba(255,255,255,.14)}
+.hw-s3t{margin:0 0 10px;font-size:15.5px;line-height:1.45;color:#FFFFFF}.hw-s3t b{color:#A8C8F0}
+.hw-s3r{display:flex;gap:8px}.hw-s3r input{flex:1;min-width:0;min-height:46px;border-radius:12px;border:1.5px solid #6A6D75;background:#17161B;color:#fff;font:inherit;font-size:16px;padding:0 12px}
+.hw-s3r input:focus{outline:2px solid #A8C8F0;outline-offset:1px}.hw-s3r button{min-height:46px;padding:0 16px;border-radius:12px;border:0;background:#A8C8F0;color:#16243A;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
+.hw-s3e{margin:8px 0 0;font-size:14px;color:#FFB3BD}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .hwtoast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:2147483001;display:flex;align-items:center;gap:10px;max-width:min(420px,92vw);background:#24212A;color:#fff;border:1px solid rgba(255,46,154,.6);border-radius:16px;padding:10px 14px;box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:15px;animation:ppfade .2s ease-out}.hwtoast svg{flex:none}.hw-count span{font-size:18px;font-weight:700;color:#E9E7EC}
 .hw-bar{height:12px;border-radius:8px;background:#3E3A45;overflow:hidden}.hw-bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#9FE3B0,#A8C8F0)}
 .hw-meta{margin:8px 0 12px;font-size:13.5px;color:#BDB7C6}
@@ -6919,14 +6925,16 @@ const gateDone=()=>!!(S.streak&&S.streak.d===sday());
 /* v10.18 (Niall, 24 Nov): the Daily 5 is switched off for now. In its place, every time the site or app opens, a homework pop-up:
    supercharge every topic in Learn by Christmas, with the pupil's own count of topics still to go. Set D5_OFF=false to bring the Daily 5 back. */
 const HW_END=new Date(2026,11,20);/* homework mode runs up to and including Fri 19 December 2026 */
-const D5_OFF=Date.now()<HW_END.getTime();let HW_SHOWN=false,HW_HID=0;
+/* S3 bypass (Niall, 25 Nov): S3 don't have the homework. Password on the pop-up unlocks the full site on that device for good. */
+const HW_S3KEY='bm-hw-s3';const hwExempt=()=>{try{return localStorage.getItem(HW_S3KEY)==='1'}catch(e){return false}};
+const D5_OFF=Date.now()<HW_END.getTime()&&!hwExempt();let HW_SHOWN=false,HW_HID=0;
 const SUPER_T={p:1,b:1,o:1,l:1};
 function hwCount(){const lv=S.level==='H'?'H':'N5';let tot=0,n=0;try{LEARN[lv].forEach(t=>{tot++;if(SUPER_T[topicStatus(t.id).tier])n++})}catch(e){}return {lv,tot,n,left:tot-n}}
 function hwDays(){const now=new Date(),x=new Date(2026,11,20);return Math.ceil((x-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5)}
 /* the lock: until a pupil supercharges at least one new topic today, only Learn is open */
 function hwSupSet(){const lv=S.level==='H'?'H':'N5';const s=[];try{LEARN[lv].forEach(t=>{if(SUPER_T[topicStatus(t.id).tier])s.push(t.id)})}catch(e){}return s}
 function hwBase(){const d=sday();if(!S.hwday||S.hwday.d!==d){S.hwday={d,base:{}}}const lv=S.level==='H'?'H':'N5';if(!S.hwday.base[lv]){S.hwday.base[lv]=hwSupSet();try{save()}catch(e){}}return S.hwday.base[lv]}
-function hwUnlocked(){if(!D5_OFF||VIEW)return true;const c=hwCount();if(c.left<=0)return true;const base=hwBase();return hwSupSet().some(id=>!base.includes(id))}
+function hwUnlocked(){if(!D5_OFF||VIEW||hwExempt())return true;const c=hwCount();if(c.left<=0)return true;const base=hwBase();return hwSupSet().some(id=>!base.includes(id))}
 const HW_LOCKED_SEL='[data-gotab="design"],[data-gotab="ws"],[data-gotab="cad"],[data-gotab="progress"],[data-gotab="tools"],[data-tooldash],[data-dlab],[data-mlab],.lt-plan,.lt-cad,#jumpPlan,#dgTile';
 function hwBlock(){document.querySelectorAll('.hwblock').forEach(x=>x.remove());const o=document.createElement('div');o.className='hwpop hwblock';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','hwbT');
   o.innerHTML=`<div class="hwbox"><span class="hw-k">${hwBat(20)}Homework first</span><h2 id="hwbT">You can’t do this until you supercharge at least 1 topic today</h2><p class="hw-who">Pick a topic in Learn and get its battery to supercharged. Then everything opens up again for the rest of the day.</p><button type="button" class="hw-go" data-hwb="go">Go to my topics</button><button type="button" class="hw-later" data-hwb="x">Not now</button></div>`;
@@ -6949,13 +6957,20 @@ function hwShow(){let o=document.getElementById('hwpop');if(o)o.remove();const c
    <div class="hw-bar c-${band}" role="img" aria-label="${c.n} of ${c.tot} ${lvN} topics supercharged"><i style="width:${pc}%"></i></div>
    <p class="hw-meta">${c.n} of ${c.tot} ${lvN} topics supercharged${d>0?` · ${d} day${d===1?'':'s'} left (until Friday 19 December)`:''}</p>${HW_WAS?'':`<p class="hw-lock">${hwBat(20)}<span>Supercharge at least <b>1 topic today</b> to open the Daily Zen, Design lab, Make lab, ${c.lv==='H'?'':'Tool Dash, '}CAD and your revision plan.</span></p>`}
    <p class="hw-how">A topic is supercharged when its battery is full and you’ve got real past paper questions right.</p>
-   <button type="button" class="hw-go" id="hwGo">${c.left>0?'Continue to supercharge':'Keep them charged'}</button></div>`;
+   <button type="button" class="hw-go" id="hwGo">${c.left>0?'Continue to supercharge':'Keep them charged'}</button>
+   <form class="hw-s3" id="hwS3" autocomplete="off"><p class="hw-s3t"><b>Are you in S3?</b> You don’t have this homework. Enter the password to unlock the full site.</p>
+    <div class="hw-s3r"><label class="sr-only" for="hwS3p">S3 password</label><input id="hwS3p" type="password" placeholder="Password" autocapitalize="off" autocorrect="off" spellcheck="false"><button type="submit">Unlock</button></div>
+    <p class="hw-s3e" id="hwS3e" role="alert" hidden>That’s not the right password. Check with your teacher.</p></form></div>`;
   document.body.appendChild(o);document.body.classList.add('gated');HW_SHOWN=true;
   $('hwGo').addEventListener('click',()=>{o.remove();document.body.classList.remove('gated');try{if(typeof tp!=='undefined'&&!tp.hidden)closePanel()}catch(e){}
     hwToTopics()});
-  o.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();$('hwGo').focus()}if(e.key==='Escape'){e.preventDefault();e.stopPropagation()}});
+  $('hwS3').addEventListener('submit',e=>{e.preventDefault();const v=($('hwS3p').value||'').trim().toLowerCase();
+    if(v==='pacman'){try{localStorage.setItem(HW_S3KEY,'1')}catch(x){}o.remove();document.body.classList.remove('gated');hwPaint();document.querySelectorAll('.hwblock').forEach(x=>x.remove());
+      const t=document.createElement('div');t.className='hwtoast';t.setAttribute('role','status');t.innerHTML='<span><b>Unlocked.</b> The full site is open on this device.</span>';document.body.appendChild(t);setTimeout(()=>t.remove(),4200)}
+    else{$('hwS3e').hidden=false;$('hwS3p').select()}});
+  o.addEventListener('keydown',e=>{if(e.key==='Tab'){const f=[...o.querySelectorAll('button,input')].filter(x=>!x.disabled&&x.offsetParent);const i=f.indexOf(document.activeElement);e.preventDefault();f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus()}if(e.key==='Escape'){e.preventDefault();e.stopPropagation()}});
   setTimeout(()=>{const b=$('hwGo');b&&b.focus()},40)}
-function hwMaybe(){hwPaint();if(BM_BLOCK)return;const dm=document.getElementById('devModal');if(dm&&!dm.hidden)return;if(VIEW||!$('welcome').hidden)return;if(HW_SHOWN||document.getElementById('hwpop'))return;hwShow()}
+function hwMaybe(){hwPaint();if(hwExempt())return;if(BM_BLOCK)return;const dm=document.getElementById('devModal');if(dm&&!dm.hidden)return;if(VIEW||!$('welcome').hidden)return;if(HW_SHOWN||document.getElementById('hwpop'))return;hwShow()}
 document.addEventListener('visibilitychange',()=>{if(!D5_OFF)return;if(document.hidden){HW_HID=Date.now()}else if(HW_HID&&Date.now()-HW_HID>60000&&!document.getElementById('hwpop')){HW_SHOWN=false;hwMaybe()}});
 function maybeGate(){
   if(D5_OFF){gate.hidden=true;if(!document.getElementById('hwpop')&&!(typeof tp!=='undefined'&&!tp.hidden))document.body.classList.remove('gated');hwMaybe();return}
