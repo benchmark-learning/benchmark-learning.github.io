@@ -222,6 +222,14 @@ html,body{margin:0;background:#EFE8E1;font-family:'Segoe UI',system-ui,-apple-sy
 @keyframes lifeup{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:none}}@keyframes hb{50%{transform:scale(1.2)}}
 .stack{margin-top:34px!important}
 .card.b1{transform:translateY(-18px) scale(.93)!important}.card.b2{transform:translateY(-34px) scale(.86)!important}
+
+/* v10.22 zoom controls and 50/50 layout */
+.card .spin3d{touch-action:none;cursor:grab}.card .spin3d:active{cursor:grabbing}
+.zm{position:absolute;right:10px;top:10px;z-index:4;display:flex;flex-direction:column;gap:8px}
+.zb{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(18,16,20,.6);color:#fff;font-size:24px;font-weight:700;line-height:1;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.zb:active{transform:scale(.94)}
+.zhint{position:absolute;left:0;right:0;bottom:8px;z-index:4;text-align:center;font-size:12px;color:rgba(255,255,255,.62);pointer-events:none}
+.opts.duo{grid-template-columns:1fr 1fr!important}.opts.duo .opt{min-height:64px;font-size:17px}
 </style></head>
 <body>
 <div class="phone" id="home">
@@ -309,9 +317,19 @@ const T=BMTOOLS3D.list();const SP=BMTOOLS3D.spinner();
 const GROUP={};T.forEach(t=>{(GROUP['g'+t.g]=GROUP['g'+t.g]||[]).push(t.id)});
 const grpOf=id=>Object.keys(GROUP).find(g=>GROUP[g].includes(id));
 const byId=Object.fromEntries(T.map(t=>[t.id,t]));
-const MAXL=12;let TIME=60;const timeFor=L=>Math.round(60-(L-1)*40/(MAXL-1));
-const cardsFor=L=>10;
-const rankOf=L=>L<=3?'Apprentice':L<=6?'Improver':L<=9?'Craftsperson':'Shokunin (master craftsperson)';
+/* v10.22 (Niall, pupils' idea): 20 levels. Levels 1-10 as before (10 tools, four answers). From level 11: one extra tool per level and a 50/50
+   between two look-alike tools, so pupils must look closely (zoom in to check the details). */
+const MAXL=20,HARD=10;let TIME=60;
+const cardsFor=L=>L<=HARD?10:10+(L-HARD);
+const timeFor=L=>L<=HARD?Math.round(60-(L-1)*40/11):Math.round(cardsFor(L)*(3.0-(L-HARD-1)*.09));
+const rankOf=L=>L<=3?'Apprentice':L<=6?'Improver':L<=10?'Craftsperson':L<=15?'Shokunin (master craftsperson)':'Grand master';
+/* look-alike pairs for the 50/50 levels (both ways) */
+const TWINS={};[['try-square','engineer-s-square'],['marking-gauge','mortise-gauge'],['scriber','bradawl'],['centre-punch','nail-punch'],['dividers','odd-leg-callipers'],['outside-callipers','odd-leg-callipers'],['dividers','outside-callipers'],['steel-rule','try-square'],
+ ['hacksaw','junior-hacksaw'],['coping-saw','junior-hacksaw'],['tenon-saw','hacksaw'],['bevel-edge-chisel','mortise-chisel'],['ball-pein-hammer','cross-pein-hammer'],['claw-hammer','cross-pein-hammer'],['wooden-mallet','hide-mallet'],
+ ['twist-drill','wood-drill-brad-point'],['countersink-bit','centre-drill'],['step-drill','countersink-bit'],['forstner-bit','wood-drill-brad-point'],['flat-file','half-round-file'],['flat-screwdriver','cross-head-screwdriver'],['tap-and-wrench','die-and-stock'],
+ ['pliers','tin-snips'],['pop-rivet-gun','pliers'],['bending-bars','steel-rule'],['bench-vice','engineer-s-vice'],['engineer-s-vice','machine-vice'],['machine-vice','hand-vice'],['soft-jaws-vice-guards','engineer-s-vice'],['g-clamp','quick-clamp'],['sash-cramp','quick-clamp'],
+ ['centre-lathe','wood-lathe'],['pillar-drill','mortise-machine'],['belt-sander','fret-scroll-saw'],['fluidiser','strip-heater'],['spot-welder','notcher'],['safety-glasses','metal-polish'],['pencil','scriber'],['smoothing-plane','belt-sander']
+].forEach(([a,b])=>{(TWINS[a]=TWINS[a]||[]).push(b);(TWINS[b]=TWINS[b]||[]).push(a)});
 const $=id=>document.getElementById(id);
 const S={get(k,d){try{const v=localStorage.getItem('tf-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('tf-'+k,JSON.stringify(v))}catch(e){}}};
 const today=(d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'))(new Date());
@@ -418,22 +436,24 @@ $('exit').onclick=closeFz;
 function setReady(l){L=l;
  const tt=$('rTitle');tt.className='rtitle gold';tt.innerHTML=[...'Tool Dash'].map((c,i)=>c===' '?'<span>&nbsp;</span>':`<span style="animation-delay:${.15+i*.06}s">${c}</span>`).join('');
  clearTimeout(window._shim);window._shim=setTimeout(function sh(){if(!$('ready').classList.contains('on'))return;tt.classList.remove('shim');void tt.offsetWidth;tt.classList.add('shim');window._shim=setTimeout(sh,4500)},1500);
-$('rLvl').textContent='Level '+L+' of '+MAXL;$('rLives').textContent=bank===0?'No spare lives: one wrong answer ends the round. Clear it to earn a life.':'You have '+bank+' spare '+(bank===1?'life':'lives')+'. Clear the level to earn one more.';$('rPath').innerHTML=Array.from({length:MAXL},(_,i)=>`<i class="${i+1<L?'d':i+1===L?'c':''}"></i>`).join('');
- $('pick').innerHTML=Array.from({length:MAXL},(_,i)=>`<option value="${i+1}" ${i+1===L?'selected':''}>Jump to level ${i+1} (${cardsFor(i+1)} cards)</option>`).join('');show('ready')}
+$('rLvl').textContent='Level '+L+' of '+MAXL+(L>HARD?' · 50/50':'');$('rLives').textContent=bank===0?'No spare lives: one wrong answer ends the round. Clear it to earn a life.':'You have '+bank+' spare '+(bank===1?'life':'lives')+'. Clear the level to earn one more.';$('rPath').innerHTML=Array.from({length:MAXL},(_,i)=>`<i class="${i+1<L?'d':i+1===L?'c':''}"></i>`).join('');
+ $('pick').innerHTML=Array.from({length:MAXL},(_,i)=>`<option value="${i+1}" ${i+1===L?'selected':''}>Jump to level ${i+1} (${cardsFor(i+1)} cards)</option>`).join('');if(L>HARD)$('rLives').textContent+=' From level 11 each tool has two look-alike answers, so zoom in and check the details.';show('ready')}
 $('pick').onchange=e=>setReady(+e.target.value);
 $('begin').onclick=()=>{au();countdown()};
 function countdown(){show('cd');$('cdL').textContent='Level '+L+' · get ready';let n=3;const step=()=>{if(!$('fz').classList.contains('on'))return;if(n===0){start();return}$('cdN').textContent=n;$('cdN').style.animation='none';void $('cdN').offsetWidth;$('cdN').style.animation='';tone(n===1?523:392,.35,'sine',.12);n--;setTimeout(step,800)};step()}
 
 function buildDeck(n){
  // weight tools pupils have missed before, allow repeats when n > tools
- const pool=[];T.forEach(t=>{const w=1+Math.min(3,misses[t.id]||0);for(let i=0;i<w;i++)pool.push(t.id)});
+ const pool=[];T.forEach(t=>{if(L>HARD&&!TWINS[t.id])return;const w=1+Math.min(3,misses[t.id]||0);for(let i=0;i<w;i++)pool.push(t.id)});
+ const nT=L>HARD?Object.keys(TWINS).filter(k=>byId[k]).length:T.length;
  const out=[];let guard=0;
  while(out.length<n&&guard++<5000){const id=pool[Math.random()*pool.length|0];
   if(out[out.length-1]===id)continue;
-  if(out.length<T.length&&out.includes(id))continue;
+  if(out.length<nT&&out.includes(id))continue;
   out.push(id)}
  return out}
 function choicesFor(id){
+ if(L>HARD){const tw=(TWINS[id]||[]).filter(x=>byId[x]);const g=(GROUP[grpOf(id)]||[]).filter(x=>x!==id&&byId[x]);const o=tw.length?tw[Math.random()*tw.length|0]:g.length?g[Math.random()*g.length|0]:T.find(t=>t.id!==id).id;return Math.random()<.5?[id,o]:[o,id]}
  const g=GROUP[grpOf(id)]||[];const hard=L>=7;
  let same=g.filter(x=>x!==id&&byId[x]).sort(()=>Math.random()-.5);
  const others=T.map(t=>t.id).filter(x=>x!==id&&!same.includes(x)).sort(()=>Math.random()-.5);
@@ -458,9 +478,11 @@ function drawLives(){$('lives').innerHTML=Array.from({length:Math.max(1,lives)},
 function renderStack(first){
  cur=deck[0];const st=$('stack');
  const html=deck.slice(0,3).map((id,i)=>`<div class="card ${i===0?'top':'b'+i}">${i===0?'<div class="tick">✓</div>':''}</div>`).reverse().join('');
- st.innerHTML=html;{const tp=st.querySelector('.card.top');tp.prepend(SP.canvas);SP.show(cur)}
+ st.innerHTML=html;{const tp=st.querySelector('.card.top');tp.prepend(SP.canvas);SP.show(cur);
+  tp.insertAdjacentHTML('beforeend',`<div class="zm"><button type="button" class="zb" data-z="-1" aria-label="Zoom out">−</button><button type="button" class="zb" data-z="1" aria-label="Zoom in">+</button></div><div class="zhint">Pinch or scroll to zoom · drag to turn</div>`);
+  tp.querySelectorAll('.zb').forEach(b=>b.onclick=e=>{e.stopPropagation();SP.zoom(+b.dataset.z)})}
  if(!first){const top=st.querySelector('.top');top.classList.add('back');requestAnimationFrame(()=>requestAnimationFrame(()=>top.classList.remove('back')))}
- $('opts').innerHTML=choicesFor(cur).map(id=>`<button class="opt" data-id="${id}">${byId[id].n}</button>`).join('');
+ $('opts').innerHTML=choicesFor(cur).map(id=>`<button class="opt" data-id="${id}">${byId[id].n}</button>`).join('');$('opts').classList.toggle('duo',L>HARD);
  [...$('opts').children].forEach(b=>b.onclick=()=>answer(b));
  $('left').textContent=deck.length+' left'}
 
@@ -484,12 +506,12 @@ function win(){stop();bank=Math.min(5,lives+1);S.set('lives',bank);
  const words=last?['Tool','Dash','master!']:(['Flying high!','You did it!','Blast off!','Sky high!'][(L-1)%4]).split(' ');
  $('hl').className='hl';
  $('hl').innerHTML=words.map(w=>`<span class="w">${w}</span>`).join(' ')+
-  `<div class="sub">${last?'You cleared all 12 levels':'Level '+(L+1)+' unlocked'}</div><div class="path">${Array.from({length:MAXL},(_,i)=>`<i class="${i+1<=L?'d':''}${i===L&&!last?' ign':''}"></i>`).join('')}</div>`;
+  `<div class="sub">${last?'You cleared all '+MAXL+' levels':'Level '+(L+1)+' unlocked'+(L+1===HARD+1?': now it’s 50/50 look-alikes':'')}</div><div class="path">${Array.from({length:MAXL},(_,i)=>`<i class="${i+1<=L?'d':''}${i===L&&!last?' ign':''}"></i>`).join('')}</div>`;
  $('celd').className='celd';
  $('celd').innerHTML=`<div class="row lifeup"><div class="hrt"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9C1 8.4 3.2 4.5 7 4.5c2.2 0 3.6 1.2 5 3 1.4-1.8 2.8-3 5-3 3.8 0 6 3.9 4.3 7.5C19 16.4 12 21 12 21z"/></svg></div><div><b>You’ve earned a life!</b><small>${bank} ${bank===1?'life':'lives'} for the next level</small></div></div>${earned?`<div class="row"><div class="pot empty" id="winPot">${potSVG}</div><div><b>+1 growth spurt</b><small>${frenzyPots} of 2 extra today</small></div></div>`:''}
   <div class="stat"><div><b>${total}</b><small>tools named</small></div><div><b>${tl}s</b><small>to spare${pb?' · best!':''}</small></div><div><b>${bank}</b><small>${bank===1?'life':'lives'} for next level</small></div></div>
   ${missList()}
-  <button class="go" id="next">${last?'Play level 12 again':'Next level'}</button>
+  <button class="go" id="next">${last?'Play level '+MAXL+' again':'Next level'}</button>
   <button class="lnk" id="home2">Back to BenchMark</button><button class="lnk" id="shareB" style="margin-top:4px">Show the class</button>`;
  $('next').onclick=()=>{celStop();setReady(Math.min(L+1,MAXL))};
  $('home2').onclick=()=>{celStop();closeFz();if(earned)setTimeout(()=>drawPots(1+frenzyPots),250)};
