@@ -72,7 +72,7 @@ h1{font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.05;m
  <div class="opts" id="opts"></div><div class="hint">Tip: keys 1 to 4 pick an answer</div>
 </div>
 <div class="scr" id="end"><div class="wrap" id="endW"></div></div>
-<script>
+<script>if(!Array.prototype.bmShuf)Object.defineProperty(Array.prototype,'bmShuf',{value:function(){for(let i=this.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=this[i];this[i]=this[j];this[j]=t}return this},configurable:true,writable:true});
 /* Flashcard Dash bank. Each card: [topic, question, answer, [three distractors], look-alike for 50/50 (or ''), figure key (or '')].
    Every fact is taken from BenchMark's Higher Learn notes (which follow the SQA Higher D&M course specification). */
 const BANK=[
@@ -376,7 +376,7 @@ let L=Math.min(unlocked,MAXL),deck=[],cur=null,lives=0,TIME=60,tLeft=60,running=
 const cardsFor=L=>7+L;
 const words=s=>String(s).split(/\s+/).filter(Boolean).length;
 const factor=L=>L<=HARD?1.6-(L-1)*0.6/9:1.25-(L-HARD-1)*0.4/9;
-function optsFor(i,L){const c=BANK[i];if(L>HARD){const o=c[4]||c[3][0];return Math.random()<.5?[c[2],o]:[o,c[2]]}return [c[2],...c[3]].sort(()=>Math.random()-.5)}
+function optsFor(i,L){const c=BANK[i];if(L>HARD){const o=c[4]||c[3][0];return Math.random()<.5?[c[2],o]:[o,c[2]]}return [c[2],...c[3]].bmShuf()}
 function allow(i,L){const c=BANK[i];const ow=L>HARD?words(c[2])+words(c[4]||c[3][0]):words(c[2])+c[3].reduce((a,x)=>a+words(x),0);return 2.5+0.32*words(c[1])+0.2*ow+(c[5]?2:0)}
 function buildDeck(n){const pool=[];BANK.forEach((c,i)=>{const w=1+Math.min(3,misses[i]||0);for(let k=0;k<w;k++)pool.push(i)});const out=[];let g=0;
   while(out.length<n&&g++<6000){const i=pool[Math.random()*pool.length|0];if(out.includes(i))continue;

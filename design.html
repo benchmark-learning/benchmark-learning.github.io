@@ -5804,24 +5804,40 @@ document.getElementById('dfLogo').outerHTML=LOGO;</script>
   if(!FE)document.body.classList.add('solo');
   let lv=new URLSearchParams(location.search).get('lv')||(FE&&FE.dataset.lv)||'n5';lv=lv==='higher'?'higher':'n5';
   const KEY='bm-df-v1';
+  /* v10.27: mix up every multiple-choice answer and every list, so there is no pattern to spot.
+     The order is fixed for this device (the seed is kept), so saved picks still line up after a reload. */
+  (()=>{let seed=0;try{seed=+localStorage.getItem('bm-df-seed')||0;if(!seed){seed=1+Math.floor(Math.random()*2147483645);localStorage.setItem('bm-df-seed',String(seed))}}catch(e){seed=1+Math.floor(Math.random()*2147483645)}
+    let s=seed;const rnd=()=>(s=s*16807%2147483647)/2147483647;
+    const perm=n=>{const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(rnd()*(i+1));const t=a[i];a[i]=a[j];a[j]=t}return a};
+    const mixIn=arr=>{const p=perm(arr.length),o=p.map(i=>arr[i]);arr.splice(0,arr.length,...o);return p};
+    [FXN,FXH].forEach(FX=>Object.values(FX).forEach(f=>(f.quiz||[]).forEach(q=>{const p=mixIn(q.o);q.a=p.indexOf(q.a)})));
+    LAB.forEach(L=>{const p=mixIn(L.items);L.best=p.indexOf(L.best);L.items.forEach((it,k)=>{it[0]='ABCDEFGH'[k]});const w=mixIn(L.why);L.wa=w.indexOf(L.wa)});
+    [MM,MM_N5].forEach(list=>list.forEach(M=>mixIn(M.opts)));
+    SAFE.forEach(x=>{const p=mixIn(x[1]);x[2]=p.indexOf(x[2])});mixIn(SAFE);
+    FSORT.forEach(R=>mixIn(R.items));[PP,PLC,PCT,PCT_H].forEach(mixIn);
+  })();
   const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}};
   let saveT=0;
   function save(){if(teacher)return;clearTimeout(saveT);saveT=setTimeout(()=>{try{
     const all=load();all.st=all.st||{};
     Object.entries(ST).forEach(([k,s])=>{all.st[k]=Object.assign({},s,{seen:s.seen.map(x=>[...x])});});
     if(pitchScore!==null){all.pitch={score:pitchScore,res:pitchRes};}
+    /* v10.27: the labs (function sort, test lab, market lab, ergonomics, safety) are kept too */
+    all.act=all.act||{};all.act[LV]={fs,lab,mk,eg,sf};
     localStorage.setItem(KEY,JSON.stringify(all));}catch(e){}},150);}
   function restore(){const all=load();
     Object.entries(all.st||{}).forEach(([k,s])=>{const [l,f]=k.split(':');if(l!==LV||!FXL()[f])return;
       const n=FXL()[f].learn.length;const seen=(s.seen||[]).slice(0,n).map(a=>new Set(a));while(seen.length<n)seen.push(new Set());
       ST[k]=Object.assign({lStep:0,qi:0,qScore:0,qAns:[],qStarted:false,exRes:{},unl:0,act:null},s,{seen,lStep:Math.min(s.lStep||0,n-1)});});
-    if(all.pitch&&pitchScore===null){pitchScore=all.pitch.score;pitchRes=all.pitch.res;}}
+    if(all.pitch&&pitchScore===null){pitchScore=all.pitch.score;pitchRes=all.pitch.res;}
+    const A=(all.act||{})[LV];if(A){if(A.fs)fs=A.fs;if(A.lab)lab=A.lab;if(A.mk)mk=A.mk;if(A.eg)eg=A.eg;if(A.sf)sf=A.sf;}}
   const wrap=(name,after)=>{const f=window[name];window[name]=function(){const r=f.apply(this,arguments);try{after&&after(arguments,r)}catch(e){}save();return r;};};
   /* results go to BenchMark so the matching Learn topic battery charges */
   const report=o=>{if(teacher||!FE)return;try{parent.BMLab&&parent.BMLab(Object.assign({src:'design',level:LV==='higher'?'H':'N5',factor:FK},o))}catch(e){}};
   wrap('quizRender',()=>{const s=S(),n=F().quiz.length;if(s.qi>=n)report({key:'quiz',kind:'quiz',got:s.qScore,max:n})});
   /* exam practice counts only once every question for this factor has been answered */
   wrap('markEx',()=>{const s=S(),ex=F().exam;if(ex.every(e=>s.exRes[e.id]!==undefined))report({key:'exam',kind:'exam',got:ex.reduce((a,e)=>a+s.exRes[e.id],0),max:ex.reduce((a,e)=>a+e.m,0)})});
+  Object.keys(ACT).forEach(k=>{const f=ACT[k];ACT[k]=function(){const r=f.apply(this,arguments);save();return r}});
   ['unlock','quizAns','markEx','markPitch','flipCard','revealCard','learnStep','fPick','labPick','labWhy','ppPick','mmPick','plcPick','egPick','sfPick'].forEach(n=>wrap(n));
   /* loading screens: in the page's own loading screen for activities, and inside the studio for the 3D product */
   const PB=()=>{try{return FE&&parent.BMBusy}catch(e){return null}};
@@ -5837,6 +5853,7 @@ document.getElementById('dfLogo').outerHTML=LOGO;</script>
   window.closeStudio=function(){if(FE){FE.classList.remove('dffull');try{parent.document.documentElement.style.overflow=''}catch(e){}}const r=oC.apply(this,arguments);fit();return r;};
   /* scroll the page (not the frame) back to the top of the Design tab */
   window.scrollTo=function(){if(!FE)return;try{const r=FE.getBoundingClientRect();if(r.top<0)parent.scrollBy(0,r.top-10)}catch(e){}};
+  {const oCL=window.chooseLevel;window.chooseLevel=function(){const r=oCL.apply(this,arguments);try{restore()}catch(e){}return r}}
   chooseLevel(lv);restore();buildHub();fit();
   if(FE&&FE.dataset.factor&&FXL()[FE.dataset.factor])openFactor(FE.dataset.factor);
 })();

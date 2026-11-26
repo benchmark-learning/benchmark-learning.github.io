@@ -1563,6 +1563,8 @@ body.hw-locked #dgTile>div:first-child::after{top:46px}
 @media (prefers-reduced-motion:reduce){.wf-fc .fcfan b{animation:none}}
 @media (min-width:700px){.wf-dash.wf-fc>.fcfan{right:12%;transform:scale(1.6);transform-origin:center}}
 @media (max-width:520px){.wf-dash.wf-fc>.fcfan{right:6px;top:18px;margin-top:0;transform:scale(.72);transform-origin:top right}.wf-fc .wf-s{max-width:62%}}
+.mflag{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 2px;padding:10px 12px;border:1.5px dashed #6B5560;border-radius:14px;background:rgba(244,179,194,.07)}.mflag p{margin:0;font-weight:700;color:#F4B3C2;font-size:15px}
+.mflagb{font:inherit;font-size:14.5px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid #F4B3C2;background:transparent;color:#F4B3C2;cursor:pointer}.mflagb:hover{background:rgba(244,179,194,.14)}.mflagb.done{border-color:#7CC9A0;color:#7CC9A0;cursor:default}
 .flagask{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,11,13,.55);animation:ppfade .15s ease-out}
 .flagask .fa-card{max-width:360px;width:100%;background:#24262B;border:1.5px solid #4A4D55;border-radius:18px;padding:18px;color:#E6E7EA;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .flagask .fa-t{display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-weight:800;font-size:17px;line-height:1.35;color:#FFF6E6}.flagask .fa-t svg{flex:none;color:#F4B3C2;margin-top:1px}
@@ -1658,7 +1660,7 @@ html.bmload:has(.bml),html.bmload:has(.bml) body{background:#000!important;overf
 </style>
 </head>
 <body class="bmw">
-<script>document.documentElement.classList.add("bmload")</script>
+<script>/* v10.27: a fair shuffle (sort with a random comparator puts the first option on top far too often) */if(!Array.prototype.bmShuf)Object.defineProperty(Array.prototype,'bmShuf',{value:function(){for(let i=this.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=this[i];this[i]=this[j];this[j]=t}return this},configurable:true,writable:true});document.documentElement.classList.add("bmload")</script>
 <div id="bmsSplash" class="bml" aria-hidden="true"><div class="bml-stage"><canvas id="bmlCv"></canvas><svg class="bml-flat" viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.6 23.2L27 8.8" stroke="#C9CDD3" stroke-width="3.6"/><path d="M15.6 17.4l1.4 1.4M18.4 14.6l1.4 1.4M21.2 11.8l1.4 1.4M24 9l1.4 1.4" stroke="#FFFFFF" stroke-width="1.1"/><path d="M5.6 16.6l7 7" stroke="#8E1B3B" stroke-width="5.4"/><circle cx="8.3" cy="19.3" r="1" fill="#E7C27D"/><circle cx="10.6" cy="21.6" r="1" fill="#E7C27D"/></svg></div><div class="bml-word"><span class="w1">BenchMark</span><span class="w2">Learning</span></div><div class="bml-bar"><i></i></div></div>
 <script>/* arrow, Home, End and Page keys typed in an answer box move the cursor only: nothing else on the page reacts */
 addEventListener("keydown",function(e){var t=e.target;if(!t||!(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||"")))return;if(/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
@@ -4438,7 +4440,7 @@ function shuffleIdx(n,seed){const a=[...Array(n).keys()];let s=seed;for(let i=n-
 function renderPractice(box,k,noWritten){
   const P=T[k];let h='';
   (P.quiz||[]).forEach((m,qi)=>{
-    const key=k+qi,order=shuffleIdx(m.o.length,qi*7+k.charCodeAt(1)+((S.att&&S.att[k])||0)*13);
+    const key=k+qi,order=shuffleIdx(m.o.length,[...k].reduce((s,c)=>(s*31+c.charCodeAt(0))%233280,7)+qi*977+((S.att&&S.att[k])||0)*131);
     h+=`<div class="q" data-mc="${key}"><p class="qtext">${esc(m.q)}</p><div class="opts">${order.map(oi=>`<button type="button" class="opt" data-mc="${key}" data-oi="${oi}">${esc(m.o[oi])}</button>`).join('')}</div><div class="fbm"></div></div>`;
   });
   if((P.quiz||[]).length)h+=`<div class="row" data-reset-row="${k}"${(P.quiz||[]).some((m,qi)=>S.mc[k+qi]!==undefined)?'':' hidden'}><button class="btn ghost" type="button" data-reset="${k}">Try again</button><span class="sub">Clears your answers and shuffles the options.</span></div>`;
@@ -6758,7 +6760,7 @@ function renderLearnTopic(id){
 }
 function curLearn(){if(LCUR==='x-words')return {mcq:WORDS_N5.practice};const lv=LVIEW||S.level||'N5';return LFIND(LCUR)}
 function paintLearnMC(div){
-  const m=curLearn().mcq[+div.dataset.i];const order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+  const m=curLearn().mcq[+div.dataset.i];const order=m.o.map((_,i)=>i).bmShuf();
   div.innerHTML=`<p class="qtext">${esc(m.q)}</p>${qFig(m)}<div class="opts">${order.map(i=>`<button type="button" class="opt lopt" data-oi="${i}">${esc(m.o[i])}</button>`).join('')}</div><div class="fbm"></div>`;
 }
 function answerLearnMC(btn){
@@ -6906,7 +6908,7 @@ function pickDaily(){
   if(pick.length<5){const later=pool.filter(q=>S.sr[q.id]&&!pick.includes(q)).sort((a,b)=>S.sr[a.id][1].localeCompare(S.sr[b.id][1]));pick=pick.concat(later.slice(0,5-pick.length))}
   const ck=new Set(chk.map(q=>q.id));
   pick.forEach(q=>{const v=S.sr[q.id];q.tag=!v?'new':v[0]===0?'again':ck.has(q.id)&&v[1]>td?'check':'review';q.n=v?v[0]:0});
-  return pick.sort(()=>Math.random()-.5);
+  return pick.bmShuf();
 }
 let DAILY=null;
 function renderDaily(){
@@ -6932,7 +6934,7 @@ function renderDaily(){
 function dailyDone(){const n=DAILY.qs.length;return `<div class="ddone"><p class="dbig">${DAILY.right} / ${n}</p><p>${DAILY.right===n?'Perfect. ':''}That’s today’s Daily 5 done. Come back tomorrow to keep your streak going.</p>${dgNote()}
   <div class="row"><button type="button" class="btn" data-dmore="1">5 more questions</button><button type="button" class="btn ghost" data-lback="1">Back to topics</button></div></div>`}
 function dailyQ(id){return srPool().find(q=>q.id===id)}
-function paintDaily(div){const q=dailyQ(div.dataset.did),m=q.m,order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+function paintDaily(div){const q=dailyQ(div.dataset.did),m=q.m,order=m.o.map((_,i)=>i).bmShuf();
   div.innerHTML=`<p class="qtext">${esc(m.q)}</p>${qFig(m)}<div class="opts">${order.map(i=>`<button type="button" class="opt dopt" data-oi="${i}">${esc(m.o[i])}</button>`).join('')}</div><div class="fbm"></div>`}
 $('tab-learn').addEventListener('click',e=>{
   const o=e.target.closest('.dopt');
@@ -7038,7 +7040,7 @@ function paintGate(){
   if(DAILY.done){
     h+=`<div class="ddone"><p class="dbig">${DAILY.right} / ${DAILY.qs.length}</p><p>${DAILY.right===DAILY.qs.length?'Perfect. ':''}Daily 5 done${st.n>1?`: that’s a ${st.n}-day streak`:''}. Anything you got wrong comes back tomorrow.</p>${dgNote()}<div class="row"><button class="btn" type="button" data-gopen="1">Open the site</button></div></div>`;
   }else{
-    const q=DAILY.qs[DAILY.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),m=q.m,order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+    const q=DAILY.qs[DAILY.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),m=q.m,order=m.o.map((_,i)=>i).bmShuf();
     h+=`<p class="sub">Answer all five to get in. Wrong answers still count: you’ll see why, and they come back tomorrow.</p>
      <div class="dprog" aria-label="Question ${DAILY.i+1} of ${DAILY.qs.length}">${DAILY.qs.map((_,j)=>`<i class="${j<DAILY.i?'dn':j===DAILY.i?'cur':''}"></i>`).join('')}</div>
      <p class="eyebrow">Question ${DAILY.i+1} of ${DAILY.qs.length} · ${esc(t.name)}</p>${dtag(q)}
@@ -7173,7 +7175,7 @@ function dgSpurtAsk(){const g=G0(),sp=dgSp(),m=document.createElement('div');m.c
 function paintSPQ(){const sp=dgSp();let h=`<div class="gcard">${gateBg()}<p class="eyebrow">Growth Spurt</p><h2 id="spqTitle">${SPQ.done&&SPQ.right===SPQ.qs.length?'Full marks! Watch your garden grow.':'Full marks to grow'}</h2>`;
   if(SPQ.done){const win=SPQ.right===SPQ.qs.length;
     h+=`<div class="ddone"><p class="dbig"><span class="five">${SPQ.right} / ${SPQ.qs.length}</span></p><p>${win?'':sp.fail<2?'Not this time. You have one last chance today with new questions.':'Not this time. Try another Growth Spurt tomorrow.'}</p><div class="row">${win?`<button class="btn" type="button" data-spgo="1">Build my Zen garden</button>`:sp.fail<2?`<button class="btn" type="button" data-spagain="1">Last chance</button><button class="btn ghost" type="button" data-spx="1">Not now</button>`:`<button class="btn" type="button" data-spx="1">Close</button>`}</div></div>`}
-  else{const q=SPQ.qs[SPQ.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),mm=q.m,order=mm.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+  else{const q=SPQ.qs[SPQ.i],t=q.l==='x-words'?{name:'Question words'}:LTOPIC(q.l),mm=q.m,order=mm.o.map((_,i)=>i).bmShuf();
     h+=`<p class="sub">Get <span class="five">5 out of 5</span> for your garden to grow.</p><div class="dprog">${SPQ.qs.map((_,j)=>`<i class="${j<SPQ.i?'dn':j===SPQ.i?'cur':''}"></i>`).join('')}</div>
      <p class="eyebrow">Question ${SPQ.i+1} of ${SPQ.qs.length} · ${esc(t.name)}</p>${dtag(q)}
      <div class="lmc q" data-sid="${q.id}"><p class="qtext">${esc(mm.q)}</p><div class="opts">${order.map(i=>`<button type="button" class="opt sopt" data-oi="${i}">${esc(mm.o[i])}</button>`).join('')}</div><div class="fbm"></div></div>`}
@@ -7937,7 +7939,7 @@ function paintTQ(){
     setBody(`<div class="ddone"><p class="dbig">${TQ.right} / ${n}</p><p>${full?'All correct. Ready for an exam question?':'Questions you got wrong also come up in your Daily 5. Try again now, or come back later.'}</p></div>`,
      full?`<button type="button" class="btn ghost" data-pclose="1">Done</button><button type="button" class="btn nx-exam" data-panel="exam">Get exam ready →</button>`
          :`<button type="button" class="btn ghost" data-pclose="1">Done for now</button><button type="button" class="btn" data-tq="retry">Try again</button>`);return}
-  const m=t.mcq[TQ.order[TQ.i]],order=m.o.map((_,i)=>i).sort(()=>Math.random()-.5);
+  const m=t.mcq[TQ.order[TQ.i]],order=m.o.map((_,i)=>i).bmShuf();
   if(!VIEW){S.tqp=S.tqp||{};S.tqp[HUB]={i:TQ.i,right:TQ.right,order:TQ.order,done:-1};save()}
   setBody(`${TQ.resumed&&TQ.i>0?`<p class="tq-resume">Picking up where you left off.</p>`:''}<p class="eyebrow">Question ${TQ.i+1} of ${n}</p><div class="lmc q" data-tqi="${TQ.order[TQ.i]}"><p class="qtext">${esc(m.q)}</p>${qFig(m)}<div class="opts">${order.map(i=>`<button type="button" class="opt tqo" data-oi="${i}">${esc(m.o[i])}</button>`).join('')}</div><div class="fbm"></div></div>`,
    `<span class="cdots">${t.mcq.map((_,i)=>`<i class="${i===TQ.i?'on':i<TQ.i?'dn':''}"></i>`).join('')}</span>`);
@@ -7964,14 +7966,14 @@ tp.addEventListener('click',e=>{
     div.querySelectorAll('.tqo').forEach(b=>{b.disabled=true;if(+b.dataset.oi===0)b.classList.add('right');else if(b===o)b.classList.add('wrong')});
     const f=div.querySelector('.fbm');f.className='fbm fb '+(ok?'good':'bad');f.innerHTML=`<strong>${ok?'Correct.':'Not quite.'}</strong> ${esc(m.e)}`;
     tp.querySelector('.tp-foot').innerHTML=`<button type="button" class="btn" data-tq="next">${TQ.i>=curTopic().mcq.length-1?'See my score':'Next →'}</button>`;tp.querySelector('[data-tq]').focus();return}
-  const q=e.target.closest('[data-tq]');if(q){if(q.dataset.tq==='retry')TQ={i:0,right:0,order:curTopic().mcq.map((_,i)=>i).sort(()=>Math.random()-.5)};else{TQ.i++;TQ.resumed=false}paintTQ();tp.querySelector('.tp-body').scrollTop=0;return}
+  const q=e.target.closest('[data-tq]');if(q){if(q.dataset.tq==='retry')TQ={i:0,right:0,order:curTopic().mcq.map((_,i)=>i).bmShuf()};else{TQ.i++;TQ.resumed=false}paintTQ();tp.querySelector('.tp-body').scrollTop=0;return}
   if(e.target.closest('[data-mark]')){
     const txt=$('exAns').value.trim();S.exAns=S.exAns||{};S.exAns[HUB]=txt;
     {const st=MK[HUB]&&MK[HUB].type==='state',n=txt.split(/\s+/).filter(Boolean).length;if(n<(st?1:4)){$('exRes').innerHTML=`<p class="fb bad">${st?'Write your answer first.':'Write your full answer first, in sentences.'}</p>`;save();return}}
     {const max=(curTopic().exam||{}).max||1,g=gUse('benchmark','learn:'+HUB),o=g&&gRun(g,txt,max);if(o){const bf=topicStatus(HUB);S.ex[HUB]=[o.sc,max];S.exb=S.exb||{};{const pv=S.exb[HUB];if(!pv||o.sc/max>=pv[0]/pv[1])S.exb[HUB]=[o.sc,max]}evStamp('ex:'+HUB);save();topicCelebrate(HUB,bf);{const em=$('exModel');if(em)em.hidden=false}
-     const guide=!!(g.meta&&g.meta.untuned);exShow(gHead(o,max,guide),gHow(o,guide?'Gauge’s marking for this question is still being checked, so treat this mark as a guide. Your teacher’s mark is the real one.':'Your teacher’s mark is the real one.'));{const d=tp.querySelector('[data-pdone]');if(d){d.disabled=false;d.removeAttribute('title')}}$('exRes').scrollIntoView({block:'nearest'});return}}
+     const guide=!!(g.meta&&g.meta.untuned);exShow(gHead(o,max,guide)+markFlagHTML(HUB,txt,o.sc,max,'Gauge '+((window.Gauge&&Gauge.version)||'')),gHow(o,guide?'Gauge’s marking for this question is still being checked, so treat this mark as a guide. Your teacher’s mark is the real one.':'Your teacher’s mark is the real one.'));{const d=tp.querySelector('[data-pdone]');if(d){d.disabled=false;d.removeAttribute('title')}}$('exRes').scrollIntoView({block:'nearest'});return}}
     const bf=topicStatus(HUB);const r=markAnswer(HUB,txt);S.ex[HUB]=[r.score,r.max];S.exb=S.exb||{};{const pv=S.exb[HUB];if(!pv||r.score/r.max>=pv[0]/pv[1])S.exb[HUB]=[r.score,r.max]}evStamp('ex:'+HUB);save();topicCelebrate(HUB,bf);{const em=$('exModel');if(em)em.hidden=false}
-    exShow(`<p class="mscore"><span>Estimated mark</span><b>${r.score} / ${r.max}</b></p>`,`<p class="mtip">${esc(r.tip)}</p>
+    exShow(`<p class="mscore"><span>Estimated mark</span><b>${r.score} / ${r.max}</b></p>`+markFlagHTML(HUB,txt,r.score,r.max,'BenchMark marker',r.credited),`<p class="mtip">${esc(r.tip)}</p>
      <div class="mans">${highlight(txt,r.spans)}</div>
      <p class="mkey"><mark class="mk-ok">earns a mark</mark> <mark class="mk-amb">nearly</mark> <mark class="mk-bad">scores zero</mark></p>
      ${spellNote(r.spell)}
@@ -8286,6 +8288,30 @@ function flagDo(b){if(!b||b.disabled)return;const f={id:b.dataset.flag,l:b.datas
  const all=flagged();all[f.id]=sday();try{localStorage.setItem('bm-flags',JSON.stringify(all))}catch(e){}
  if(window.goatcounter&&window.goatcounter.count)gcSend(f);else{GC_Q.push(f);gcLoad()}
  b.disabled=true;b.classList.add('done');const sp=b.querySelector('span');if(sp)sp.textContent='Flagged. Thanks!';else b.textContent='Flagged. Thanks!'}
+/* v10.27: "Think you deserve more?" After a low mark the pupil can send their answer (and nothing else) to the teacher.
+   MARK_FORM is a Microsoft Forms pre-filled link with the placeholders QQQ (question), AAA (answer), MMM (mark), VVV (site version and which marker), PPP (points credited).
+   Responses land in the form's Excel sheet. Until the link is set, only the question and mark are counted (no answer text). */
+const MARK_FORM='';
+let MFLAG=null;
+function markFlagHTML(id,txt,sc,max,by,cr){if(VIEW||!MARK_FORM||!(sc<max&&sc<=max/2))return '';/* hidden until the form link is in */MFLAG={q:'learn:'+id,a:txt,m:sc+'/'+max,by:by||'',cr:(cr||[]).join('; ')};
+ const sent=(()=>{try{return JSON.parse(localStorage.getItem('bm-mflags')||'{}')}catch(e){return {}}})()[MFLAG.q+'|'+txt];
+ return `<div class="mflag"><p>Think you deserve more?</p><button type="button" class="mflagb${sent?' done':''}" data-mflag ${sent?'disabled':''}>${sent?'Sent to your teacher. Thanks!':'Flag this mark to your teacher'}</button></div>`}
+function mflagScrub(t){return (t||'').replace(/\S+@\S+\.\S+/g,'[email]').replace(/\b(my name is|i am|i'm)\s+[A-Z][a-z]+(\s+[A-Z][a-z]+)?/g,'$1 [name]').slice(0,1500)}
+function mflagAsk(b){if(!MFLAG)return;document.querySelectorAll('.flagask').forEach(x=>x.remove());const back=document.activeElement,form=!!MARK_FORM;
+ const d=document.createElement('div');d.className='flagask';d.setAttribute('role','alertdialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-labelledby','mfT');d.setAttribute('aria-describedby','mfD');
+ d.innerHTML=`<div class="fa-card"><p class="fa-t" id="mfT"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 21V4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M5 4h11l-2.2 4L16 12H5" fill="currentColor"/></svg>Think this mark is wrong?</p>
+  <p class="fa-d" id="mfD">Press <b>Flag it</b> to send your answer to your teacher, with no other details, so they can double check the marking. Please don’t put your name in your answer.${form?' A short form will open: press <b>Submit</b> on it.':''}</p>
+  <div class="fa-row"><button type="button" class="btn ghost" data-fa="no">No</button><button type="button" class="btn" data-fa="yes">Flag it</button></div></div>`;
+ const close=()=>{d.remove();document.removeEventListener('keydown',key,true);try{back&&back.focus&&back.focus()}catch(e){}};
+ const key=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close()}};
+ d.addEventListener('click',e=>{e.stopPropagation();const a=e.target.closest('[data-fa]');if(a&&a.dataset.fa==='yes'){close();mflagDo(b)}else if(a||e.target===d)close()});
+ document.addEventListener('keydown',key,true);document.body.appendChild(d);setTimeout(()=>{const n=d.querySelector('[data-fa=no]');n&&n.focus()},30)}
+function mflagDo(b){const f=MFLAG;if(!f)return;const ver='v10.27';
+ if(MARK_FORM){const u=MARK_FORM.replace('QQQ',encodeURIComponent(f.q)).replace('AAA',encodeURIComponent(mflagScrub(f.a))).replace('MMM',encodeURIComponent(f.m)).replace('VVV',encodeURIComponent(ver+' · '+f.by)).replace('PPP',encodeURIComponent(f.cr||'none'));try{window.open(u,'_blank','noopener')}catch(e){location.href=u}}
+ else{const g={l:'Mark flag · '+f.q+' · '+f.m,t:'Pupil thinks the mark is too low [ref '+f.q+']'};if(window.goatcounter&&window.goatcounter.count)gcSend(g);else{GC_Q.push(g);gcLoad()}}
+ try{const all=JSON.parse(localStorage.getItem('bm-mflags')||'{}');all[f.q+'|'+f.a]=sday();localStorage.setItem('bm-mflags',JSON.stringify(all))}catch(e){}
+ b.disabled=true;b.classList.add('done');b.textContent='Sent to your teacher. Thanks!'}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-mflag]');if(!b||b.disabled)return;e.preventDefault();e.stopPropagation();mflagAsk(b)},true);
 let PPCTXS=null;
 /* after marking, show the spellings to learn: markers must be able to recognise the key word, so it is worth getting right in the exam */
 const BMNONOTE=new Set(['ergonomic','ergonomical','anthropometric','thermoset','thermosetts','thermosett','comfy','alot','tak','incase','ok','doesnt','dosent','becuase','becasue','beacuse','untill']),BMUS=new Set(['color','colors','colored','aluminum','caliper','calipers','labor','mold','molds','molding','vise','esthetics','gage']);

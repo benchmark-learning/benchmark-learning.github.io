@@ -308,7 +308,7 @@ html,body{margin:0;background:#EFE8E1;font-family:'Segoe UI',system-ui,-apple-sy
 </div>
 <div class="toast" id="toast"></div>
 
-<script>/* arrow, Home, End and Page keys typed in an answer box move the cursor only: nothing else on the page reacts */
+<script>if(!Array.prototype.bmShuf)Object.defineProperty(Array.prototype,'bmShuf',{value:function(){for(let i=this.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=this[i];this[i]=this[j];this[j]=t}return this},configurable:true,writable:true});/* arrow, Home, End and Page keys typed in an answer box move the cursor only: nothing else on the page reacts */
 addEventListener("keydown",function(e){var t=e.target;if(!t||!(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||"")))return;if(/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
 <script src="tools.js"></script>
 <script>
@@ -455,11 +455,11 @@ function buildDeck(n){
 function choicesFor(id){
  if(L>HARD){const tw=(TWINS[id]||[]).filter(x=>byId[x]);const g=(GROUP[grpOf(id)]||[]).filter(x=>x!==id&&byId[x]);const o=tw.length?tw[Math.random()*tw.length|0]:g.length?g[Math.random()*g.length|0]:T.find(t=>t.id!==id).id;return Math.random()<.5?[id,o]:[o,id]}
  const g=GROUP[grpOf(id)]||[];const hard=L>=7;
- let same=g.filter(x=>x!==id&&byId[x]).sort(()=>Math.random()-.5);
- const others=T.map(t=>t.id).filter(x=>x!==id&&!same.includes(x)).sort(()=>Math.random()-.5);
+ let same=g.filter(x=>x!==id&&byId[x]).bmShuf();
+ const others=T.map(t=>t.id).filter(x=>x!==id&&!same.includes(x)).bmShuf();
  const pickSame=hard?3:2;const opts=[...same.slice(0,pickSame)];
  while(opts.length<3)opts.push(others.pop());
- return [id,...opts].sort(()=>Math.random()-.5)}
+ return [id,...opts].bmShuf()}
 
 function start(){
  TIME=timeFor(L);total=cardsFor(L);deck=buildDeck(total);lives=bank;startLives=bank;streak=0;tLeft=TIME;cleared=0;missedRun={};freezeTo=0;busy=false;running=true;
