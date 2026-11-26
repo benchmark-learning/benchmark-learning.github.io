@@ -72,7 +72,10 @@ h1{font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.05;m
  <div class="opts" id="opts"></div><div class="hint">Tip: keys 1 to 4 pick an answer</div>
 </div>
 <div class="scr" id="end"><div class="wrap" id="endW"></div></div>
-<script>if(!Array.prototype.bmShuf)Object.defineProperty(Array.prototype,'bmShuf',{value:function(){for(let i=this.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=this[i];this[i]=this[j];this[j]=t}return this},configurable:true,writable:true});
+<script>/* v10.31: haptics. Android: a short buzz for a right answer, a double buzz for finishing a level. iPhone: Safari gives a light tick when an on/off switch is toggled, so a hidden switch is clicked. Nothing on a wrong answer. */
+const bmBuzz=(()=>{let lab=null;const tick=()=>{try{if(!lab){lab=document.createElement('label');lab.setAttribute('aria-hidden','true');lab.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none';const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.tabIndex=-1;lab.appendChild(i);lab.addEventListener('click',e=>e.stopPropagation());document.body.appendChild(lab)}lab.click()}catch(e){}};
+ return k=>{const big=k==='big';try{if(navigator.vibrate&&navigator.vibrate(big?[30,70,30]:25))return}catch(e){}tick();if(big)setTimeout(tick,120)}})();
+if(!Array.prototype.bmShuf)Object.defineProperty(Array.prototype,'bmShuf',{value:function(){for(let i=this.length-1;i>0;i--){const j=Math.random()*(i+1)|0;const t=this[i];this[i]=this[j];this[j]=t}return this},configurable:true,writable:true});
 /* Flashcard Dash bank. Each card: [topic, question, answer, [three distractors], look-alike for 50/50 (or ''), figure key (or '')].
    Every fact is taken from BenchMark's Higher Learn notes (which follow the SQA Higher D&M course specification). */
 const BANK=[
@@ -412,9 +415,9 @@ function paint(first){cur=deck[0];const c=BANK[cur],card=$('card');card.classNam
   [...$('opts').children].forEach(b=>b.onclick=()=>answer(b));$('left').textContent=deck.length+' left';
   if(!first)requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.remove('in')))}
 function answer(b){if(busy||!running)return;busy=true;const card=$('card');
-  if(b.dataset.a==='1'){b.classList.add('right');card.classList.add('ok');ding(++cleared);if(misses[cur]){misses[cur]--;if(!misses[cur])delete misses[cur];ST.set('miss',misses)}
+  if(b.dataset.a==='1'){b.classList.add('right');card.classList.add('ok');ding(++cleared);bmBuzz();if(misses[cur]){misses[cur]--;if(!misses[cur])delete misses[cur];ST.set('miss',misses)}
     setTimeout(()=>{card.classList.add('out');setTimeout(()=>{deck.shift();busy=false;if(!deck.length)return end(true);paint()},230)},420)}
-  else{b.classList.add('wrong');[...$('opts').children].find(x=>x.dataset.a==='1').classList.add('right');card.classList.add('bad');thud();try{navigator.vibrate&&navigator.vibrate([30,40,30])}catch(e){}
+  else{b.classList.add('wrong');[...$('opts').children].find(x=>x.dataset.a==='1').classList.add('right');card.classList.add('bad');thud();
     missedRun[cur]=1;misses[cur]=(misses[cur]||0)+1;ST.set('miss',misses);lives--;drawLives();
     setTimeout(()=>{if(lives<=0){busy=false;return end(false,'lives')}const id=deck.shift();deck.push(id);card.classList.add('out');setTimeout(()=>{busy=false;paint()},230)},1500)}}
 document.addEventListener('keydown',e=>{if(!$('play').classList.contains('on'))return;const n=+e.key;if(n>=1&&n<=4){const b=$('opts').children[n-1];if(b)b.click()}});
@@ -422,7 +425,7 @@ function revHTML(){const ids=Object.keys(missedRun).map(Number);if(!ids.length)r
 function fly(){const f=document.createElement('div');f.className='flycards';const cs=['var(--lil)','var(--pink)','var(--blue)','var(--mint)'];f.innerHTML=Array.from({length:18},(_,i)=>`<b style="--c:${cs[i%4]};--dx:${(Math.random()*2-1)*45}vw;--dy:${-20-Math.random()*50}vh;--r:${(Math.random()*2-1)*200}deg;animation-delay:${i*40}ms"></b>`).join('');document.body.appendChild(f);setTimeout(()=>f.remove(),2600)}
 function end(won,why){stop();const tl=Math.ceil(tLeft),wasL=L;let html;
   if(won){bank=Math.min(3,lives-1);ST.set('lives',bank);const pb=!best[L]||tl>best[L];if(pb){best[L]=tl;ST.set('best',best)}if(L>=unlocked&&L<MAXL){unlocked=L+1;ST.set('unl',unlocked)}
-    const lastL=L>=MAXL;tone(523,.2,'triangle',.1);tone(659,.2,'triangle',.1,.12);tone(784,.35,'triangle',.1,.24);fly();
+    const lastL=L>=MAXL;bmBuzz('big');tone(523,.2,'triangle',.1);tone(659,.2,'triangle',.1,.12);tone(784,.35,'triangle',.1,.24);fly();
     html=`<div class="kick">Level ${L} cleared</div><div class="big">${lastL?'Flashcard master!':['Sharp!','Nailed it!','On fire!','Top marks!'][(L-1)%4]}</div>
      <p class="sub">${lastL?'You cleared all 20 levels.':`Level ${L+1} unlocked`+(L+1===HARD+1?': now it’s 50/50 look-alikes.':'.')}</p><div class="path">${pathHTML(L+1)}</div>
      <div class="stat"><div><b>${fmt(tl)}</b><small>time left${pb?' · best!':''}</small></div><div><b>${Math.max(0,lives)}</b><small>lives kept · spare ${bank}</small></div></div>${revHTML()}

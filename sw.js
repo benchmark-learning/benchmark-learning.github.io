@@ -1,7 +1,7 @@
 /* BenchMark offline helper. Change VERSION when you want every device to refresh its saved copy. */
-const VERSION='bm-v96';
-const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png','favicon-32.png','workshop.js','tools.js','tooldash.html','fcdash.html','design.html','gauge.js'];
-const EXTRA_HOSTS=['fonts.googleapis.com','fonts.gstatic.com','cdnjs.cloudflare.com','commons.wikimedia.org','upload.wikimedia.org'];
+const VERSION='bm-v104';
+const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png','favicon-32.png','workshop.js','tools.js','tooldash.html','fcdash.html','design.html','gauge.js','jspdf.js'];
+const EXTRA_HOSTS=[];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{

@@ -263,7 +263,10 @@ body.inbm .wrap{max-width:1100px}
 .dfdots{display:inline-flex;gap:7px}.dfdots i{width:8px;height:8px;border-radius:50%;background:#F4B3C2;animation:dfdot 1.2s ease-in-out infinite}.dfdots i:nth-child(2){animation-delay:.2s}.dfdots i:nth-child(3){animation-delay:.4s}@keyframes dfdot{0%,100%{transform:scale(.6);opacity:.4}50%{transform:scale(1);opacity:1}}
 </style></head>
 <body class="inbm">
-<script>/* arrow keys in an answer box move the cursor only */addEventListener('keydown',function(e){var t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||''))&&/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
+<script>/* v10.31: haptics. Android: a short buzz for a right answer, a double buzz for finishing a level. iPhone: Safari gives a light tick when an on/off switch is toggled, so a hidden switch is clicked. Nothing on a wrong answer. */
+const bmBuzz=(()=>{let lab=null;const tick=()=>{try{if(!lab){lab=document.createElement('label');lab.setAttribute('aria-hidden','true');lab.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none';const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.tabIndex=-1;lab.appendChild(i);lab.addEventListener('click',e=>e.stopPropagation());document.body.appendChild(lab)}lab.click()}catch(e){}};
+ return k=>{const big=k==='big';try{if(navigator.vibrate&&navigator.vibrate(big?[30,70,30]:25))return}catch(e){}tick();if(big)setTimeout(tick,120)}})();
+/* arrow keys in an answer box move the cursor only */addEventListener('keydown',function(e){var t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||''))&&/^(Arrow|Home$|End$|Page)/.test(e.key)&&!e.altKey&&!e.metaKey)e.stopPropagation()},true);</script>
 <div id="dfRoot"><div class="wrap">
  <div id="levels" class="hide"></div>
  <div id="hub" class="hide">
@@ -5458,7 +5461,7 @@ function quizRender(){
 }
 function quizAns(i){
   const s=S(),q=F().quiz[s.qi],bs=[...document.querySelectorAll('#quiz .opt')];bs.forEach(b=>b.disabled=true);bs[q.a].classList.add('right');
-  const ok=i===q.a;if(!ok)bs[i].classList.add('wrong');else s.qScore++;s.qAns[s.qi]=ok;
+  const ok=i===q.a;if(ok)bmBuzz();if(!ok)bs[i].classList.add('wrong');else s.qScore++;s.qAns[s.qi]=ok;
   document.getElementById('qwhy').innerHTML=`${fbox(ok,q.w)}<div style="margin-top:14px"><button class="btn primary" onclick="S().qi++;quizRender()">${s.qi<F().quiz.length-1?'Next →':'See score →'}</button></div>`;
 }
 
