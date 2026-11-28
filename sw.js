@@ -1,6 +1,6 @@
 /* © 2026 BenchMark Learning. All rights reserved. No part of this file may be copied, reproduced or republished without permission. */
 /* BenchMark offline helper. Change VERSION when you want every device to refresh its saved copy. */
-const VERSION='bm-v106';
+const VERSION='bm-v107';
 const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','icon-maskable-512.png','apple-touch-icon.png','favicon-32.png','workshop.js','tools.js','tooldash.html','fcdash.html','design.html','gauge.js','jspdf.js','privacy.html'];
 const EXTRA_HOSTS=[];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});

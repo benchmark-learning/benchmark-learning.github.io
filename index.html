@@ -8454,8 +8454,9 @@ function ppMI(k){const r=ppGet(k);if(!r)return '';const pts=(r[7]||[]).filter(x=
 
 /* ---------- Gauge: past paper marking (gauge.js is built in the Gauge chat; see claude/gauge-benchmark-sync.md) ---------- */
 function gPid(q){return String(q).replace(/\((\w+)\)/g,(m,x,o)=>(o?'_':'')+x).replace(/^(\d+)_/,'$1')}
-function gPack(k){const G=window.Gauge;if(!G||k[0]!=='H')return null;const r=ppGet(k);if(!r)return null;const id='sqa-higher-'+r[0];
-  try{const list=G.packs().map(p=>p.id);if(!list.includes(id))return null;const P=G.use(id),pid=gPid(r[1]);if(!P.questions||!P.questions[pid])return null;return {P,pid,meta:G.packs().find(p=>p.id===id)}}catch(e){return null}}
+function gPack(k){const G=window.Gauge;if(!G)return null;const r=ppGet(k);if(!r)return null;const hi=k[0]==='H',pr=r[0]==='Practice';
+  const id=pr?'benchmark':(hi?'sqa-higher-':'sqa-n5-')+r[0],pid=pr?'pp:'+(hi?'h-':'n5-')+r[1]:gPid(r[1]);
+  try{const list=G.packs().map(p=>p.id);if(!list.includes(id))return null;const P=G.use(id);if(!P.questions||!P.questions[pid])return null;return {P,pid,meta:G.packs().find(p=>p.id===id)}}catch(e){return null}}
 function gBadge(){const G=window.Gauge;if(!G)return '';return `<span class="gwrap"><button type="button" class="gbadge" data-gbadge aria-expanded="false" aria-describedby="gInfo">${G.icon||''}<span>${esc(G.badge||'Gauge')}</span></button><span class="ginfo" id="gInfo" role="tooltip" hidden>${esc(G.badgeInfo||'')}</span></span>`}
 function gUse(packId,qid){const G=window.Gauge;if(!G)return null;try{const meta=G.packs().find(p=>p.id===packId);if(!meta)return null;const P=G.use(packId);if(!P.questions||!P.questions[qid])return null;return {P,pid:qid,meta}}catch(e){return null}}
 function gRun(g,raw,max){try{const res=g.P.markPart(g.pid,raw),sc=Math.max(0,Math.min(max,+res.mark||0));return {res,sc,fb:g.P.feedback(g.pid,res,sc,max)}}catch(e){console.warn('Gauge',e);return null}}
@@ -8477,7 +8478,7 @@ function ppGauge(k,raw){const g=gPack(k);if(!g)return false;const r=ppGet(k),[y,
   try{res=g.P.markPart(g.pid,raw);const sc0=Math.max(0,Math.min(max,+res.mark||0));fb=g.P.feedback(g.pid,res,sc0,max)}catch(e){console.warn('Gauge',e);return false}
   const sc=Math.max(0,Math.min(max,+res.mark||0)),guide=!!(g.meta&&g.meta.untuned);if(sc>=max)bmBuzz();
   S.ppd=S.ppd||{};const bf=topicStatus(l);S.ppd[k]=Math.max(sc,S.ppd[k]||0);evStamp('pp:'+k);save();if($('ppMI'))$('ppMI').innerHTML=ppMI(k);if(MK[l])setTimeout(()=>topicCelebrate(l,bf),900);
-  ppShowRes(k,gHead({sc},max,guide),gHow({res,fb,sc},guide?`Gauge’s marking for the ${y} paper is still being checked against real answers, so treat this mark as a guide. If you’re not sure, check with your teacher.`:'If you’re not sure about your mark, check it with your teacher.'));
+  ppShowRes(k,gHead({sc},max,guide),gHow({res,fb,sc},guide?`Gauge’s marking for ${y==='Practice'?'this practice question':'the '+y+' paper'} is still being checked against real answers, so treat this mark as a guide. If you’re not sure, check with your teacher.`:'If you’re not sure about your mark, check it with your teacher.'));
   return true}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gbadge]');document.querySelectorAll('.ginfo').forEach(t=>{const own=b&&t.previousElementSibling===b;if(!own){t.hidden=true;const bb=t.previousElementSibling;bb&&bb.setAttribute('aria-expanded','false')}});
   if(b){const t=b.nextElementSibling;if(b.dataset.hov==='1'){t.hidden=false;delete b.dataset.hov}else t.hidden=!t.hidden;b.dataset.pin=t.hidden?'':'1';b.setAttribute('aria-expanded',String(!t.hidden))}});
