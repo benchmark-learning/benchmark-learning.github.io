@@ -284,7 +284,7 @@ const bmBuzz=(()=>{let lab=null;const tick=()=>{try{if(!lab){lab=document.create
   <div class="station hide" id="st-exam"><div id="exam"></div></div>
   <div class="station hide" id="st-results"></div>
  </div>
- <div class="tfoot"><button class="tbtn" id="tBtn" onclick="openTeacher()">Teacher preview</button><div style="margin-top:12px;font-size:12.5px;opacity:.7">© 2026 BenchMark Learning. All rights reserved.</div></div>
+ <div class="tfoot"><button class="tbtn" id="tBtn" onclick="openTeacher()">Teacher preview</button><div id="dfCopy" style="margin-top:12px;font-size:12.5px;opacity:.7">© 2026 BenchMark Learning. All rights reserved.</div></div>
 </div></div>
 <!-- ================= STUDIO (full screen) ================= -->
 <div id="studio">
@@ -292,7 +292,7 @@ const bmBuzz=(()=>{let lab=null;const tick=()=>{try{if(!lab){lab=document.create
     <button class="btn" onclick="closeStudio()">✕ Close</button>
     <button class="btn" id="stBack" onclick="studioPick()">← Products</button>
     <div class="sp"></div>
-    <button class="btn" onclick="toggleFS()">⛶ Full screen</button>
+    <button class="btn" onclick="toggleFS()"><svg viewBox="0 0 24 24" width="1.05em" height="1.05em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-.15em"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg> Full screen</button>
   </div>
   <div class="pick" id="stPick">
     <h2>Choose your product</h2>
@@ -5511,7 +5511,8 @@ function results(){
 /* ---------- teacher preview ---------- */
 function openTeacher(){const m=document.getElementById('tModal');m.classList.add('show');const i=document.getElementById('tPass');i.value='';setTimeout(()=>i.focus(),50);}
 function closeTeacher(){document.getElementById('tModal').classList.remove('show');}
-function tCheck(v){if(v.trim().toLowerCase()==='dovetail'){teacher=true;Object.values(ST).forEach(s=>s.unl=4);closeTeacher();document.getElementById('tBtn').textContent='Teacher preview: on';if(FK)go(cur);}}
+function tHash(w){let h=0x811c9dc5;for(const ch of new TextEncoder().encode(w)){h^=ch;h=Math.imul(h,0x01000193)>>>0}return h.toString(16).padStart(8,'0')}
+function tCheck(v){if(tHash(v.trim().toLowerCase())==='5268b5e7'){teacher=true;Object.values(ST).forEach(s=>s.unl=4);closeTeacher();document.getElementById('tBtn').textContent='Teacher preview: on';if(FK)go(cur);}}
 
 /* ---------- marking: one point per sentence or clause ---------- */
 function markPoints(text,max,points,minW=3){
@@ -5863,4 +5864,5 @@ document.getElementById('dfLogo').outerHTML=LOGO;</script>
   if(FE&&FE.dataset.factor&&FXL()[FE.dataset.factor])openFactor(FE.dataset.factor);
 })();
 </script>
+<script>try{if(window.top!==window.self){var c=document.getElementById("dfCopy");if(c)c.hidden=true}}catch(e){}</script>
 </body></html>

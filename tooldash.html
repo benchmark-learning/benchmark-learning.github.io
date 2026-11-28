@@ -322,7 +322,7 @@ const T=BMTOOLS3D.list();const SP=BMTOOLS3D.spinner();
 const GROUP={};T.forEach(t=>{(GROUP['g'+t.g]=GROUP['g'+t.g]||[]).push(t.id)});
 const grpOf=id=>Object.keys(GROUP).find(g=>GROUP[g].includes(id));
 const byId=Object.fromEntries(T.map(t=>[t.id,t]));
-/* v10.22 (Niall, pupils' idea): 20 levels. Levels 1-10 as before (10 tools, four answers). From level 11: one extra tool per level and a 50/50
+/* v10.22 (teacher, pupils' idea): 20 levels. Levels 1-10 as before (10 tools, four answers). From level 11: one extra tool per level and a 50/50
    between two look-alike tools, so pupils must look closely (zoom in to check the details). */
 const MAXL=20,HARD=10;let TIME=60;
 const cardsFor=L=>L<=HARD?10:10+(L-HARD);
